@@ -1,0 +1,37 @@
+# ============================================================
+# DATASETS — NEVER COMMIT
+# ============================================================
+
+backend/data/
+data/
+datasets/
+
+# GIS / Remote sensing
+*.tif
+*.tiff
+*.geotiff
+*.parquet
+*.geoparquet
+*.geojson
+*.gpkg
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+
+# OSM
+*.pbf
+*.osm
+*.osm.pbf
+
+# Map tiles
+*.mbtiles
+*.pmtiles
+*.mvt
+
+# Raster tiles
+*.png
+*.jpg
+*.jpeg
+*.webp
