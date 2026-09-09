@@ -1,0 +1,6 @@
+{
+  "name": "BHURAKSHA 2.0 — AI-Powered Landslide Risk Intelligence",
+  "description": "AI-powered landslide risk monitoring, multi-source data fusion, geospatial prediction, and targeted early warning platform for the North Eastern Region of India.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
