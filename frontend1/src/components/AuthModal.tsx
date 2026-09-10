@@ -22,9 +22,14 @@ import {
 } from 'lucide-react';
 import { UserRole, OfficerAccessRequest, OfficerOperationalProfile } from '../types';
 import { AuthService } from '../services/authService';
+import { obtainAdminToken } from '../services/districtAdminService';
 import { OfficerMultiStepRegistration } from './field-officer/OfficerMultiStepRegistration';
 import { OfficerStatusResolution } from './field-officer/OfficerStatusResolution';
 import { OfficerProfileSelection } from './field-officer/OfficerProfileSelection';
+
+import { LoginForm } from './auth/LoginForm';
+import { SignupForm } from './auth/SignupForm';
+import { OtpVerificationForm } from './auth/OtpVerificationForm';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -43,6 +48,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 }) => {
   const [mode, setMode] = useState<'signin' | 'register'>(initialMode);
   const [selectedRole, setSelectedRole] = useState<UserRole>(initialRole);
+
+  const [citizenAuthStep, setCitizenAuthStep] = useState<'signup' | 'otp'>('signup');
+  const [citizenAuthPhone, setCitizenAuthPhone] = useState('');
 
   // Field Officer specific sub-view: login or request access
   const [officerSubMode, setOfficerSubMode] = useState<'login' | 'request_access'>('login');
@@ -244,6 +252,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     }
 
     if (result.user && result.authorizedRole) {
+      if (result.authorizedRole === 'admin') {
+        obtainAdminToken().catch((e) => console.warn('Admin token background fetch:', e));
+      }
       setIsSuccess(true);
       setSuccessMessage(`Authorized: Entering ${result.authorizedRole.toUpperCase()} Dashboard...`);
       setTimeout(() => {
@@ -311,34 +322,23 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-xl animate-fade-in overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-earth-900/60 backdrop-blur-xs animate-fade-in overflow-y-auto">
       <div
-        className="relative w-full max-w-[560px] my-auto bg-[#0C121E] border border-white/20 rounded-3xl p-5 sm:p-7 shadow-[0_0_90px_rgba(0,0,0,0.85)] text-left"
+        className="relative w-full max-w-[580px] my-auto bg-[#FFFFFF] border-2 border-[#C9C0AD] rounded-3xl p-5 sm:p-7 shadow-2xl text-left text-[#141712]"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Ambient Top Glow according to selected role */}
-        <div
-          className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl pointer-events-none transition-all duration-500 ${
-            selectedRole === 'admin'
-              ? 'bg-amber-500/10'
-              : selectedRole === 'officer'
-              ? 'bg-blue-500/10'
-              : 'bg-emerald-500/10'
-          }`}
-        />
-
         {/* Top Header Bar */}
-        <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-3">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl border border-amber-500/30 bg-amber-500/10 flex items-center justify-center text-amber-400">
-              <Shield className="w-4 h-4" />
+        <div className="flex items-center justify-between mb-4 border-b border-[#E2DBD0] pb-3">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl border border-brand-300 bg-brand-100 flex items-center justify-center text-brand-800 shadow-2xs">
+              <Shield className="w-5 h-5" />
             </div>
             <div>
-              <span className="text-[10px] font-mono-code uppercase tracking-[0.2em] text-white/50 block">
-                BHURAKSHA 2.0
+              <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-brand-700 block font-bold">
+                BHURAKSHA 2.0 &bull; LIFE-SAFETY PLATFORM
               </span>
-              <span className="text-xs font-mono-code text-white font-bold uppercase tracking-wider">
-                Disaster Intelligence Platform
+              <span className="text-sm font-serif text-[#141712] font-bold tracking-tight">
+                Disaster Intelligence &amp; Early Warning
               </span>
             </div>
           </div>
@@ -346,21 +346,21 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           <button
             onClick={onClose}
             aria-label="Close modal"
-            className="w-8 h-8 rounded-xl border border-white/15 bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-xl border-2 border-[#BCB29E] bg-[#F5F1E6] flex items-center justify-center text-[#474C3F] hover:text-[#141712] hover:bg-[#EDE7DC] transition-colors cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Top Mode Selector: [ SIGN IN ] [ CITIZEN REGISTER ] */}
-        <div className="grid grid-cols-2 p-1 bg-white/[0.04] border border-white/10 rounded-xl mb-4.5 h-11">
+        <div className="grid grid-cols-2 p-1.5 bg-[#EDE7DC] border-2 border-[#C9C0AD] rounded-2xl mb-4 h-12">
           <button
             type="button"
             onClick={handleSelectSignIn}
-            className={`text-xs uppercase tracking-wider font-semibold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer font-mono-code ${
+            className={`text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer font-mono ${
               mode === 'signin'
-                ? 'bg-amber-400 text-black shadow-md font-bold'
-                : 'text-white/60 hover:text-white'
+                ? 'bg-[#1E4B33] text-white shadow-sm font-bold'
+                : 'text-[#474C3F] hover:text-[#141712] font-semibold'
             }`}
           >
             <Lock className="w-3.5 h-3.5" />
@@ -369,10 +369,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           <button
             type="button"
             onClick={handleSelectCitizenRegister}
-            className={`text-xs uppercase tracking-wider font-semibold rounded-lg transition-all flex items-center justify-center gap-1.5 cursor-pointer font-mono-code ${
+            className={`text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer font-mono ${
               mode === 'register'
-                ? 'bg-emerald-400 text-black shadow-md font-bold'
-                : 'text-white/60 hover:text-white'
+                ? 'bg-[#1E4B33] text-white shadow-sm font-bold'
+                : 'text-[#474C3F] hover:text-[#141712] font-semibold'
             }`}
           >
             <Users className="w-3.5 h-3.5" />
@@ -381,125 +381,179 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         </div>
 
         {/* Section Header: "Who are you?" */}
-        <div className="mb-3 flex items-center justify-between">
-          <span className="text-xs font-mono-code uppercase tracking-wider text-white/60 font-semibold">
-            Who are you?
+        <div className="mb-2.5 flex items-center justify-between">
+          <span className="text-xs font-mono uppercase tracking-wider text-[#2E3327] font-bold">
+            Select Your Role
           </span>
-          <span className="text-[10px] font-mono-code text-white/40 uppercase tracking-widest">
+          <span className="text-[10px] font-mono text-[#6B7263] uppercase tracking-wider font-semibold">
             {selectedRole === 'admin'
               ? 'RESTRICTED / SDMA ONLY'
+              : selectedRole === 'district_admin'
+              ? 'DISTRICT JURISDICTION'
               : selectedRole === 'officer'
-              ? 'AUTHORIZED OFFICIAL ONLY'
+              ? 'FIELD VERIFICATION'
               : 'OPEN PUBLIC ACCESS'}
           </span>
         </div>
 
-        {/* 3-Role Architecture Selector Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-4">
+        {/* 4-Role Architecture Selector Cards */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
           {/* Card 1: CITIZEN */}
           <button
             type="button"
             onClick={() => handleSelectRole('citizen')}
-            className={`p-3 rounded-2xl border text-left transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between ${
+            className={`p-3 rounded-2xl border-2 text-left transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between ${
               selectedRole === 'citizen'
-                ? 'bg-emerald-500/15 border-emerald-400 text-white shadow-lg shadow-emerald-500/10 ring-1 ring-emerald-400/40'
-                : 'bg-white/[0.02] border-white/10 text-white/60 hover:border-white/25 hover:text-white'
+                ? 'bg-[#EBF4EE] border-[#1E4B33] text-[#0D2619] shadow-md ring-2 ring-[#1E4B33]/40'
+                : 'bg-[#F5F1E6] border-[#D5CCA8] text-[#4E5446] hover:bg-[#EAE3D2] hover:border-[#BCB29E] hover:text-[#141712]'
             }`}
           >
             <div className="flex items-center justify-between mb-2">
               <div
-                className={`w-7 h-7 rounded-lg flex items-center justify-center ${
+                className={`w-7 h-7 rounded-lg flex items-center justify-center transition-colors ${
                   selectedRole === 'citizen'
-                    ? 'bg-emerald-400/20 text-emerald-300'
-                    : 'bg-white/5 text-white/40'
+                    ? 'bg-[#1E4B33] text-white'
+                    : 'bg-[#E0D7C5] text-[#555A4D]'
                 }`}
               >
                 <Users className="w-3.5 h-3.5" />
               </div>
-              <span className="px-1.5 py-0.5 rounded text-[8px] font-mono-code font-bold uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+              <span
+                className={`px-1.5 py-0.5 rounded text-[8px] font-mono font-bold uppercase transition-colors ${
+                  selectedRole === 'citizen'
+                    ? 'bg-[#1E4B33] text-white'
+                    : 'bg-[#DAD1BD] text-[#474C3F] border border-[#C5BBA4]'
+                }`}
+              >
                 PUBLIC
               </span>
             </div>
             <div>
-              <span className="text-xs font-bold font-mono-code uppercase block text-white">
+              <span className="text-xs font-bold font-mono uppercase block text-[#141712]">
                 CITIZEN
               </span>
-              <span className="text-[10px] text-white/60 block leading-tight mt-0.5">
+              <span className="text-[10px] text-[#474C3F] block leading-tight mt-0.5 font-medium">
                 Public safety &amp; alerts
               </span>
             </div>
           </button>
 
-          {/* Card 2: FIELD OFFICER */}
+          {/* Card 2: DISTRICT ADMIN */}
           <button
             type="button"
-            onClick={() => handleSelectRole('officer')}
-            className={`p-3 rounded-2xl border text-left transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between ${
-              selectedRole === 'officer'
-                ? 'bg-blue-500/15 border-blue-400 text-white shadow-lg shadow-blue-500/10 ring-1 ring-blue-400/40'
-                : 'bg-white/[0.02] border-white/10 text-white/60 hover:border-white/25 hover:text-white'
+            onClick={() => handleSelectRole('district_admin')}
+            className={`p-3 rounded-2xl border-2 text-left transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between ${
+              selectedRole === 'district_admin'
+                ? 'bg-[#FDF1EB] border-[#B5551F] text-[#5C2308] shadow-md ring-2 ring-[#B5551F]/40'
+                : 'bg-[#F5F1E6] border-[#D5CCA8] text-[#4E5446] hover:bg-[#EAE3D2] hover:border-[#BCB29E] hover:text-[#141712]'
             }`}
           >
             <div className="flex items-center justify-between mb-2">
               <div
-                className={`w-7 h-7 rounded-lg flex items-center justify-center ${
-                  selectedRole === 'officer'
-                    ? 'bg-blue-400/20 text-blue-300'
-                    : 'bg-white/5 text-white/40'
+                className={`w-7 h-7 rounded-lg flex items-center justify-center transition-colors ${
+                  selectedRole === 'district_admin'
+                    ? 'bg-[#B5551F] text-white'
+                    : 'bg-[#E0D7C5] text-[#555A4D]'
                 }`}
               >
-                <Radio className="w-3.5 h-3.5" />
+                <Building className="w-3.5 h-3.5" />
               </div>
-              <span className="px-1.5 py-0.5 rounded text-[8px] font-mono-code font-bold uppercase bg-blue-500/20 text-blue-300 border border-blue-500/30">
-                AUTHORIZED
+              <span
+                className={`px-1.5 py-0.5 rounded text-[8px] font-mono font-bold uppercase transition-colors ${
+                  selectedRole === 'district_admin'
+                    ? 'bg-[#B5551F] text-white'
+                    : 'bg-[#DAD1BD] text-[#474C3F] border border-[#C5BBA4]'
+                }`}
+              >
+                DISTRICT
               </span>
             </div>
             <div>
-              <span className="text-xs font-bold font-mono-code uppercase block text-white">
-                FIELD OFFICER
+              <span className="text-xs font-bold font-mono uppercase block text-[#141712]">
+                DISTRICT ADMIN
               </span>
-              <span className="text-[10px] text-white/60 block leading-tight mt-0.5">
-                Authorized personnel only
-              </span>
-              <span className="text-[9px] font-mono-code text-blue-400 font-bold block mt-1">
-                &rarr; Request Officer Access
+              <span className="text-[10px] text-[#474C3F] block leading-tight mt-0.5 font-medium">
+                Assigned district desk
               </span>
             </div>
           </button>
 
-          {/* Card 3: ADMIN / SDMA */}
+          {/* Card 3: FIELD OFFICER */}
           <button
             type="button"
-            onClick={() => handleSelectRole('admin')}
-            className={`p-3 rounded-2xl border text-left transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between ${
-              selectedRole === 'admin'
-                ? 'bg-amber-500/15 border-amber-400 text-white shadow-lg shadow-amber-500/10 ring-1 ring-amber-400/40'
-                : 'bg-white/[0.02] border-white/10 text-white/60 hover:border-white/25 hover:text-white'
+            onClick={() => handleSelectRole('officer')}
+            className={`p-3 rounded-2xl border-2 text-left transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between ${
+              selectedRole === 'officer'
+                ? 'bg-[#EDF5F0] border-[#246A44] text-[#113822] shadow-md ring-2 ring-[#246A44]/40'
+                : 'bg-[#F5F1E6] border-[#D5CCA8] text-[#4E5446] hover:bg-[#EAE3D2] hover:border-[#BCB29E] hover:text-[#141712]'
             }`}
           >
             <div className="flex items-center justify-between mb-2">
               <div
-                className={`w-7 h-7 rounded-lg flex items-center justify-center ${
+                className={`w-7 h-7 rounded-lg flex items-center justify-center transition-colors ${
+                  selectedRole === 'officer'
+                    ? 'bg-[#246A44] text-white'
+                    : 'bg-[#E0D7C5] text-[#555A4D]'
+                }`}
+              >
+                <Radio className="w-3.5 h-3.5" />
+              </div>
+              <span
+                className={`px-1.5 py-0.5 rounded text-[8px] font-mono font-bold uppercase transition-colors ${
+                  selectedRole === 'officer'
+                    ? 'bg-[#246A44] text-white'
+                    : 'bg-[#DAD1BD] text-[#474C3F] border border-[#C5BBA4]'
+                }`}
+              >
+                FIELD
+              </span>
+            </div>
+            <div>
+              <span className="text-xs font-bold font-mono uppercase block text-[#141712]">
+                FIELD OFFICER
+              </span>
+              <span className="text-[10px] text-[#474C3F] block leading-tight mt-0.5 font-medium">
+                Field investigations
+              </span>
+            </div>
+          </button>
+
+          {/* Card 4: ADMIN / SDMA */}
+          <button
+            type="button"
+            onClick={() => handleSelectRole('admin')}
+            className={`p-3 rounded-2xl border-2 text-left transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between ${
+              selectedRole === 'admin'
+                ? 'bg-[#FEF5E7] border-[#B87217] text-[#543004] shadow-md ring-2 ring-[#B87217]/40'
+                : 'bg-[#F5F1E6] border-[#D5CCA8] text-[#4E5446] hover:bg-[#EAE3D2] hover:border-[#BCB29E] hover:text-[#141712]'
+            }`}
+          >
+            <div className="flex items-center justify-between mb-2">
+              <div
+                className={`w-7 h-7 rounded-lg flex items-center justify-center transition-colors ${
                   selectedRole === 'admin'
-                    ? 'bg-amber-400/20 text-amber-300'
-                    : 'bg-white/5 text-white/40'
+                    ? 'bg-[#B87217] text-white'
+                    : 'bg-[#E0D7C5] text-[#555A4D]'
                 }`}
               >
                 <Shield className="w-3.5 h-3.5" />
               </div>
-              <span className="px-1.5 py-0.5 rounded text-[8px] font-mono-code font-bold uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                RESTRICTED
+              <span
+                className={`px-1.5 py-0.5 rounded text-[8px] font-mono font-bold uppercase transition-colors ${
+                  selectedRole === 'admin'
+                    ? 'bg-[#B87217] text-white'
+                    : 'bg-[#DAD1BD] text-[#474C3F] border border-[#C5BBA4]'
+                }`}
+              >
+                HQ
               </span>
             </div>
             <div>
-              <span className="text-xs font-bold font-mono-code uppercase block text-white">
+              <span className="text-xs font-bold font-mono uppercase block text-[#141712]">
                 ADMIN / SDMA
               </span>
-              <span className="text-[10px] text-white/60 block leading-tight mt-0.5">
-                Authorized administrators only
-              </span>
-              <span className="text-[9px] font-mono-code text-amber-400 font-bold block mt-1">
-                &rarr; Admin Login
+              <span className="text-[10px] text-[#474C3F] block leading-tight mt-0.5 font-medium">
+                State SDMA Command
               </span>
             </div>
           </button>
@@ -508,86 +562,69 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         {/* Security / Error Message Banner */}
         {errorMessage && (
           <div
-            className={`mb-4 p-3.5 rounded-2xl border flex items-start gap-3 text-left animate-shake ${
-              errorCode === 'ADMIN_RESTRICTED' || errorCode === 'RESTRICTED_ACCESS'
-                ? 'bg-red-500/10 border-red-500/40 text-red-300'
-                : errorCode === 'OFFICER_PENDING'
-                ? 'bg-amber-500/10 border-amber-500/40 text-amber-300'
-                : 'bg-red-500/10 border-red-500/30 text-red-300'
-            }`}
+            className="mb-4 p-3.5 rounded-xl border border-red-300 bg-red-50 text-red-900 flex items-start gap-3 text-left"
           >
-            <div className="p-1 rounded-lg bg-red-500/20 text-red-400 shrink-0 mt-0.5">
+            <div className="p-1 rounded-lg bg-red-100 text-red-700 shrink-0 mt-0.5">
               <AlertTriangle className="w-4 h-4" />
             </div>
             <div className="space-y-0.5 text-xs">
-              <span className="font-mono-code font-bold uppercase block tracking-wider">
+              <span className="font-mono font-bold uppercase block tracking-wider text-red-900">
                 {errorTitle || 'Access Restricted'}
               </span>
-              <p className="text-white/80 leading-relaxed font-sans">{errorMessage}</p>
+              <p className="text-red-800 leading-relaxed font-sans">{errorMessage}</p>
             </div>
           </div>
         )}
 
         {/* ========================================================================= */}
-        {/* VIEW 1: SIGN IN MODE (CITIZEN, FIELD OFFICER, ADMIN LOGIN)               */}
+        {/* VIEW 1: SIGN IN MODE (CITIZEN, DISTRICT ADMIN, SUPER ADMIN LOGIN VIA PHONE) */}
         {/* ========================================================================= */}
-        {mode === 'signin' && (
-          <form onSubmit={handleSignInSubmit} className="space-y-3.5">
-            {/* 1A: CITIZEN SIGN IN */}
-            {selectedRole === 'citizen' && (
-              <div className="space-y-3">
-                <div className="flex items-center justify-between text-[11px] font-mono-code text-white/60">
-                  <span>CITIZEN SIGN IN</span>
-                  <span className="text-emerald-400">PUBLIC ACCESS PORTAL</span>
-                </div>
+        {mode === 'signin' && (selectedRole === 'citizen' || selectedRole === 'district_admin' || selectedRole === 'admin') && (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between text-[11px] font-mono text-earth-600 mb-1">
+              <span className="font-bold uppercase text-earth-900">
+                {selectedRole === 'district_admin'
+                  ? 'DISTRICT ADMINISTRATOR LOGIN'
+                  : selectedRole === 'admin'
+                  ? 'SDMA SUPER-ADMIN LOGIN'
+                  : 'CITIZEN SIGN IN'}
+              </span>
+              <span className="text-xs font-medium text-brand-700">
+                {selectedRole === 'district_admin' ? 'JURISDICTION ACCESS' : selectedRole === 'admin' ? 'COMMAND LEVEL 3' : 'PUBLIC ACCESS PORTAL'}
+              </span>
+            </div>
 
-                <div>
-                  <label className="text-[10px] font-mono-code uppercase tracking-wider text-white/60 block mb-1">
-                    MOBILE NUMBER OR EMAIL
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      required
-                      value={identifier}
-                      onChange={(e) => setIdentifier(e.target.value)}
-                      placeholder="+91 98620 44102 or resident@gmail.com"
-                      className="w-full h-11 bg-[#080C14] border border-white/15 rounded-xl pl-9 pr-3.5 text-xs text-white placeholder-white/30 focus:outline-none focus:border-emerald-400 font-mono-code"
-                    />
-                    <Smartphone className="w-4 h-4 text-white/40 absolute left-3 top-3.5" />
-                  </div>
-                </div>
+            {selectedRole === 'district_admin' && (
+              <div className="p-3 rounded-xl bg-accent-50 border border-accent-200 text-[11px] text-accent-900">
+                Enter your 10-digit mobile number and password assigned by the State Disaster Management Authority.
+              </div>
+            )}
 
+            {selectedRole === 'admin' && (
+              <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-[11px] text-amber-900 flex items-center justify-between">
                 <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <label className="text-[10px] font-mono-code uppercase tracking-wider text-white/60">
-                      PASSWORD
-                    </label>
-                    <button
-                      type="button"
-                      onClick={() => handleQuickDemoFill('citizen')}
-                      className="text-[10px] font-mono-code text-emerald-400 hover:underline cursor-pointer"
-                    >
-                      Fill Demo Resident &rarr;
-                    </button>
-                  </div>
-                  <div className="relative">
-                    <input
-                      type="password"
-                      required
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="••••••••••••"
-                      className="w-full h-11 bg-[#080C14] border border-white/15 rounded-xl pl-9 pr-3.5 text-xs text-white placeholder-white/30 focus:outline-none focus:border-emerald-400 font-mono-code"
-                    />
-                    <Lock className="w-4 h-4 text-white/40 absolute left-3 top-3.5" />
-                  </div>
+                  <span className="text-earth-600 block text-[10px] uppercase font-mono font-semibold">MAIN ADMIN CREDENTIALS:</span>
+                  <span>Mobile: <strong>9999999999</strong> &bull; Password: <strong>AdminPass123!</strong></span>
                 </div>
               </div>
             )}
 
-            {/* 1B: FIELD OFFICER SIGN IN */}
-            {selectedRole === 'officer' && officerStatusState && (
+            <LoginForm 
+              onSuccess={(role, name) => {
+                if (role === 'admin' || selectedRole === 'admin') {
+                  obtainAdminToken().catch(() => {});
+                }
+                onAuthenticated?.((role as UserRole) || selectedRole, name || 'Authorized User');
+                onClose();
+              }}
+              onSwitchToSignup={selectedRole === 'citizen' ? handleSelectCitizenRegister : undefined}
+            />
+          </div>
+        )}
+
+        {mode === 'signin' && selectedRole === 'officer' && (
+          <form onSubmit={handleSignInSubmit} className="space-y-3.5">
+            {officerStatusState ? (
               <OfficerStatusResolution
                 status={officerStatusState}
                 requestData={officerRequestData}
@@ -599,18 +636,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   setOfficerStatusState(null);
                 }}
               />
-            )}
-
-            {selectedRole === 'officer' && !officerStatusState && (
+            ) : (
               <div className="space-y-3">
-                <div className="flex items-center justify-between text-[11px] font-mono-code">
-                  <span className="text-white/60">OFFICER OPERATIONAL LOGIN</span>
-                  <span className="text-blue-400 font-bold">AUTHORIZED PERSONNEL ONLY</span>
+                <div className="flex items-center justify-between text-[11px] font-mono">
+                  <span className="text-earth-700 font-semibold">OFFICER OPERATIONAL LOGIN</span>
+                  <span className="text-brand-700 font-bold">AUTHORIZED PERSONNEL ONLY</span>
                 </div>
 
                 <div>
-                  <label className="text-[10px] font-mono-code uppercase tracking-wider text-white/60 block mb-1">
-                    OFFICIAL OFFICER ID / INSTITUTIONAL EMAIL
+                  <label className="text-xs font-bold text-[#2E3327] block mb-1">
+                    Official Officer ID / Institutional Email
                   </label>
                   <div className="relative">
                     <input
@@ -619,21 +654,21 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       value={identifier}
                       onChange={(e) => setIdentifier(e.target.value)}
                       placeholder="OFF-8821 or t.sangma@sdma.gov.in"
-                      className="w-full h-11 bg-[#080C14] border border-blue-500/30 rounded-xl pl-9 pr-3.5 text-xs text-white placeholder-white/30 focus:outline-none focus:border-blue-400 font-mono-code"
+                      className="w-full h-11 bg-white border-2 border-[#BCB29E] rounded-xl pl-9 pr-3.5 text-xs font-semibold text-[#141712] placeholder:text-[#6B7263] focus:outline-none focus:border-[#1E4B33] focus:ring-4 focus:ring-[#1E4B33]/20 font-mono shadow-xs"
                     />
-                    <FileBadge2 className="w-4 h-4 text-blue-400 absolute left-3 top-3.5" />
+                    <FileBadge2 className="w-4 h-4 text-[#6B7263] absolute left-3 top-3.5" />
                   </div>
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="text-[10px] font-mono-code uppercase tracking-wider text-white/60">
-                      OFFICER SECURITY KEY / PASSWORD
+                    <label className="text-xs font-bold text-[#2E3327]">
+                      Officer Security Key / Password
                     </label>
                     <button
                       type="button"
                       onClick={() => handleQuickDemoFill('officer_approved')}
-                      className="text-[10px] font-mono-code text-blue-400 hover:underline cursor-pointer"
+                      className="text-[10px] font-mono text-brand-700 hover:underline cursor-pointer font-bold"
                     >
                       Fill Demo Officer &rarr;
                     </button>
@@ -645,17 +680,17 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••••••"
-                      className="w-full h-11 bg-[#080C14] border border-blue-500/30 rounded-xl pl-9 pr-3.5 text-xs text-white placeholder-white/30 focus:outline-none focus:border-blue-400 font-mono-code"
+                      className="w-full h-11 bg-white border-2 border-[#BCB29E] rounded-xl pl-9 pr-3.5 text-xs font-semibold text-[#141712] placeholder:text-[#6B7263] focus:outline-none focus:border-[#1E4B33] focus:ring-4 focus:ring-[#1E4B33]/20 font-mono shadow-xs"
                     />
-                    <Lock className="w-4 h-4 text-blue-400 absolute left-3 top-3.5" />
+                    <Lock className="w-4 h-4 text-[#6B7263] absolute left-3 top-3.5" />
                   </div>
                 </div>
 
                 {/* Notice & Option to Request Officer Access */}
-                <div className="p-3 rounded-xl bg-blue-500/[0.08] border border-blue-500/25 flex items-center justify-between text-xs font-mono-code">
-                  <div className="flex items-center gap-2 text-blue-300">
-                    <Info className="w-3.5 h-3.5 shrink-0" />
-                    <span className="text-[10px]">No open instant access for officers.</span>
+                <div className="p-3 rounded-xl bg-earth-100 border border-earth-200 flex items-center justify-between text-xs font-mono">
+                  <div className="flex items-center gap-2 text-earth-700">
+                    <Info className="w-3.5 h-3.5 shrink-0 text-brand-700" />
+                    <span className="text-[10px]">Pre-clearance required for officers.</span>
                   </div>
                   <button
                     type="button"
@@ -663,108 +698,24 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       setMode('register');
                       setOfficerSubMode('request_access');
                     }}
-                    className="text-[10.5px] text-amber-400 font-bold hover:underline cursor-pointer flex items-center gap-1"
+                    className="text-[10.5px] text-accent-700 font-bold hover:underline cursor-pointer flex items-center gap-1"
                   >
                     <span>Field Officer Registration</span>
                     <ArrowRight className="w-3 h-3" />
                   </button>
                 </div>
+
+                {/* Submit Button for Officer Sign In */}
+                <button
+                  type="submit"
+                  disabled={isSuccess}
+                  className="w-full h-11 rounded-xl font-sans font-semibold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-xs bg-brand-700 hover:bg-brand-800 text-white disabled:opacity-75"
+                >
+                  <Lock className="w-4 h-4" />
+                  <span>SIGN IN AS FIELD OFFICER &rarr;</span>
+                </button>
               </div>
             )}
-
-            {/* 1C: ADMIN / SDMA SIGN IN */}
-            {selectedRole === 'admin' && (
-              <div className="p-4 rounded-2xl bg-amber-500/[0.04] border border-amber-500/30 space-y-3">
-                <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                  <span className="text-[9px] font-mono-code uppercase text-amber-400 font-bold flex items-center gap-1.5">
-                    <Shield className="w-3.5 h-3.5" />
-                    STATE DISASTER MANAGEMENT AUTHORITY (SDMA)
-                  </span>
-                  <span className="text-[9px] font-mono-code text-amber-400/80 bg-amber-500/20 px-2 py-0.5 rounded uppercase font-bold">
-                    LEVEL-3 RESTRICTED
-                  </span>
-                </div>
-
-                <div>
-                  <label className="text-[10px] font-mono-code uppercase tracking-wider text-white/60 block mb-1">
-                    ADMINISTRATOR ID / SDMA COMMAND EMAIL
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      required
-                      value={identifier}
-                      onChange={(e) => setIdentifier(e.target.value)}
-                      placeholder="ADM-4091 or r.lalrinzuala@sdma.gov.in"
-                      className="w-full h-11 bg-[#080C14] border border-amber-500/30 rounded-xl pl-9 pr-3.5 text-xs text-white placeholder-white/30 focus:outline-none focus:border-amber-400 font-mono-code"
-                    />
-                    <KeyRound className="w-4 h-4 text-amber-400 absolute left-3 top-3.5" />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <label className="text-[10px] font-mono-code uppercase tracking-wider text-white/60">
-                      SECURE PASSWORD
-                    </label>
-                    <button
-                      type="button"
-                      onClick={() => handleQuickDemoFill('admin')}
-                      className="text-[10px] font-mono-code text-amber-400 hover:underline cursor-pointer"
-                    >
-                      Fill Demo Admin &rarr;
-                    </button>
-                  </div>
-                  <div className="relative">
-                    <input
-                      type="password"
-                      required
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="••••••••••••"
-                      className="w-full h-11 bg-[#080C14] border border-amber-500/30 rounded-xl pl-9 pr-3.5 text-xs text-white placeholder-white/30 focus:outline-none focus:border-amber-400 font-mono-code"
-                    />
-                    <Lock className="w-4 h-4 text-amber-400 absolute left-3 top-3.5" />
-                  </div>
-                </div>
-
-                <div className="text-[9px] font-mono-code text-white/50 leading-relaxed bg-[#080C14] p-2.5 rounded-xl border border-white/10">
-                  <span className="text-amber-400 font-bold block mb-0.5">SECURITY NOTICE:</span>
-                  Administrative access is restricted to authorized disaster-management personnel. All login attempts are cryptographically audited.
-                </div>
-              </div>
-            )}
-
-            {/* Submit Button for Sign In */}
-            <button
-              type="submit"
-              disabled={isSuccess}
-              className={`w-full h-12 rounded-xl font-mono-code font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg disabled:opacity-75 ${
-                selectedRole === 'admin'
-                  ? 'bg-amber-400 hover:bg-amber-300 text-black shadow-amber-500/20'
-                  : selectedRole === 'officer'
-                  ? 'bg-blue-500 hover:bg-blue-400 text-white shadow-blue-500/20'
-                  : 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-emerald-500/20'
-              }`}
-            >
-              {isSuccess ? (
-                <>
-                  <CheckCircle2 className="w-4 h-4" />
-                  <span>{successMessage || 'AUTHENTICATING CLEARANCE...'}</span>
-                </>
-              ) : (
-                <>
-                  <span>
-                    {selectedRole === 'admin'
-                      ? 'AUTHENTICATE & ENTER COMMAND CENTER →'
-                      : selectedRole === 'officer'
-                      ? 'SIGN IN AS FIELD OFFICER →'
-                      : 'SIGN IN AS CITIZEN →'}
-                  </span>
-                  <ArrowRight className="w-4 h-4" />
-                </>
-              )}
-            </button>
           </form>
         )}
 
@@ -775,89 +726,30 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           <div>
             {/* 2A: CITIZEN REGISTRATION (PUBLICLY ALLOWED) */}
             {selectedRole === 'citizen' && (
-              <form onSubmit={handleCitizenRegisterSubmit} className="space-y-3">
-                <div className="flex items-center justify-between text-[11px] font-mono-code border-b border-white/10 pb-2">
-                  <span className="text-emerald-400 font-bold uppercase">PUBLIC CITIZEN REGISTRATION</span>
-                  <span className="text-white/50">FREE COMMUNITY ACCESS</span>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between text-[11px] font-mono border-b border-earth-200 pb-2 mb-2">
+                  <span className="text-brand-800 font-bold uppercase">PUBLIC CITIZEN REGISTRATION</span>
+                  <span className="text-earth-600">FREE COMMUNITY ACCESS</span>
                 </div>
-
-                <div>
-                  <label className="text-[10px] font-mono-code uppercase tracking-wider text-white/60 block mb-1">
-                    FULL NAME
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={regName}
-                    onChange={(e) => setRegName(e.target.value)}
-                    placeholder="e.g. M. Zothansanga"
-                    className="w-full h-10 bg-[#080C14] border border-white/15 rounded-xl px-3 text-xs text-white placeholder-white/30 focus:outline-none focus:border-emerald-400 font-mono-code"
+                {citizenAuthStep === 'signup' ? (
+                  <SignupForm 
+                    onSuccess={(phone) => {
+                      setCitizenAuthPhone(phone);
+                      setCitizenAuthStep('otp');
+                    }}
+                    onSwitchToLogin={handleSelectSignIn}
                   />
-                </div>
-
-                <div>
-                  <label className="text-[10px] font-mono-code uppercase tracking-wider text-white/60 block mb-1">
-                    MOBILE NUMBER OR EMAIL
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={regIdentifier}
-                    onChange={(e) => setRegIdentifier(e.target.value)}
-                    placeholder="e.g. +91 98620 44102 or name@gmail.com"
-                    className="w-full h-10 bg-[#080C14] border border-white/15 rounded-xl px-3 text-xs text-white placeholder-white/30 focus:outline-none focus:border-emerald-400 font-mono-code"
+                ) : (
+                  <OtpVerificationForm 
+                    phoneNumber={citizenAuthPhone}
+                    onSuccess={() => {
+                      onAuthenticated?.('citizen', 'Citizen User');
+                      onClose();
+                    }}
+                    onBack={() => setCitizenAuthStep('signup')}
                   />
-                </div>
-
-                <div>
-                  <label className="text-[10px] font-mono-code uppercase tracking-wider text-white/60 block mb-1">
-                    REGISTERED LOCATION / DISTRICT
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="text"
-                      required
-                      value={regLocation}
-                      onChange={(e) => setRegLocation(e.target.value)}
-                      placeholder="e.g. Sector A (Durtlang Ridge, Aizawl)"
-                      className="w-full h-10 bg-[#080C14] border border-white/15 rounded-xl pl-9 pr-3 text-xs text-white placeholder-white/30 focus:outline-none focus:border-emerald-400 font-mono-code"
-                    />
-                    <MapPin className="w-4 h-4 text-emerald-400 absolute left-3 top-3" />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="text-[10px] font-mono-code uppercase tracking-wider text-white/60 block mb-1">
-                    CREATE PASSWORD
-                  </label>
-                  <input
-                    type="password"
-                    required
-                    value={regPassword}
-                    onChange={(e) => setRegPassword(e.target.value)}
-                    placeholder="••••••••••••"
-                    className="w-full h-10 bg-[#080C14] border border-white/15 rounded-xl px-3 text-xs text-white placeholder-white/30 focus:outline-none focus:border-emerald-400 font-mono-code"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSuccess}
-                  className="w-full h-12 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-mono-code font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-emerald-500/20 disabled:opacity-75 mt-2"
-                >
-                  {isSuccess ? (
-                    <>
-                      <CheckCircle2 className="w-4 h-4" />
-                      <span>{successMessage || 'CREATING CITIZEN ACCOUNT...'}</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>COMPLETE CITIZEN REGISTRATION →</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
-              </form>
+                )}
+              </div>
             )}
 
             {/* 2B: FIELD OFFICER - RESTRICTED REQUEST ACCESS (4-STEP FORM) */}
@@ -876,17 +768,17 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
             {/* 2C: ADMIN / SDMA - PUBLIC REGISTRATION STRICTLY FORBIDDEN */}
             {selectedRole === 'admin' && (
-              <div className="p-6 rounded-2xl bg-amber-500/[0.04] border border-amber-500/30 text-left space-y-3">
-                <div className="flex items-center gap-2 text-amber-400 font-bold font-mono-code text-xs uppercase">
+              <div className="p-6 rounded-2xl bg-amber-50/70 border border-amber-200 text-left space-y-3">
+                <div className="flex items-center gap-2 text-amber-900 font-bold font-mono text-xs uppercase">
                   <Lock className="w-4 h-4" />
                   <span>PUBLIC ADMIN REGISTRATION NOT PERMITTED</span>
                 </div>
 
-                <p className="text-xs text-white/80 leading-relaxed font-sans">
+                <p className="text-xs text-earth-800 leading-relaxed font-sans">
                   Administrative access is restricted to authorized disaster-management personnel. Admin accounts are provisioned exclusively by State Disaster Management Authority (SDMA) system administration.
                 </p>
 
-                <div className="p-3 bg-[#080C14] rounded-xl border border-white/10 text-[10px] font-mono-code text-white/50 space-y-1">
+                <div className="p-3 bg-white rounded-xl border border-earth-200 text-[10px] font-mono text-earth-700 space-y-1">
                   <div>&bull; Public users cannot register administrative accounts.</div>
                   <div>&bull; Multi-factor institutional clearance is required.</div>
                 </div>
@@ -894,7 +786,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 <button
                   type="button"
                   onClick={handleSelectSignIn}
-                  className="w-full py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-mono-code font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20"
+                  className="w-full py-3 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-mono font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 shadow-xs"
                 >
                   <span>RETURN TO ADMIN LOGIN &rarr;</span>
                 </button>
@@ -906,18 +798,18 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         {/* ========================================================================= */}
         {/* SEPARATE PROTOTYPE DEMO ACCESS (EXPLICITLY MARKED PROTOTYPE TEST HARNESS) */}
         {/* ========================================================================= */}
-        <div className="mt-4 pt-3.5 border-t border-white/10 text-left space-y-2">
+        <div className="mt-4 pt-3.5 border-t border-earth-200 text-left space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-mono-code uppercase text-white/50 flex items-center gap-1.5 font-bold">
-              <Sparkles className="w-3 h-3 text-amber-400" />
+            <span className="text-[10px] font-mono uppercase text-earth-600 flex items-center gap-1.5 font-bold">
+              <Sparkles className="w-3 h-3 text-accent-700" />
               <span>PROTOTYPE DEMO ACCESS (PRE-AUTHORIZED TEST ACCOUNTS)</span>
             </span>
-            <span className="text-[9px] font-mono-code text-amber-400 uppercase">
-              SEPARATE DEMO CREDENTIALS
+            <span className="text-[9px] font-mono text-accent-800 uppercase font-semibold">
+              PRE-CONFIGURED PERSONAS
             </span>
           </div>
 
-          <p className="text-[9.5px] font-sans text-white/40 leading-tight">
+          <p className="text-[10px] font-sans text-earth-600 leading-tight">
             Use these pre-authorized accounts to test role-based separation. Administrator and Officer privileges cannot be acquired through public registration.
           </p>
 
@@ -925,64 +817,64 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             <button
               type="button"
               onClick={() => handleQuickDemoFill('citizen')}
-              className="px-2 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 cursor-pointer font-mono-code text-[9px] font-bold text-left flex flex-col transition-colors"
+              className="px-2 py-1.5 rounded-lg bg-brand-50 hover:bg-brand-100 text-brand-900 border border-brand-200 cursor-pointer font-mono text-[9px] font-bold text-left flex flex-col transition-colors"
             >
               <span>DEMO CITIZEN</span>
-              <span className="text-[7.5px] opacity-70 font-sans font-normal">Public Resident</span>
+              <span className="text-[7.5px] text-earth-600 font-sans font-normal">Public Resident</span>
             </button>
 
             <button
               type="button"
               onClick={() => handleQuickDemoFill('officer_approved')}
-              className="px-2 py-1.5 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 text-blue-300 border border-blue-500/30 cursor-pointer font-mono-code text-[9px] font-bold text-left flex flex-col transition-colors"
+              className="px-2 py-1.5 rounded-lg bg-earth-100 hover:bg-earth-200 text-earth-900 border border-earth-300 cursor-pointer font-mono text-[9px] font-bold text-left flex flex-col transition-colors"
             >
               <span>OFFICER (ACTIVE)</span>
-              <span className="text-[7.5px] opacity-70 font-sans font-normal">Full Operational</span>
+              <span className="text-[7.5px] text-earth-600 font-sans font-normal">Full Operational</span>
             </button>
 
             <button
               type="button"
               onClick={() => handleQuickDemoFill('officer_pending')}
-              className="px-2 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 cursor-pointer font-mono-code text-[9px] font-bold text-left flex flex-col transition-colors"
+              className="px-2 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 cursor-pointer font-mono text-[9px] font-bold text-left flex flex-col transition-colors"
             >
               <span>OFFICER (PENDING)</span>
-              <span className="text-[7.5px] opacity-70 font-sans font-normal">Awaiting Review</span>
+              <span className="text-[7.5px] text-earth-600 font-sans font-normal">Awaiting Review</span>
             </button>
 
             <button
               type="button"
               onClick={() => handleQuickDemoFill('officer_rejected')}
-              className="px-2 py-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 cursor-pointer font-mono-code text-[9px] font-bold text-left flex flex-col transition-colors"
+              className="px-2 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-200 cursor-pointer font-mono text-[9px] font-bold text-left flex flex-col transition-colors"
             >
               <span>OFFICER (REJECTED)</span>
-              <span className="text-[7.5px] opacity-70 font-sans font-normal">Ineligible / Denied</span>
+              <span className="text-[7.5px] text-earth-600 font-sans font-normal">Ineligible / Denied</span>
             </button>
 
             <button
               type="button"
               onClick={() => handleQuickDemoFill('officer_info')}
-              className="px-2 py-1.5 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 cursor-pointer font-mono-code text-[9px] font-bold text-left flex flex-col transition-colors"
+              className="px-2 py-1.5 rounded-lg bg-earth-100 hover:bg-earth-200 text-earth-900 border border-earth-300 cursor-pointer font-mono text-[9px] font-bold text-left flex flex-col transition-colors"
             >
               <span>OFFICER (INFO REQ)</span>
-              <span className="text-[7.5px] opacity-70 font-sans font-normal">Needs Resubmit</span>
+              <span className="text-[7.5px] text-earth-600 font-sans font-normal">Needs Resubmit</span>
             </button>
 
             <button
               type="button"
               onClick={() => handleQuickDemoFill('admin')}
-              className="px-2 py-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-300 border border-red-500/30 cursor-pointer font-mono-code text-[9px] font-bold text-left flex flex-col transition-colors"
+              className="px-2 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 cursor-pointer font-mono text-[9px] font-bold text-left flex flex-col transition-colors"
             >
               <span>DEMO ADMIN</span>
-              <span className="text-[7.5px] opacity-70 font-sans font-normal">SDMA Command</span>
+              <span className="text-[7.5px] text-earth-600 font-sans font-normal">SDMA Command</span>
             </button>
           </div>
         </div>
 
         {/* Security Architecture Summary Strip */}
-        <div className="mt-3.5 pt-2.5 border-t border-white/5 flex flex-wrap items-center justify-between text-[8.5px] font-mono-code text-white/40 uppercase tracking-widest gap-1">
-          <span className="text-emerald-400/80">PUBLIC: CITIZEN &rarr; REGISTER &rarr; CITIZEN DASHBOARD</span>
-          <span className="text-blue-400/80">AUTHORIZED: OFFICER &rarr; REQUEST ACCESS &rarr; VERIFICATION</span>
-          <span className="text-amber-400/80">RESTRICTED: ADMIN / SDMA &rarr; LOGIN ONLY</span>
+        <div className="mt-3 pt-2.5 border-t border-earth-200 flex flex-wrap items-center justify-between text-[8.5px] font-mono text-earth-500 uppercase tracking-widest gap-1">
+          <span className="text-brand-800">PUBLIC: CITIZEN &rarr; REGISTER &rarr; CITIZEN DASHBOARD</span>
+          <span className="text-earth-700">AUTHORIZED: OFFICER &rarr; REQUEST ACCESS &rarr; VERIFICATION</span>
+          <span className="text-amber-800">RESTRICTED: ADMIN / SDMA &rarr; LOGIN ONLY</span>
         </div>
       </div>
     </div>

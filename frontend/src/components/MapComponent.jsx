@@ -19,7 +19,10 @@ const LAND_COVER_LABELS = {
   100:'Mosaic Tree and Shrub',
 };
 
-const MapComponent = ({ showNERBoundaries, showRoads, showLandslides, showSusceptibility }) => {
+const HOSPITALS_PMTILES_URL = '/data/hospitals/tiles/hospitals.pmtiles';
+const HOSPITALS_SOURCE_LAYER = 'hospitals';
+
+const MapComponent = ({ showNERBoundaries, showRoads, showLandslides, showSusceptibility, showHospitals }) => {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
 
@@ -551,6 +554,99 @@ const MapComponent = ({ showNERBoundaries, showRoads, showLandslides, showSuscep
       map.on('mouseleave', 'landslides-circles', () => {
         map.getCanvas().style.cursor = '';
       });
+
+      // =====================================================================
+      // 5. HOSPITALS PMTILES LAYER
+      // =====================================================================
+      map.addSource('hospitals-source', {
+        type: 'vector',
+        url: `pmtiles://${HOSPITALS_PMTILES_URL}`
+      });
+
+      map.addLayer({
+        id: 'hospitals-layer',
+        type: 'circle',
+        source: 'hospitals-source',
+        'source-layer': HOSPITALS_SOURCE_LAYER,
+        layout: {
+          'visibility': showHospitals ? 'visible' : 'none'
+        },
+        paint: {
+          'circle-radius': [
+            'interpolate', ['linear'], ['zoom'],
+            4, 3,
+            8, 4.5,
+            12, 6.5,
+            15, 9
+          ],
+          'circle-color': '#059669', // Emerald green
+          'circle-opacity': 0.9,
+          'circle-stroke-width': 1.5,
+          'circle-stroke-color': '#ffffff'
+        }
+      });
+
+      map.addLayer({
+        id: 'hospitals-symbol',
+        type: 'symbol',
+        source: 'hospitals-source',
+        'source-layer': HOSPITALS_SOURCE_LAYER,
+        minzoom: 11,
+        layout: {
+          'text-field': '🏥', // Hospital emoji as icon
+          'text-size': [
+            'interpolate', ['linear'], ['zoom'],
+            11, 10,
+            15, 16
+          ],
+          'text-allow-overlap': true,
+          'visibility': showHospitals ? 'visible' : 'none'
+        }
+      });
+
+      // ── Click popup for Hospitals ──────────────────────────────────────────
+      map.on('click', 'hospitals-layer', (e) => {
+        if (!e.features || e.features.length === 0) return;
+        const props = e.features[0].properties || {};
+
+        const name = props.name || 'Unnamed Hospital';
+        const type = props.hospital_type || 'Hospital';
+        const district = props.district;
+        const state = props.state;
+        const operator = props.operator;
+        const emergency = props.emergency;
+        const phone = props.phone;
+        const address = props.address;
+
+        let tableRows = '';
+        if (type) tableRows += `<tr><td style="color:#64748b;padding:2px 0;">Type:</td><td style="font-weight:600;color:#1e293b;text-align:right;">${type}</td></tr>`;
+        if (district) tableRows += `<tr><td style="color:#64748b;padding:2px 0;">District:</td><td style="font-weight:600;color:#1e293b;text-align:right;">${district}</td></tr>`;
+        if (state) tableRows += `<tr><td style="color:#64748b;padding:2px 0;">State:</td><td style="font-weight:600;color:#1e293b;text-align:right;">${state}</td></tr>`;
+        if (operator) tableRows += `<tr><td style="color:#64748b;padding:2px 0;">Operator:</td><td style="font-weight:600;color:#1e293b;text-align:right;">${operator}</td></tr>`;
+        if (emergency) tableRows += `<tr><td style="color:#64748b;padding:2px 0;">Emergency:</td><td style="font-weight:600;color:#1e293b;text-align:right;">${emergency}</td></tr>`;
+        if (phone) tableRows += `<tr><td style="color:#64748b;padding:2px 0;">Phone:</td><td style="font-weight:600;color:#1e293b;text-align:right;">${phone}</td></tr>`;
+        if (address) tableRows += `<tr><td style="color:#64748b;padding:2px 0;">Address:</td><td style="font-weight:600;color:#1e293b;text-align:right;font-size:11px;">${address}</td></tr>`;
+
+        new maplibregl.Popup({ closeButton: true, closeOnClick: true })
+          .setLngLat(e.lngLat)
+          .setHTML(`
+            <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:6px;min-width:220px;">
+              <div style="font-size:14px;font-weight:700;color:#065f46;margin-bottom:6px;
+                          border-bottom:2px solid #059669;padding-bottom:3px;">${name}</div>
+              <table style="width:100%;font-size:12px;border-collapse:collapse;">
+                ${tableRows}
+              </table>
+            </div>
+          `)
+          .addTo(map);
+      });
+
+      map.on('mouseenter', 'hospitals-layer', () => {
+        map.getCanvas().style.cursor = 'pointer';
+      });
+      map.on('mouseleave', 'hospitals-layer', () => {
+        map.getCanvas().style.cursor = '';
+      });
     });
 
     return () => {
@@ -583,6 +679,10 @@ const MapComponent = ({ showNERBoundaries, showRoads, showLandslides, showSuscep
       if (map.getLayer('susceptibility-layer')) {
         map.setLayoutProperty('susceptibility-layer', 'visibility', visibility);
       }
+    } else if (type === 'hospitals') {
+      ['hospitals-layer', 'hospitals-symbol'].forEach((id) => {
+        if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', visibility);
+      });
     }
   };
 
@@ -605,6 +705,11 @@ const MapComponent = ({ showNERBoundaries, showRoads, showLandslides, showSuscep
     if (!mapRef.current || !mapRef.current.isStyleLoaded()) return;
     updateVisibility('susceptibility', showSusceptibility);
   }, [showSusceptibility]);
+
+  useEffect(() => {
+    if (!mapRef.current || !mapRef.current.isStyleLoaded()) return;
+    updateVisibility('hospitals', showHospitals);
+  }, [showHospitals]);
 
   return <div className="map-container" ref={mapContainerRef} />;
 };

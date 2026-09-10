@@ -9,6 +9,7 @@ function App() {
   // Layer state
   const [showLandslides, setShowLandslides] = useState(false);
   const [showSusceptibility, setShowSusceptibility] = useState(false);
+  const [showHospitals, setShowHospitals] = useState(true);
 
   // Future layer state placeholders (modular GIS architecture)
   const [showRivers, setShowRivers] = useState(false);
@@ -122,6 +123,18 @@ function App() {
                   <span style={{ fontWeight: 600, color: '#dc2626' }}>Historical Landslides</span>
                 </label>
               </div>
+
+              <div className="layer-item">
+                <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', gap: '8px' }}>
+                  <input 
+                    type="checkbox"
+                    id="toggle-hospitals"
+                    checked={showHospitals} 
+                    onChange={(e) => setShowHospitals(e.target.checked)} 
+                  />
+                  <span style={{ fontWeight: 600, color: '#059669' }}>Hospitals</span>
+                </label>
+              </div>
             </div>
 
             <hr style={{ margin: '18px 0', borderColor: '#e2e8f0' }} />
@@ -172,6 +185,7 @@ function App() {
             showRoads={showRoads}
             showLandslides={showLandslides}
             showSusceptibility={showSusceptibility}
+            showHospitals={showHospitals}
           />
         </section>
       </main>

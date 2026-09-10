@@ -18,16 +18,54 @@ except ImportError:
     _RASTER_DEPS = False
     print("[Susceptibility] WARNING: rasterio or Pillow not found — susceptibility tiles will return 503")
 
-app = FastAPI(title="SIH 2026 Landslide GIS API - Northeast India")
+import asyncio
+from contextlib import asynccontextmanager
+from routes.auth import router as auth_router
+from routes.profile import router as profile_router
+from routes.risk import router as risk_router
+from routes.alerts import router as alerts_router
+from routes.reference import router as reference_router
+from routes.admin_districts import router as admin_districts_router
+from routes.reports import router as reports_router
+from services.prediction_service import prediction_service
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        # Initialize ML prediction pipeline and spatial cKDTree in background thread
+        asyncio.create_task(asyncio.to_thread(prediction_service.initialize))
+    except Exception as e:
+        print(f"[PredictionPipeline] Startup initialization warning: {e}")
+    yield
+
+app = FastAPI(title="SIH 2026 Landslide GIS API - Northeast India", lifespan=lifespan)
 
 # Enable CORS for the React frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+    ],
+    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include the routers
+app.include_router(auth_router)
+app.include_router(profile_router)
+app.include_router(risk_router)
+app.include_router(alerts_router, prefix="/api")
+app.include_router(alerts_router)
+app.include_router(reference_router)
+app.include_router(admin_districts_router)
+app.include_router(reports_router)
 
 BASE_DIR = os.path.dirname(__file__)
 NER_DIR = os.path.join(BASE_DIR, "data", "NER_Boundaries")
@@ -38,6 +76,18 @@ LANDSLIDES_PMTILES = os.path.join(LANDSLIDES_DIR, "historical_landslides.pmtiles
 # Model A — Landslide Susceptibility COG
 MODEL1_DIR = os.path.join(BASE_DIR, "data", "Model 1 Datasets")
 SUSCEPTIBILITY_COG = os.path.join(MODEL1_DIR, "modelA_NER_only_susceptibility_cog.tif")
+
+# Villages Data
+VILLAGES_DIR = os.path.join(BASE_DIR, "data", "Villages")
+VILLAGES_PMTILES = os.path.join(VILLAGES_DIR, "villages_ner.pmtiles")
+VILLAGES_PARQUET = os.path.join(VILLAGES_DIR, "villages_ner.parquet")
+_villages_df = None  # Cached pandas DataFrame for search
+
+# Hospitals Data
+HOSPITALS_DIR = os.path.join(BASE_DIR, "data", "Hospitals")
+HOSPITALS_PMTILES = os.path.join(HOSPITALS_DIR, "tiles", "hospitals.pmtiles")
+HOSPITALS_PARQUET = os.path.join(HOSPITALS_DIR, "hospitals_ner.parquet")
+_hospitals_df = None  # Cached pandas DataFrame for search
 
 # Locate roads.mbtiles
 MBTILES_CANDIDATES = [
@@ -343,6 +393,144 @@ async def get_landslide_info():
 
 
 # ============================================================================
+# 3.5. PMTILES & SEARCH — VILLAGE SETTLEMENTS
+# ============================================================================
+
+@app.get("/data/tiles/villages_ner.pmtiles")
+async def serve_village_pmtiles(request: Request):
+    """Serve villages_ner.pmtiles with HTTP Range request support."""
+    if not os.path.exists(VILLAGES_PMTILES):
+        return JSONResponse(
+            {"error": "villages_ner.pmtiles not found. Run build_village_tiles.py first."},
+            status_code=404
+        )
+
+    return FileResponse(
+        VILLAGES_PMTILES,
+        media_type="application/octet-stream",
+        headers={
+            "Accept-Ranges": "bytes",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Range",
+            "Access-Control-Expose-Headers": "Content-Range, Content-Length, Accept-Ranges",
+            "Cache-Control": "public, max-age=3600",
+        }
+    )
+
+@app.get("/api/gis/villages/search")
+async def search_villages(q: str, limit: int = 20):
+    """
+    Search villages by name (case-insensitive partial match).
+    Loads GeoParquet into memory on first request.
+    """
+    global _villages_df
+    if not os.path.exists(VILLAGES_PARQUET):
+        return JSONResponse({"error": "villages_ner.parquet not found"}, status_code=404)
+
+    if _villages_df is None:
+        try:
+            import pandas as pd
+            _villages_df = pd.read_parquet(VILLAGES_PARQUET)
+            # Ensure name is string and drop missing names
+            _villages_df = _villages_df[_villages_df["name"].notna()].copy()
+            _villages_df["name_lower"] = _villages_df["name"].astype(str).str.lower()
+            # Drop geometry column as it's not JSON serializable easily and we have lat/lon
+            if "geometry" in _villages_df.columns:
+                _villages_df = _villages_df.drop(columns=["geometry"])
+        except Exception as e:
+            return JSONResponse({"error": f"Failed to load dataset: {e}"}, status_code=500)
+
+    if not q:
+        return []
+
+    q_lower = q.lower()
+    
+    # Prefix match first, then fallback to partial match
+    starts_with = _villages_df[_villages_df["name_lower"].str.startswith(q_lower)]
+    contains = _villages_df[
+        _villages_df["name_lower"].str.contains(q_lower) & 
+        ~_villages_df["name_lower"].str.startswith(q_lower)
+    ]
+    
+    import pandas as pd
+    matches = pd.concat([starts_with, contains]).head(limit)
+    
+    # Drop the temporary lowercased column
+    matches = matches.drop(columns=["name_lower"])
+    
+    # Fill NaN values with None for proper JSON serialization
+    matches = matches.replace({float('nan'): None})
+    
+    return matches.to_dict(orient="records")
+
+
+# ============================================================================
+# 3.6. PMTILES & SEARCH — HOSPITALS
+# ============================================================================
+
+@app.get("/data/hospitals/tiles/hospitals.pmtiles")
+async def serve_hospital_pmtiles(request: Request):
+    """Serve hospitals.pmtiles with HTTP Range request support."""
+    if not os.path.exists(HOSPITALS_PMTILES):
+        return JSONResponse(
+            {"error": "hospitals.pmtiles not found. Run build_hospital_tiles.py first."},
+            status_code=404
+        )
+
+    return FileResponse(
+        HOSPITALS_PMTILES,
+        media_type="application/octet-stream",
+        headers={
+            "Accept-Ranges": "bytes",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Range",
+            "Access-Control-Expose-Headers": "Content-Range, Content-Length, Accept-Ranges",
+            "Cache-Control": "public, max-age=3600",
+        }
+    )
+
+@app.get("/api/gis/hospitals/search")
+async def search_hospitals(q: str, limit: int = 20):
+    """
+    Search hospitals by name (case-insensitive partial match).
+    Loads GeoParquet into memory on first request.
+    """
+    global _hospitals_df
+    if not os.path.exists(HOSPITALS_PARQUET):
+        return JSONResponse({"error": "hospitals_ner.parquet not found"}, status_code=404)
+
+    if _hospitals_df is None:
+        try:
+            import pandas as pd
+            _hospitals_df = pd.read_parquet(HOSPITALS_PARQUET)
+            # Ensure name is string and drop missing names
+            _hospitals_df = _hospitals_df[_hospitals_df["name"].notna()].copy()
+            _hospitals_df["name_lower"] = _hospitals_df["name"].astype(str).str.lower()
+            if "geometry" in _hospitals_df.columns:
+                _hospitals_df = _hospitals_df.drop(columns=["geometry"])
+        except Exception as e:
+            return JSONResponse({"error": f"Failed to load dataset: {e}"}, status_code=500)
+
+    if not q:
+        return []
+
+    q_lower = q.lower()
+    
+    starts_with = _hospitals_df[_hospitals_df["name_lower"].str.startswith(q_lower)]
+    contains = _hospitals_df[
+        _hospitals_df["name_lower"].str.contains(q_lower) & 
+        ~_hospitals_df["name_lower"].str.startswith(q_lower)
+    ]
+    
+    import pandas as pd
+    matches = pd.concat([starts_with, contains]).head(limit)
+    matches = matches.drop(columns=["name_lower"])
+    matches = matches.replace({float('nan'): None})
+    
+    return matches.to_dict(orient="records")
+
+
+# ============================================================================
 # 4. SUSCEPTIBILITY RASTER TILE ENDPOINT
 # ============================================================================
 
@@ -567,6 +755,197 @@ async def get_susceptibility_info():
         {"class": "Very High", "min": 0.8,  "max": 1.0,  "color": "#d7191c"},
     ]
     return JSONResponse(info)
+
+
+# =====================================================================
+# CITIZEN HAZARD REPORTING API WITH STRICT SERVER-SIDE VALIDATION
+# =====================================================================
+from pydantic import BaseModel
+from typing import List, Optional, Any
+from datetime import datetime
+import time
+
+REPORTS_DB_PATH = os.path.join(BASE_DIR, "data", "citizen_reports.db")
+
+def init_citizen_reports_db():
+    try:
+        os.makedirs(os.path.dirname(REPORTS_DB_PATH), exist_ok=True)
+        conn = sqlite3.connect(REPORTS_DB_PATH)
+        cur = conn.cursor()
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS citizen_reports (
+                id TEXT PRIMARY KEY,
+                citizen_id TEXT,
+                citizen_name TEXT,
+                latitude REAL,
+                longitude REAL,
+                accuracy REAL,
+                location_timestamp TEXT,
+                hazard_type TEXT,
+                description TEXT,
+                photos_json TEXT,
+                video_json TEXT,
+                report_timestamp TEXT,
+                status TEXT
+            )
+        """)
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        print(f"[Citizen Reports] DB init error: {e}")
+
+init_citizen_reports_db()
+
+class GeoPhotoPayload(BaseModel):
+    id: Optional[str] = None
+    dataUrl: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    accuracy: Optional[float] = None
+    capturedAt: Optional[Any] = None
+
+class GeoVideoPayload(BaseModel):
+    id: Optional[str] = None
+    dataUrl: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    accuracy: Optional[float] = None
+    capturedAt: Optional[Any] = None
+    durationSec: Optional[float] = None
+
+class CitizenReportPayload(BaseModel):
+    reportId: Optional[str] = None
+    citizenId: Optional[str] = None
+    citizenName: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    accuracy: Optional[float] = None
+    locationTimestamp: Optional[Any] = None
+    hazardType: str
+    description: Optional[str] = ""
+    photos: Optional[List[GeoPhotoPayload]] = []
+    videos: Optional[List[GeoVideoPayload]] = []
+    video: Optional[GeoVideoPayload] = None
+    status: Optional[str] = "NEW"
+
+@app.post("/api/reports/citizen")
+async def submit_citizen_report(payload: CitizenReportPayload):
+    """
+    Submits a Citizen Hazard Report with strict server-side validation:
+    1. Valid device GPS coordinates are required.
+    2. Maximum 5 photos allowed.
+    3. Maximum 1 video allowed.
+    4. Video duration must not exceed 10.0 seconds.
+    5. Does NOT automatically change official AI risk models.
+    """
+    # 1. GPS validation
+    if payload.latitude is None or payload.longitude is None:
+        return JSONResponse(status_code=400, content={"error": "Valid device GPS coordinates are required."})
+    try:
+        lat = float(payload.latitude)
+        lon = float(payload.longitude)
+        if not (-90.0 <= lat <= 90.0 and -180.0 <= lon <= 180.0):
+            return JSONResponse(status_code=400, content={"error": "Valid device GPS coordinates are required."})
+    except (ValueError, TypeError):
+        return JSONResponse(status_code=400, content={"error": "Valid device GPS coordinates are required."})
+
+    # 2. Photos limit validation (Strict max 5)
+    photos = payload.photos or []
+    if len(photos) > 5:
+        return JSONResponse(status_code=400, content={"error": "Upload blocked. Maximum limit is 5 photos."})
+
+    # 3. Video limit validation (Strict max 1)
+    videos = list(payload.videos or [])
+    if payload.video is not None:
+        videos.append(payload.video)
+    if len(videos) > 1:
+        return JSONResponse(status_code=400, content={"error": "Upload blocked. Maximum limit is 1 video."})
+
+    # 4. Video duration validation (Strict max 10.0 seconds)
+    if len(videos) == 1:
+        dur = videos[0].durationSec
+        if dur is not None:
+            try:
+                dur_float = float(dur)
+                if dur_float > 10.05:
+                    return JSONResponse(status_code=400, content={"error": "Upload blocked. Video duration cannot exceed 10 seconds."})
+            except (ValueError, TypeError):
+                pass
+
+    # 5. Persist to citizen_reports database
+    report_id = payload.reportId or f"BR-{int(time.time() * 1000) % 100000:05d}"
+    try:
+        conn = sqlite3.connect(REPORTS_DB_PATH)
+        cur = conn.cursor()
+        cur.execute("""
+            INSERT OR REPLACE INTO citizen_reports
+            (id, citizen_id, citizen_name, latitude, longitude, accuracy, location_timestamp, hazard_type, description, photos_json, video_json, report_timestamp, status)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            report_id,
+            payload.citizenId or "citizen-resident",
+            payload.citizenName or "Resident Citizen",
+            lat,
+            lon,
+            float(payload.accuracy or 15.0),
+            str(payload.locationTimestamp or datetime.utcnow().isoformat()),
+            payload.hazardType,
+            payload.description or "",
+            json.dumps([p.dict() for p in photos]),
+            json.dumps(videos[0].dict() if videos else None),
+            datetime.utcnow().isoformat(),
+            "NEW"
+        ))
+        conn.commit()
+        conn.close()
+    except Exception as e:
+        print(f"[Citizen Reports] DB insert error: {e}")
+        return JSONResponse(status_code=500, content={"error": f"Failed to persist report: {str(e)}"})
+
+    return JSONResponse(
+        status_code=201,
+        content={
+            "status": "NEW",
+            "reportId": report_id,
+            "message": "Citizen report received and queued for Field Officer verification.",
+            "latitude": lat,
+            "longitude": lon,
+            "photosCount": len(photos),
+            "hasVideo": len(videos) > 0
+        }
+    )
+
+@app.get("/api/reports/citizen")
+async def get_citizen_reports():
+    """Returns all citizen reports stored in the backend."""
+    try:
+        conn = sqlite3.connect(REPORTS_DB_PATH)
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM citizen_reports ORDER BY report_timestamp DESC")
+        rows = cur.fetchall()
+        reports = []
+        for r in rows:
+            reports.append({
+                "id": r["id"],
+                "reportId": r["id"],
+                "citizenId": r["citizen_id"],
+                "citizenName": r["citizen_name"],
+                "latitude": r["latitude"],
+                "longitude": r["longitude"],
+                "accuracy": r["accuracy"],
+                "locationTimestamp": r["location_timestamp"],
+                "hazardType": r["hazard_type"],
+                "description": r["description"],
+                "photos": json.loads(r["photos_json"]) if r["photos_json"] else [],
+                "video": json.loads(r["video_json"]) if r["video_json"] else None,
+                "reportTimestamp": r["report_timestamp"],
+                "status": r["status"] or "NEW"
+            })
+        conn.close()
+        return JSONResponse({"reports": reports, "count": len(reports)})
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e), "reports": []})
 
 
 if __name__ == "__main__":

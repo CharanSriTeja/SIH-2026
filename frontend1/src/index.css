@@ -1,37 +1,92 @@
-<<<<<<< HEAD
 @import "tailwindcss";
+@config "../tailwind.config.js";
+
+@theme {
+  --color-earth-surface: #ECE7DC;
+  --color-earth-paper: #FFFFFF;
+  --color-earth-raised: #FFFFFF;
+  --color-earth-subtle: #DFD8CA;
+  --color-earth-divider: #BCB29E;
+  --color-earth-border: #C9C0AD;
+
+  --color-brand-primary: #1E4B33;
+  --color-brand-dark: #143524;
+  --color-brand-light: #EBF4EE;
+  --color-brand-border: #9EC4AF;
+
+  --color-accent-terracotta: #B5551F;
+  --color-accent-terracotta-dark: #964214;
+  --color-accent-terracotta-light: #FDF1EB;
+
+  --color-risk-low: #3E7B49;
+  --color-risk-low-bg: #EAF4EC;
+  --color-risk-low-border: #A8D9B2;
+  --color-risk-low-text: #1E4A26;
+
+  --color-risk-mod: #B87217;
+  --color-risk-mod-bg: #FDF4E6;
+  --color-risk-mod-border: #F0CE91;
+  --color-risk-mod-text: #694008;
+
+  --color-risk-high: #BD5015;
+  --color-risk-high-bg: #FDF0E8;
+  --color-risk-high-border: #F2BCA0;
+  --color-risk-high-text: #732C05;
+
+  --color-risk-crit: #8A2418;
+  --color-risk-crit-bg: #FCEEEB;
+  --color-risk-crit-border: #EABEB7;
+  --color-risk-crit-text: #5C170F;
+
+  --color-text-primary: #141712;
+  --color-text-secondary: #474C3F;
+  --color-text-subtle: #6B7263;
+
+  --font-serif: 'Lora', 'Source Serif 4', Georgia, serif;
+  --font-sans: 'Inter', 'Public Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
 
 @layer base {
   :root {
-    --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-sans: 'Inter', 'Public Sans', system-ui, -apple-system, sans-serif;
+    --font-heading: 'Lora', 'Source Serif 4', Georgia, serif;
     --font-mono: 'JetBrains Mono', monospace;
     font-family: var(--font-sans);
   }
 
   html {
-    background-color: #000000;
+    background-color: #ECE7DC;
+    color: #141712;
+    font-family: var(--font-sans);
+    font-size: 16px;
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
   }
 
   body {
-    background-color: transparent;
-    color: #F3F4F6;
+    background-color: #ECE7DC;
+    color: #141712;
     font-family: var(--font-sans);
+    line-height: 1.6;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+    color: #141712;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
   }
+}
+
+.font-serif-heading {
+  font-family: var(--font-heading);
 }
 
 .font-mono-code {
   font-family: var(--font-mono);
-}
-
-.font-heading {
-  font-family: var(--font-heading);
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -42,59 +97,34 @@
   scrollbar-width: none;
 }
 
-/* Glass & Environmental styles */
-.glass-panel {
-  background: rgba(10, 14, 22, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+/* Crisp Paper & Topographic Card Styling */
+.earth-panel {
+  background: #FFFFFF;
+  border: 1px solid #C9C0AD;
+  box-shadow: 0 1px 3px 0 rgba(20, 23, 18, 0.06);
 }
 
-.glass-panel-hover {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.earth-panel-hover {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.glass-panel-hover:hover {
-  background: rgba(15, 22, 36, 0.85);
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.5);
-}
-
-.glass-card-accent {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+.earth-panel-hover:hover {
+  background: #FFFFFF;
+  border-color: #9EC4AF;
+  box-shadow: 0 8px 24px -4px rgba(20, 23, 18, 0.1);
 }
 
-/* Subtle glow animations */
-@keyframes pulse-slow {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.05); }
+.earth-card-accent {
+  background: #FFFFFF;
+  border: 1px solid #C9C0AD;
+  box-shadow: 0 1px 3px rgba(20, 23, 18, 0.05);
 }
 
-@keyframes ping-slow {
-  0% { transform: scale(0.9); opacity: 0.8; }
-  100% { transform: scale(2.2); opacity: 0; }
+/* Subtle pulse animation */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
 }
 
-@keyframes flowLine {
-  0% { stroke-dashoffset: 200; }
-  100% { stroke-dashoffset: 0; }
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
 }
-
-.animate-pulse-slow {
-  animation: pulse-slow 4s ease-in-out infinite;
-}
-
-.animate-ping-slow {
-  animation: ping-slow 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-.flow-stroke {
-  stroke-dasharray: 8 12;
-  animation: flowLine 2s linear infinite;
-}
-
-
-=======
-/* Empty to prevent Vite default boilerplate from interfering with App.css */
->>>>>>> fbe5466c91f82a483c83f8a81a2d5824e6b3ab68

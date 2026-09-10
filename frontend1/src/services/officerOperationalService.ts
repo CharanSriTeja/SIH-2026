@@ -276,21 +276,6 @@ const SEED_INVESTIGATION_TASKS: InvestigationTask[] = [
     }
   },
 ];
-      severity: 'HIGH',
-      groundCondition: 'Saturated shale debris with active talus sliding',
-      slopeCondition: 'Joint spacing widened to 45mm along major bedding plane',
-      roadCondition: 'Single lane blocked by 3 large boulders (1.2m diameter)',
-      waterDrainageCondition: 'Natural cascade overflow spilling directly onto road formation',
-      additionalNotes: 'Immediate mechanical clearance and temporary boulder net catch barrier recommended.',
-      photos: [
-        'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&auto=format&fit=crop&q=80'
-      ],
-      submittedDateTime: 'Today, 10:45 IST',
-      coordinates: [25.298, 91.582],
-      isOfflineSynced: true,
-    }
-  }
-];
 
 const SEED_RESPONSE_TASKS: ResponseTeamTask[] = [
   {

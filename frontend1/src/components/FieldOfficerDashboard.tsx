@@ -384,29 +384,29 @@ export const FieldOfficerDashboard: React.FC<FieldOfficerDashboardProps> = ({
   ).length;
 
   return (
-    <div className="min-h-screen bg-[#060910] text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-earth-100 text-earth-900 flex flex-col font-sans">
       {/* ========================================================================= */}
       {/* 1. SIMPLE, UNCLUTTERED NAVBAR                                             */}
       {/* ========================================================================= */}
-      <header className="bg-[#0B101C] border-b border-slate-800 sticky top-0 z-30 shadow-md">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <header className="bg-[#FFFDF8]/95 border-b border-earth-300 sticky top-0 z-30 shadow-2xs backdrop-blur-md">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-4">
           {/* Brand */}
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-brand-100 border border-brand-200 flex items-center justify-center text-brand-800 shadow-2xs">
               <Shield className="w-5 h-5" />
             </div>
-            <div>
-              <span className="font-bold text-base tracking-tight text-white block">
-                BHURAKSHA 2.0
+            <div className="text-left">
+              <span className="font-bold text-base sm:text-lg font-serif tracking-tight text-earth-900 block">
+                BHURAKSHA
               </span>
-              <span className="text-[10px] text-slate-400 block -mt-0.5">
-                Field Officer Terminal
+              <span className="text-[10px] font-mono text-earth-600 block -mt-0.5 uppercase tracking-wider">
+                FIELD OFFICER TERMINAL
               </span>
             </div>
           </div>
 
           {/* MAIN SECTIONS */}
-          <nav className="hidden md:flex items-center gap-1 text-xs">
+          <nav className="hidden md:flex items-center gap-1.5 p-1.5 rounded-2xl bg-[#EDE7DC] border-2 border-[#C9C0AD] text-xs">
             {(
               [
                 { id: 'RISK STATUS', label: 'Risk Status' },
@@ -422,19 +422,19 @@ export const FieldOfficerDashboard: React.FC<FieldOfficerDashboardProps> = ({
                   key={section.id}
                   type="button"
                   onClick={() => setActiveTab(section.id as OfficerNavSection)}
-                  className={`px-3.5 py-2 rounded-lg font-semibold transition-colors cursor-pointer flex items-center gap-1.5 ${
+                  className={`px-3.5 py-2 rounded-xl font-mono text-xs uppercase font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                     isActive
-                      ? 'bg-blue-600 text-white shadow-sm'
-                      : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                      ? 'bg-[#1E4B33] text-white shadow-sm'
+                      : 'text-[#474C3F] hover:text-[#141712] hover:bg-[#DFD8CA]'
                   }`}
                 >
                   <span>{section.label}</span>
                   {section.id === 'VERIFICATION' && pendingVerificationsCount > 0 && (
                     <span
-                      className={`px-1.5 py-0.2 rounded-full text-[10px] font-bold ${
+                      className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono font-bold ${
                         isActive
-                          ? 'bg-white text-blue-700'
-                          : 'bg-blue-500 text-white'
+                          ? 'bg-white text-brand-900'
+                          : 'bg-accent-700 text-white'
                       }`}
                     >
                       {pendingVerificationsCount}
@@ -450,27 +450,27 @@ export const FieldOfficerDashboard: React.FC<FieldOfficerDashboardProps> = ({
             <button
               type="button"
               onClick={() => setIsProfileModalOpen(true)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-xs text-left cursor-pointer transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white hover:bg-earth-100 border border-earth-300 text-xs text-left cursor-pointer transition-colors shadow-2xs"
             >
-              <div className="w-6 h-6 rounded-md bg-blue-500/20 text-blue-300 flex items-center justify-center font-bold text-[11px]">
+              <div className="w-6 h-6 rounded-lg bg-brand-100 border border-brand-200 text-brand-800 flex items-center justify-center font-bold text-[11px] font-mono">
                 {officerName.charAt(0)}
               </div>
               <div className="hidden sm:block">
-                <span className="text-white font-medium block leading-tight truncate max-w-[120px]">
+                <span className="text-earth-900 font-semibold block leading-tight truncate max-w-[120px]">
                   {officerName}
                 </span>
-                <span className="text-[10px] text-slate-400 block leading-tight">
+                <span className="text-[10px] font-mono text-earth-600 block leading-tight">
                   {assignedDistrict}
                 </span>
               </div>
-              <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+              <ChevronDown className="w-3.5 h-3.5 text-earth-500" />
             </button>
 
             {/* Logout */}
             <button
               type="button"
               onClick={onLogout}
-              className="p-2 rounded-lg bg-slate-800 hover:bg-red-900/30 text-slate-400 hover:text-red-300 border border-slate-700 cursor-pointer transition-colors"
+              className="p-2 rounded-xl bg-white hover:bg-red-50 text-earth-600 hover:text-red-700 border border-earth-300 cursor-pointer transition-colors shadow-2xs"
               title="Sign Out"
             >
               <LogOut className="w-4 h-4" />
@@ -479,7 +479,7 @@ export const FieldOfficerDashboard: React.FC<FieldOfficerDashboardProps> = ({
         </div>
 
         {/* Mobile Navigation Tabs */}
-        <div className="md:hidden border-t border-slate-800 px-3 py-2 flex items-center justify-between gap-1 overflow-x-auto text-xs">
+        <div className="md:hidden border-t border-earth-200 px-3 py-2 flex items-center justify-between gap-1 overflow-x-auto text-xs bg-earth-50">
           {(
             [
               { id: 'RISK STATUS', label: 'Risk Status' },
@@ -493,15 +493,15 @@ export const FieldOfficerDashboard: React.FC<FieldOfficerDashboardProps> = ({
               key={section.id}
               type="button"
               onClick={() => setActiveTab(section.id as OfficerNavSection)}
-              className={`px-2.5 py-1.5 rounded-lg font-medium whitespace-nowrap text-xs ${
+              className={`px-2.5 py-1.5 rounded-lg font-mono text-xs uppercase font-bold whitespace-nowrap ${
                 activeTab === section.id
-                  ? 'bg-blue-600 text-white'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-brand-700 text-white'
+                  : 'text-earth-700 hover:text-earth-900'
               }`}
             >
               {section.label}
               {section.id === 'VERIFICATION' && pendingVerificationsCount > 0 && (
-                <span className="ml-1 px-1.5 py-0.2 rounded-full bg-blue-500 text-white text-[9px]">
+                <span className="ml-1 px-1.5 py-0.2 rounded-full bg-accent-700 text-white text-[9px]">
                   {pendingVerificationsCount}
                 </span>
               )}
@@ -513,7 +513,7 @@ export const FieldOfficerDashboard: React.FC<FieldOfficerDashboardProps> = ({
       {/* ========================================================================= */}
       {/* 2. MAIN WORKSPACE (ONE CLEAR PURPOSE PER TAB)                             */}
       {/* ========================================================================= */}
-      <main className="flex-1 w-full bg-[#060910]">
+      <main className="flex-1 w-full bg-earth-100">
         {/* 1. RISK STATUS: First page after Field Officer logs in */}
         {activeTab === 'RISK STATUS' && (
           <OfficerRiskStatus

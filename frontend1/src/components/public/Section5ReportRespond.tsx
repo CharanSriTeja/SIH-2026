@@ -1,5 +1,6 @@
 import React from 'react';
-import { Eye, CheckCircle2, ShieldAlert, HeartHandshake, ArrowRight, ArrowDown, Shield, UserCheck, AlertTriangle } from 'lucide-react';
+import { Eye, ShieldAlert, HeartHandshake, Shield, UserCheck, AlertTriangle } from 'lucide-react';
+import { Button } from '../ui/Button';
 
 interface Section5ReportRespondProps {
   onOpenAuth: (mode: 'signin' | 'register') => void;
@@ -10,36 +11,32 @@ export const Section5ReportRespond: React.FC<Section5ReportRespondProps> = ({
 }) => {
   const workflowSteps = [
     {
-      title: 'GROUND REPORT',
-      detail: 'Citizens and field staff submit geo-tagged observations: visible slope cracks, erosion, water seepage, or road subsidence with photos.',
+      title: 'Citizen Ground Report',
+      detail: 'Residents submit geo-tagged observations: visible slope cracks, tension fractures, or road damage with camera evidence.',
       icon: Eye,
-      accent: 'text-amber-400',
-      border: 'border-amber-500/25',
-      bg: 'bg-amber-500/10',
+      accent: 'text-[#B5551F]',
+      badge: 'Step 01',
     },
     {
-      title: 'OFFICER VERIFICATION',
-      detail: 'Authorized field officers inspect reported sites, validate ground evidence, and update structural severity ratings.',
+      title: 'Officer Field Verification',
+      detail: 'Designated field officers inspect reported sites, validate ground displacement, and confirm threat ratings.',
       icon: UserCheck,
-      accent: 'text-blue-400',
-      border: 'border-blue-500/25',
-      bg: 'bg-blue-500/10',
+      accent: 'text-[#2E4A3D]',
+      badge: 'Step 02',
     },
     {
-      title: 'RESPONSE PRIORITIZATION',
-      detail: 'Command authorities correlate verified incidents with AI risk polygons to dispatch emergency teams and clear transit lifelines.',
+      title: 'District Response Prioritization',
+      detail: 'District administrators correlate verified incidents with live GIS risk polygons to mobilize Quick Response Teams.',
       icon: ShieldAlert,
-      accent: 'text-orange-400',
-      border: 'border-orange-500/25',
-      bg: 'bg-orange-500/10',
+      accent: 'text-[#B5551F]',
+      badge: 'Step 03',
     },
     {
-      title: 'SAFETY / EVACUATION',
-      detail: 'Pre-emptive evacuation notices and designated safe shelter routes protect vulnerable community members before failure occurs.',
+      title: 'Safe Evacuation & Protection',
+      detail: 'Pre-emptive advisories and designated shelter routes guide vulnerable households to safety before slope failure occurs.',
       icon: HeartHandshake,
-      accent: 'text-emerald-400',
-      border: 'border-emerald-500/25',
-      bg: 'bg-emerald-500/10',
+      accent: 'text-[#2E4A3D]',
+      badge: 'Step 04',
     },
   ];
 
@@ -51,57 +48,52 @@ export const Section5ReportRespond: React.FC<Section5ReportRespondProps> = ({
       <div className="space-y-6 lg:space-y-7">
         {/* Section Header */}
         <div className="text-left space-y-2 max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-300">
-            <Shield className="w-3.5 h-3.5 text-emerald-400" />
-            <span className="text-[11px] font-mono-code font-bold uppercase tracking-[0.2em]">
-              05 // GROUND OBSERVATIONS &amp; RESPONSE
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-[#CAD7CE] bg-[#E8EFEA] text-[#2E4A3D]">
+            <Shield className="w-3.5 h-3.5 text-[#2E4A3D]" />
+            <span className="text-xs font-sans font-semibold uppercase tracking-wider">
+              Stage 04 &bull; Field Verification &amp; Civil Protection
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white font-heading uppercase tracking-tight">
-            REPORT, RESPOND &amp; PROTECT
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#23261F] tracking-tight">
+            Report, Respond &amp; Protect
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
-            Citizens and field personnel can provide geo-tagged ground observations such as visible cracks, erosion, water seepage or road damage.
-            These reports provide supporting ground evidence and are reviewed by authorized field officers to coordinate rapid response and evacuation.
+          <p className="text-base text-[#55594C] leading-relaxed">
+            Ground-truth reporting bridges artificial intelligence and actual community safety. Every citizen hazard upload is geo-referenced, jurisdictionally routed to the appropriate district magistrate, and validated by field response teams.
           </p>
         </div>
 
         {/* 4-Stage Visual Workflow Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-          {workflowSteps.map((step, idx) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {workflowSteps.map((step) => {
             const Icon = step.icon;
             return (
               <div
                 key={step.title}
-                className={`p-4 rounded-2xl border ${step.border} ${step.bg} backdrop-blur-xl flex flex-col justify-between space-y-3 shadow-xl`}
+                className="p-5 rounded-xl border border-[#DDD6C4] bg-[#FFFDF8] flex flex-col justify-between space-y-4 shadow-xs hover:border-[#2E4A3D]/40 transition-colors"
               >
                 <div className="flex items-center justify-between">
-                  <div className="w-9 h-9 rounded-xl bg-black/40 border border-white/10 flex items-center justify-center">
-                    <Icon className={`w-4 h-4 ${step.accent}`} />
+                  <div className="w-10 h-10 rounded-lg bg-[#F6F3EC] border border-[#DDD6C4] flex items-center justify-center shadow-2xs">
+                    <Icon className={`w-5 h-5 ${step.accent}`} />
                   </div>
-                  <span className="text-[10px] font-mono-code text-white/40 font-bold">
-                    STAGE 0{idx + 1}
+                  <span className="text-xs font-mono font-bold text-[#55594C] bg-[#EDE8DE] px-2.5 py-0.5 rounded">
+                    {step.badge}
                   </span>
                 </div>
 
                 <div>
-                  <div className="text-xs font-mono-code font-bold text-white uppercase tracking-wider">
+                  <div className="text-sm font-serif font-bold text-[#23261F]">
                     {step.title}
                   </div>
-                  <p className="text-[11px] text-slate-300 mt-1 leading-relaxed">
+                  <p className="text-xs text-[#55594C] mt-1.5 leading-relaxed">
                     {step.detail}
                   </p>
                 </div>
 
-                <div className="pt-2 border-t border-white/10 flex items-center gap-1.5 text-[9px] font-mono-code text-white/40 uppercase">
-                  <span>DISASTER PIPELINE</span>
-                  {idx < workflowSteps.length - 1 ? (
-                    <span className="text-amber-400">&rarr;</span>
-                  ) : (
-                    <span className="text-emerald-400">&bull; SAFE</span>
-                  )}
+                <div className="pt-3 border-t border-[#DDD6C4] flex items-center gap-1.5 text-xs font-sans font-medium text-[#7B8071]">
+                  <span>Operational Pipeline</span>
+                  <span className="text-[#2E4A3D] font-bold">&rarr;</span>
                 </div>
               </div>
             );
@@ -109,39 +101,41 @@ export const Section5ReportRespond: React.FC<Section5ReportRespondProps> = ({
         </div>
 
         {/* Linear Progression Sequence: ALERT -> RESPONSE -> EVACUATION / SAFETY */}
-        <div className="rounded-xl border border-white/15 bg-[#0C121E]/80 backdrop-blur-xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3 text-left">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
+        <div className="rounded-xl border border-[#DDD6C4] bg-[#FFFDF8] p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+          <div className="flex items-center gap-3.5 text-left">
+            <div className="w-10 h-10 rounded-lg bg-[#FDF1EB] border border-[#F6C8B3] flex items-center justify-center text-[#B5551F] shrink-0">
               <AlertTriangle className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-[10px] font-mono-code uppercase tracking-wider text-white/50">
-                LIFECYCLE SEQUENCE
+              <div className="text-xs font-mono uppercase tracking-wider text-[#7B8071]">
+                Disaster Response Progression
               </div>
-              <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm font-mono-code font-bold mt-0.5 flex-wrap">
-                <span className="text-red-400">ALERT</span>
-                <span className="text-white/30">&rarr;</span>
-                <span className="text-amber-400">RESPONSE</span>
-                <span className="text-white/30">&rarr;</span>
-                <span className="text-emerald-400">EVACUATION / SAFETY</span>
+              <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm font-sans font-bold mt-0.5 flex-wrap">
+                <span className="text-[#8A2418]">1. Threat Warning</span>
+                <span className="text-[#DDD6C4]">&rarr;</span>
+                <span className="text-[#C98A2C]">2. Officer Verification</span>
+                <span className="text-[#DDD6C4]">&rarr;</span>
+                <span className="text-[#2E4A3D]">3. Coordinated Evacuation</span>
               </div>
             </div>
           </div>
 
           {/* Access Platform Buttons */}
-          <div className="flex items-center gap-2.5 shrink-0 w-full sm:w-auto justify-end">
-            <button
+          <div className="flex items-center gap-3 shrink-0 w-full sm:w-auto justify-end">
+            <Button
+              variant="secondary"
+              size="md"
               onClick={() => onOpenAuth('signin')}
-              className="px-4 py-2 text-xs font-mono-code font-semibold tracking-wider text-white/80 hover:text-white hover:bg-white/[0.08] rounded-xl transition-all cursor-pointer uppercase border border-white/15"
             >
-              SIGN IN
-            </button>
-            <button
+              Sign In
+            </Button>
+            <Button
+              variant="primary"
+              size="md"
               onClick={() => onOpenAuth('register')}
-              className="px-4 py-2 text-xs font-mono-code font-bold tracking-wider text-black bg-emerald-400 hover:bg-emerald-300 rounded-xl transition-all cursor-pointer uppercase shadow-lg shadow-emerald-500/20"
             >
-              REGISTER
-            </button>
+              Register Citizen Account
+            </Button>
           </div>
         </div>
       </div>

@@ -195,21 +195,19 @@ export const LandscapeCanvas: React.FC<LandscapeCanvasProps> = () => {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* THE 240-FRAME LANDSLIDE SCROLL ANIMATION CANVAS */}
-      <canvas ref={canvasRef} className="w-full h-full block bg-black" />
+      {/* Scroll-responsive terrain elevation canvas */}
+      <canvas ref={canvasRef} className="w-full h-full block bg-[#F6F3EC]" />
 
-      {/* Atmospheric Contrast Overlays: Allows background animation to shine while keeping text 100% legible */}
-      <div className="absolute inset-0 bg-black/40 pointer-events-none" />
-      <div className="absolute inset-0 bg-radial-[circle_at_center,transparent_40%,rgba(4,7,14,0.75)_100%] pointer-events-none" />
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#080C14]/80 to-transparent pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#080C14]/90 to-transparent pointer-events-none" />
+      {/* Warm paper contrast veil: keeps terrain subtle and body text 100% legible */}
+      <div className="absolute inset-0 bg-[#F6F3EC]/80 pointer-events-none backdrop-blur-[1px]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#F6F3EC]/90 via-transparent to-[#F6F3EC]/95 pointer-events-none" />
 
       {/* Floating Spatial Telemetry HUD Indicator */}
-      <div className="absolute top-24 left-6 hidden lg:flex items-center gap-3 text-[10px] tracking-[0.2em] font-mono-code text-white/50 pointer-events-auto bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 shadow-lg">
-        <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-        <span>SATELLITE &amp; TERRAIN SURVEILLANCE</span>
-        <span className="text-white/20">|</span>
-        <span className="text-amber-400 font-semibold">{hudPhase}</span>
+      <div className="absolute top-24 left-6 hidden lg:flex items-center gap-3 text-[11px] font-mono text-[#55594C] pointer-events-auto bg-[#FFFDF8]/95 border border-[#DDD6C4] px-3.5 py-1.5 rounded-lg shadow-sm">
+        <div className="w-2 h-2 rounded-full bg-[#4F8F5B] animate-pulse" />
+        <span className="font-semibold text-[#2E4A3D]">TERRAIN &amp; PRECIPITATION OBSERVATION</span>
+        <span className="text-[#DDD6C4]">|</span>
+        <span className="text-[#B5551F] font-semibold">{hudPhase}</span>
       </div>
     </div>
   );

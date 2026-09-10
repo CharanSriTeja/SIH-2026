@@ -1,4 +1,4 @@
-export type UserRole = 'admin' | 'officer' | 'citizen';
+export type UserRole = 'admin' | 'officer' | 'citizen' | 'district_admin';
 
 export type OfficerOperationalProfile =
   | 'Monitoring & Coordination Officer'
@@ -342,3 +342,89 @@ export interface MultilingualBroadcast {
   actionGuidance: string;
   safetyShelter: string;
 }
+
+export interface CitizenLocationState {
+  latitude: number;
+  longitude: number;
+  altitude?: number | null;
+  accuracy: number;
+  timestamp: number;
+  areaName?: string;
+  isPermissionGranted: boolean;
+  isDemo?: boolean;
+}
+
+export interface GeoTaggedPhoto {
+  id: string;
+  dataUrl: string;
+  latitude: number;
+  longitude: number;
+  accuracy: number;
+  capturedAt: number;
+}
+
+export interface GeoTaggedVideo {
+  id: string;
+  dataUrl: string;
+  latitude: number;
+  longitude: number;
+  accuracy: number;
+  capturedAt: number;
+  durationSec: number;
+}
+
+export interface DistrictRef {
+  id: string;
+  state_name: string;
+  district_name: string;
+  centroid_lat?: number;
+  centroid_lon?: number;
+}
+
+export interface StatesDistrictsResponse {
+  states: string[];
+  districts_by_state: Record<string, string[]>;
+  districts?: DistrictRef[];
+  all_districts?: DistrictRef[];
+}
+
+export interface DistrictAdminUser {
+  id: string;
+  phone_number: string;
+  name: string;
+  role: string;
+  district_id: string;
+  state_name?: string;
+  district_name?: string;
+  is_verified?: boolean;
+  created_at?: string;
+}
+
+export interface DistrictAdminCreatePayload {
+  name: string;
+  phone_number: string;
+  password: string;
+  state_name: string;
+  district_name: string;
+}
+
+export interface CitizenReportItem {
+  id: string;
+  user_id: string;
+  district_id: string;
+  district_name?: string;
+  state_name?: string;
+  citizen_name?: string;
+  citizen_phone?: string;
+  latitude: number;
+  longitude: number;
+  hazard_type: string;
+  description: string;
+  photo_path?: string | null;
+  photo_url?: string | null;
+  status: 'pending' | 'verified' | 'dismissed' | string;
+  submitted_at: string;
+  reviewed_at?: string | null;
+  reviewed_by?: string | null;
+}
+

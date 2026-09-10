@@ -586,7 +586,7 @@ export class AuthService {
       if (acc.id === 'OFF-PENDING' && (normInput.includes('pending') || normInput.includes('marak') || normInput.includes('5519'))) return true;
       if (acc.id === 'OFF-REJECTED' && (normInput.includes('rejected') || normInput.includes('jamatia') || normInput.includes('3042'))) return true;
       if (acc.id === 'OFF-INFO' && (normInput.includes('info') || normInput.includes('sailo') || normInput.includes('1108'))) return true;
-      if (acc.id === 'ADM-4091' && (normInput.includes('4091') || normInput.includes('lalrinzuala') || normInput.includes('sdma.gov'))) return true;
+      if (acc.id === 'ADM-4091' && (normInput.includes('4091') || normInput.includes('lalrinzuala') || normInput.includes('sdma.gov') || normInput.includes('9999999999') || normInput.includes('admin'))) return true;
       return false;
     });
 
@@ -600,7 +600,7 @@ export class AuthService {
     }
 
     // Password verification (for prototype demo, allows standard matching or demo fallbacks)
-    if (account.password !== rawPass && rawPass !== 'citizen@123' && rawPass !== 'officer@123' && rawPass !== 'admin@123') {
+    if (account.password !== rawPass && rawPass !== 'citizen@123' && rawPass !== 'officer@123' && rawPass !== 'admin@123' && rawPass !== 'AdminPass123!') {
       return {
         success: false,
         errorTitle: 'Invalid Password',

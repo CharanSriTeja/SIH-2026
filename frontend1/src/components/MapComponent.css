@@ -5,3 +5,209 @@
   width: 100%;
   height: 100%;
 }
+
+/* ========================================================= */
+/* GOOGLE MAPS STYLE PULSING & BLINKING LOCATION BEACON      */
+/* ========================================================= */
+
+/* Ensure the marker wrapper always renders ABOVE all vector layers & popups */
+.maplibregl-marker.user-gps-marker-wrapper,
+.maplibregl-marker:has(.user-gps-pulse-marker) {
+  z-index: 9999 !important;
+}
+
+.user-gps-pulse-marker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
+  width: 68px;
+  height: 68px;
+  pointer-events: auto;
+}
+
+/* Radar pulse wave 1 (expanding outwards) */
+.gmaps-pulse-wave-1 {
+  position: absolute;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.4) 0%, rgba(59, 130, 246, 0.15) 70%, rgba(96, 165, 250, 0) 100%);
+  border: 1.5px solid rgba(96, 165, 250, 0.6);
+  animation: gmaps-radar-pulse 2.2s cubic-bezier(0.1, 0.6, 0.3, 1) infinite;
+  pointer-events: none;
+}
+
+/* Radar pulse wave 2 (staggered delay) */
+.gmaps-pulse-wave-2 {
+  position: absolute;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.35) 0%, rgba(147, 197, 253, 0.1) 60%, rgba(191, 219, 254, 0) 100%);
+  border: 1.5px solid rgba(147, 197, 253, 0.5);
+  animation: gmaps-radar-pulse 2.2s cubic-bezier(0.1, 0.6, 0.3, 1) 0.75s infinite;
+  pointer-events: none;
+}
+
+/* Radar pulse wave 3 (fine fast ripple) */
+.gmaps-pulse-wave-3 {
+  position: absolute;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(219, 234, 254, 0.5);
+  animation: gmaps-radar-pulse 2.2s cubic-bezier(0.1, 0.6, 0.3, 1) 1.5s infinite;
+  pointer-events: none;
+}
+
+/* Accuracy / Halo Glow */
+.gmaps-pulse-halo {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.5);
+  filter: blur(4px);
+  pointer-events: none;
+  animation: gmaps-glow-breathe 2s ease-in-out infinite alternate;
+}
+
+/* Solid Blue Center Dot with White Rim (Google Maps blue dot) */
+.gmaps-pulse-dot {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #1a73e8;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.4), 0 3px 8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(37, 99, 235, 0.95);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Blinking inner core light in center of blue dot */
+.gmaps-pulse-inner-core {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 6px #ffffff;
+  animation: gmaps-blink 1s ease-in-out infinite;
+}
+
+.user-gps-pulse-marker:hover .gmaps-pulse-dot {
+  transform: scale(1.35);
+  background: #2563eb;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8), 0 4px 12px rgba(0, 0, 0, 0.7), 0 0 24px rgba(37, 99, 235, 1);
+}
+
+/* Floating "YOU ARE HERE" chip above marker with blinking live status dot */
+.gmaps-pulse-label {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  background: #2E4A3D;
+  border: 1.5px solid #1E3329;
+  box-shadow: 0 4px 14px rgba(46, 74, 61, 0.35);
+  backdrop-filter: blur(8px);
+  color: #FFFDF8;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: gmaps-subtle-float 2.5s ease-in-out infinite alternate;
+}
+
+/* Blinking beacon dot inside badge */
+.gmaps-pulse-label-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4F8F5B;
+  box-shadow: 0 0 8px #4F8F5B;
+  animation: gmaps-blink 1.2s ease-in-out infinite;
+}
+
+/* MapLibre Popup Styling for Earthy Theme */
+.maplibregl-popup-content {
+  background: #FFFDF8 !important;
+  color: #23261F !important;
+  border: 1px solid #DDD6C4 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 10px 25px -5px rgba(35, 38, 31, 0.15) !important;
+  padding: 12px 14px !important;
+  font-family: var(--font-sans, system-ui, sans-serif) !important;
+}
+
+.maplibregl-popup-anchor-top .maplibregl-popup-tip {
+  border-bottom-color: #DDD6C4 !important;
+}
+.maplibregl-popup-anchor-bottom .maplibregl-popup-tip {
+  border-top-color: #DDD6C4 !important;
+}
+.maplibregl-popup-anchor-left .maplibregl-popup-tip {
+  border-right-color: #DDD6C4 !important;
+}
+.maplibregl-popup-anchor-right .maplibregl-popup-tip {
+  border-left-color: #DDD6C4 !important;
+}
+
+@keyframes gmaps-radar-pulse {
+  0% {
+    transform: scale(0.25);
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+@keyframes gmaps-glow-breathe {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0.9;
+  }
+}
+
+@keyframes gmaps-blink {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.15;
+    transform: scale(0.7);
+  }
+}
+
+@keyframes gmaps-subtle-float {
+  0% {
+    transform: translateX(-50%) translateY(-8px);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-12px);
+  }
+}

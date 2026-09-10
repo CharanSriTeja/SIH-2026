@@ -96,16 +96,20 @@ def main():
     """
     
     log.info(f"Querying Overpass for bbox {BBOX} ...")
-    api = overpy.Overpass(url=OVERPASS_URL)
     
     try:
-        result = api.query(query)
+        import requests
+        resp = requests.post(OVERPASS_URL, data={"data": query}, headers={"User-Agent": "SIH2026-VillageExtractor/1.0 (Python)"})
+        resp.raise_for_status()
+        result = resp.json()
     except Exception as e:
         sys.exit(f"Overpass API error: {e}")
 
     records = []
-    for node in result.nodes:
-        tags = node.tags
+    nodes = result.get("elements", [])
+    for node in nodes:
+        if node.get("type") != "node": continue
+        tags = node.get("tags", {})
         place_type = tags.get("place", "").strip()
         
         if place_type not in PLACE_TYPES:
@@ -120,11 +124,11 @@ def main():
                 population = None
 
         records.append({
-            "osm_id":     int(node.id),
+            "osm_id":     int(node["id"]),
             "name":       name,
             "place_type": place_type,
-            "latitude":   float(node.lat),
-            "longitude":  float(node.lon),
+            "latitude":   float(node["lat"]),
+            "longitude":  float(node["lon"]),
             "population": population,
             "wikidata":   tags.get("wikidata", None) or None,
             "wikipedia":  tags.get("wikipedia", None) or None,
@@ -152,7 +156,7 @@ def main():
         
     # Standardize column name for state
     state_col = None
-    for c in ["state", "STATE", "name", "NAME"]:
+    for c in ["state", "STATE", "name", "NAME", "state_name", "st_nm"]:
         if c in boundaries.columns:
             state_col = c
             break

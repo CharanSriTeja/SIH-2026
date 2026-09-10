@@ -151,26 +151,26 @@ export const CommandCenterModal: React.FC<CommandCenterModalProps> = ({
   const currentBroadcast = MULTILINGUAL_BROADCASTS.find((b) => b.languageCode === selectedLanguage) || MULTILINGUAL_BROADCASTS[0];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/90 backdrop-blur-2xl overflow-hidden animate-fade-in">
-      <div className="relative w-full max-w-7xl h-[94vh] bg-[#070B12] border border-white/20 rounded-3xl flex flex-col shadow-[0_0_80px_rgba(0,0,0,0.8)] overflow-hidden text-left">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-earth-900/70 backdrop-blur-md overflow-hidden animate-fade-in">
+      <div className="relative w-full max-w-7xl h-[94vh] bg-[#FFFDF8] border border-earth-300 rounded-3xl flex flex-col shadow-2xl overflow-hidden text-left">
         
         {/* Top Header Bar */}
-        <div className="px-5 py-3.5 border-b border-white/10 flex flex-wrap items-center justify-between gap-3 shrink-0 bg-[#0A0F1A]/80 backdrop-blur-md">
+        <div className="px-5 py-3.5 border-b border-earth-200 flex flex-wrap items-center justify-between gap-3 shrink-0 bg-earth-50">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-red-500/20 border border-red-500/40 flex items-center justify-center text-red-400">
-              <ShieldAlert className="w-4 h-4" />
+            <div className="w-9 h-9 rounded-xl bg-brand-100 border border-brand-200 flex items-center justify-center text-brand-800 shadow-2xs">
+              <ShieldAlert className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-sm sm:text-base font-extrabold text-white font-heading tracking-wide uppercase">
-                  BHURAKSHA 2.0 Unified Command Center
+                <span className="text-sm sm:text-base font-bold text-earth-900 font-serif tracking-tight uppercase">
+                  BHURAKSHA Unified Command Center
                 </span>
-                <span className="px-2 py-0.5 rounded text-[9px] font-mono-code font-bold bg-emerald-500/15 border border-emerald-500/30 text-emerald-400">
+                <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-brand-100 border border-brand-200 text-brand-900">
                   NER REGIONAL HUB
                 </span>
               </div>
-              <span className="text-[10px] font-mono-code text-white/50 block">
-                MULTI-HAZARD EARLY WARNING SYSTEM // MEGHALAYA • MIZORAM • SIKKIM • NAGALAND • ASSAM
+              <span className="text-[10px] font-mono text-earth-600 block">
+                MULTI-HAZARD EARLY WARNING SYSTEM &bull; MEGHALAYA &bull; MIZORAM &bull; SIKKIM &bull; NAGALAND &bull; ASSAM
               </span>
             </div>
           </div>
@@ -181,21 +181,21 @@ export const CommandCenterModal: React.FC<CommandCenterModalProps> = ({
             <button
               onClick={onToggleOfflineMode}
               title="Toggle Remote Low-Network / Offline Storage Sync Mode"
-              className={`px-3 py-1.5 rounded-xl border text-[11px] font-mono-code font-bold flex items-center gap-2 transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-xl border text-[11px] font-mono font-bold flex items-center gap-2 transition-all cursor-pointer shadow-2xs ${
                 isOfflineMode
-                  ? 'bg-amber-500/20 border-amber-500/50 text-amber-300'
-                  : 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20'
+                  ? 'bg-amber-100 border-amber-300 text-amber-900'
+                  : 'bg-emerald-50 border-emerald-300 text-emerald-800 hover:bg-emerald-100'
               }`}
             >
               {isOfflineMode ? (
                 <>
-                  <WifiOff className="w-3.5 h-3.5 text-amber-400" />
+                  <WifiOff className="w-3.5 h-3.5 text-amber-700" />
                   <span>OFFLINE CACHE ACTIVE</span>
                 </>
               ) : (
                 <>
-                  <Wifi className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>ONLINE // CLOUD SYNCED</span>
+                  <Wifi className="w-3.5 h-3.5 text-emerald-700" />
+                  <span>ONLINE &bull; CLOUD SYNCED</span>
                 </>
               )}
             </button>
@@ -203,16 +203,17 @@ export const CommandCenterModal: React.FC<CommandCenterModalProps> = ({
             {/* Quick Report Citizen Incident */}
             <button
               onClick={onOpenReportModal}
-              className="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-mono-code text-[11px] font-bold flex items-center gap-1.5 transition-all cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl bg-accent-700 hover:bg-accent-800 text-white font-mono text-[11px] font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
             >
-              <Camera className="w-3.5 h-3.5 text-emerald-400" />
+              <Camera className="w-3.5 h-3.5" />
               <span>+ REPORT HAZARD</span>
             </button>
 
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-white/50 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              className="p-2 rounded-xl text-earth-600 hover:text-earth-900 bg-white hover:bg-earth-100 border border-earth-200 transition-colors cursor-pointer"
+              aria-label="Close modal"
             >
               <X className="w-5 h-5" />
             </button>
@@ -220,7 +221,7 @@ export const CommandCenterModal: React.FC<CommandCenterModalProps> = ({
         </div>
 
         {/* Operational Navigation Tabs */}
-        <div className="px-5 py-2 border-b border-white/10 bg-white/[0.01] flex items-center gap-1 sm:gap-2 overflow-x-auto shrink-0 scrollbar-none">
+        <div className="px-5 py-2.5 border-b border-earth-200 bg-earth-50 flex items-center gap-1.5 overflow-x-auto shrink-0 no-scrollbar">
           {[
             { id: 'gis', label: 'GIS Dashboard & Heatmaps', icon: MapPin, badge: '5 SECTORS' },
             { id: 'ml_engine', label: 'AI/ML Predictive Analytics', icon: Cpu, badge: 'ST-GNN' },
@@ -235,17 +236,17 @@ export const CommandCenterModal: React.FC<CommandCenterModalProps> = ({
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                className={`px-3 py-2 rounded-xl text-xs font-mono-code uppercase tracking-wider flex items-center gap-2 whitespace-nowrap transition-all cursor-pointer shrink-0 ${
+                className={`px-3 py-1.5 rounded-xl text-xs font-mono uppercase tracking-wider flex items-center gap-2 whitespace-nowrap transition-all cursor-pointer shrink-0 ${
                   isActive
-                    ? 'bg-white text-black font-extrabold shadow-md'
-                    : 'text-white/60 hover:text-white hover:bg-white/[0.04]'
+                    ? 'bg-brand-700 text-white font-bold shadow-xs'
+                    : 'text-earth-700 hover:text-earth-900 hover:bg-earth-200/70'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
                 <span>{tab.label}</span>
                 <span
-                  className={`text-[9px] px-1.5 py-0.2 rounded font-bold ${
-                    isActive ? 'bg-black/15 text-black' : 'bg-white/10 text-white/50'
+                  className={`text-[9px] px-1.5 py-0.2 rounded-full font-bold ${
+                    isActive ? 'bg-white text-brand-900' : 'bg-earth-200 text-earth-700'
                   }`}
                 >
                   {tab.badge}
@@ -256,7 +257,7 @@ export const CommandCenterModal: React.FC<CommandCenterModalProps> = ({
         </div>
 
         {/* Tab Body Viewports */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-[#080C14]">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-earth-100">
           
           {/* TAB 1: REAL-TIME GIS DASHBOARD & RISK HEATMAPS */}
           {activeTab === 'gis' && (

@@ -386,16 +386,16 @@ export const OfficerRiskMap: React.FC<OfficerRiskMapProps> = ({
   });
 
   return (
-    <div className="w-full flex flex-col min-h-[calc(100vh-4rem)] bg-[#0B1120] text-slate-100 font-sans">
+    <div className="w-full flex flex-col min-h-[calc(100vh-4rem)] bg-earth-50 text-earth-900 font-sans">
       {/* ========================================================================= */}
       {/* 1. SIMPLE MAP FILTER TOOLBAR                                              */}
       {/* ========================================================================= */}
-      <div className="bg-[#0F172A] border-b border-slate-700/60 px-4 sm:px-6 py-3">
+      <div className="bg-[#FFFDF8] border-b border-earth-300 px-4 sm:px-6 py-3 shadow-xs">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
           {/* Risk Level Filter */}
           <div className="flex items-center gap-2">
-            <span className="text-slate-400 font-medium">Risk Level:</span>
-            <div className="inline-flex rounded-lg bg-slate-800 p-0.5 border border-slate-700">
+            <span className="text-earth-600 font-medium">Risk Level:</span>
+            <div className="inline-flex rounded-lg bg-earth-100 p-0.5 border border-earth-300">
               {(['ALL', 'HIGH', 'MODERATE', 'LOW'] as const).map((lvl) => (
                 <button
                   key={lvl}
@@ -403,8 +403,8 @@ export const OfficerRiskMap: React.FC<OfficerRiskMapProps> = ({
                   onClick={() => setRiskFilter(lvl)}
                   className={`px-3 py-1 rounded-md text-xs font-medium transition-colors cursor-pointer ${
                     riskFilter === lvl
-                      ? 'bg-slate-700 text-white shadow-sm'
-                      : 'text-slate-400 hover:text-slate-200'
+                      ? 'bg-brand-700 text-white shadow-xs'
+                      : 'text-earth-700 hover:text-earth-900'
                   }`}
                 >
                   {lvl === 'ALL' ? 'All Risks' : lvl.charAt(0) + lvl.slice(1).toLowerCase()}
@@ -414,13 +414,13 @@ export const OfficerRiskMap: React.FC<OfficerRiskMapProps> = ({
           </div>
 
           {/* Simple Layer Toggles */}
-          <div className="flex items-center gap-4 text-slate-300">
+          <div className="flex items-center gap-4 text-earth-800">
             <label className="inline-flex items-center gap-1.5 cursor-pointer">
               <input
                 type="checkbox"
                 checked={showReports}
                 onChange={(e) => setShowReports(e.target.checked)}
-                className="w-3.5 h-3.5 rounded bg-slate-800 border-slate-600 text-blue-600 focus:ring-0"
+                className="w-3.5 h-3.5 rounded bg-white border-earth-300 text-brand-700 focus:ring-0"
               />
               <span>Reports</span>
             </label>
@@ -430,7 +430,7 @@ export const OfficerRiskMap: React.FC<OfficerRiskMapProps> = ({
                 type="checkbox"
                 checked={showRoads}
                 onChange={(e) => setShowRoads(e.target.checked)}
-                className="w-3.5 h-3.5 rounded bg-slate-800 border-slate-600 text-blue-600 focus:ring-0"
+                className="w-3.5 h-3.5 rounded bg-white border-earth-300 text-brand-700 focus:ring-0"
               />
               <span>Roads</span>
             </label>
@@ -440,7 +440,7 @@ export const OfficerRiskMap: React.FC<OfficerRiskMapProps> = ({
                 type="checkbox"
                 checked={showVillages}
                 onChange={(e) => setShowVillages(e.target.checked)}
-                className="w-3.5 h-3.5 rounded bg-slate-800 border-slate-600 text-blue-600 focus:ring-0"
+                className="w-3.5 h-3.5 rounded bg-white border-earth-300 text-brand-700 focus:ring-0"
               />
               <span>Villages</span>
             </label>
@@ -450,7 +450,7 @@ export const OfficerRiskMap: React.FC<OfficerRiskMapProps> = ({
                 type="checkbox"
                 checked={showHistorical}
                 onChange={(e) => setShowHistorical(e.target.checked)}
-                className="w-3.5 h-3.5 rounded bg-slate-800 border-slate-600 text-purple-500 focus:ring-0"
+                className="w-3.5 h-3.5 rounded bg-white border-earth-300 text-purple-700 focus:ring-0"
               />
               <span>Historical Landslides</span>
             </label>
@@ -789,14 +789,14 @@ export const OfficerRiskMap: React.FC<OfficerRiskMapProps> = ({
           </svg>
 
           {/* Simple Map Legend (bottom left) */}
-          <div className="absolute bottom-3 left-3 bg-[#0F172A]/90 backdrop-blur-sm border border-slate-700/80 rounded-lg p-2.5 text-[11px] text-slate-300 space-y-1.5 pointer-events-none">
-            <div className="font-semibold text-slate-200 text-xs mb-1">Map Legend</div>
+          <div className="absolute bottom-3 left-3 bg-[#FFFDF8]/95 backdrop-blur-sm border border-earth-300 rounded-lg p-2.5 text-[11px] text-earth-800 space-y-1.5 shadow-sm pointer-events-none">
+            <div className="font-semibold text-earth-900 text-xs mb-1 font-serif">Map Legend</div>
             <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded bg-red-500/50 border border-red-400 inline-block" />
+              <span className="w-3 h-3 rounded bg-red-500/50 border border-red-500 inline-block" />
               <span>High Risk Area</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded bg-amber-500/50 border border-amber-400 inline-block" />
+              <span className="w-3 h-3 rounded bg-amber-500/50 border border-amber-500 inline-block" />
               <span>Moderate Risk Area</span>
             </div>
             <div className="flex items-center gap-2">
@@ -804,15 +804,15 @@ export const OfficerRiskMap: React.FC<OfficerRiskMapProps> = ({
               <span>Citizen Report</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[8px] border-b-red-500 inline-block" />
+              <span className="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[8px] border-b-red-600 inline-block" />
               <span>Verified Hazard</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-3 h-2 rounded-sm bg-sky-400 border border-white inline-block" />
+              <span className="w-3 h-2 rounded-sm bg-sky-500 border border-white inline-block" />
               <span>Bridge / Crossing</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rotate-45 bg-purple-500 border border-white inline-block" />
+              <span className="w-2.5 h-2.5 rotate-45 bg-purple-600 border border-white inline-block" />
               <span>Historical Landslide</span>
             </div>
           </div>
@@ -822,70 +822,70 @@ export const OfficerRiskMap: React.FC<OfficerRiskMapProps> = ({
         {/* 3. BASIC INFORMATION CARD FOR CLICKED LOCATION                            */}
         {/* ========================================================================= */}
         {selectedLocation && (
-          <div className="mt-4 bg-[#0F172A] border border-slate-700 rounded-xl p-4 sm:p-5 shadow-lg">
+          <div className="mt-4 bg-[#FFFDF8] border border-earth-300 rounded-xl p-4 sm:p-5 shadow-sm text-earth-900">
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
               {/* Left Details */}
               <div className="space-y-2 max-w-2xl">
                 <div className="flex items-center gap-2.5 flex-wrap">
-                  <h2 className="text-base sm:text-lg font-semibold text-white">
+                  <h2 className="text-base sm:text-lg font-semibold text-earth-900 font-serif">
                     {selectedLocation.name}
                   </h2>
                   <span
-                    className={`px-2.5 py-0.5 rounded text-xs font-semibold ${
+                    className={`px-2.5 py-0.5 rounded text-xs font-semibold font-mono ${
                       selectedLocation.riskLevel === 'HIGH'
-                        ? 'bg-red-500/20 text-red-300 border border-red-500/40'
+                        ? 'bg-rose-100 text-rose-900 border border-rose-300'
                         : selectedLocation.riskLevel === 'MODERATE'
-                        ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
-                        : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                        ? 'bg-amber-100 text-amber-900 border border-amber-300'
+                        : 'bg-emerald-100 text-emerald-900 border border-emerald-300'
                     }`}
                   >
                     {selectedLocation.riskLevel} RISK
                   </span>
-                  <span className="text-slate-400 text-xs">
-                    Type: <span className="text-slate-200 capitalize">{selectedLocation.type}</span>
+                  <span className="text-earth-600 text-xs">
+                    Type: <span className="text-earth-900 capitalize font-medium">{selectedLocation.type}</span>
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-300 pt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-earth-700 pt-1">
                   <div>
-                    <span className="text-slate-400">Nearby Village:</span>{' '}
-                    <span className="text-slate-100 font-medium">
+                    <span className="text-earth-500">Nearby Village:</span>{' '}
+                    <span className="text-earth-900 font-medium">
                       {selectedLocation.nearbyVillage}
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-400">Nearby Road:</span>{' '}
-                    <span className="text-slate-100 font-medium">
+                    <span className="text-earth-500">Nearby Road:</span>{' '}
+                    <span className="text-earth-900 font-medium">
                       {selectedLocation.nearbyRoad}
                     </span>
                   </div>
                 </div>
 
                 {/* Environmental Information */}
-                <div className="p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/80 grid grid-cols-3 gap-2 text-xs">
+                <div className="p-2.5 rounded-lg bg-earth-50 border border-earth-200 grid grid-cols-3 gap-2 text-xs shadow-xs">
                   <div>
-                    <span className="text-slate-400 block text-[11px]">24h Rainfall</span>
-                    <span className="text-white font-medium">
+                    <span className="text-earth-500 block text-[11px] font-mono">24h Rainfall</span>
+                    <span className="text-earth-900 font-medium font-mono">
                       {selectedLocation.environmentalInfo.rainfall24h}
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-400 block text-[11px]">Soil Saturation</span>
-                    <span className="text-white font-medium">
+                    <span className="text-earth-500 block text-[11px] font-mono">Soil Saturation</span>
+                    <span className="text-earth-900 font-medium font-mono">
                       {selectedLocation.environmentalInfo.soilSaturation}
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-400 block text-[11px]">Slope Angle</span>
-                    <span className="text-white font-medium">
+                    <span className="text-earth-500 block text-[11px] font-mono">Slope Angle</span>
+                    <span className="text-earth-900 font-medium font-mono">
                       {selectedLocation.environmentalInfo.slope}
                     </span>
                   </div>
                 </div>
 
                 {selectedLocation.notes && (
-                  <p className="text-xs text-slate-300 leading-relaxed">
-                    <span className="text-slate-400 font-medium">Field Observation: </span>
+                  <p className="text-xs text-earth-700 leading-relaxed">
+                    <span className="text-earth-500 font-medium font-mono">Field Observation: </span>
                     {selectedLocation.notes}
                   </p>
                 )}
@@ -896,7 +896,7 @@ export const OfficerRiskMap: React.FC<OfficerRiskMapProps> = ({
                 <button
                   type="button"
                   onClick={() => setSelectedLocation(null)}
-                  className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-medium cursor-pointer"
+                  className="px-3 py-1.5 rounded-lg bg-earth-100 hover:bg-earth-200 text-earth-800 border border-earth-300 text-xs font-medium cursor-pointer shadow-xs transition-colors"
                 >
                   Close Info
                 </button>
@@ -905,7 +905,7 @@ export const OfficerRiskMap: React.FC<OfficerRiskMapProps> = ({
                   <button
                     type="button"
                     onClick={onNavigateToVerification}
-                    className="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium cursor-pointer flex items-center gap-1.5"
+                    className="px-3.5 py-1.5 rounded-lg bg-brand-700 hover:bg-brand-800 text-white text-xs font-medium cursor-pointer flex items-center gap-1.5 shadow-xs transition-colors"
                   >
                     <span>Open in Verification</span>
                     <ChevronRight className="w-3.5 h-3.5" />
@@ -919,7 +919,7 @@ export const OfficerRiskMap: React.FC<OfficerRiskMapProps> = ({
                       const repNum = selectedLocation.id === 'haz-1042' ? '#1042' : '#1039';
                       onViewReport(repNum);
                     }}
-                    className="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium cursor-pointer flex items-center gap-1.5"
+                    className="px-3.5 py-1.5 rounded-lg bg-brand-700 hover:bg-brand-800 text-white text-xs font-medium cursor-pointer flex items-center gap-1.5 shadow-xs transition-colors"
                   >
                     <span>View Verified Field Report</span>
                     <ChevronRight className="w-3.5 h-3.5" />
