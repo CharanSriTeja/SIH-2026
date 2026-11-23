@@ -6,44 +6,66 @@
 .env.*
 !.env.example
 .venv/
+venv/
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.ipynb_checkpoints/
+*.log
 
 # ============================================================
-# DATASETS — NEVER COMMIT
+# MASSIVE RAW DATASETS (>50MB) — NEVER COMMIT
 # ============================================================
-
-backend/data/
-data/
-datasets/
-config.json
-*.env
-# GIS / Remote sensing
-*.tif
-*.tiff
-*.geotiff
+*.nc
+*.duckdb
+*.zip
 *.parquet
 *.geoparquet
-*.geojson
-*.gpkg
-*.shp
-*.shx
-*.dbf
-*.prj
-*.cpg
+*.h5
+*.hdf5
+*.osm*
 
-# OSM
-*.pbf
-*.osm
-*.osm.pbf
+# ============================================================
+# DATA DIRECTORY RULES (relative to backend/)
+# ============================================================
+# By default ignore everything in data/
+data/**
 
-# Map tiles
-*.mbtiles
-*.pmtiles
-*.mvt
+# Whitelist root files & folders
+!data/
+!data/config.json
+!data/states_districts.json
+!data/states_districts_detailed.json
 
-# Raster tiles
-*.png
-*.jpg
-*.jpeg
-*.webp
+# Whitelist state boundaries (GeoJSON)
+!data/NER_Boundaries/
+!data/NER_Boundaries/**
+
+# Whitelist trained ML models
+!data/Models/
+!data/Models/**
+
+# Whitelist Model A COG
+!data/Model 1 Datasets/
+!data/Model 1 Datasets/modelA_NER_only_susceptibility_cog.tif
+
+# Whitelist vector map tiles (PMTiles)
+!data/Villages/
+!data/Villages/villages_ner.pmtiles
+
+!data/Hospitals/
+!data/Hospitals/tiles/
+!data/Hospitals/tiles/**
+
+!data/Landslides Data/
+!data/Landslides Data/historical_landslides.pmtiles
+
+# Whitelist daily processed outputs & QC reports
+!data/processed/
+!data/processed/**
+
+!data/soil_moisture/
+!data/soil_moisture/processed/
+!data/soil_moisture/processed/**

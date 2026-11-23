@@ -1,0 +1,46 @@
+{
+  "status": "COMPLETE",
+  "pipeline": "NASA SMAP Soil Moisture Pipeline",
+  "product_id": "SPL3SMP_E",
+  "product_version": "006",
+  "raw_granules": [
+    "SMAP_L3_SM_P_E_20260901_R19240_001.h5",
+    "SMAP_L3_SM_P_E_20260908_R19240_001.h5"
+  ],
+  "observation_date": "20260908",
+  "processed_at": "2026-11-23T11:18:38.849835+00:00",
+  "ease_grid": {
+    "crs": "EPSG:6933",
+    "rows": 1624,
+    "cols": 3856,
+    "am_valid_pixels": 770831,
+    "pm_valid_pixels": 821576,
+    "combined_valid_pixels": 846638
+  },
+  "ner_grid_200m": {
+    "crs": "EPSG:4326",
+    "height": 3921,
+    "width": 4904,
+    "valid_cells": 6411931,
+    "direct_observed_cells": 421300,
+    "interpolated_cells": 5990631,
+    "coverage_pct": 6.6,
+    "min_sm_cm3_per_cm3": 0.2975,
+    "max_sm_cm3_per_cm3": 0.4986,
+    "mean_sm_cm3_per_cm3": 0.3887,
+    "median_sm_cm3_per_cm3": 0.3879,
+    "p25_sm_cm3_per_cm3": 0.3879,
+    "p75_sm_cm3_per_cm3": 0.3879
+  },
+  "resolution_disclosure": {
+    "native_satellite_resolution": "9 km (EASE-Grid 2.0)",
+    "analysis_grid_resolution": "200 m (Model B analysis grid)",
+    "resampling_method": "Bilinear interpolation",
+    "is_native_200m": false,
+    "honesty_statement": "Soil moisture is derived from NASA SMAP Enhanced L3 ~9km radiometer observations and bilinearly interpolated onto the 200m analysis grid. The system does not claim native 200m satellite observation resolution."
+  },
+  "artifacts": {
+    "dated_geotiff": "D:\\charan coding\\SIH 2026\\SIH1\\backend\\data\\soil_moisture\\processed\\smap_soil_moisture_20260908_ner.tif",
+    "latest_geotiff": "D:\\charan coding\\SIH 2026\\SIH1\\backend\\data\\soil_moisture\\processed\\smap_soil_moisture_latest_ner.tif"
+  }
+}

@@ -1,0 +1,73 @@
+name: Daily Landslide Risk Pipeline (Model B + NER Rasters)
+
+on:
+  schedule:
+    # Runs everyday at 01:00 UTC (06:30 AM IST)
+    - cron: '0 1 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions UI
+
+permissions:
+  contents: write
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install System Geospatial Libraries (GDAL & HDF5)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential \
+            libgdal-dev \
+            gdal-bin \
+            libhdf5-dev
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+
+      - name: Execute Unified Daily Landslide Risk Pipeline
+        env:
+          NASA_EARTHDATA_USERNAME: ${{ secrets.NASA_EARTHDATA_USERNAME }}
+          NASA_EARTHDATA_PASSWORD: ${{ secrets.NASA_EARTHDATA_PASSWORD }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          cd backend
+          python scripts/run_unified_daily_pipeline.py --force
+
+      - name: Commit and Push Updated Risk & Weather Rasters
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add backend/data/processed/ backend/data/soil_moisture/processed/
+          
+          # Only commit if changes exist
+          if git diff --staged --quiet; then
+            echo "No changes in rasters to commit."
+          else
+            git commit -m "chore(pipeline): auto-update daily 24h risk & satellite rasters [skip ci]"
+            git push
+          fi
+
+      - name: Trigger Render Deploy Hook (Optional)
+        if: env.RENDER_DEPLOY_HOOK != ''
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          echo "Triggering Render webhook deploy..."
+          curl -s -X POST "$RENDER_DEPLOY_HOOK"

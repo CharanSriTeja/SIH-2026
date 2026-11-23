@@ -1022,3 +1022,11 @@ Data: ['https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/
 2026-11-23 17:03:53,829 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2957, 90.0728) = 0.0814
 2026-11-23 17:03:53,830 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0814 (matches tile color)
 2026-11-23 17:06:00,583 - landslide_sms.alert_service - INFO - Alerts history database initialized at D:\charan coding\SIH 2026\SIH1\backend\data\alerts_history.db
+2026-11-23 17:15:52,767 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-11-23 17:15:52,769 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-11-23 17:15:54,803 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-11-23 17:15:54,849 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-11-23 17:15:54,862 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-11-23 17:15:56,149 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-11-23 17:16:11,835 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 15.69s.
+2026-11-23 17:16:14,117 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 21.35s!

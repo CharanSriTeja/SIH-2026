@@ -1,0 +1,3653 @@
+{
+  "Arunachal Pradesh": [
+    {
+      "district": "Aalo HQ",
+      "lat": 28.1394,
+      "lon": 94.7638
+    },
+    {
+      "district": "Anelih",
+      "lat": 28.5789,
+      "lon": 95.6005
+    },
+    {
+      "district": "Anini Circle",
+      "lat": 29.0114,
+      "lon": 96.0124
+    },
+    {
+      "district": "Anjaw",
+      "lat": 28.0123,
+      "lon": 96.8432
+    },
+    {
+      "district": "Bagra Circle",
+      "lat": 28.0502,
+      "lon": 94.7939
+    },
+    {
+      "district": "Balemu Circle",
+      "lat": 26.9598,
+      "lon": 92.1677
+    },
+    {
+      "district": "Balijan ADC",
+      "lat": 26.9937,
+      "lon": 93.5821
+    },
+    {
+      "district": "Bameng ADC",
+      "lat": 27.5147,
+      "lon": 92.9315
+    },
+    {
+      "district": "Banderdewa Circle",
+      "lat": 27.0477,
+      "lon": 93.7291
+    },
+    {
+      "district": "Baririjo Circle",
+      "lat": 27.8761,
+      "lon": 94.4511
+    },
+    {
+      "district": "Basar ADC",
+      "lat": 27.9681,
+      "lon": 94.7407
+    },
+    {
+      "district": "Bhalukpong EAC",
+      "lat": 27.0625,
+      "lon": 92.5466
+    },
+    {
+      "district": "Bilat Circle",
+      "lat": 27.9807,
+      "lon": 95.185
+    },
+    {
+      "district": "Boleng ADC",
+      "lat": 28.3909,
+      "lon": 94.8697
+    },
+    {
+      "district": "Bomdila HQ",
+      "lat": 27.2529,
+      "lon": 92.4113
+    },
+    {
+      "district": "Bongkhar Circle",
+      "lat": 27.5031,
+      "lon": 91.7743
+    },
+    {
+      "district": "Bordumsa ADC",
+      "lat": 27.4771,
+      "lon": 95.9776
+    },
+    {
+      "district": "Chaglagam Circle",
+      "lat": 28.4555,
+      "lon": 96.6475
+    },
+    {
+      "district": "Chambang Circle",
+      "lat": 27.8302,
+      "lon": 93.7614
+    },
+    {
+      "district": "Changlang",
+      "lat": 27.1245,
+      "lon": 95.7412
+    },
+    {
+      "district": "Changlang HQ",
+      "lat": 27.1237,
+      "lon": 95.8489
+    },
+    {
+      "district": "Chayangtajo ADC",
+      "lat": 27.7273,
+      "lon": 93.1509
+    },
+    {
+      "district": "Chetam Peer Yapu Circle",
+      "lat": 28.0275,
+      "lon": 94.0052
+    },
+    {
+      "district": "Chongkham EAC",
+      "lat": 27.7199,
+      "lon": 96.1035
+    },
+    {
+      "district": "Dadam Circle",
+      "lat": 26.9295,
+      "lon": 95.4215
+    },
+    {
+      "district": "Dambuk ADC",
+      "lat": 28.2742,
+      "lon": 95.5436
+    },
+    {
+      "district": "Damin Circle",
+      "lat": 28.1942,
+      "lon": 93.164
+    },
+    {
+      "district": "Daporijo Hq",
+      "lat": 28.0141,
+      "lon": 94.179
+    },
+    {
+      "district": "Darak Circle",
+      "lat": 28.2749,
+      "lon": 94.4937
+    },
+    {
+      "district": "Daring Circle",
+      "lat": 27.8588,
+      "lon": 94.7566
+    },
+    {
+      "district": "Desali Circle",
+      "lat": 28.3549,
+      "lon": 96.2077
+    },
+    {
+      "district": "Dibang Valley",
+      "lat": 28.7845,
+      "lon": 95.8456
+    },
+    {
+      "district": "Dirang ADC",
+      "lat": 27.4459,
+      "lon": 92.2297
+    },
+    {
+      "district": "Dissing-Passo",
+      "lat": 26.9957,
+      "lon": 93.2444
+    },
+    {
+      "district": "Diyun EAC",
+      "lat": 27.5642,
+      "lon": 96.0935
+    },
+    {
+      "district": "Doimukh SDO",
+      "lat": 27.1805,
+      "lon": 93.7666
+    },
+    {
+      "district": "Dollungmukh Circle",
+      "lat": 27.6084,
+      "lon": 94.1402
+    },
+    {
+      "district": "Dudunghar Circle",
+      "lat": 27.5617,
+      "lon": 91.618
+    },
+    {
+      "district": "Dumporijo ADC",
+      "lat": 28.0247,
+      "lon": 94.2908
+    },
+    {
+      "district": "East Kameng",
+      "lat": 27.3291,
+      "lon": 93.0426
+    },
+    {
+      "district": "East Siang",
+      "lat": 28.0667,
+      "lon": 95.3333
+    },
+    {
+      "district": "Etalin Circle",
+      "lat": 28.8392,
+      "lon": 95.9448
+    },
+    {
+      "district": "Gangte Circle",
+      "lat": 27.8514,
+      "lon": 93.9001
+    },
+    {
+      "district": "Geku EAC",
+      "lat": 28.442,
+      "lon": 95.1434
+    },
+    {
+      "district": "Gelling Circle",
+      "lat": 29.0985,
+      "lon": 94.9494
+    },
+    {
+      "district": "Gensi EAC",
+      "lat": 27.7729,
+      "lon": 94.5029
+    },
+    {
+      "district": "Gepen Circle",
+      "lat": 27.9164,
+      "lon": 94.1518
+    },
+    {
+      "district": "Giba Circle",
+      "lat": 28.1802,
+      "lon": 93.9641
+    },
+    {
+      "district": "Gite Ripa Circle",
+      "lat": 28.1291,
+      "lon": 94.3312
+    },
+    {
+      "district": "Goiliang Circle",
+      "lat": 28.2231,
+      "lon": 96.764
+    },
+    {
+      "district": "Gumto Circle",
+      "lat": 27.1786,
+      "lon": 93.8285
+    },
+    {
+      "district": "Gyawe Purang Circle",
+      "lat": 27.4829,
+      "lon": 93.2189
+    },
+    {
+      "district": "Hawai HQ",
+      "lat": 27.8405,
+      "lon": 97.0067
+    },
+    {
+      "district": "Hayuliang Circle",
+      "lat": 28.1317,
+      "lon": 96.4486
+    },
+    {
+      "district": "Hunli SDO",
+      "lat": 28.3404,
+      "lon": 95.9857
+    },
+    {
+      "district": "Itanagar EAC",
+      "lat": 27.1016,
+      "lon": 93.5903
+    },
+    {
+      "district": "Jairampur ADC",
+      "lat": 27.3537,
+      "lon": 96.0556
+    },
+    {
+      "district": "Jamiri Circle",
+      "lat": 27.2075,
+      "lon": 92.6365
+    },
+    {
+      "district": "Jang ADC",
+      "lat": 27.5159,
+      "lon": 92.0281
+    },
+    {
+      "district": "Jengging Circle",
+      "lat": 28.6555,
+      "lon": 94.924
+    },
+    {
+      "district": "Jomlo Mobuk Circle",
+      "lat": 28.2402,
+      "lon": 94.8404
+    },
+    {
+      "district": "Kakoi Circle",
+      "lat": 27.4339,
+      "lon": 94.075
+    },
+    {
+      "district": "Kalaktang ADC",
+      "lat": 27.1393,
+      "lon": 92.1529
+    },
+    {
+      "district": "Kamba ADC",
+      "lat": 28.2844,
+      "lon": 94.6189
+    },
+    {
+      "district": "Kamengbari Doimara Circle",
+      "lat": 26.9981,
+      "lon": 92.4377
+    },
+    {
+      "district": "Kamle",
+      "lat": 27.7123,
+      "lon": 94.0123
+    },
+    {
+      "district": "Kamporijo Circle",
+      "lat": 27.7758,
+      "lon": 93.9674
+    },
+    {
+      "district": "Kangku Circle",
+      "lat": 27.6601,
+      "lon": 94.4282
+    },
+    {
+      "district": "Kanubari ADC",
+      "lat": 26.9676,
+      "lon": 95.2514
+    },
+    {
+      "district": "Katan Circle",
+      "lat": 28.266,
+      "lon": 95.2159
+    },
+    {
+      "district": "Kaying EAC",
+      "lat": 28.3655,
+      "lon": 94.6295
+    },
+    {
+      "district": "Kebang Circle",
+      "lat": 28.1156,
+      "lon": 95.0991
+    },
+    {
+      "district": "Kharsang Circle",
+      "lat": 27.4353,
+      "lon": 96.0381
+    },
+    {
+      "district": "Khenawa Circle",
+      "lat": 27.6284,
+      "lon": 92.9359
+    },
+    {
+      "district": "Khimiyang EAC",
+      "lat": 26.9841,
+      "lon": 95.7531
+    },
+    {
+      "district": "Khonsa HQ",
+      "lat": 26.9891,
+      "lon": 95.5054
+    },
+    {
+      "district": "Kibithu Circle",
+      "lat": 28.2607,
+      "lon": 97.1136
+    },
+    {
+      "district": "Kimin SDO",
+      "lat": 27.3603,
+      "lon": 93.9377
+    },
+    {
+      "district": "Kitpi Circle",
+      "lat": 27.6002,
+      "lon": 91.9007
+    },
+    {
+      "district": "Kitpi-Tawang Circle Boundary",
+      "lat": 27.606,
+      "lon": 91.8818
+    },
+    {
+      "district": "Koloriang HQ",
+      "lat": 27.8912,
+      "lon": 93.3395
+    },
+    {
+      "district": "Kora Circle",
+      "lat": 27.9295,
+      "lon": 94.9966
+    },
+    {
+      "district": "Koronu Circle",
+      "lat": 28.087,
+      "lon": 95.9928
+    },
+    {
+      "district": "Koyu EAC",
+      "lat": 27.972,
+      "lon": 94.9558
+    },
+    {
+      "district": "Kra Daadi",
+      "lat": 27.8123,
+      "lon": 93.6214
+    },
+    {
+      "district": "Kronli (Arzoo circle)",
+      "lat": 28.4163,
+      "lon": 95.791
+    },
+    {
+      "district": "Kurung Kumey",
+      "lat": 27.9427,
+      "lon": 93.4735
+    },
+    {
+      "district": "Lada Circle",
+      "lat": 27.5932,
+      "lon": 92.6866
+    },
+    {
+      "district": "Laju SDO",
+      "lat": 26.894,
+      "lon": 95.5909
+    },
+    {
+      "district": "Lathao Circle",
+      "lat": 27.7478,
+      "lon": 95.8706
+    },
+    {
+      "district": "Lawnu Circle",
+      "lat": 27.0493,
+      "lon": 95.3251
+    },
+    {
+      "district": "Lekang Mahadevpur Circle",
+      "lat": 27.6293,
+      "lon": 95.8566
+    },
+    {
+      "district": "Lepa Rada",
+      "lat": 27.9542,
+      "lon": 94.5123
+    },
+    {
+      "district": "Leporiang Circle",
+      "lat": 27.278,
+      "lon": 93.3381
+    },
+    {
+      "district": "Lhou Circle",
+      "lat": 27.6022,
+      "lon": 91.9435
+    },
+    {
+      "district": "Lhou-Kitpi circle boundary",
+      "lat": 27.6032,
+      "lon": 91.9224
+    },
+    {
+      "district": "Lhou-Tawang circle boundary",
+      "lat": 27.6487,
+      "lon": 91.9209
+    },
+    {
+      "district": "Likabali SDO",
+      "lat": 27.7311,
+      "lon": 94.7467
+    },
+    {
+      "district": "Limeking Circle",
+      "lat": 28.4651,
+      "lon": 93.5464
+    },
+    {
+      "district": "Liromoba EAC",
+      "lat": 28.1422,
+      "lon": 94.4454
+    },
+    {
+      "district": "Lohit",
+      "lat": 27.9123,
+      "lon": 96.1723
+    },
+    {
+      "district": "Longding",
+      "lat": 26.8521,
+      "lon": 95.2412
+    },
+    {
+      "district": "Longding HQ",
+      "lat": 26.8957,
+      "lon": 95.3172
+    },
+    {
+      "district": "Lower Dibang Valley",
+      "lat": 28.1432,
+      "lon": 95.8341
+    },
+    {
+      "district": "Lower Siang",
+      "lat": 27.8421,
+      "lon": 94.7312
+    },
+    {
+      "district": "Lower Subansiri",
+      "lat": 27.5358,
+      "lon": 93.8344
+    },
+    {
+      "district": "Lumla Circle",
+      "lat": 27.5434,
+      "lon": 91.7213
+    },
+    {
+      "district": "Lumla-Bongkha Circle Boundary",
+      "lat": 27.5199,
+      "lon": 91.7542
+    },
+    {
+      "district": "Lumla-Dudunghar Circle Boundary",
+      "lat": 27.5417,
+      "lon": 91.6569
+    },
+    {
+      "district": "Lumla-Zemithang Circle Boundary",
+      "lat": 27.5816,
+      "lon": 91.7143
+    },
+    {
+      "district": "Lyngok Longtoi Circle",
+      "lat": 27.2287,
+      "lon": 95.8486
+    },
+    {
+      "district": "Manchal Circle",
+      "lat": 28.0067,
+      "lon": 96.7037
+    },
+    {
+      "district": "Manmao EAC",
+      "lat": 27.2475,
+      "lon": 95.9509
+    },
+    {
+      "district": "Mariyang ADC",
+      "lat": 28.5643,
+      "lon": 95.276
+    },
+    {
+      "district": "Maro Circle",
+      "lat": 27.9967,
+      "lon": 94.4102
+    },
+    {
+      "district": "Mebo ADC",
+      "lat": 28.1856,
+      "lon": 95.3945
+    },
+    {
+      "district": "Mechuka ADC",
+      "lat": 28.6242,
+      "lon": 94.1098
+    },
+    {
+      "district": "Mengio EAC",
+      "lat": 27.5219,
+      "lon": 93.4189
+    },
+    {
+      "district": "Metengliang Circle",
+      "lat": 28.1954,
+      "lon": 96.502
+    },
+    {
+      "district": "Miao ADC",
+      "lat": 27.5033,
+      "lon": 96.4583
+    },
+    {
+      "district": "Migging Circle",
+      "lat": 28.7291,
+      "lon": 94.6292
+    },
+    {
+      "district": "Mipi Circle",
+      "lat": 29.0922,
+      "lon": 95.7793
+    },
+    {
+      "district": "Monigong EAC",
+      "lat": 28.8233,
+      "lon": 94.222
+    },
+    {
+      "district": "Mopom Adipasi Circle",
+      "lat": 28.3581,
+      "lon": 95.2954
+    },
+    {
+      "district": "Mukto Circle",
+      "lat": 27.5123,
+      "lon": 91.8914
+    },
+    {
+      "district": "Nacho SDO",
+      "lat": 28.5004,
+      "lon": 93.7511
+    },
+    {
+      "district": "Nafra EAC",
+      "lat": 27.5388,
+      "lon": 92.5903
+    },
+    {
+      "district": "Naharlagun EAC",
+      "lat": 27.1256,
+      "lon": 93.7025
+    },
+    {
+      "district": "Nampong SDO",
+      "lat": 27.3605,
+      "lon": 96.4642
+    },
+    {
+      "district": "Namsai",
+      "lat": 27.6741,
+      "lon": 95.8712
+    },
+    {
+      "district": "Namsai HQ",
+      "lat": 27.6791,
+      "lon": 95.8793
+    },
+    {
+      "district": "Namsang",
+      "lat": 27.1597,
+      "lon": 95.5539
+    },
+    {
+      "district": "Namsing Circle",
+      "lat": 28.0174,
+      "lon": 95.5003
+    },
+    {
+      "district": "Namtok EAC",
+      "lat": 27.2248,
+      "lon": 95.731
+    },
+    {
+      "district": "Nari ADC",
+      "lat": 27.8458,
+      "lon": 95.058
+    },
+    {
+      "district": "New Seren Circle",
+      "lat": 27.7968,
+      "lon": 94.9398
+    },
+    {
+      "district": "Nyapin ADC",
+      "lat": 27.7193,
+      "lon": 93.4387
+    },
+    {
+      "district": "Old Ziro SDO",
+      "lat": 27.6621,
+      "lon": 93.8081
+    },
+    {
+      "district": "Oyan Circle",
+      "lat": 27.9072,
+      "lon": 95.3421
+    },
+    {
+      "district": "Pakke Kessang",
+      "lat": 27.1567,
+      "lon": 93.2278
+    },
+    {
+      "district": "Palin Circle",
+      "lat": 27.6908,
+      "lon": 93.6178
+    },
+    {
+      "district": "Palling Circle",
+      "lat": 28.8583,
+      "lon": 94.861
+    },
+    {
+      "district": "Pangchao SDO",
+      "lat": 26.7324,
+      "lon": 95.3106
+    },
+    {
+      "district": "Pangin EAC",
+      "lat": 28.1858,
+      "lon": 95.0012
+    },
+    {
+      "district": "Papum Pare",
+      "lat": 27.1511,
+      "lon": 93.5938
+    },
+    {
+      "district": "Parang Circle",
+      "lat": 27.387,
+      "lon": 93.4795
+    },
+    {
+      "district": "Parsi-Parlo",
+      "lat": 27.9877,
+      "lon": 93.4252
+    },
+    {
+      "district": "Pasighat HQ",
+      "lat": 28.0152,
+      "lon": 95.337
+    },
+    {
+      "district": "Payeng Circle",
+      "lat": 28.3416,
+      "lon": 94.2037
+    },
+    {
+      "district": "Payum Circle",
+      "lat": 28.688,
+      "lon": 94.5826
+    },
+    {
+      "district": "Phassang",
+      "lat": 27.7285,
+      "lon": 93.2868
+    },
+    {
+      "district": "Pidi Circle",
+      "lat": 28.6524,
+      "lon": 94.3702
+    },
+    {
+      "district": "Pipsorang Circle",
+      "lat": 28.1695,
+      "lon": 93.6672
+    },
+    {
+      "district": "Pipu Dipu Circle",
+      "lat": 27.5422,
+      "lon": 93.1689
+    },
+    {
+      "district": "Pistana Circle",
+      "lat": 27.5827,
+      "lon": 93.6538
+    },
+    {
+      "district": "Piyong Circle",
+      "lat": 27.6264,
+      "lon": 96.0099
+    },
+    {
+      "district": "Pizirang(Veo)",
+      "lat": 27.2284,
+      "lon": 93.1583
+    },
+    {
+      "district": "Puchi Geko Circle",
+      "lat": 27.8721,
+      "lon": 94.2473
+    },
+    {
+      "district": "Pumao Circle",
+      "lat": 26.8307,
+      "lon": 95.24
+    },
+    {
+      "district": "Raga ADC",
+      "lat": 27.7526,
+      "lon": 94.1627
+    },
+    {
+      "district": "Rebo Perging Circle",
+      "lat": 28.2902,
+      "lon": 95.0375
+    },
+    {
+      "district": "Renuk Circle",
+      "lat": 27.1455,
+      "lon": 95.9467
+    },
+    {
+      "district": "Richukrong Circle",
+      "lat": 27.3135,
+      "lon": 92.8634
+    },
+    {
+      "district": "Riga EAC",
+      "lat": 28.4245,
+      "lon": 95.0443
+    },
+    {
+      "district": "Roing HQ",
+      "lat": 28.1388,
+      "lon": 95.8277
+    },
+    {
+      "district": "Ruksin ADC",
+      "lat": 27.8638,
+      "lon": 95.197
+    },
+    {
+      "district": "Rumgong ADC",
+      "lat": 28.3416,
+      "lon": 94.8258
+    },
+    {
+      "district": "Rupa SDO",
+      "lat": 27.1798,
+      "lon": 92.3609
+    },
+    {
+      "district": "Sagalee ADC",
+      "lat": 27.2775,
+      "lon": 93.5176
+    },
+    {
+      "district": "Sangdupota Basar Nello Circle",
+      "lat": 27.0783,
+      "lon": 93.3799
+    },
+    {
+      "district": "Sangram SDO",
+      "lat": 27.8186,
+      "lon": 93.5137
+    },
+    {
+      "district": "Sarli Circle",
+      "lat": 27.9993,
+      "lon": 92.9634
+    },
+    {
+      "district": "Sawa Circle",
+      "lat": 27.7874,
+      "lon": 92.7822
+    },
+    {
+      "district": "Segi Gusar Circle",
+      "lat": 28.0896,
+      "lon": 94.2043
+    },
+    {
+      "district": "Seijosa",
+      "lat": 27.0551,
+      "lon": 92.8708
+    },
+    {
+      "district": "Seppa HQ",
+      "lat": 27.3014,
+      "lon": 93.1009
+    },
+    {
+      "district": "Shergaon Circle",
+      "lat": 27.0508,
+      "lon": 92.2948
+    },
+    {
+      "district": "Shi Yomi",
+      "lat": 28.5321,
+      "lon": 94.2145
+    },
+    {
+      "district": "Siang",
+      "lat": 28.3241,
+      "lon": 94.9543
+    },
+    {
+      "district": "Sibe Circle",
+      "lat": 27.7923,
+      "lon": 94.4528
+    },
+    {
+      "district": "Singa Circle",
+      "lat": 28.8301,
+      "lon": 95.1738
+    },
+    {
+      "district": "Singchung ADC",
+      "lat": 27.1848,
+      "lon": 92.5217
+    },
+    {
+      "district": "Siyum ADC",
+      "lat": 28.4901,
+      "lon": 94.011
+    },
+    {
+      "district": "Soha Circle",
+      "lat": 27.193,
+      "lon": 95.6034
+    },
+    {
+      "district": "Sunpura Circle",
+      "lat": 27.9612,
+      "lon": 95.9747
+    },
+    {
+      "district": "Taksing Circle",
+      "lat": 28.42,
+      "lon": 93.2598
+    },
+    {
+      "district": "Tali ADC",
+      "lat": 27.9667,
+      "lon": 93.7703
+    },
+    {
+      "district": "Taliha ADC",
+      "lat": 28.2334,
+      "lon": 94.1878
+    },
+    {
+      "district": "Tarak Lengdi Cicle",
+      "lat": 27.7518,
+      "lon": 93.8332
+    },
+    {
+      "district": "Taraso Circle",
+      "lat": 26.9816,
+      "lon": 93.4496
+    },
+    {
+      "district": "Tato EAC",
+      "lat": 28.4687,
+      "lon": 94.3977
+    },
+    {
+      "district": "Tawang",
+      "lat": 27.5862,
+      "lon": 91.8594
+    },
+    {
+      "district": "Tawang Circle",
+      "lat": 27.6384,
+      "lon": 91.8463
+    },
+    {
+      "district": "Tezu HQ",
+      "lat": 28.1732,
+      "lon": 96.2555
+    },
+    {
+      "district": "Thembang Circle",
+      "lat": 27.3746,
+      "lon": 92.3554
+    },
+    {
+      "district": "Thingbu Circle",
+      "lat": 27.6955,
+      "lon": 92.1961
+    },
+    {
+      "district": "Thrizino ADC",
+      "lat": 27.2897,
+      "lon": 92.7412
+    },
+    {
+      "district": "Tikhak Rima Putok Circle",
+      "lat": 27.3033,
+      "lon": 96.1435
+    },
+    {
+      "district": "Tinali Paglam Circle",
+      "lat": 27.9844,
+      "lon": 95.5872
+    },
+    {
+      "district": "Tirap",
+      "lat": 27.0123,
+      "lon": 95.5123
+    },
+    {
+      "district": "Tirbin EAC",
+      "lat": 28.0097,
+      "lon": 94.5571
+    },
+    {
+      "district": "Toru Circle",
+      "lat": 27.2735,
+      "lon": 93.7161
+    },
+    {
+      "district": "Tuting ADC",
+      "lat": 29.087,
+      "lon": 94.7753
+    },
+    {
+      "district": "Upper Siang",
+      "lat": 28.6123,
+      "lon": 95.0123
+    },
+    {
+      "district": "Upper Subansiri",
+      "lat": 28.0645,
+      "lon": 94.1234
+    },
+    {
+      "district": "Vijoynagar EAC",
+      "lat": 27.2697,
+      "lon": 96.9798
+    },
+    {
+      "district": "Wakka SDO",
+      "lat": 26.801,
+      "lon": 95.4245
+    },
+    {
+      "district": "Wakro Circle",
+      "lat": 27.7501,
+      "lon": 96.4552
+    },
+    {
+      "district": "Walong Circle",
+      "lat": 28.0677,
+      "lon": 97.1118
+    },
+    {
+      "district": "West Kameng",
+      "lat": 27.2645,
+      "lon": 92.4159
+    },
+    {
+      "district": "West Siang",
+      "lat": 28.1678,
+      "lon": 94.6732
+    },
+    {
+      "district": "Yachuli ADC",
+      "lat": 27.5518,
+      "lon": 93.8257
+    },
+    {
+      "district": "Yangte Circle",
+      "lat": 27.8471,
+      "lon": 93.6341
+    },
+    {
+      "district": "Yatdam Circle",
+      "lat": 27.0963,
+      "lon": 95.6814
+    },
+    {
+      "district": "Yazali Circle",
+      "lat": 27.4196,
+      "lon": 93.7188
+    },
+    {
+      "district": "Yingkiong Circle",
+      "lat": 28.6772,
+      "lon": 95.0279
+    },
+    {
+      "district": "Yomcha ADC",
+      "lat": 28.1128,
+      "lon": 94.5578
+    },
+    {
+      "district": "Zemithang Circle",
+      "lat": 27.7056,
+      "lon": 91.7125
+    },
+    {
+      "district": "Ziro HQ",
+      "lat": 27.5596,
+      "lon": 93.9032
+    }
+  ],
+  "Assam": [
+    {
+      "district": "Agamoni",
+      "lat": 26.2074,
+      "lon": 89.7749
+    },
+    {
+      "district": "Algapur",
+      "lat": 24.796,
+      "lon": 92.6085
+    },
+    {
+      "district": "Amguri",
+      "lat": 26.8352,
+      "lon": 94.5831
+    },
+    {
+      "district": "Azara",
+      "lat": 26.0996,
+      "lon": 91.6808
+    },
+    {
+      "district": "Badarpur",
+      "lat": 24.8204,
+      "lon": 92.5034
+    },
+    {
+      "district": "Baganpara (Pt)",
+      "lat": 26.611,
+      "lon": 91.1949
+    },
+    {
+      "district": "Baghbor",
+      "lat": 26.2277,
+      "lon": 90.8644
+    },
+    {
+      "district": "Bagribari (Pt)",
+      "lat": 26.2562,
+      "lon": 90.0279
+    },
+    {
+      "district": "Bagribari Pt",
+      "lat": 26.1183,
+      "lon": 90.1212
+    },
+    {
+      "district": "Bajali",
+      "lat": 26.5455,
+      "lon": 91.2366
+    },
+    {
+      "district": "Bajali (Pt)",
+      "lat": 26.5112,
+      "lon": 91.2099
+    },
+    {
+      "district": "Baksa",
+      "lat": 26.6543,
+      "lon": 91.5987
+    },
+    {
+      "district": "Balijana",
+      "lat": 26.0558,
+      "lon": 90.4965
+    },
+    {
+      "district": "Banekuchi",
+      "lat": 26.4809,
+      "lon": 91.3596
+    },
+    {
+      "district": "Barama (Pt)",
+      "lat": 26.5003,
+      "lon": 91.3591
+    },
+    {
+      "district": "Barama Pt",
+      "lat": 26.5557,
+      "lon": 91.3914
+    },
+    {
+      "district": "Barbhag",
+      "lat": 26.3699,
+      "lon": 91.4789
+    },
+    {
+      "district": "Barkhetri",
+      "lat": 26.252,
+      "lon": 91.3353
+    },
+    {
+      "district": "Barnagar",
+      "lat": 26.619,
+      "lon": 91.0095
+    },
+    {
+      "district": "Barnagar (Pt)",
+      "lat": 26.5083,
+      "lon": 90.8974
+    },
+    {
+      "district": "Barpeta",
+      "lat": 26.3414,
+      "lon": 91.027
+    },
+    {
+      "district": "Baska",
+      "lat": 26.6758,
+      "lon": 91.3297
+    },
+    {
+      "district": "Bengtol",
+      "lat": 26.7378,
+      "lon": 90.514
+    },
+    {
+      "district": "Bhowraguri",
+      "lat": 26.3832,
+      "lon": 90.0487
+    },
+    {
+      "district": "Bhuragaon",
+      "lat": 26.3779,
+      "lon": 92.1832
+    },
+    {
+      "district": "Bihpuria",
+      "lat": 27.0588,
+      "lon": 93.9317
+    },
+    {
+      "district": "Bijni",
+      "lat": 26.4577,
+      "lon": 90.7479
+    },
+    {
+      "district": "Bijni (Pt)",
+      "lat": 26.6155,
+      "lon": 90.7529
+    },
+    {
+      "district": "Bilasipara Pt",
+      "lat": 26.2565,
+      "lon": 90.2024
+    },
+    {
+      "district": "Biswanath",
+      "lat": 26.7774,
+      "lon": 93.2585
+    },
+    {
+      "district": "Boitamari",
+      "lat": 26.2744,
+      "lon": 90.5118
+    },
+    {
+      "district": "Bokakhat",
+      "lat": 26.6932,
+      "lon": 93.5572
+    },
+    {
+      "district": "Boko",
+      "lat": 25.8873,
+      "lon": 91.1423
+    },
+    {
+      "district": "Bongaigaon",
+      "lat": 26.4789,
+      "lon": 90.5643
+    },
+    {
+      "district": "Bongaigaon (Pt)",
+      "lat": 26.4128,
+      "lon": 90.5749
+    },
+    {
+      "district": "Cachar",
+      "lat": 24.8333,
+      "lon": 92.8
+    },
+    {
+      "district": "Chabua",
+      "lat": 27.5597,
+      "lon": 95.1363
+    },
+    {
+      "district": "Chamaria",
+      "lat": 26.0983,
+      "lon": 91.1479
+    },
+    {
+      "district": "Chandrapur",
+      "lat": 26.2129,
+      "lon": 91.9376
+    },
+    {
+      "district": "Chapar (Pt)",
+      "lat": 26.329,
+      "lon": 90.3467
+    },
+    {
+      "district": "Chapar Pt",
+      "lat": 26.2763,
+      "lon": 90.3713
+    },
+    {
+      "district": "Charaideo",
+      "lat": 26.9421,
+      "lon": 94.9543
+    },
+    {
+      "district": "Chariduar",
+      "lat": 26.861,
+      "lon": 92.7766
+    },
+    {
+      "district": "Chenga",
+      "lat": 26.2112,
+      "lon": 91.0703
+    },
+    {
+      "district": "Chhaygaon",
+      "lat": 25.918,
+      "lon": 91.3331
+    },
+    {
+      "district": "Chirang",
+      "lat": 26.6123,
+      "lon": 90.6421
+    },
+    {
+      "district": "Dalgaon",
+      "lat": 26.5855,
+      "lon": 92.1498
+    },
+    {
+      "district": "Dalgaon (Pt)",
+      "lat": 26.542,
+      "lon": 92.1918
+    },
+    {
+      "district": "Darrang",
+      "lat": 26.4521,
+      "lon": 92.0321
+    },
+    {
+      "district": "Dergaon",
+      "lat": 26.6912,
+      "lon": 93.9733
+    },
+    {
+      "district": "Dhakuakhana (Pt-I)",
+      "lat": 27.2359,
+      "lon": 94.4646
+    },
+    {
+      "district": "Dhakuakhana (Pt-II)",
+      "lat": 27.3057,
+      "lon": 94.5182
+    },
+    {
+      "district": "Dhekiajuli (Pt)",
+      "lat": 26.7304,
+      "lon": 92.4826
+    },
+    {
+      "district": "Dhekiajuli tehsil",
+      "lat": 26.6438,
+      "lon": 92.4029
+    },
+    {
+      "district": "Dhemaji",
+      "lat": 27.4664,
+      "lon": 94.5048
+    },
+    {
+      "district": "Dhing",
+      "lat": 26.4439,
+      "lon": 92.5163
+    },
+    {
+      "district": "Dhubri",
+      "lat": 26.0183,
+      "lon": 89.9465
+    },
+    {
+      "district": "Dhubri (Pt)",
+      "lat": 26.1284,
+      "lon": 89.9768
+    },
+    {
+      "district": "Dibrugarh",
+      "lat": 27.4728,
+      "lon": 94.912
+    },
+    {
+      "district": "Dibrugarh East",
+      "lat": 27.4811,
+      "lon": 94.9773
+    },
+    {
+      "district": "Dibrugarh West",
+      "lat": 27.3329,
+      "lon": 94.7839
+    },
+    {
+      "district": "Dima Hasao",
+      "lat": 25.1745,
+      "lon": 93.0234
+    },
+    {
+      "district": "Dimow",
+      "lat": 27.13,
+      "lon": 94.689
+    },
+    {
+      "district": "Diphu",
+      "lat": 25.8558,
+      "lon": 93.4826
+    },
+    {
+      "district": "Dispur",
+      "lat": 26.1518,
+      "lon": 91.7826
+    },
+    {
+      "district": "Doboka",
+      "lat": 26.1291,
+      "lon": 92.867
+    },
+    {
+      "district": "Donka",
+      "lat": 25.8533,
+      "lon": 92.6104
+    },
+    {
+      "district": "Doom Dooma",
+      "lat": 27.6311,
+      "lon": 95.5734
+    },
+    {
+      "district": "Dotoma",
+      "lat": 26.4861,
+      "lon": 90.1836
+    },
+    {
+      "district": "Dudhnai",
+      "lat": 25.9819,
+      "lon": 90.8139
+    },
+    {
+      "district": "Ghograpar (Pt)",
+      "lat": 26.4909,
+      "lon": 91.5036
+    },
+    {
+      "district": "Goalpara",
+      "lat": 26.1789,
+      "lon": 90.6234
+    },
+    {
+      "district": "Gogamukh",
+      "lat": 27.4328,
+      "lon": 94.3556
+    },
+    {
+      "district": "Gohpur",
+      "lat": 26.884,
+      "lon": 93.6627
+    },
+    {
+      "district": "Golaghat",
+      "lat": 26.4044,
+      "lon": 94.0242
+    },
+    {
+      "district": "Golakganj Pt",
+      "lat": 26.1753,
+      "lon": 89.8557
+    },
+    {
+      "district": "Golokganj (Pt)",
+      "lat": 26.2239,
+      "lon": 89.8814
+    },
+    {
+      "district": "Goreswar",
+      "lat": 26.4645,
+      "lon": 91.7372
+    },
+    {
+      "district": "Goreswar (Pt)",
+      "lat": 26.6298,
+      "lon": 91.7067
+    },
+    {
+      "district": "Goroimari",
+      "lat": 26.1191,
+      "lon": 91.2588
+    },
+    {
+      "district": "Gossaigaon (Pt)",
+      "lat": 26.541,
+      "lon": 90.0129
+    },
+    {
+      "district": "Gossaigaon Pt",
+      "lat": 26.3677,
+      "lon": 89.8682
+    },
+    {
+      "district": "Guwahati",
+      "lat": 26.1577,
+      "lon": 91.7234
+    },
+    {
+      "district": "Haflong",
+      "lat": 25.1825,
+      "lon": 92.8374
+    },
+    {
+      "district": "Hailakandi",
+      "lat": 24.6887,
+      "lon": 92.5795
+    },
+    {
+      "district": "Hajo",
+      "lat": 26.2363,
+      "lon": 91.5409
+    },
+    {
+      "district": "Harisinga tehsil",
+      "lat": 26.7791,
+      "lon": 91.8541
+    },
+    {
+      "district": "Helem",
+      "lat": 26.8328,
+      "lon": 93.5377
+    },
+    {
+      "district": "Hojai",
+      "lat": 26.009,
+      "lon": 92.8294
+    },
+    {
+      "district": "Jalah (Pt)",
+      "lat": 26.6385,
+      "lon": 91.1483
+    },
+    {
+      "district": "Jonai",
+      "lat": 27.7453,
+      "lon": 95.1794
+    },
+    {
+      "district": "Jorhat",
+      "lat": 26.7509,
+      "lon": 94.2037
+    },
+    {
+      "district": "Jorhat East",
+      "lat": 26.8042,
+      "lon": 94.2815
+    },
+    {
+      "district": "Jorhat West",
+      "lat": 26.7867,
+      "lon": 94.1051
+    },
+    {
+      "district": "Kadam",
+      "lat": 27.37,
+      "lon": 94.1932
+    },
+    {
+      "district": "Kalaigaon",
+      "lat": 26.6005,
+      "lon": 91.9592
+    },
+    {
+      "district": "Kalaigaon (Pt)",
+      "lat": 26.5369,
+      "lon": 91.9412
+    },
+    {
+      "district": "Kalgachia",
+      "lat": 26.3121,
+      "lon": 90.7917
+    },
+    {
+      "district": "Kaliabor",
+      "lat": 26.5489,
+      "lon": 93.0741
+    },
+    {
+      "district": "Kamalpur",
+      "lat": 26.3349,
+      "lon": 91.7099
+    },
+    {
+      "district": "Kampur",
+      "lat": 26.0944,
+      "lon": 92.6642
+    },
+    {
+      "district": "Kamrup",
+      "lat": 26.3123,
+      "lon": 91.6421
+    },
+    {
+      "district": "Kamrup Metropolitan",
+      "lat": 26.1445,
+      "lon": 91.7362
+    },
+    {
+      "district": "Karbi Anglong",
+      "lat": 26.1543,
+      "lon": 93.3643
+    },
+    {
+      "district": "Karimganj",
+      "lat": 24.8483,
+      "lon": 92.3353
+    },
+    {
+      "district": "Katigora",
+      "lat": 24.9851,
+      "lon": 92.6208
+    },
+    {
+      "district": "Katlichara",
+      "lat": 24.3436,
+      "lon": 92.5863
+    },
+    {
+      "district": "Khoirabari (Pt)",
+      "lat": 26.5632,
+      "lon": 91.8325
+    },
+    {
+      "district": "Khoirabari tehsil",
+      "lat": 26.5947,
+      "lon": 91.8185
+    },
+    {
+      "district": "Khumtai",
+      "lat": 26.7468,
+      "lon": 93.8738
+    },
+    {
+      "district": "Kokrajhar",
+      "lat": 26.5871,
+      "lon": 90.2832
+    },
+    {
+      "district": "Kokrajhar (Pt)",
+      "lat": 26.4471,
+      "lon": 90.3585
+    },
+    {
+      "district": "Koya",
+      "lat": 26.3731,
+      "lon": 91.561
+    },
+    {
+      "district": "Laharighat",
+      "lat": 26.4237,
+      "lon": 92.3623
+    },
+    {
+      "district": "Lakhimpur",
+      "lat": 27.2345,
+      "lon": 94.1023
+    },
+    {
+      "district": "Lakhipur",
+      "lat": 24.8408,
+      "lon": 93.0377
+    },
+    {
+      "district": "Lala",
+      "lat": 24.583,
+      "lon": 92.6412
+    },
+    {
+      "district": "Lanka",
+      "lat": 25.9135,
+      "lon": 93.0486
+    },
+    {
+      "district": "Mahmora",
+      "lat": 27.1205,
+      "lon": 94.9679
+    },
+    {
+      "district": "Mahur",
+      "lat": 25.1406,
+      "lon": 93.2811
+    },
+    {
+      "district": "Maibong",
+      "lat": 25.4945,
+      "lon": 93.2092
+    },
+    {
+      "district": "Majuli",
+      "lat": 27.0243,
+      "lon": 94.2747
+    },
+    {
+      "district": "Mangaldoi",
+      "lat": 26.4932,
+      "lon": 92.0384
+    },
+    {
+      "district": "Mangaldoi (Pt)",
+      "lat": 26.4121,
+      "lon": 92.0352
+    },
+    {
+      "district": "Mankachar",
+      "lat": 25.6292,
+      "lon": 89.9233
+    },
+    {
+      "district": "Margherita",
+      "lat": 27.4384,
+      "lon": 95.7261
+    },
+    {
+      "district": "Mariani",
+      "lat": 26.6008,
+      "lon": 94.4183
+    },
+    {
+      "district": "Marigaon",
+      "lat": 26.2071,
+      "lon": 92.3347
+    },
+    {
+      "district": "Matia",
+      "lat": 26.0539,
+      "lon": 90.754
+    },
+    {
+      "district": "Mayong",
+      "lat": 26.1984,
+      "lon": 92.136
+    },
+    {
+      "district": "Mazbat tehsil",
+      "lat": 26.7706,
+      "lon": 92.2866
+    },
+    {
+      "district": "Mikirbheta",
+      "lat": 26.3256,
+      "lon": 92.4669
+    },
+    {
+      "district": "Morangi",
+      "lat": 26.4922,
+      "lon": 93.8511
+    },
+    {
+      "district": "Moranhat",
+      "lat": 27.2366,
+      "lon": 94.9108
+    },
+    {
+      "district": "Morigaon",
+      "lat": 26.2543,
+      "lon": 92.3421
+    },
+    {
+      "district": "Na-Duar",
+      "lat": 26.7566,
+      "lon": 93.0031
+    },
+    {
+      "district": "Nagaon",
+      "lat": 26.3039,
+      "lon": 92.6664
+    },
+    {
+      "district": "Nagarbera",
+      "lat": 26.096,
+      "lon": 91.0249
+    },
+    {
+      "district": "Naharkatiya",
+      "lat": 27.2277,
+      "lon": 95.2989
+    },
+    {
+      "district": "Nalbari",
+      "lat": 26.4233,
+      "lon": 91.4378
+    },
+    {
+      "district": "Naobaicha",
+      "lat": 27.1605,
+      "lon": 93.9908
+    },
+    {
+      "district": "Narayanpur",
+      "lat": 26.9635,
+      "lon": 93.8129
+    },
+    {
+      "district": "Nazira",
+      "lat": 26.8617,
+      "lon": 94.7717
+    },
+    {
+      "district": "New Seren Circle",
+      "lat": 27.7968,
+      "lon": 94.9398
+    },
+    {
+      "district": "Nilambazar",
+      "lat": 24.7319,
+      "lon": 92.4005
+    },
+    {
+      "district": "North Guwahati (Pt)",
+      "lat": 26.1932,
+      "lon": 91.7085
+    },
+    {
+      "district": "North Lakhimpur",
+      "lat": 27.1612,
+      "lon": 94.1324
+    },
+    {
+      "district": "Pachim Nalbari",
+      "lat": 26.3792,
+      "lon": 91.3302
+    },
+    {
+      "district": "Palasbari",
+      "lat": 26.0037,
+      "lon": 91.5219
+    },
+    {
+      "district": "Patharkandi",
+      "lat": 24.4661,
+      "lon": 92.3125
+    },
+    {
+      "district": "Pathorighat",
+      "lat": 26.5207,
+      "lon": 91.9145
+    },
+    {
+      "district": "Pathorighat (Pt)",
+      "lat": 26.4676,
+      "lon": 91.8546
+    },
+    {
+      "district": "Phuloni",
+      "lat": 26.2921,
+      "lon": 93.2219
+    },
+    {
+      "district": "Raha",
+      "lat": 26.2003,
+      "lon": 92.5257
+    },
+    {
+      "district": "Ramkrishna Nagar",
+      "lat": 24.4928,
+      "lon": 92.4395
+    },
+    {
+      "district": "Rangia (Pt)",
+      "lat": 26.5069,
+      "lon": 91.5999
+    },
+    {
+      "district": "Rangia Pt",
+      "lat": 26.4263,
+      "lon": 91.6366
+    },
+    {
+      "district": "Rangjuli",
+      "lat": 25.9918,
+      "lon": 90.9897
+    },
+    {
+      "district": "Rupahi",
+      "lat": 26.4872,
+      "lon": 92.7396
+    },
+    {
+      "district": "Sadiya",
+      "lat": 27.8341,
+      "lon": 95.6897
+    },
+    {
+      "district": "Samaguri",
+      "lat": 26.3541,
+      "lon": 92.8327
+    },
+    {
+      "district": "Sarthebari",
+      "lat": 26.3736,
+      "lon": 91.1668
+    },
+    {
+      "district": "Sarupathar",
+      "lat": 26.1275,
+      "lon": 93.889
+    },
+    {
+      "district": "Sarupeta",
+      "lat": 26.6042,
+      "lon": 91.0886
+    },
+    {
+      "district": "Sarupeta (Pt)",
+      "lat": 26.5096,
+      "lon": 91.0748
+    },
+    {
+      "district": "Sibsagar",
+      "lat": 26.9634,
+      "lon": 94.5902
+    },
+    {
+      "district": "Sidli",
+      "lat": 26.4412,
+      "lon": 90.4634
+    },
+    {
+      "district": "Sidli (Pt)",
+      "lat": 26.4956,
+      "lon": 90.4578
+    },
+    {
+      "district": "Silchar",
+      "lat": 24.8177,
+      "lon": 92.76
+    },
+    {
+      "district": "Silonijan",
+      "lat": 26.3713,
+      "lon": 93.6582
+    },
+    {
+      "district": "Sipajhar",
+      "lat": 26.3179,
+      "lon": 91.8493
+    },
+    {
+      "district": "Sissibargaon",
+      "lat": 27.5286,
+      "lon": 94.7614
+    },
+    {
+      "district": "Sivasagar",
+      "lat": 26.9843,
+      "lon": 94.6321
+    },
+    {
+      "district": "Sonai",
+      "lat": 24.5724,
+      "lon": 92.919
+    },
+    {
+      "district": "Sonapur",
+      "lat": 26.1138,
+      "lon": 92.0129
+    },
+    {
+      "district": "Sonari",
+      "lat": 27.0558,
+      "lon": 95.0532
+    },
+    {
+      "district": "Sonitpur",
+      "lat": 26.6543,
+      "lon": 92.7934
+    },
+    {
+      "district": "South Salmara",
+      "lat": 25.9056,
+      "lon": 90.0067
+    },
+    {
+      "district": "South Salmara-Mankachar",
+      "lat": 25.7123,
+      "lon": 89.9123
+    },
+    {
+      "district": "Srijangram",
+      "lat": 26.3295,
+      "lon": 90.7216
+    },
+    {
+      "district": "Subansiri (Pt II)",
+      "lat": 27.5804,
+      "lon": 94.3355
+    },
+    {
+      "district": "Subansiri (Pt-I)",
+      "lat": 27.2116,
+      "lon": 94.3445
+    },
+    {
+      "district": "Sunpura Circle",
+      "lat": 27.9612,
+      "lon": 95.9747
+    },
+    {
+      "district": "Tamulpur",
+      "lat": 26.6786,
+      "lon": 91.5576
+    },
+    {
+      "district": "Tengakhat",
+      "lat": 27.3638,
+      "lon": 95.2486
+    },
+    {
+      "district": "Teok",
+      "lat": 26.8049,
+      "lon": 94.4292
+    },
+    {
+      "district": "Tezpur",
+      "lat": 26.6169,
+      "lon": 92.7569
+    },
+    {
+      "district": "Tihu (Pt)",
+      "lat": 26.4774,
+      "lon": 91.3005
+    },
+    {
+      "district": "Tihu Pt",
+      "lat": 26.5282,
+      "lon": 91.2897
+    },
+    {
+      "district": "Tingkhong",
+      "lat": 27.2237,
+      "lon": 95.1169
+    },
+    {
+      "district": "Tinsukia",
+      "lat": 27.5199,
+      "lon": 95.4263
+    },
+    {
+      "district": "Titabor",
+      "lat": 26.512,
+      "lon": 94.1823
+    },
+    {
+      "district": "Udalguri",
+      "lat": 26.7456,
+      "lon": 92.0987
+    },
+    {
+      "district": "Udalguri tehsil",
+      "lat": 26.7756,
+      "lon": 92.1038
+    },
+    {
+      "district": "Udarbond",
+      "lat": 24.9568,
+      "lon": 92.9406
+    },
+    {
+      "district": "Umrangso",
+      "lat": 25.5738,
+      "lon": 92.83
+    },
+    {
+      "district": "West Karbi Anglong",
+      "lat": 25.8643,
+      "lon": 92.5432
+    }
+  ],
+  "Manipur": [
+    {
+      "district": "Bishnupur",
+      "lat": 24.6321,
+      "lon": 93.7643
+    },
+    {
+      "district": "Bishnupur block",
+      "lat": 24.561,
+      "lon": 93.8088
+    },
+    {
+      "district": "Bungte Chiru Subdivision",
+      "lat": 24.6995,
+      "lon": 93.7254
+    },
+    {
+      "district": "Chakpikarong subdivision",
+      "lat": 24.0511,
+      "lon": 93.9973
+    },
+    {
+      "district": "Chandel",
+      "lat": 24.3245,
+      "lon": 94.0345
+    },
+    {
+      "district": "Chandel subdivision",
+      "lat": 24.3204,
+      "lon": 94.0404
+    },
+    {
+      "district": "Chingai Subdivision",
+      "lat": 25.4416,
+      "lon": 94.5045
+    },
+    {
+      "district": "Churachandpur",
+      "lat": 24.3333,
+      "lon": 93.6667
+    },
+    {
+      "district": "Churachandpur Subdivision",
+      "lat": 24.2871,
+      "lon": 93.7341
+    },
+    {
+      "district": "Haochong Subdivision",
+      "lat": 24.9261,
+      "lon": 93.6152
+    },
+    {
+      "district": "Henglep subdivision",
+      "lat": 24.4397,
+      "lon": 93.5052
+    },
+    {
+      "district": "Imphal East",
+      "lat": 24.8123,
+      "lon": 93.9643
+    },
+    {
+      "district": "Imphal West",
+      "lat": 24.7943,
+      "lon": 93.8921
+    },
+    {
+      "district": "Jiribam",
+      "lat": 24.8021,
+      "lon": 93.1234
+    },
+    {
+      "district": "Kakching",
+      "lat": 24.4843,
+      "lon": 93.9843
+    },
+    {
+      "district": "Kakching subdivision",
+      "lat": 24.4143,
+      "lon": 93.9458
+    },
+    {
+      "district": "Kamjong",
+      "lat": 24.9543,
+      "lon": 94.5123
+    },
+    {
+      "district": "Kamjong subdivision",
+      "lat": 24.841,
+      "lon": 94.5634
+    },
+    {
+      "district": "Kangchup Geljang Subdivision",
+      "lat": 24.858,
+      "lon": 93.7537
+    },
+    {
+      "district": "Kangpoki subdivision",
+      "lat": 25.2349,
+      "lon": 93.8951
+    },
+    {
+      "district": "Kangpokpi",
+      "lat": 25.1543,
+      "lon": 93.9743
+    },
+    {
+      "district": "Kangvai Subdivision",
+      "lat": 24.5439,
+      "lon": 93.6749
+    },
+    {
+      "district": "Kasom Khullen Subdivision",
+      "lat": 24.6462,
+      "lon": 94.2949
+    },
+    {
+      "district": "Keirao Bitra",
+      "lat": 24.7588,
+      "lon": 94.0411
+    },
+    {
+      "district": "Khoupum Subdivision",
+      "lat": 24.711,
+      "lon": 93.5302
+    },
+    {
+      "district": "Lamphelpat",
+      "lat": 24.8008,
+      "lon": 93.9139
+    },
+    {
+      "district": "Lamsang subdivision",
+      "lat": 24.8863,
+      "lon": 93.8637
+    },
+    {
+      "district": "Lilong subdivision",
+      "lat": 24.6376,
+      "lon": 93.9392
+    },
+    {
+      "district": "Longmei Subdivision",
+      "lat": 24.7451,
+      "lon": 93.6219
+    },
+    {
+      "district": "Machi subdivision",
+      "lat": 24.5269,
+      "lon": 94.1941
+    },
+    {
+      "district": "Moirang block",
+      "lat": 24.415,
+      "lon": 93.7906
+    },
+    {
+      "district": "Nambol Subdivision",
+      "lat": 24.6828,
+      "lon": 93.8179
+    },
+    {
+      "district": "Noney",
+      "lat": 24.8421,
+      "lon": 93.5943
+    },
+    {
+      "district": "Nungba subdivision",
+      "lat": 24.671,
+      "lon": 93.3467
+    },
+    {
+      "district": "Paomata",
+      "lat": 25.5018,
+      "lon": 94.3182
+    },
+    {
+      "district": "Parbung-Tipaimukh subdivision",
+      "lat": 24.2845,
+      "lon": 93.1105
+    },
+    {
+      "district": "Patsoi",
+      "lat": 24.7642,
+      "lon": 93.8493
+    },
+    {
+      "district": "Pherzawl",
+      "lat": 24.2543,
+      "lon": 93.1843
+    },
+    {
+      "district": "Phungyar subdivision",
+      "lat": 24.8164,
+      "lon": 94.2949
+    },
+    {
+      "district": "Porompat",
+      "lat": 24.8184,
+      "lon": 93.9529
+    },
+    {
+      "district": "Purul",
+      "lat": 25.3471,
+      "lon": 94.2661
+    },
+    {
+      "district": "Saikul subdivision",
+      "lat": 24.9037,
+      "lon": 94.0386
+    },
+    {
+      "district": "Saitu-Gamphazol subdivision",
+      "lat": 25.019,
+      "lon": 93.8565
+    },
+    {
+      "district": "Sawombung subdivision",
+      "lat": 24.8948,
+      "lon": 94.0389
+    },
+    {
+      "district": "Senapati",
+      "lat": 25.2643,
+      "lon": 94.0123
+    },
+    {
+      "district": "Senapati tehsil",
+      "lat": 25.3807,
+      "lon": 94.0319
+    },
+    {
+      "district": "Singngat subdivision",
+      "lat": 24.1004,
+      "lon": 93.5784
+    },
+    {
+      "district": "Tamenglong",
+      "lat": 24.9843,
+      "lon": 93.4934
+    },
+    {
+      "district": "Tamenglong North",
+      "lat": 25.1999,
+      "lon": 93.7145
+    },
+    {
+      "district": "Tamenglong Subdivision",
+      "lat": 24.9619,
+      "lon": 93.4946
+    },
+    {
+      "district": "Tamenglong West",
+      "lat": 24.9861,
+      "lon": 93.3809
+    },
+    {
+      "district": "Tengnoupal",
+      "lat": 24.4021,
+      "lon": 94.1543
+    },
+    {
+      "district": "Tengnoupal subdivision",
+      "lat": 24.3176,
+      "lon": 94.2381
+    },
+    {
+      "district": "Thanlon subdivision",
+      "lat": 24.3007,
+      "lon": 93.3277
+    },
+    {
+      "district": "Thoubal",
+      "lat": 24.6321,
+      "lon": 94.0123
+    },
+    {
+      "district": "Thoubal Subdivision",
+      "lat": 24.6098,
+      "lon": 94.025
+    },
+    {
+      "district": "Ukhrul",
+      "lat": 25.1123,
+      "lon": 94.3643
+    },
+    {
+      "district": "Ukhrul subdivision",
+      "lat": 25.1105,
+      "lon": 94.4286
+    },
+    {
+      "district": "Vangai Range",
+      "lat": 24.4776,
+      "lon": 93.1133
+    },
+    {
+      "district": "Wangoi",
+      "lat": 24.6557,
+      "lon": 93.8704
+    }
+  ],
+  "Meghalaya": [
+    {
+      "district": "Amlarem",
+      "lat": 25.2699,
+      "lon": 92.1112
+    },
+    {
+      "district": "Baghmara",
+      "lat": 25.3618,
+      "lon": 90.64
+    },
+    {
+      "district": "Betasing",
+      "lat": 25.5314,
+      "lon": 89.9997
+    },
+    {
+      "district": "Chokpot",
+      "lat": 25.359,
+      "lon": 90.427
+    },
+    {
+      "district": "Dadenggiri",
+      "lat": 25.803,
+      "lon": 90.2024
+    },
+    {
+      "district": "Dalu",
+      "lat": 25.3144,
+      "lon": 90.1158
+    },
+    {
+      "district": "Dambo Rongjeng",
+      "lat": 25.7062,
+      "lon": 90.8339
+    },
+    {
+      "district": "East Garo Hills",
+      "lat": 25.6123,
+      "lon": 90.5843
+    },
+    {
+      "district": "East Jaintia Hills",
+      "lat": 25.3214,
+      "lon": 92.4543
+    },
+    {
+      "district": "East Khasi Hills",
+      "lat": 25.5788,
+      "lon": 91.8933
+    },
+    {
+      "district": "Eastern West Khasi Hills",
+      "lat": 25.5123,
+      "lon": 91.5643
+    },
+    {
+      "district": "Gambegre",
+      "lat": 25.4419,
+      "lon": 90.1623
+    },
+    {
+      "district": "Gasuapara",
+      "lat": 25.2328,
+      "lon": 90.3669
+    },
+    {
+      "district": "Jirang",
+      "lat": 25.9387,
+      "lon": 91.5762
+    },
+    {
+      "district": "Kharkutta",
+      "lat": 25.8369,
+      "lon": 90.8886
+    },
+    {
+      "district": "Khatarshnong Laitkroh",
+      "lat": 25.4401,
+      "lon": 91.8252
+    },
+    {
+      "district": "Khliehriat",
+      "lat": 25.2453,
+      "lon": 92.3254
+    },
+    {
+      "district": "Laskein",
+      "lat": 25.5475,
+      "lon": 92.4707
+    },
+    {
+      "district": "Mairang",
+      "lat": 25.6707,
+      "lon": 91.6267
+    },
+    {
+      "district": "Mawkynrew",
+      "lat": 25.4111,
+      "lon": 92.018
+    },
+    {
+      "district": "Mawkyrwat",
+      "lat": 25.3854,
+      "lon": 91.3563
+    },
+    {
+      "district": "Mawlai",
+      "lat": 25.6415,
+      "lon": 91.9145
+    },
+    {
+      "district": "Mawpat",
+      "lat": 25.6003,
+      "lon": 91.9556
+    },
+    {
+      "district": "Mawphlang",
+      "lat": 25.5122,
+      "lon": 91.7665
+    },
+    {
+      "district": "Mawryngkneng",
+      "lat": 25.5995,
+      "lon": 92.0254
+    },
+    {
+      "district": "Mawshynrut",
+      "lat": 25.5857,
+      "lon": 91.0233
+    },
+    {
+      "district": "Mawsynram",
+      "lat": 25.3387,
+      "lon": 91.5526
+    },
+    {
+      "district": "Mawthadraishan",
+      "lat": 25.5644,
+      "lon": 91.4593
+    },
+    {
+      "district": "Mylliem",
+      "lat": 25.5635,
+      "lon": 91.8799
+    },
+    {
+      "district": "Nongstoin",
+      "lat": 25.5739,
+      "lon": 91.2375
+    },
+    {
+      "district": "North Garo Hills",
+      "lat": 25.9123,
+      "lon": 90.5643
+    },
+    {
+      "district": "Pynursla",
+      "lat": 25.3183,
+      "lon": 91.8875
+    },
+    {
+      "district": "Ranikor",
+      "lat": 25.2749,
+      "lon": 91.1737
+    },
+    {
+      "district": "Resubelpara",
+      "lat": 25.8891,
+      "lon": 90.5614
+    },
+    {
+      "district": "Ri Bhoi",
+      "lat": 25.9021,
+      "lon": 91.8843
+    },
+    {
+      "district": "Rongara",
+      "lat": 25.2667,
+      "lon": 90.8075
+    },
+    {
+      "district": "Rongram",
+      "lat": 25.6404,
+      "lon": 90.2545
+    },
+    {
+      "district": "Saipung",
+      "lat": 25.2847,
+      "lon": 92.6123
+    },
+    {
+      "district": "Samanda",
+      "lat": 25.5451,
+      "lon": 90.5232
+    },
+    {
+      "district": "Selsella",
+      "lat": 25.7482,
+      "lon": 90.0243
+    },
+    {
+      "district": "Shella Bholaganj",
+      "lat": 25.2644,
+      "lon": 91.7325
+    },
+    {
+      "district": "Sohiong",
+      "lat": 25.5869,
+      "lon": 91.8189
+    },
+    {
+      "district": "Songsak",
+      "lat": 25.6919,
+      "lon": 90.5788
+    },
+    {
+      "district": "South Garo Hills",
+      "lat": 25.3021,
+      "lon": 90.6321
+    },
+    {
+      "district": "South West Garo Hills",
+      "lat": 25.5021,
+      "lon": 89.9643
+    },
+    {
+      "district": "South West Khasi Hills",
+      "lat": 25.3421,
+      "lon": 91.4543
+    },
+    {
+      "district": "Thadlaskein",
+      "lat": 25.5615,
+      "lon": 92.2926
+    },
+    {
+      "district": "Tikrikilla",
+      "lat": 25.9079,
+      "lon": 90.2831
+    },
+    {
+      "district": "Umling",
+      "lat": 25.9641,
+      "lon": 91.9555
+    },
+    {
+      "district": "Umsning",
+      "lat": 25.8561,
+      "lon": 92.023
+    },
+    {
+      "district": "West Garo Hills",
+      "lat": 25.5143,
+      "lon": 90.2034
+    },
+    {
+      "district": "West Jaintia Hills",
+      "lat": 25.4521,
+      "lon": 92.2034
+    },
+    {
+      "district": "West Khasi Hills",
+      "lat": 25.5345,
+      "lon": 91.2643
+    },
+    {
+      "district": "Zikzak",
+      "lat": 25.3942,
+      "lon": 89.9393
+    }
+  ],
+  "Mizoram": [
+    {
+      "district": "'N' Thingdawl",
+      "lat": 24.1199,
+      "lon": 92.7172
+    },
+    {
+      "district": "Aibawk",
+      "lat": 23.4835,
+      "lon": 92.7376
+    },
+    {
+      "district": "Aizawl",
+      "lat": 23.7307,
+      "lon": 92.7173
+    },
+    {
+      "district": "Bilkhawthlir",
+      "lat": 24.332,
+      "lon": 92.7103
+    },
+    {
+      "district": "Champhai",
+      "lat": 23.632,
+      "lon": 93.3443
+    },
+    {
+      "district": "Darlawn",
+      "lat": 24.101,
+      "lon": 92.9236
+    },
+    {
+      "district": "East Lungdar",
+      "lat": 23.1424,
+      "lon": 93.0475
+    },
+    {
+      "district": "Hnahthial",
+      "lat": 22.9666,
+      "lon": 93.0084
+    },
+    {
+      "district": "Khawbung",
+      "lat": 23.1976,
+      "lon": 93.2668
+    },
+    {
+      "district": "Khawzawl",
+      "lat": 23.4881,
+      "lon": 93.1426
+    },
+    {
+      "district": "Kolasib",
+      "lat": 24.2245,
+      "lon": 92.6843
+    },
+    {
+      "district": "Lawngtlai",
+      "lat": 22.3448,
+      "lon": 92.7933
+    },
+    {
+      "district": "Lunglei",
+      "lat": 22.8974,
+      "lon": 92.7903
+    },
+    {
+      "district": "Lungsen",
+      "lat": 22.8297,
+      "lon": 92.5876
+    },
+    {
+      "district": "Mamit",
+      "lat": 23.9321,
+      "lon": 92.4843
+    },
+    {
+      "district": "Ngopa",
+      "lat": 23.863,
+      "lon": 93.1895
+    },
+    {
+      "district": "Phullen",
+      "lat": 23.9534,
+      "lon": 93.0782
+    },
+    {
+      "district": "Reiek",
+      "lat": 23.7292,
+      "lon": 92.5918
+    },
+    {
+      "district": "S' Bungtlang",
+      "lat": 22.2889,
+      "lon": 92.7096
+    },
+    {
+      "district": "Saiha",
+      "lat": 22.4995,
+      "lon": 93.0604
+    },
+    {
+      "district": "Saitual",
+      "lat": 23.6843,
+      "lon": 92.9843
+    },
+    {
+      "district": "Sangau",
+      "lat": 22.6462,
+      "lon": 93.0268
+    },
+    {
+      "district": "Serchhip",
+      "lat": 23.3859,
+      "lon": 92.886
+    },
+    {
+      "district": "Siaha",
+      "lat": 22.4843,
+      "lon": 92.9843
+    },
+    {
+      "district": "Thingsulthliah",
+      "lat": 23.6791,
+      "lon": 92.9118
+    },
+    {
+      "district": "Tipa",
+      "lat": 22.1698,
+      "lon": 93.0113
+    },
+    {
+      "district": "Tlangnuam",
+      "lat": 23.7588,
+      "lon": 92.7279
+    },
+    {
+      "district": "West Bunghmun",
+      "lat": 23.1763,
+      "lon": 92.5377
+    },
+    {
+      "district": "West Phaileng",
+      "lat": 23.521,
+      "lon": 92.4224
+    },
+    {
+      "district": "Zawlnuam",
+      "lat": 23.9899,
+      "lon": 92.403
+    }
+  ],
+  "Nagaland": [
+    {
+      "district": "Aboi",
+      "lat": 26.5955,
+      "lon": 94.9566
+    },
+    {
+      "district": "Aghunato",
+      "lat": 25.9592,
+      "lon": 94.6041
+    },
+    {
+      "district": "Aitepyong",
+      "lat": 26.3375,
+      "lon": 94.2768
+    },
+    {
+      "district": "Akuhaito",
+      "lat": 26.0835,
+      "lon": 94.4248
+    },
+    {
+      "district": "Akuluto",
+      "lat": 26.2049,
+      "lon": 94.4652
+    },
+    {
+      "district": "Alongkima",
+      "lat": 26.596,
+      "lon": 94.5452
+    },
+    {
+      "district": "Amahator",
+      "lat": 25.9559,
+      "lon": 94.742
+    },
+    {
+      "district": "Angjangyang",
+      "lat": 26.504,
+      "lon": 94.9515
+    },
+    {
+      "district": "Asuto",
+      "lat": 26.1323,
+      "lon": 94.6564
+    },
+    {
+      "district": "Athibung",
+      "lat": 25.5754,
+      "lon": 93.4926
+    },
+    {
+      "district": "Atoizu",
+      "lat": 26.1006,
+      "lon": 94.4786
+    },
+    {
+      "district": "Baghty",
+      "lat": 26.2588,
+      "lon": 94.2001
+    },
+    {
+      "district": "Bhandari",
+      "lat": 26.2014,
+      "lon": 94.1032
+    },
+    {
+      "district": "Botsa",
+      "lat": 25.8481,
+      "lon": 94.1733
+    },
+    {
+      "district": "Changpang",
+      "lat": 26.4487,
+      "lon": 94.2386
+    },
+    {
+      "district": "Changtongya",
+      "lat": 26.5357,
+      "lon": 94.6556
+    },
+    {
+      "district": "Chare",
+      "lat": 26.277,
+      "lon": 94.6133
+    },
+    {
+      "district": "Chen",
+      "lat": 26.5561,
+      "lon": 95.0817
+    },
+    {
+      "district": "Chessore",
+      "lat": 26.0891,
+      "lon": 94.725
+    },
+    {
+      "district": "Chetheba",
+      "lat": 25.6793,
+      "lon": 94.2632
+    },
+    {
+      "district": "Chiephobozou",
+      "lat": 25.8013,
+      "lon": 94.1128
+    },
+    {
+      "district": "Chizami",
+      "lat": 25.5707,
+      "lon": 94.3771
+    },
+    {
+      "district": "Chozuba",
+      "lat": 25.714,
+      "lon": 94.304
+    },
+    {
+      "district": "Chuchuyimlang",
+      "lat": 26.4553,
+      "lon": 94.6206
+    },
+    {
+      "district": "Chukitong",
+      "lat": 26.0973,
+      "lon": 94.3303
+    },
+    {
+      "district": "Chumukedima",
+      "lat": 25.8474,
+      "lon": 93.7576
+    },
+    {
+      "district": "Chunlika",
+      "lat": 25.9812,
+      "lon": 94.2311
+    },
+    {
+      "district": "Chümoukedima",
+      "lat": 25.8021,
+      "lon": 93.7843
+    },
+    {
+      "district": "Dhansiripar",
+      "lat": 25.7582,
+      "lon": 93.6462
+    },
+    {
+      "district": "Dimapur",
+      "lat": 25.9068,
+      "lon": 93.7275
+    },
+    {
+      "district": "Dimapur Sadar",
+      "lat": 25.9041,
+      "lon": 93.7336
+    },
+    {
+      "district": "Englan",
+      "lat": 26.1799,
+      "lon": 94.2595
+    },
+    {
+      "district": "Ghathashi",
+      "lat": 25.8578,
+      "lon": 94.3581
+    },
+    {
+      "district": "Hunta",
+      "lat": 26.9477,
+      "lon": 95.1799
+    },
+    {
+      "district": "Jakhama",
+      "lat": 25.5898,
+      "lon": 94.1053
+    },
+    {
+      "district": "Jalukie",
+      "lat": 25.6212,
+      "lon": 93.6586
+    },
+    {
+      "district": "Kanubari ADC",
+      "lat": 26.9676,
+      "lon": 95.2514
+    },
+    {
+      "district": "Kebai Khelma",
+      "lat": 25.4241,
+      "lon": 93.4617
+    },
+    {
+      "district": "Kezocha",
+      "lat": 25.6669,
+      "lon": 94.2123
+    },
+    {
+      "district": "Khezhakeno",
+      "lat": 25.5186,
+      "lon": 94.2171
+    },
+    {
+      "district": "Khongsa",
+      "lat": 25.7358,
+      "lon": 94.939
+    },
+    {
+      "district": "Khuza",
+      "lat": 25.7965,
+      "lon": 94.4854
+    },
+    {
+      "district": "Kikruma",
+      "lat": 25.6119,
+      "lon": 94.2556
+    },
+    {
+      "district": "Kiphire",
+      "lat": 25.8643,
+      "lon": 94.7843
+    },
+    {
+      "district": "Kiphire Sadar",
+      "lat": 25.9152,
+      "lon": 94.8046
+    },
+    {
+      "district": "Kiusam",
+      "lat": 25.916,
+      "lon": 94.8957
+    },
+    {
+      "district": "Kohima",
+      "lat": 25.6751,
+      "lon": 94.1086
+    },
+    {
+      "district": "Kohima Sadar",
+      "lat": 25.6863,
+      "lon": 94.1231
+    },
+    {
+      "district": "Kubolong",
+      "lat": 26.4319,
+      "lon": 94.5147
+    },
+    {
+      "district": "Kuhoboto",
+      "lat": 25.8355,
+      "lon": 93.8501
+    },
+    {
+      "district": "Longchem",
+      "lat": 26.617,
+      "lon": 94.4835
+    },
+    {
+      "district": "Longkhim",
+      "lat": 26.2486,
+      "lon": 94.673
+    },
+    {
+      "district": "Longleng",
+      "lat": 26.4907,
+      "lon": 94.7898
+    },
+    {
+      "district": "Longmatra",
+      "lat": 25.7926,
+      "lon": 94.7642
+    },
+    {
+      "district": "Longshen",
+      "lat": 26.6692,
+      "lon": 95.1045
+    },
+    {
+      "district": "Lotsu",
+      "lat": 26.0833,
+      "lon": 94.0769
+    },
+    {
+      "district": "Mangko",
+      "lat": 26.0651,
+      "lon": 94.7565
+    },
+    {
+      "district": "Mangkolemba",
+      "lat": 26.4355,
+      "lon": 94.4114
+    },
+    {
+      "district": "Medziphema",
+      "lat": 25.7629,
+      "lon": 93.8691
+    },
+    {
+      "district": "Meluri",
+      "lat": 25.6249,
+      "lon": 94.6362
+    },
+    {
+      "district": "Mokokchung",
+      "lat": 26.3245,
+      "lon": 94.5245
+    },
+    {
+      "district": "Mon",
+      "lat": 26.7456,
+      "lon": 95.0643
+    },
+    {
+      "district": "Mon Sadar",
+      "lat": 26.7503,
+      "lon": 95.0105
+    },
+    {
+      "district": "Monyakshu",
+      "lat": 26.4104,
+      "lon": 95.063
+    },
+    {
+      "district": "Mopong",
+      "lat": 26.4418,
+      "lon": 94.9581
+    },
+    {
+      "district": "Naginimora",
+      "lat": 26.8341,
+      "lon": 94.8658
+    },
+    {
+      "district": "Namsang",
+      "lat": 26.7432,
+      "lon": 94.7852
+    },
+    {
+      "district": "Ngoungchung",
+      "lat": 26.3433,
+      "lon": 94.8378
+    },
+    {
+      "district": "Nihokhu",
+      "lat": 25.8508,
+      "lon": 93.9184
+    },
+    {
+      "district": "Niuland",
+      "lat": 25.8943,
+      "lon": 93.9123
+    },
+    {
+      "district": "Noklak",
+      "lat": 26.2065,
+      "lon": 95.019
+    },
+    {
+      "district": "Noksen",
+      "lat": 26.3702,
+      "lon": 94.7278
+    },
+    {
+      "district": "Nsong",
+      "lat": 25.2948,
+      "lon": 93.5241
+    },
+    {
+      "district": "ONGPANGKONG (N)",
+      "lat": 26.2947,
+      "lon": 94.5411
+    },
+    {
+      "district": "Ongpangkong (S)",
+      "lat": 26.3061,
+      "lon": 94.4278
+    },
+    {
+      "district": "Panso",
+      "lat": 26.1346,
+      "lon": 94.9525
+    },
+    {
+      "district": "Pedi (Ngwalwa)",
+      "lat": 25.6185,
+      "lon": 93.8545
+    },
+    {
+      "district": "Peren",
+      "lat": 25.4792,
+      "lon": 93.7299
+    },
+    {
+      "district": "Pfutsero",
+      "lat": 25.5616,
+      "lon": 94.3012
+    },
+    {
+      "district": "Phek",
+      "lat": 25.6843,
+      "lon": 94.5023
+    },
+    {
+      "district": "Phek Sadar",
+      "lat": 25.6871,
+      "lon": 94.4677
+    },
+    {
+      "district": "Phokhungri",
+      "lat": 25.6056,
+      "lon": 94.7547
+    },
+    {
+      "district": "Phomching",
+      "lat": 26.7127,
+      "lon": 95.1892
+    },
+    {
+      "district": "Phor",
+      "lat": 25.7053,
+      "lon": 94.7562
+    },
+    {
+      "district": "Pughoboto",
+      "lat": 25.9107,
+      "lon": 94.2862
+    },
+    {
+      "district": "Pungro",
+      "lat": 25.8173,
+      "lon": 94.8764
+    },
+    {
+      "district": "Ralan",
+      "lat": 25.9951,
+      "lon": 94.0152
+    },
+    {
+      "district": "Razieba",
+      "lat": 25.5312,
+      "lon": 94.3356
+    },
+    {
+      "district": "Sakraba",
+      "lat": 25.6449,
+      "lon": 94.3611
+    },
+    {
+      "district": "Sakshi",
+      "lat": 26.4406,
+      "lon": 94.8589
+    },
+    {
+      "district": "Sangsangnyu",
+      "lat": 26.2461,
+      "lon": 94.8776
+    },
+    {
+      "district": "Sanis",
+      "lat": 26.1942,
+      "lon": 94.1959
+    },
+    {
+      "district": "Saptiqa",
+      "lat": 26.0069,
+      "lon": 94.3886
+    },
+    {
+      "district": "Satakha",
+      "lat": 25.9038,
+      "lon": 94.4457
+    },
+    {
+      "district": "Satoi",
+      "lat": 25.8111,
+      "lon": 94.6156
+    },
+    {
+      "district": "Sechu-Zubza",
+      "lat": 25.6731,
+      "lon": 93.9932
+    },
+    {
+      "district": "Sekruzu",
+      "lat": 25.7901,
+      "lon": 94.3895
+    },
+    {
+      "district": "Seyochung",
+      "lat": 25.9364,
+      "lon": 94.6595
+    },
+    {
+      "district": "Shamator",
+      "lat": 26.1109,
+      "lon": 94.8653
+    },
+    {
+      "district": "Shangnyu",
+      "lat": 26.801,
+      "lon": 95.1515
+    },
+    {
+      "district": "Sitimi",
+      "lat": 25.8395,
+      "lon": 94.6885
+    },
+    {
+      "district": "Sotokur",
+      "lat": 26.1522,
+      "lon": 94.7743
+    },
+    {
+      "district": "Sungro",
+      "lat": 26.2569,
+      "lon": 94.3263
+    },
+    {
+      "district": "Suruhuto",
+      "lat": 26.1608,
+      "lon": 94.5776
+    },
+    {
+      "district": "Tamlu",
+      "lat": 26.6617,
+      "lon": 94.7301
+    },
+    {
+      "district": "Tening",
+      "lat": 25.3574,
+      "lon": 93.5961
+    },
+    {
+      "district": "Thonoknyu",
+      "lat": 25.9913,
+      "lon": 95.028
+    },
+    {
+      "district": "Tizit",
+      "lat": 26.8912,
+      "lon": 95.0402
+    },
+    {
+      "district": "Tminyu",
+      "lat": 25.9245,
+      "lon": 94.2034
+    },
+    {
+      "district": "Tobu",
+      "lat": 26.351,
+      "lon": 94.9707
+    },
+    {
+      "district": "Tseminyu",
+      "lat": 25.9263,
+      "lon": 94.1871
+    },
+    {
+      "district": "Tsogin",
+      "lat": 25.9202,
+      "lon": 94.0623
+    },
+    {
+      "district": "Tsurangkong",
+      "lat": 26.455,
+      "lon": 94.3438
+    },
+    {
+      "district": "Tsurungto",
+      "lat": 26.0198,
+      "lon": 94.8502
+    },
+    {
+      "district": "Tuensang",
+      "lat": 26.2843,
+      "lon": 94.8321
+    },
+    {
+      "district": "Tuensang Sadar",
+      "lat": 26.2481,
+      "lon": 94.8012
+    },
+    {
+      "district": "Tuli",
+      "lat": 26.6493,
+      "lon": 94.6599
+    },
+    {
+      "district": "V.K.",
+      "lat": 26.1608,
+      "lon": 94.3916
+    },
+    {
+      "district": "Wakching",
+      "lat": 26.6815,
+      "lon": 94.872
+    },
+    {
+      "district": "Wokha",
+      "lat": 26.1021,
+      "lon": 94.2643
+    },
+    {
+      "district": "Wokha Sadar",
+      "lat": 26.0831,
+      "lon": 94.2062
+    },
+    {
+      "district": "Wozhuro",
+      "lat": 26.0199,
+      "lon": 94.1372
+    },
+    {
+      "district": "Yongnyah",
+      "lat": 26.5962,
+      "lon": 94.8064
+    },
+    {
+      "district": "Zuketsa",
+      "lat": 25.5328,
+      "lon": 94.242
+    },
+    {
+      "district": "Zunheboto",
+      "lat": 25.9643,
+      "lon": 94.5245
+    },
+    {
+      "district": "Zunheboto Sadar",
+      "lat": 26.0269,
+      "lon": 94.5259
+    }
+  ],
+  "Sikkim": [
+    {
+      "district": "Chungthang",
+      "lat": 27.8131,
+      "lon": 88.5031
+    },
+    {
+      "district": "Gangtok",
+      "lat": 27.3389,
+      "lon": 88.6065
+    },
+    {
+      "district": "Gangtok subdivision",
+      "lat": 27.3257,
+      "lon": 88.6795
+    },
+    {
+      "district": "Gyalshing",
+      "lat": 27.4185,
+      "lon": 88.1942
+    },
+    {
+      "district": "Mangan",
+      "lat": 27.5307,
+      "lon": 88.4608
+    },
+    {
+      "district": "Namchi",
+      "lat": 27.1715,
+      "lon": 88.4057
+    },
+    {
+      "district": "Pakyong",
+      "lat": 27.2412,
+      "lon": 88.5843
+    },
+    {
+      "district": "Pakyong subdivision",
+      "lat": 27.2474,
+      "lon": 88.6291
+    },
+    {
+      "district": "Ravongla",
+      "lat": 27.3704,
+      "lon": 88.3791
+    },
+    {
+      "district": "Rongli subdivision",
+      "lat": 27.2199,
+      "lon": 88.7559
+    },
+    {
+      "district": "Soreng",
+      "lat": 27.19,
+      "lon": 88.1712
+    }
+  ],
+  "Tripura": [
+    {
+      "district": "Amarpur",
+      "lat": 23.5796,
+      "lon": 91.687
+    },
+    {
+      "district": "Ambassa",
+      "lat": 23.8355,
+      "lon": 91.8676
+    },
+    {
+      "district": "Belonia",
+      "lat": 23.2181,
+      "lon": 91.4515
+    },
+    {
+      "district": "Bishalgarh",
+      "lat": 23.6607,
+      "lon": 91.2915
+    },
+    {
+      "district": "Dhalai",
+      "lat": 23.9021,
+      "lon": 91.8432
+    },
+    {
+      "district": "Dharmanagar",
+      "lat": 24.444,
+      "lon": 92.1892
+    },
+    {
+      "district": "Gomati",
+      "lat": 23.5345,
+      "lon": 91.4934
+    },
+    {
+      "district": "Gonda Twisa",
+      "lat": 23.5609,
+      "lon": 91.8632
+    },
+    {
+      "district": "Jampuijala",
+      "lat": 23.6969,
+      "lon": 91.4406
+    },
+    {
+      "district": "Jirania",
+      "lat": 23.8416,
+      "lon": 91.4353
+    },
+    {
+      "district": "Kailashahar",
+      "lat": 24.2784,
+      "lon": 91.9938
+    },
+    {
+      "district": "Kamalpur",
+      "lat": 24.0992,
+      "lon": 91.8335
+    },
+    {
+      "district": "Kanchanpur",
+      "lat": 23.9174,
+      "lon": 92.2085
+    },
+    {
+      "district": "Karbook",
+      "lat": 23.2889,
+      "lon": 91.7279
+    },
+    {
+      "district": "Khowai",
+      "lat": 24.0844,
+      "lon": 91.6166
+    },
+    {
+      "district": "Kumarghat",
+      "lat": 24.1305,
+      "lon": 92.0561
+    },
+    {
+      "district": "Longtharai Valley",
+      "lat": 23.8801,
+      "lon": 92.04
+    },
+    {
+      "district": "Mohanpur",
+      "lat": 23.9654,
+      "lon": 91.3774
+    },
+    {
+      "district": "North Tripura",
+      "lat": 24.2843,
+      "lon": 92.1745
+    },
+    {
+      "district": "Panisagar",
+      "lat": 24.2372,
+      "lon": 92.1992
+    },
+    {
+      "district": "Sabroom",
+      "lat": 23.0693,
+      "lon": 91.6783
+    },
+    {
+      "district": "Sadar",
+      "lat": 23.7804,
+      "lon": 91.3052
+    },
+    {
+      "district": "Santirbazar",
+      "lat": 23.2813,
+      "lon": 91.6076
+    },
+    {
+      "district": "Sepahijala",
+      "lat": 23.6843,
+      "lon": 91.3123
+    },
+    {
+      "district": "Sonamura",
+      "lat": 23.4692,
+      "lon": 91.2901
+    },
+    {
+      "district": "South Tripura",
+      "lat": 23.2345,
+      "lon": 91.5643
+    },
+    {
+      "district": "Teliamura",
+      "lat": 23.8501,
+      "lon": 91.656
+    },
+    {
+      "district": "Udaipur",
+      "lat": 23.551,
+      "lon": 91.4916
+    },
+    {
+      "district": "Unakoti",
+      "lat": 24.3345,
+      "lon": 92.0123
+    },
+    {
+      "district": "West Tripura",
+      "lat": 23.8315,
+      "lon": 91.2868
+    }
+  ]
+}

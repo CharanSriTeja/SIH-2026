@@ -1,0 +1,4192 @@
+{
+  "date": "20260916",
+  "generated_at": "2026-09-17T00:23:08.667800+00:00",
+  "total_alert_cells": 550281,
+  "critical_cell_count": 159523,
+  "high_cell_count": 390758,
+  "districts_at_risk_count": 230,
+  "districts": [
+    {
+      "state": "Tripura",
+      "district": "Karbook",
+      "severity": "Critical",
+      "max_risk_score": 0.9649,
+      "avg_risk_score": 0.8207,
+      "alert_cell_count": 2352,
+      "critical_cell_count": 1768,
+      "high_cell_count": 584,
+      "avg_rainfall_24h_mm": 32.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3569,
+      "approx_centroid": {
+        "lat": 23.3824,
+        "lon": 91.7812
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Gonda Twisa",
+      "severity": "Critical",
+      "max_risk_score": 0.9624,
+      "avg_risk_score": 0.6895,
+      "alert_cell_count": 6772,
+      "critical_cell_count": 2311,
+      "high_cell_count": 4461,
+      "avg_rainfall_24h_mm": 27.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3836,
+      "approx_centroid": {
+        "lat": 23.5749,
+        "lon": 91.8556
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Goreswar",
+      "severity": "Critical",
+      "max_risk_score": 0.9605,
+      "avg_risk_score": 0.7748,
+      "alert_cell_count": 1234,
+      "critical_cell_count": 731,
+      "high_cell_count": 503,
+      "avg_rainfall_24h_mm": 19.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3666,
+      "approx_centroid": {
+        "lat": 26.4375,
+        "lon": 91.7479
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Chapar (Pt)",
+      "severity": "Critical",
+      "max_risk_score": 0.9593,
+      "avg_risk_score": 0.7838,
+      "alert_cell_count": 2222,
+      "critical_cell_count": 1478,
+      "high_cell_count": 744,
+      "avg_rainfall_24h_mm": 25.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3776,
+      "approx_centroid": {
+        "lat": 26.349,
+        "lon": 90.3039
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Barnagar (Pt)",
+      "severity": "Critical",
+      "max_risk_score": 0.9591,
+      "avg_risk_score": 0.8546,
+      "alert_cell_count": 6077,
+      "critical_cell_count": 5401,
+      "high_cell_count": 676,
+      "avg_rainfall_24h_mm": 23.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3706,
+      "approx_centroid": {
+        "lat": 26.486,
+        "lon": 90.9016
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Pachim Nalbari",
+      "severity": "Critical",
+      "max_risk_score": 0.9587,
+      "avg_risk_score": 0.7368,
+      "alert_cell_count": 2392,
+      "critical_cell_count": 1250,
+      "high_cell_count": 1142,
+      "avg_rainfall_24h_mm": 21.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3725,
+      "approx_centroid": {
+        "lat": 26.3656,
+        "lon": 91.3527
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Nalbari",
+      "severity": "Critical",
+      "max_risk_score": 0.9586,
+      "avg_risk_score": 0.858,
+      "alert_cell_count": 2291,
+      "critical_cell_count": 1990,
+      "high_cell_count": 301,
+      "avg_rainfall_24h_mm": 20.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3666,
+      "approx_centroid": {
+        "lat": 26.4251,
+        "lon": 91.4299
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Barnagar",
+      "severity": "Critical",
+      "max_risk_score": 0.9584,
+      "avg_risk_score": 0.8694,
+      "alert_cell_count": 1048,
+      "critical_cell_count": 997,
+      "high_cell_count": 51,
+      "avg_rainfall_24h_mm": 21.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3731,
+      "approx_centroid": {
+        "lat": 26.5839,
+        "lon": 91.0178
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Bongaigaon",
+      "severity": "Critical",
+      "max_risk_score": 0.9579,
+      "avg_risk_score": 0.8376,
+      "alert_cell_count": 747,
+      "critical_cell_count": 579,
+      "high_cell_count": 168,
+      "avg_rainfall_24h_mm": 19.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3794,
+      "approx_centroid": {
+        "lat": 26.484,
+        "lon": 90.6169
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Bijni",
+      "severity": "Critical",
+      "max_risk_score": 0.9577,
+      "avg_risk_score": 0.8495,
+      "alert_cell_count": 4530,
+      "critical_cell_count": 3805,
+      "high_cell_count": 725,
+      "avg_rainfall_24h_mm": 23.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3716,
+      "approx_centroid": {
+        "lat": 26.4674,
+        "lon": 90.755
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Bilasipara Pt",
+      "severity": "Critical",
+      "max_risk_score": 0.957,
+      "avg_risk_score": 0.8303,
+      "alert_cell_count": 2949,
+      "critical_cell_count": 2437,
+      "high_cell_count": 512,
+      "avg_rainfall_24h_mm": 25.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3751,
+      "approx_centroid": {
+        "lat": 26.2972,
+        "lon": 90.1797
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Barbhag",
+      "severity": "Critical",
+      "max_risk_score": 0.9559,
+      "avg_risk_score": 0.6443,
+      "alert_cell_count": 1158,
+      "critical_cell_count": 368,
+      "high_cell_count": 790,
+      "avg_rainfall_24h_mm": 20.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3772,
+      "approx_centroid": {
+        "lat": 26.3713,
+        "lon": 91.4566
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Pathorighat (Pt)",
+      "severity": "Critical",
+      "max_risk_score": 0.9557,
+      "avg_risk_score": 0.7294,
+      "alert_cell_count": 394,
+      "critical_cell_count": 211,
+      "high_cell_count": 183,
+      "avg_rainfall_24h_mm": 18.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3705,
+      "approx_centroid": {
+        "lat": 26.449,
+        "lon": 91.8244
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Barpeta",
+      "severity": "Critical",
+      "max_risk_score": 0.9551,
+      "avg_risk_score": 0.8282,
+      "alert_cell_count": 1764,
+      "critical_cell_count": 1379,
+      "high_cell_count": 385,
+      "avg_rainfall_24h_mm": 25.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.37,
+      "approx_centroid": {
+        "lat": 26.3985,
+        "lon": 90.9975
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Sarupeta (Pt)",
+      "severity": "Critical",
+      "max_risk_score": 0.9549,
+      "avg_risk_score": 0.8464,
+      "alert_cell_count": 4135,
+      "critical_cell_count": 3610,
+      "high_cell_count": 525,
+      "avg_rainfall_24h_mm": 24.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3607,
+      "approx_centroid": {
+        "lat": 26.4917,
+        "lon": 91.0518
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Silchar",
+      "severity": "Critical",
+      "max_risk_score": 0.9548,
+      "avg_risk_score": 0.851,
+      "alert_cell_count": 5681,
+      "critical_cell_count": 4982,
+      "high_cell_count": 699,
+      "avg_rainfall_24h_mm": 31.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3721,
+      "approx_centroid": {
+        "lat": 24.7845,
+        "lon": 92.7494
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Sonai",
+      "severity": "Critical",
+      "max_risk_score": 0.9548,
+      "avg_risk_score": 0.6927,
+      "alert_cell_count": 4864,
+      "critical_cell_count": 1747,
+      "high_cell_count": 3117,
+      "avg_rainfall_24h_mm": 25.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3862,
+      "approx_centroid": {
+        "lat": 24.654,
+        "lon": 92.8979
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Cachar",
+      "severity": "Critical",
+      "max_risk_score": 0.9548,
+      "avg_risk_score": 0.7727,
+      "alert_cell_count": 4535,
+      "critical_cell_count": 2728,
+      "high_cell_count": 1807,
+      "avg_rainfall_24h_mm": 30.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3731,
+      "approx_centroid": {
+        "lat": 24.8201,
+        "lon": 92.8372
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Sarupeta",
+      "severity": "Critical",
+      "max_risk_score": 0.9546,
+      "avg_risk_score": 0.8145,
+      "alert_cell_count": 1097,
+      "critical_cell_count": 898,
+      "high_cell_count": 199,
+      "avg_rainfall_24h_mm": 22.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3658,
+      "approx_centroid": {
+        "lat": 26.5898,
+        "lon": 91.0838
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Barkhetri",
+      "severity": "Critical",
+      "max_risk_score": 0.9546,
+      "avg_risk_score": 0.6834,
+      "alert_cell_count": 55,
+      "critical_cell_count": 19,
+      "high_cell_count": 36,
+      "avg_rainfall_24h_mm": 20.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3749,
+      "approx_centroid": {
+        "lat": 26.3124,
+        "lon": 91.3668
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Dambo Rongjeng",
+      "severity": "Critical",
+      "max_risk_score": 0.9535,
+      "avg_risk_score": 0.6757,
+      "alert_cell_count": 3708,
+      "critical_cell_count": 1290,
+      "high_cell_count": 2418,
+      "avg_rainfall_24h_mm": 23.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3834,
+      "approx_centroid": {
+        "lat": 25.5813,
+        "lon": 90.8158
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Baska",
+      "severity": "Critical",
+      "max_risk_score": 0.9535,
+      "avg_risk_score": 0.7692,
+      "alert_cell_count": 846,
+      "critical_cell_count": 556,
+      "high_cell_count": 290,
+      "avg_rainfall_24h_mm": 21.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3619,
+      "approx_centroid": {
+        "lat": 26.6638,
+        "lon": 91.3582
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Kokrajhar (Pt)",
+      "severity": "Critical",
+      "max_risk_score": 0.9531,
+      "avg_risk_score": 0.8908,
+      "alert_cell_count": 697,
+      "critical_cell_count": 631,
+      "high_cell_count": 66,
+      "avg_rainfall_24h_mm": 19.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3739,
+      "approx_centroid": {
+        "lat": 26.4057,
+        "lon": 90.3404
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Lala",
+      "severity": "Critical",
+      "max_risk_score": 0.952,
+      "avg_risk_score": 0.6565,
+      "alert_cell_count": 5517,
+      "critical_cell_count": 1690,
+      "high_cell_count": 3827,
+      "avg_rainfall_24h_mm": 24.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.6047,
+        "lon": 92.6859
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Koya",
+      "severity": "Critical",
+      "max_risk_score": 0.952,
+      "avg_risk_score": 0.6567,
+      "alert_cell_count": 865,
+      "critical_cell_count": 297,
+      "high_cell_count": 568,
+      "avg_rainfall_24h_mm": 19.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3741,
+      "approx_centroid": {
+        "lat": 26.4027,
+        "lon": 91.5581
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Rangia Pt",
+      "severity": "Critical",
+      "max_risk_score": 0.9516,
+      "avg_risk_score": 0.795,
+      "alert_cell_count": 1475,
+      "critical_cell_count": 1016,
+      "high_cell_count": 459,
+      "avg_rainfall_24h_mm": 19.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3633,
+      "approx_centroid": {
+        "lat": 26.429,
+        "lon": 91.6328
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Amarpur",
+      "severity": "Critical",
+      "max_risk_score": 0.9511,
+      "avg_risk_score": 0.6795,
+      "alert_cell_count": 3750,
+      "critical_cell_count": 1348,
+      "high_cell_count": 2402,
+      "avg_rainfall_24h_mm": 22.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3856,
+      "approx_centroid": {
+        "lat": 23.555,
+        "lon": 91.7229
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Sarthebari",
+      "severity": "Critical",
+      "max_risk_score": 0.9511,
+      "avg_risk_score": 0.79,
+      "alert_cell_count": 167,
+      "critical_cell_count": 118,
+      "high_cell_count": 49,
+      "avg_rainfall_24h_mm": 25.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3762,
+      "approx_centroid": {
+        "lat": 26.4022,
+        "lon": 91.1025
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Banekuchi",
+      "severity": "Critical",
+      "max_risk_score": 0.9501,
+      "avg_risk_score": 0.8923,
+      "alert_cell_count": 1229,
+      "critical_cell_count": 1154,
+      "high_cell_count": 75,
+      "avg_rainfall_24h_mm": 21.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3632,
+      "approx_centroid": {
+        "lat": 26.4621,
+        "lon": 91.369
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Kalgachia",
+      "severity": "Critical",
+      "max_risk_score": 0.948,
+      "avg_risk_score": 0.6795,
+      "alert_cell_count": 740,
+      "critical_cell_count": 235,
+      "high_cell_count": 505,
+      "avg_rainfall_24h_mm": 28.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3854,
+      "approx_centroid": {
+        "lat": 26.3673,
+        "lon": 90.8294
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "East Garo Hills",
+      "severity": "Critical",
+      "max_risk_score": 0.945,
+      "avg_risk_score": 0.6701,
+      "alert_cell_count": 2857,
+      "critical_cell_count": 960,
+      "high_cell_count": 1897,
+      "avg_rainfall_24h_mm": 24.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3877,
+      "approx_centroid": {
+        "lat": 25.5588,
+        "lon": 90.6741
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Dotoma",
+      "severity": "Critical",
+      "max_risk_score": 0.9424,
+      "avg_risk_score": 0.7975,
+      "alert_cell_count": 51,
+      "critical_cell_count": 39,
+      "high_cell_count": 12,
+      "avg_rainfall_24h_mm": 18.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3604,
+      "approx_centroid": {
+        "lat": 26.3788,
+        "lon": 90.227
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Barama (Pt)",
+      "severity": "Critical",
+      "max_risk_score": 0.9416,
+      "avg_risk_score": 0.8143,
+      "alert_cell_count": 821,
+      "critical_cell_count": 627,
+      "high_cell_count": 194,
+      "avg_rainfall_24h_mm": 21.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3589,
+      "approx_centroid": {
+        "lat": 26.5103,
+        "lon": 91.3629
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Ghograpar (Pt)",
+      "severity": "Critical",
+      "max_risk_score": 0.9397,
+      "avg_risk_score": 0.7349,
+      "alert_cell_count": 1058,
+      "critical_cell_count": 460,
+      "high_cell_count": 598,
+      "avg_rainfall_24h_mm": 19.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3489,
+      "approx_centroid": {
+        "lat": 26.4888,
+        "lon": 91.4808
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Bijni (Pt)",
+      "severity": "Critical",
+      "max_risk_score": 0.9397,
+      "avg_risk_score": 0.7835,
+      "alert_cell_count": 114,
+      "critical_cell_count": 76,
+      "high_cell_count": 38,
+      "avg_rainfall_24h_mm": 18.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3588,
+      "approx_centroid": {
+        "lat": 26.5427,
+        "lon": 90.7831
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Bhowraguri",
+      "severity": "Critical",
+      "max_risk_score": 0.9318,
+      "avg_risk_score": 0.7962,
+      "alert_cell_count": 74,
+      "critical_cell_count": 59,
+      "high_cell_count": 15,
+      "avg_rainfall_24h_mm": 19.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3811,
+      "approx_centroid": {
+        "lat": 26.3259,
+        "lon": 90.1212
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Tihu Pt",
+      "severity": "Critical",
+      "max_risk_score": 0.9276,
+      "avg_risk_score": 0.8271,
+      "alert_cell_count": 370,
+      "critical_cell_count": 337,
+      "high_cell_count": 33,
+      "avg_rainfall_24h_mm": 22.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3765,
+      "approx_centroid": {
+        "lat": 26.5563,
+        "lon": 91.3224
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Barama Pt",
+      "severity": "Critical",
+      "max_risk_score": 0.9214,
+      "avg_risk_score": 0.7403,
+      "alert_cell_count": 1293,
+      "critical_cell_count": 540,
+      "high_cell_count": 753,
+      "avg_rainfall_24h_mm": 20.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3435,
+      "approx_centroid": {
+        "lat": 26.5689,
+        "lon": 91.4028
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Kamalpur",
+      "severity": "Critical",
+      "max_risk_score": 0.9201,
+      "avg_risk_score": 0.5458,
+      "alert_cell_count": 215,
+      "critical_cell_count": 4,
+      "high_cell_count": 211,
+      "avg_rainfall_24h_mm": 18.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3886,
+      "approx_centroid": {
+        "lat": 26.3641,
+        "lon": 91.7341
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Tihu (Pt)",
+      "severity": "Critical",
+      "max_risk_score": 0.9193,
+      "avg_risk_score": 0.8756,
+      "alert_cell_count": 238,
+      "critical_cell_count": 237,
+      "high_cell_count": 1,
+      "avg_rainfall_24h_mm": 22.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3785,
+      "approx_centroid": {
+        "lat": 26.4681,
+        "lon": 91.3243
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Sabroom",
+      "severity": "Critical",
+      "max_risk_score": 0.9177,
+      "avg_risk_score": 0.815,
+      "alert_cell_count": 35,
+      "critical_cell_count": 28,
+      "high_cell_count": 7,
+      "avg_rainfall_24h_mm": 47.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3803,
+      "approx_centroid": {
+        "lat": 23.1285,
+        "lon": 91.8161
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Mawshynrut",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.6942,
+      "alert_cell_count": 13457,
+      "critical_cell_count": 5469,
+      "high_cell_count": 7988,
+      "avg_rainfall_24h_mm": 26.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.5472,
+        "lon": 90.999
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "S' Bungtlang",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.6647,
+      "alert_cell_count": 12293,
+      "critical_cell_count": 2399,
+      "high_cell_count": 9894,
+      "avg_rainfall_24h_mm": 50.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 22.2958,
+        "lon": 92.6668
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "West Phaileng",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.6847,
+      "alert_cell_count": 11598,
+      "critical_cell_count": 3717,
+      "high_cell_count": 7881,
+      "avg_rainfall_24h_mm": 44.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.5442,
+        "lon": 92.4056
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Lawngtlai",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.6634,
+      "alert_cell_count": 10776,
+      "critical_cell_count": 2451,
+      "high_cell_count": 8325,
+      "avg_rainfall_24h_mm": 48.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 22.4009,
+        "lon": 92.7844
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Rongara",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7767,
+      "alert_cell_count": 10354,
+      "critical_cell_count": 7751,
+      "high_cell_count": 2603,
+      "avg_rainfall_24h_mm": 36.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.3367,
+        "lon": 90.8563
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Hnahthial",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.6122,
+      "alert_cell_count": 8764,
+      "critical_cell_count": 1393,
+      "high_cell_count": 7371,
+      "avg_rainfall_24h_mm": 32.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 22.9372,
+        "lon": 93.0309
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Baghmara",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7659,
+      "alert_cell_count": 8365,
+      "critical_cell_count": 5684,
+      "high_cell_count": 2681,
+      "avg_rainfall_24h_mm": 37.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.4107,
+        "lon": 90.6643
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Kanchanpur",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.6952,
+      "alert_cell_count": 7589,
+      "critical_cell_count": 3343,
+      "high_cell_count": 4246,
+      "avg_rainfall_24h_mm": 26.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.7968,
+        "lon": 92.2357
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Reiek",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7641,
+      "alert_cell_count": 6595,
+      "critical_cell_count": 4623,
+      "high_cell_count": 1972,
+      "avg_rainfall_24h_mm": 30.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.7225,
+        "lon": 92.53
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Sangau",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.5904,
+      "alert_cell_count": 6161,
+      "critical_cell_count": 772,
+      "high_cell_count": 5389,
+      "avg_rainfall_24h_mm": 32.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 22.7002,
+        "lon": 93.0265
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Mohanpur",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7255,
+      "alert_cell_count": 5952,
+      "critical_cell_count": 3028,
+      "high_cell_count": 2924,
+      "avg_rainfall_24h_mm": 36.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.984,
+        "lon": 91.4194
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "East Lungdar",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7278,
+      "alert_cell_count": 5851,
+      "critical_cell_count": 3241,
+      "high_cell_count": 2610,
+      "avg_rainfall_24h_mm": 33.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.1425,
+        "lon": 93.0187
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Serchhip",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7636,
+      "alert_cell_count": 5740,
+      "critical_cell_count": 3934,
+      "high_cell_count": 1806,
+      "avg_rainfall_24h_mm": 34.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.3643,
+        "lon": 92.9296
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Katigora",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.6613,
+      "alert_cell_count": 5369,
+      "critical_cell_count": 929,
+      "high_cell_count": 4440,
+      "avg_rainfall_24h_mm": 27.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.0208,
+        "lon": 92.6273
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Sonamura",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7373,
+      "alert_cell_count": 5180,
+      "critical_cell_count": 2992,
+      "high_cell_count": 2188,
+      "avg_rainfall_24h_mm": 40.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.4454,
+        "lon": 91.3383
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Aibawk",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7429,
+      "alert_cell_count": 4376,
+      "critical_cell_count": 2460,
+      "high_cell_count": 1916,
+      "avg_rainfall_24h_mm": 39.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.433,
+        "lon": 92.6622
+      }
+    },
+    {
+      "state": "Manipur",
+      "district": "Chakpikarong subdivision",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.6354,
+      "alert_cell_count": 4116,
+      "critical_cell_count": 1026,
+      "high_cell_count": 3090,
+      "avg_rainfall_24h_mm": 29.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.0059,
+        "lon": 94.1187
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Pynursla",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7136,
+      "alert_cell_count": 3939,
+      "critical_cell_count": 1722,
+      "high_cell_count": 2217,
+      "avg_rainfall_24h_mm": 40.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.32,
+        "lon": 91.9012
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Nilambazar",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7264,
+      "alert_cell_count": 3796,
+      "critical_cell_count": 1837,
+      "high_cell_count": 1959,
+      "avg_rainfall_24h_mm": 38.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.696,
+        "lon": 92.372
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "South Garo Hills",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7775,
+      "alert_cell_count": 3644,
+      "critical_cell_count": 2713,
+      "high_cell_count": 931,
+      "avg_rainfall_24h_mm": 33.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.2994,
+        "lon": 90.6177
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Jirania",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7357,
+      "alert_cell_count": 3549,
+      "critical_cell_count": 1948,
+      "high_cell_count": 1601,
+      "avg_rainfall_24h_mm": 31.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.8756,
+        "lon": 91.4437
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Amlarem",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.6605,
+      "alert_cell_count": 3299,
+      "critical_cell_count": 954,
+      "high_cell_count": 2345,
+      "avg_rainfall_24h_mm": 26.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.2869,
+        "lon": 92.1086
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Badarpur",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7524,
+      "alert_cell_count": 3209,
+      "critical_cell_count": 2148,
+      "high_cell_count": 1061,
+      "avg_rainfall_24h_mm": 39.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.8418,
+        "lon": 92.5043
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Mawsynram",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7541,
+      "alert_cell_count": 2923,
+      "critical_cell_count": 1850,
+      "high_cell_count": 1073,
+      "avg_rainfall_24h_mm": 31.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.3095,
+        "lon": 91.5646
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Shella Bholaganj",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.6196,
+      "alert_cell_count": 2123,
+      "critical_cell_count": 303,
+      "high_cell_count": 1820,
+      "avg_rainfall_24h_mm": 45.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.2988,
+        "lon": 91.7098
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Boitamari",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7408,
+      "alert_cell_count": 1664,
+      "critical_cell_count": 966,
+      "high_cell_count": 698,
+      "avg_rainfall_24h_mm": 34.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.2392,
+        "lon": 90.5231
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Siaha",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.6377,
+      "alert_cell_count": 1598,
+      "critical_cell_count": 324,
+      "high_cell_count": 1274,
+      "avg_rainfall_24h_mm": 46.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 22.5258,
+        "lon": 92.8611
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Mawkynrew",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.6875,
+      "alert_cell_count": 1319,
+      "critical_cell_count": 548,
+      "high_cell_count": 771,
+      "avg_rainfall_24h_mm": 27.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.3773,
+        "lon": 92.0242
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Khatarshnong Laitkroh",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7387,
+      "alert_cell_count": 902,
+      "critical_cell_count": 556,
+      "high_cell_count": 346,
+      "avg_rainfall_24h_mm": 32.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.4137,
+        "lon": 91.8235
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Chapar Pt",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.7106,
+      "alert_cell_count": 198,
+      "critical_cell_count": 94,
+      "high_cell_count": 104,
+      "avg_rainfall_24h_mm": 35.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.2503,
+        "lon": 90.3487
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Gomati",
+      "severity": "Critical",
+      "max_risk_score": 0.8831,
+      "avg_risk_score": 0.8589,
+      "alert_cell_count": 65,
+      "critical_cell_count": 65,
+      "high_cell_count": 0,
+      "avg_rainfall_24h_mm": 35.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.5042,
+        "lon": 91.3951
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Lanka",
+      "severity": "Critical",
+      "max_risk_score": 0.8816,
+      "avg_risk_score": 0.6541,
+      "alert_cell_count": 13719,
+      "critical_cell_count": 3151,
+      "high_cell_count": 10568,
+      "avg_rainfall_24h_mm": 30.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.856,
+        "lon": 93.1432
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Ranikor",
+      "severity": "Critical",
+      "max_risk_score": 0.8678,
+      "avg_risk_score": 0.6745,
+      "alert_cell_count": 6795,
+      "critical_cell_count": 2094,
+      "high_cell_count": 4701,
+      "avg_rainfall_24h_mm": 26.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.3455,
+        "lon": 91.1084
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Balijana",
+      "severity": "Critical",
+      "max_risk_score": 0.8678,
+      "avg_risk_score": 0.6727,
+      "alert_cell_count": 5331,
+      "critical_cell_count": 1829,
+      "high_cell_count": 3502,
+      "avg_rainfall_24h_mm": 28.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.0756,
+        "lon": 90.4502
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Tipa",
+      "severity": "Critical",
+      "max_risk_score": 0.8678,
+      "avg_risk_score": 0.6591,
+      "alert_cell_count": 5313,
+      "critical_cell_count": 1391,
+      "high_cell_count": 3922,
+      "avg_rainfall_24h_mm": 24.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 22.1436,
+        "lon": 92.9203
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Khowai",
+      "severity": "Critical",
+      "max_risk_score": 0.8678,
+      "avg_risk_score": 0.6461,
+      "alert_cell_count": 3773,
+      "critical_cell_count": 1094,
+      "high_cell_count": 2679,
+      "avg_rainfall_24h_mm": 24.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.0302,
+        "lon": 91.5661
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Mamit",
+      "severity": "Critical",
+      "max_risk_score": 0.8678,
+      "avg_risk_score": 0.6153,
+      "alert_cell_count": 3296,
+      "critical_cell_count": 624,
+      "high_cell_count": 2672,
+      "avg_rainfall_24h_mm": 23.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.8336,
+        "lon": 92.4444
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Samanda",
+      "severity": "Critical",
+      "max_risk_score": 0.8678,
+      "avg_risk_score": 0.6436,
+      "alert_cell_count": 3099,
+      "critical_cell_count": 807,
+      "high_cell_count": 2292,
+      "avg_rainfall_24h_mm": 25.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.4881,
+        "lon": 90.5299
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Belonia",
+      "severity": "Critical",
+      "max_risk_score": 0.8678,
+      "avg_risk_score": 0.7059,
+      "alert_cell_count": 2492,
+      "critical_cell_count": 1041,
+      "high_cell_count": 1451,
+      "avg_rainfall_24h_mm": 27.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.3035,
+        "lon": 91.42
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Patharkandi",
+      "severity": "Critical",
+      "max_risk_score": 0.8678,
+      "avg_risk_score": 0.6071,
+      "alert_cell_count": 2044,
+      "critical_cell_count": 344,
+      "high_cell_count": 1700,
+      "avg_rainfall_24h_mm": 23.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.5571,
+        "lon": 92.3065
+      }
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "district": "Tirap",
+      "severity": "Critical",
+      "max_risk_score": 0.8678,
+      "avg_risk_score": 0.6716,
+      "alert_cell_count": 1730,
+      "critical_cell_count": 695,
+      "high_cell_count": 1035,
+      "avg_rainfall_24h_mm": 28.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 27.043,
+        "lon": 95.4913
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Goalpara",
+      "severity": "Critical",
+      "max_risk_score": 0.8678,
+      "avg_risk_score": 0.6763,
+      "alert_cell_count": 1654,
+      "critical_cell_count": 639,
+      "high_cell_count": 1015,
+      "avg_rainfall_24h_mm": 29.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.1797,
+        "lon": 90.6088
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Aizawl",
+      "severity": "Critical",
+      "max_risk_score": 0.8678,
+      "avg_risk_score": 0.7317,
+      "alert_cell_count": 848,
+      "critical_cell_count": 391,
+      "high_cell_count": 457,
+      "avg_rainfall_24h_mm": 26.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.6758,
+        "lon": 92.7245
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Bongaigaon (Pt)",
+      "severity": "Critical",
+      "max_risk_score": 0.8678,
+      "avg_risk_score": 0.6447,
+      "alert_cell_count": 664,
+      "critical_cell_count": 175,
+      "high_cell_count": 489,
+      "avg_rainfall_24h_mm": 28.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3889,
+      "approx_centroid": {
+        "lat": 26.3753,
+        "lon": 90.5998
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Saiha",
+      "severity": "Critical",
+      "max_risk_score": 0.8678,
+      "avg_risk_score": 0.5926,
+      "alert_cell_count": 346,
+      "critical_cell_count": 32,
+      "high_cell_count": 314,
+      "avg_rainfall_24h_mm": 23.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 22.4753,
+        "lon": 93.1135
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Hailakandi",
+      "severity": "Critical",
+      "max_risk_score": 0.8678,
+      "avg_risk_score": 0.7543,
+      "alert_cell_count": 203,
+      "critical_cell_count": 120,
+      "high_cell_count": 83,
+      "avg_rainfall_24h_mm": 27.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.6487,
+        "lon": 92.6195
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Longtharai Valley",
+      "severity": "Critical",
+      "max_risk_score": 0.8644,
+      "avg_risk_score": 0.5977,
+      "alert_cell_count": 5940,
+      "critical_cell_count": 427,
+      "high_cell_count": 5513,
+      "avg_rainfall_24h_mm": 23.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.7886,
+        "lon": 92.0637
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Diphu",
+      "severity": "Critical",
+      "max_risk_score": 0.8639,
+      "avg_risk_score": 0.6357,
+      "alert_cell_count": 10412,
+      "critical_cell_count": 2204,
+      "high_cell_count": 8208,
+      "avg_rainfall_24h_mm": 27.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.8876,
+        "lon": 93.3699
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Srijangram",
+      "severity": "Critical",
+      "max_risk_score": 0.8639,
+      "avg_risk_score": 0.6492,
+      "alert_cell_count": 248,
+      "critical_cell_count": 62,
+      "high_cell_count": 186,
+      "avg_rainfall_24h_mm": 31.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.3279,
+        "lon": 90.6584
+      }
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "district": "Namsang",
+      "severity": "Critical",
+      "max_risk_score": 0.8635,
+      "avg_risk_score": 0.7122,
+      "alert_cell_count": 35,
+      "critical_cell_count": 15,
+      "high_cell_count": 20,
+      "avg_rainfall_24h_mm": 29.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 27.0799,
+        "lon": 95.5743
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Chokpot",
+      "severity": "Critical",
+      "max_risk_score": 0.8625,
+      "avg_risk_score": 0.6371,
+      "alert_cell_count": 3878,
+      "critical_cell_count": 821,
+      "high_cell_count": 3057,
+      "avg_rainfall_24h_mm": 25.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.3676,
+        "lon": 90.4807
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Mawphlang",
+      "severity": "Critical",
+      "max_risk_score": 0.8625,
+      "avg_risk_score": 0.6264,
+      "alert_cell_count": 1341,
+      "critical_cell_count": 350,
+      "high_cell_count": 991,
+      "avg_rainfall_24h_mm": 23.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.463,
+        "lon": 91.7294
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "South West Khasi Hills",
+      "severity": "Critical",
+      "max_risk_score": 0.8619,
+      "avg_risk_score": 0.6814,
+      "alert_cell_count": 1798,
+      "critical_cell_count": 442,
+      "high_cell_count": 1356,
+      "avg_rainfall_24h_mm": 25.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.2943,
+        "lon": 91.4573
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Sadar",
+      "severity": "Critical",
+      "max_risk_score": 0.8589,
+      "avg_risk_score": 0.6643,
+      "alert_cell_count": 2276,
+      "critical_cell_count": 673,
+      "high_cell_count": 1603,
+      "avg_rainfall_24h_mm": 43.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.7747,
+        "lon": 91.307
+      }
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "district": "Lawnu Circle",
+      "severity": "Critical",
+      "max_risk_score": 0.8568,
+      "avg_risk_score": 0.7343,
+      "alert_cell_count": 3060,
+      "critical_cell_count": 1117,
+      "high_cell_count": 1943,
+      "avg_rainfall_24h_mm": 26.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 27.0442,
+        "lon": 95.3279
+      }
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "district": "Yatdam Circle",
+      "severity": "Critical",
+      "max_risk_score": 0.8568,
+      "avg_risk_score": 0.7081,
+      "alert_cell_count": 84,
+      "critical_cell_count": 29,
+      "high_cell_count": 55,
+      "avg_rainfall_24h_mm": 27.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 27.0451,
+        "lon": 95.6376
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Karbi Anglong",
+      "severity": "Critical",
+      "max_risk_score": 0.856,
+      "avg_risk_score": 0.6036,
+      "alert_cell_count": 12039,
+      "critical_cell_count": 1293,
+      "high_cell_count": 10746,
+      "avg_rainfall_24h_mm": 26.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.0933,
+        "lon": 93.353
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Jampuijala",
+      "severity": "Critical",
+      "max_risk_score": 0.8544,
+      "avg_risk_score": 0.7991,
+      "alert_cell_count": 90,
+      "critical_cell_count": 82,
+      "high_cell_count": 8,
+      "avg_rainfall_24h_mm": 31.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.7518,
+        "lon": 91.4069
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Algapur",
+      "severity": "Critical",
+      "max_risk_score": 0.8538,
+      "avg_risk_score": 0.7094,
+      "alert_cell_count": 1046,
+      "critical_cell_count": 487,
+      "high_cell_count": 559,
+      "avg_rainfall_24h_mm": 33.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.8629,
+        "lon": 92.6244
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Khawzawl",
+      "severity": "Critical",
+      "max_risk_score": 0.8535,
+      "avg_risk_score": 0.6133,
+      "alert_cell_count": 1930,
+      "critical_cell_count": 347,
+      "high_cell_count": 1583,
+      "avg_rainfall_24h_mm": 22.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.4956,
+        "lon": 93.0732
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Sidli",
+      "severity": "Critical",
+      "max_risk_score": 0.8476,
+      "avg_risk_score": 0.6374,
+      "alert_cell_count": 275,
+      "critical_cell_count": 86,
+      "high_cell_count": 189,
+      "avg_rainfall_24h_mm": 26.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.3739,
+        "lon": 90.4678
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Lakhipur",
+      "severity": "Critical",
+      "max_risk_score": 0.8475,
+      "avg_risk_score": 0.6967,
+      "alert_cell_count": 6911,
+      "critical_cell_count": 2811,
+      "high_cell_count": 4100,
+      "avg_rainfall_24h_mm": 26.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.8514,
+        "lon": 93.041
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Charaideo",
+      "severity": "Critical",
+      "max_risk_score": 0.8475,
+      "avg_risk_score": 0.7366,
+      "alert_cell_count": 3216,
+      "critical_cell_count": 2001,
+      "high_cell_count": 1215,
+      "avg_rainfall_24h_mm": 27.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.9448,
+        "lon": 94.9346
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Tizit",
+      "severity": "Critical",
+      "max_risk_score": 0.8475,
+      "avg_risk_score": 0.7725,
+      "alert_cell_count": 2987,
+      "critical_cell_count": 2395,
+      "high_cell_count": 592,
+      "avg_rainfall_24h_mm": 27.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.8856,
+        "lon": 95.0388
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Naginimora",
+      "severity": "Critical",
+      "max_risk_score": 0.8475,
+      "avg_risk_score": 0.7597,
+      "alert_cell_count": 2978,
+      "critical_cell_count": 1982,
+      "high_cell_count": 996,
+      "avg_rainfall_24h_mm": 26.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.8474,
+        "lon": 94.8794
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Mon Sadar",
+      "severity": "Critical",
+      "max_risk_score": 0.8475,
+      "avg_risk_score": 0.6798,
+      "alert_cell_count": 2917,
+      "critical_cell_count": 886,
+      "high_cell_count": 2031,
+      "avg_rainfall_24h_mm": 24.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.7553,
+        "lon": 94.9899
+      }
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "district": "Dadam Circle",
+      "severity": "Critical",
+      "max_risk_score": 0.8475,
+      "avg_risk_score": 0.6591,
+      "alert_cell_count": 2899,
+      "critical_cell_count": 145,
+      "high_cell_count": 2754,
+      "avg_rainfall_24h_mm": 24.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.936,
+        "lon": 95.4245
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Shangnyu",
+      "severity": "Critical",
+      "max_risk_score": 0.8475,
+      "avg_risk_score": 0.6989,
+      "alert_cell_count": 1821,
+      "critical_cell_count": 251,
+      "high_cell_count": 1570,
+      "avg_rainfall_24h_mm": 25.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.803,
+        "lon": 95.1397
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Mon",
+      "severity": "Critical",
+      "max_risk_score": 0.8475,
+      "avg_risk_score": 0.6704,
+      "alert_cell_count": 1725,
+      "critical_cell_count": 236,
+      "high_cell_count": 1489,
+      "avg_rainfall_24h_mm": 24.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.7556,
+        "lon": 95.0696
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Sonari",
+      "severity": "Critical",
+      "max_risk_score": 0.8475,
+      "avg_risk_score": 0.6294,
+      "alert_cell_count": 778,
+      "critical_cell_count": 68,
+      "high_cell_count": 710,
+      "avg_rainfall_24h_mm": 24.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 27.0247,
+        "lon": 95.0914
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Thingsulthliah",
+      "severity": "Critical",
+      "max_risk_score": 0.8475,
+      "avg_risk_score": 0.6749,
+      "alert_cell_count": 637,
+      "critical_cell_count": 131,
+      "high_cell_count": 506,
+      "avg_rainfall_24h_mm": 24.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.6235,
+        "lon": 92.8953
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Nazira",
+      "severity": "Critical",
+      "max_risk_score": 0.8461,
+      "avg_risk_score": 0.6838,
+      "alert_cell_count": 2070,
+      "critical_cell_count": 469,
+      "high_cell_count": 1601,
+      "avg_rainfall_24h_mm": 25.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.8609,
+        "lon": 94.7823
+      }
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "district": "Khonsa HQ",
+      "severity": "Critical",
+      "max_risk_score": 0.8461,
+      "avg_risk_score": 0.6837,
+      "alert_cell_count": 1896,
+      "critical_cell_count": 437,
+      "high_cell_count": 1459,
+      "avg_rainfall_24h_mm": 25.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.9692,
+        "lon": 95.5003
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "South Tripura",
+      "severity": "Critical",
+      "max_risk_score": 0.8461,
+      "avg_risk_score": 0.6232,
+      "alert_cell_count": 1504,
+      "critical_cell_count": 6,
+      "high_cell_count": 1498,
+      "avg_rainfall_24h_mm": 23.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.2486,
+        "lon": 91.5436
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Ramkrishna Nagar",
+      "severity": "Critical",
+      "max_risk_score": 0.8461,
+      "avg_risk_score": 0.6382,
+      "alert_cell_count": 1044,
+      "critical_cell_count": 224,
+      "high_cell_count": 820,
+      "avg_rainfall_24h_mm": 24.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.5737,
+        "lon": 92.4055
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Rangia (Pt)",
+      "severity": "Critical",
+      "max_risk_score": 0.8447,
+      "avg_risk_score": 0.6845,
+      "alert_cell_count": 372,
+      "critical_cell_count": 52,
+      "high_cell_count": 320,
+      "avg_rainfall_24h_mm": 18.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3441,
+      "approx_centroid": {
+        "lat": 26.4775,
+        "lon": 91.6028
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Udarbond",
+      "severity": "Critical",
+      "max_risk_score": 0.8428,
+      "avg_risk_score": 0.578,
+      "alert_cell_count": 6671,
+      "critical_cell_count": 206,
+      "high_cell_count": 6465,
+      "avg_rainfall_24h_mm": 22.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.9839,
+        "lon": 92.9399
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Hunta",
+      "severity": "Critical",
+      "max_risk_score": 0.8419,
+      "avg_risk_score": 0.6763,
+      "alert_cell_count": 1989,
+      "critical_cell_count": 58,
+      "high_cell_count": 1931,
+      "avg_rainfall_24h_mm": 24.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.9829,
+        "lon": 95.1535
+      }
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "district": "Changlang",
+      "severity": "Critical",
+      "max_risk_score": 0.8415,
+      "avg_risk_score": 0.6833,
+      "alert_cell_count": 222,
+      "critical_cell_count": 9,
+      "high_cell_count": 213,
+      "avg_rainfall_24h_mm": 25.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 27.0683,
+        "lon": 95.7763
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Santirbazar",
+      "severity": "Critical",
+      "max_risk_score": 0.8415,
+      "avg_risk_score": 0.6995,
+      "alert_cell_count": 97,
+      "critical_cell_count": 30,
+      "high_cell_count": 67,
+      "avg_rainfall_24h_mm": 25.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.3016,
+        "lon": 91.5453
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Bagribari Pt",
+      "severity": "Critical",
+      "max_risk_score": 0.8393,
+      "avg_risk_score": 0.6227,
+      "alert_cell_count": 1293,
+      "critical_cell_count": 191,
+      "high_cell_count": 1102,
+      "avg_rainfall_24h_mm": 29.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.0944,
+        "lon": 90.2087
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Tikrikilla",
+      "severity": "Critical",
+      "max_risk_score": 0.8379,
+      "avg_risk_score": 0.6324,
+      "alert_cell_count": 1516,
+      "critical_cell_count": 205,
+      "high_cell_count": 1311,
+      "avg_rainfall_24h_mm": 25.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.0286,
+        "lon": 90.3046
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Khliehriat",
+      "severity": "Critical",
+      "max_risk_score": 0.8223,
+      "avg_risk_score": 0.5976,
+      "alert_cell_count": 2232,
+      "critical_cell_count": 62,
+      "high_cell_count": 2170,
+      "avg_rainfall_24h_mm": 24.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.1722,
+        "lon": 92.3494
+      }
+    },
+    {
+      "state": "Manipur",
+      "district": "Jiribam",
+      "severity": "Critical",
+      "max_risk_score": 0.8194,
+      "avg_risk_score": 0.6349,
+      "alert_cell_count": 7753,
+      "critical_cell_count": 76,
+      "high_cell_count": 7677,
+      "avg_rainfall_24h_mm": 23.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.8113,
+        "lon": 93.1433
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "West Tripura",
+      "severity": "Critical",
+      "max_risk_score": 0.8151,
+      "avg_risk_score": 0.6205,
+      "alert_cell_count": 1988,
+      "critical_cell_count": 180,
+      "high_cell_count": 1808,
+      "avg_rainfall_24h_mm": 46.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.8541,
+        "lon": 91.3078
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Lunglei",
+      "severity": "Critical",
+      "max_risk_score": 0.8134,
+      "avg_risk_score": 0.6124,
+      "alert_cell_count": 8838,
+      "critical_cell_count": 85,
+      "high_cell_count": 8753,
+      "avg_rainfall_24h_mm": 52.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 22.8809,
+        "lon": 92.7841
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Baghbor",
+      "severity": "Critical",
+      "max_risk_score": 0.8052,
+      "avg_risk_score": 0.5899,
+      "alert_cell_count": 282,
+      "critical_cell_count": 22,
+      "high_cell_count": 260,
+      "avg_rainfall_24h_mm": 26.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.2065,
+        "lon": 90.8121
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Tamulpur",
+      "severity": "Critical",
+      "max_risk_score": 0.7847,
+      "avg_risk_score": 0.6567,
+      "alert_cell_count": 113,
+      "critical_cell_count": 11,
+      "high_cell_count": 102,
+      "avg_rainfall_24h_mm": 18.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3177,
+      "approx_centroid": {
+        "lat": 26.6785,
+        "lon": 91.4606
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "West Bunghmun",
+      "severity": "Critical",
+      "max_risk_score": 0.7638,
+      "avg_risk_score": 0.6406,
+      "alert_cell_count": 20609,
+      "critical_cell_count": 1078,
+      "high_cell_count": 19531,
+      "avg_rainfall_24h_mm": 60.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.153,
+        "lon": 92.5071
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Lungsen",
+      "severity": "Critical",
+      "max_risk_score": 0.7609,
+      "avg_risk_score": 0.6448,
+      "alert_cell_count": 24723,
+      "critical_cell_count": 674,
+      "high_cell_count": 24049,
+      "avg_rainfall_24h_mm": 70.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 22.796,
+        "lon": 92.5855
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Bishalgarh",
+      "severity": "Critical",
+      "max_risk_score": 0.7598,
+      "avg_risk_score": 0.5797,
+      "alert_cell_count": 3627,
+      "critical_cell_count": 48,
+      "high_cell_count": 3579,
+      "avg_rainfall_24h_mm": 51.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.6446,
+        "lon": 91.2312
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Chirang",
+      "severity": "Critical",
+      "max_risk_score": 0.7544,
+      "avg_risk_score": 0.6882,
+      "alert_cell_count": 2,
+      "critical_cell_count": 1,
+      "high_cell_count": 1,
+      "avg_rainfall_24h_mm": 18.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3714,
+      "approx_centroid": {
+        "lat": 26.5129,
+        "lon": 90.6611
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Sepahijala",
+      "severity": "High",
+      "max_risk_score": 0.7447,
+      "avg_risk_score": 0.6106,
+      "alert_cell_count": 393,
+      "critical_cell_count": 0,
+      "high_cell_count": 393,
+      "avg_rainfall_24h_mm": 45.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.7091,
+        "lon": 91.2877
+      }
+    },
+    {
+      "state": "Manipur",
+      "district": "Tengnoupal subdivision",
+      "severity": "High",
+      "max_risk_score": 0.7389,
+      "avg_risk_score": 0.5285,
+      "alert_cell_count": 354,
+      "critical_cell_count": 0,
+      "high_cell_count": 354,
+      "avg_rainfall_24h_mm": 21.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.1252,
+        "lon": 94.2068
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Khawbung",
+      "severity": "High",
+      "max_risk_score": 0.7383,
+      "avg_risk_score": 0.551,
+      "alert_cell_count": 2102,
+      "critical_cell_count": 0,
+      "high_cell_count": 2102,
+      "avg_rainfall_24h_mm": 21.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.2193,
+        "lon": 93.2411
+      }
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "district": "Khimiyang EAC",
+      "severity": "High",
+      "max_risk_score": 0.7369,
+      "avg_risk_score": 0.6304,
+      "alert_cell_count": 1276,
+      "critical_cell_count": 0,
+      "high_cell_count": 1276,
+      "avg_rainfall_24h_mm": 24.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 27.0085,
+        "lon": 95.7436
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Kanubari ADC",
+      "severity": "High",
+      "max_risk_score": 0.7327,
+      "avg_risk_score": 0.6785,
+      "alert_cell_count": 1440,
+      "critical_cell_count": 0,
+      "high_cell_count": 1440,
+      "avg_rainfall_24h_mm": 24.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 27.01,
+        "lon": 95.2374
+      }
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "district": "Laju SDO",
+      "severity": "High",
+      "max_risk_score": 0.7327,
+      "avg_risk_score": 0.5966,
+      "alert_cell_count": 1350,
+      "critical_cell_count": 0,
+      "high_cell_count": 1350,
+      "avg_rainfall_24h_mm": 23.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.9125,
+        "lon": 95.574
+      }
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "district": "Longding",
+      "severity": "High",
+      "max_risk_score": 0.7327,
+      "avg_risk_score": 0.6916,
+      "alert_cell_count": 544,
+      "critical_cell_count": 0,
+      "high_cell_count": 544,
+      "avg_rainfall_24h_mm": 25.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.8696,
+        "lon": 95.2116
+      }
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "district": "Pumao Circle",
+      "severity": "High",
+      "max_risk_score": 0.7327,
+      "avg_risk_score": 0.6937,
+      "alert_cell_count": 111,
+      "critical_cell_count": 0,
+      "high_cell_count": 111,
+      "avg_rainfall_24h_mm": 24.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.8253,
+        "lon": 95.2102
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Phuloni",
+      "severity": "High",
+      "max_risk_score": 0.7326,
+      "avg_risk_score": 0.5629,
+      "alert_cell_count": 1395,
+      "critical_cell_count": 0,
+      "high_cell_count": 1395,
+      "avg_rainfall_24h_mm": 22.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.2068,
+        "lon": 93.2267
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "West Khasi Hills",
+      "severity": "High",
+      "max_risk_score": 0.7313,
+      "avg_risk_score": 0.5483,
+      "alert_cell_count": 1905,
+      "critical_cell_count": 0,
+      "high_cell_count": 1905,
+      "avg_rainfall_24h_mm": 21.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.47,
+        "lon": 91.2093
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Namsang",
+      "severity": "High",
+      "max_risk_score": 0.7313,
+      "avg_risk_score": 0.6073,
+      "alert_cell_count": 1767,
+      "critical_cell_count": 0,
+      "high_cell_count": 1767,
+      "avg_rainfall_24h_mm": 23.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.7623,
+        "lon": 94.7645
+      }
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "district": "Longding HQ",
+      "severity": "High",
+      "max_risk_score": 0.7313,
+      "avg_risk_score": 0.6696,
+      "alert_cell_count": 1095,
+      "critical_cell_count": 0,
+      "high_cell_count": 1095,
+      "avg_rainfall_24h_mm": 24.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.9072,
+        "lon": 95.3259
+      }
+    },
+    {
+      "state": "Manipur",
+      "district": "Tamenglong West",
+      "severity": "High",
+      "max_risk_score": 0.7255,
+      "avg_risk_score": 0.5744,
+      "alert_cell_count": 5188,
+      "critical_cell_count": 0,
+      "high_cell_count": 5188,
+      "avg_rainfall_24h_mm": 21.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.9467,
+        "lon": 93.3419
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Nongstoin",
+      "severity": "High",
+      "max_risk_score": 0.7255,
+      "avg_risk_score": 0.5386,
+      "alert_cell_count": 3439,
+      "critical_cell_count": 0,
+      "high_cell_count": 3439,
+      "avg_rainfall_24h_mm": 21.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.6345,
+        "lon": 91.219
+      }
+    },
+    {
+      "state": "Manipur",
+      "district": "Nungba subdivision",
+      "severity": "High",
+      "max_risk_score": 0.7255,
+      "avg_risk_score": 0.5775,
+      "alert_cell_count": 3113,
+      "critical_cell_count": 0,
+      "high_cell_count": 3113,
+      "avg_rainfall_24h_mm": 22.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.753,
+        "lon": 93.3068
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Ambassa",
+      "severity": "High",
+      "max_risk_score": 0.7255,
+      "avg_risk_score": 0.5228,
+      "alert_cell_count": 2630,
+      "critical_cell_count": 0,
+      "high_cell_count": 2630,
+      "avg_rainfall_24h_mm": 20.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.7557,
+        "lon": 91.9046
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Wakching",
+      "severity": "High",
+      "max_risk_score": 0.7255,
+      "avg_risk_score": 0.5506,
+      "alert_cell_count": 2626,
+      "critical_cell_count": 0,
+      "high_cell_count": 2626,
+      "avg_rainfall_24h_mm": 21.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.6828,
+        "lon": 94.8839
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Tlangnuam",
+      "severity": "High",
+      "max_risk_score": 0.7255,
+      "avg_risk_score": 0.5568,
+      "alert_cell_count": 965,
+      "critical_cell_count": 0,
+      "high_cell_count": 965,
+      "avg_rainfall_24h_mm": 21.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.8259,
+        "lon": 92.6901
+      }
+    },
+    {
+      "state": "Manipur",
+      "district": "Tamenglong Subdivision",
+      "severity": "High",
+      "max_risk_score": 0.7255,
+      "avg_risk_score": 0.5759,
+      "alert_cell_count": 756,
+      "critical_cell_count": 0,
+      "high_cell_count": 756,
+      "avg_rainfall_24h_mm": 21.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.9097,
+        "lon": 93.4725
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Saitual",
+      "severity": "High",
+      "max_risk_score": 0.7255,
+      "avg_risk_score": 0.5652,
+      "alert_cell_count": 529,
+      "critical_cell_count": 0,
+      "high_cell_count": 529,
+      "avg_rainfall_24h_mm": 21.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.6205,
+        "lon": 93.0043
+      }
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "district": "Changlang HQ",
+      "severity": "High",
+      "max_risk_score": 0.7255,
+      "avg_risk_score": 0.6063,
+      "alert_cell_count": 407,
+      "critical_cell_count": 0,
+      "high_cell_count": 407,
+      "avg_rainfall_24h_mm": 23.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 27.0636,
+        "lon": 95.8362
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "East Jaintia Hills",
+      "severity": "High",
+      "max_risk_score": 0.7255,
+      "avg_risk_score": 0.5571,
+      "alert_cell_count": 241,
+      "critical_cell_count": 0,
+      "high_cell_count": 241,
+      "avg_rainfall_24h_mm": 21.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.1614,
+        "lon": 92.4807
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Phomching",
+      "severity": "High",
+      "max_risk_score": 0.7205,
+      "avg_risk_score": 0.549,
+      "alert_cell_count": 489,
+      "critical_cell_count": 0,
+      "high_cell_count": 489,
+      "avg_rainfall_24h_mm": 21.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.7038,
+        "lon": 95.1838
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Mahmora",
+      "severity": "High",
+      "max_risk_score": 0.6999,
+      "avg_risk_score": 0.6418,
+      "alert_cell_count": 19,
+      "critical_cell_count": 0,
+      "high_cell_count": 19,
+      "avg_rainfall_24h_mm": 23.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 27.0463,
+        "lon": 94.9474
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Teliamura",
+      "severity": "High",
+      "max_risk_score": 0.6926,
+      "avg_risk_score": 0.5236,
+      "alert_cell_count": 1750,
+      "critical_cell_count": 0,
+      "high_cell_count": 1750,
+      "avg_rainfall_24h_mm": 20.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.8947,
+        "lon": 91.5943
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Saipung",
+      "severity": "High",
+      "max_risk_score": 0.6926,
+      "avg_risk_score": 0.5306,
+      "alert_cell_count": 956,
+      "critical_cell_count": 0,
+      "high_cell_count": 956,
+      "avg_rainfall_24h_mm": 20.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.1542,
+        "lon": 92.5891
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Karimganj",
+      "severity": "High",
+      "max_risk_score": 0.6729,
+      "avg_risk_score": 0.5561,
+      "alert_cell_count": 587,
+      "critical_cell_count": 0,
+      "high_cell_count": 587,
+      "avg_rainfall_24h_mm": 53.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.8574,
+        "lon": 92.3235
+      }
+    },
+    {
+      "state": "Manipur",
+      "district": "Khoupum Subdivision",
+      "severity": "High",
+      "max_risk_score": 0.6661,
+      "avg_risk_score": 0.5427,
+      "alert_cell_count": 1217,
+      "critical_cell_count": 0,
+      "high_cell_count": 1217,
+      "avg_rainfall_24h_mm": 20.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.7612,
+        "lon": 93.4785
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Chenga",
+      "severity": "High",
+      "max_risk_score": 0.6316,
+      "avg_risk_score": 0.5307,
+      "alert_cell_count": 66,
+      "critical_cell_count": 0,
+      "high_cell_count": 66,
+      "avg_rainfall_24h_mm": 21.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.2052,
+        "lon": 91.0771
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Palasbari",
+      "severity": "High",
+      "max_risk_score": 0.6307,
+      "avg_risk_score": 0.5424,
+      "alert_cell_count": 4228,
+      "critical_cell_count": 0,
+      "high_cell_count": 4228,
+      "avg_rainfall_24h_mm": 22.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.0131,
+        "lon": 91.5095
+      }
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "district": "Wakka SDO",
+      "severity": "High",
+      "max_risk_score": 0.6242,
+      "avg_risk_score": 0.5473,
+      "alert_cell_count": 987,
+      "critical_cell_count": 0,
+      "high_cell_count": 987,
+      "avg_rainfall_24h_mm": 22.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.8346,
+        "lon": 95.4488
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Matia",
+      "severity": "High",
+      "max_risk_score": 0.6193,
+      "avg_risk_score": 0.524,
+      "alert_cell_count": 65,
+      "critical_cell_count": 0,
+      "high_cell_count": 65,
+      "avg_rainfall_24h_mm": 20.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.1109,
+        "lon": 90.7696
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Haflong",
+      "severity": "High",
+      "max_risk_score": 0.6143,
+      "avg_risk_score": 0.5416,
+      "alert_cell_count": 1671,
+      "critical_cell_count": 0,
+      "high_cell_count": 1671,
+      "avg_rainfall_24h_mm": 21.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.0835,
+        "lon": 92.8026
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Longshen",
+      "severity": "High",
+      "max_risk_score": 0.5966,
+      "avg_risk_score": 0.5286,
+      "alert_cell_count": 1332,
+      "critical_cell_count": 0,
+      "high_cell_count": 1332,
+      "avg_rainfall_24h_mm": 20.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.6689,
+        "lon": 95.0925
+      }
+    },
+    {
+      "state": "Manipur",
+      "district": "Noney",
+      "severity": "High",
+      "max_risk_score": 0.5966,
+      "avg_risk_score": 0.5276,
+      "alert_cell_count": 890,
+      "critical_cell_count": 0,
+      "high_cell_count": 890,
+      "avg_rainfall_24h_mm": 20.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.8384,
+        "lon": 93.5585
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Amguri",
+      "severity": "High",
+      "max_risk_score": 0.5875,
+      "avg_risk_score": 0.5323,
+      "alert_cell_count": 2478,
+      "critical_cell_count": 0,
+      "high_cell_count": 2478,
+      "avg_rainfall_24h_mm": 21.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.7874,
+        "lon": 94.5928
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Azara",
+      "severity": "High",
+      "max_risk_score": 0.587,
+      "avg_risk_score": 0.5232,
+      "alert_cell_count": 3457,
+      "critical_cell_count": 0,
+      "high_cell_count": 3457,
+      "avg_rainfall_24h_mm": 20.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.09,
+        "lon": 91.6511
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Mawkyrwat",
+      "severity": "High",
+      "max_risk_score": 0.587,
+      "avg_risk_score": 0.546,
+      "alert_cell_count": 1316,
+      "critical_cell_count": 0,
+      "high_cell_count": 1316,
+      "avg_rainfall_24h_mm": 21.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.3518,
+        "lon": 91.3029
+      }
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "district": "Pangchao SDO",
+      "severity": "High",
+      "max_risk_score": 0.587,
+      "avg_risk_score": 0.5291,
+      "alert_cell_count": 822,
+      "critical_cell_count": 0,
+      "high_cell_count": 822,
+      "avg_rainfall_24h_mm": 21.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.7364,
+        "lon": 95.3239
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Maibong",
+      "severity": "High",
+      "max_risk_score": 0.587,
+      "avg_risk_score": 0.526,
+      "alert_cell_count": 687,
+      "critical_cell_count": 0,
+      "high_cell_count": 687,
+      "avg_rainfall_24h_mm": 19.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.7219,
+        "lon": 93.2186
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Chhaygaon",
+      "severity": "High",
+      "max_risk_score": 0.583,
+      "avg_risk_score": 0.5198,
+      "alert_cell_count": 6859,
+      "critical_cell_count": 0,
+      "high_cell_count": 6859,
+      "avg_rainfall_24h_mm": 20.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.8832,
+        "lon": 91.3446
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Eastern West Khasi Hills",
+      "severity": "High",
+      "max_risk_score": 0.582,
+      "avg_risk_score": 0.5212,
+      "alert_cell_count": 333,
+      "critical_cell_count": 0,
+      "high_cell_count": 333,
+      "avg_rainfall_24h_mm": 19.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.4469,
+        "lon": 91.6106
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Mylliem",
+      "severity": "High",
+      "max_risk_score": 0.582,
+      "avg_risk_score": 0.5229,
+      "alert_cell_count": 107,
+      "critical_cell_count": 0,
+      "high_cell_count": 107,
+      "avg_rainfall_24h_mm": 19.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.503,
+        "lon": 91.8819
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Boko",
+      "severity": "High",
+      "max_risk_score": 0.5723,
+      "avg_risk_score": 0.5173,
+      "alert_cell_count": 2850,
+      "critical_cell_count": 0,
+      "high_cell_count": 2850,
+      "avg_rainfall_24h_mm": 19.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.7898,
+        "lon": 91.1732
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Tuli",
+      "severity": "High",
+      "max_risk_score": 0.5723,
+      "avg_risk_score": 0.5324,
+      "alert_cell_count": 2275,
+      "critical_cell_count": 0,
+      "high_cell_count": 2275,
+      "avg_rainfall_24h_mm": 20.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.6698,
+        "lon": 94.6329
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Aitepyong",
+      "severity": "High",
+      "max_risk_score": 0.5723,
+      "avg_risk_score": 0.5255,
+      "alert_cell_count": 1600,
+      "critical_cell_count": 0,
+      "high_cell_count": 1600,
+      "avg_rainfall_24h_mm": 19.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.3429,
+        "lon": 94.2805
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Tsurangkong",
+      "severity": "High",
+      "max_risk_score": 0.5723,
+      "avg_risk_score": 0.5293,
+      "alert_cell_count": 1145,
+      "critical_cell_count": 0,
+      "high_cell_count": 1145,
+      "avg_rainfall_24h_mm": 20.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.4312,
+        "lon": 94.3416
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "North Guwahati (Pt)",
+      "severity": "High",
+      "max_risk_score": 0.5723,
+      "avg_risk_score": 0.5233,
+      "alert_cell_count": 940,
+      "critical_cell_count": 0,
+      "high_cell_count": 940,
+      "avg_rainfall_24h_mm": 19.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.1888,
+        "lon": 91.6665
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Teok",
+      "severity": "High",
+      "max_risk_score": 0.5723,
+      "avg_risk_score": 0.5231,
+      "alert_cell_count": 929,
+      "critical_cell_count": 0,
+      "high_cell_count": 929,
+      "avg_rainfall_24h_mm": 20.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.7578,
+        "lon": 94.4795
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Yongnyah",
+      "severity": "High",
+      "max_risk_score": 0.5723,
+      "avg_risk_score": 0.5321,
+      "alert_cell_count": 735,
+      "critical_cell_count": 0,
+      "high_cell_count": 735,
+      "avg_rainfall_24h_mm": 19.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.5929,
+        "lon": 94.8289
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Mangkolemba",
+      "severity": "High",
+      "max_risk_score": 0.5723,
+      "avg_risk_score": 0.5331,
+      "alert_cell_count": 590,
+      "critical_cell_count": 0,
+      "high_cell_count": 590,
+      "avg_rainfall_24h_mm": 19.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.4727,
+        "lon": 94.4137
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Tamlu",
+      "severity": "High",
+      "max_risk_score": 0.5723,
+      "avg_risk_score": 0.5349,
+      "alert_cell_count": 484,
+      "critical_cell_count": 0,
+      "high_cell_count": 484,
+      "avg_rainfall_24h_mm": 21.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.6952,
+        "lon": 94.7135
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Nagarbera",
+      "severity": "High",
+      "max_risk_score": 0.5723,
+      "avg_risk_score": 0.5178,
+      "alert_cell_count": 225,
+      "critical_cell_count": 0,
+      "high_cell_count": 225,
+      "avg_rainfall_24h_mm": 19.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.1113,
+        "lon": 90.9554
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Aboi",
+      "severity": "High",
+      "max_risk_score": 0.5711,
+      "avg_risk_score": 0.5235,
+      "alert_cell_count": 1153,
+      "critical_cell_count": 0,
+      "high_cell_count": 1153,
+      "avg_rainfall_24h_mm": 19.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.6098,
+        "lon": 94.953
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Ongpangkong (S)",
+      "severity": "High",
+      "max_risk_score": 0.5711,
+      "avg_risk_score": 0.532,
+      "alert_cell_count": 426,
+      "critical_cell_count": 0,
+      "high_cell_count": 426,
+      "avg_rainfall_24h_mm": 20.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.3271,
+        "lon": 94.4014
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Hajo",
+      "severity": "High",
+      "max_risk_score": 0.5708,
+      "avg_risk_score": 0.5185,
+      "alert_cell_count": 240,
+      "critical_cell_count": 0,
+      "high_cell_count": 240,
+      "avg_rainfall_24h_mm": 20.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.2218,
+        "lon": 91.5392
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Jirang",
+      "severity": "High",
+      "max_risk_score": 0.5706,
+      "avg_risk_score": 0.5162,
+      "alert_cell_count": 2219,
+      "critical_cell_count": 0,
+      "high_cell_count": 2219,
+      "avg_rainfall_24h_mm": 19.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.944,
+        "lon": 91.5583
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Mahur",
+      "severity": "High",
+      "max_risk_score": 0.5688,
+      "avg_risk_score": 0.5179,
+      "alert_cell_count": 2006,
+      "critical_cell_count": 0,
+      "high_cell_count": 2006,
+      "avg_rainfall_24h_mm": 19.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.0264,
+        "lon": 93.2058
+      }
+    },
+    {
+      "state": "Mizoram",
+      "district": "Zawlnuam",
+      "severity": "High",
+      "max_risk_score": 0.5657,
+      "avg_risk_score": 0.5225,
+      "alert_cell_count": 145,
+      "critical_cell_count": 0,
+      "high_cell_count": 145,
+      "avg_rainfall_24h_mm": 19.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 23.8874,
+        "lon": 92.3589
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Changtongya",
+      "severity": "High",
+      "max_risk_score": 0.5639,
+      "avg_risk_score": 0.5262,
+      "alert_cell_count": 620,
+      "critical_cell_count": 0,
+      "high_cell_count": 620,
+      "avg_rainfall_24h_mm": 19.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.5437,
+        "lon": 94.6486
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Chuchuyimlang",
+      "severity": "High",
+      "max_risk_score": 0.5639,
+      "avg_risk_score": 0.5308,
+      "alert_cell_count": 539,
+      "critical_cell_count": 0,
+      "high_cell_count": 539,
+      "avg_rainfall_24h_mm": 18.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.4443,
+        "lon": 94.6394
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Guwahati",
+      "severity": "High",
+      "max_risk_score": 0.5639,
+      "avg_risk_score": 0.5174,
+      "alert_cell_count": 393,
+      "critical_cell_count": 0,
+      "high_cell_count": 393,
+      "avg_rainfall_24h_mm": 19.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.1538,
+        "lon": 91.7032
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Goroimari",
+      "severity": "High",
+      "max_risk_score": 0.5639,
+      "avg_risk_score": 0.5174,
+      "alert_cell_count": 366,
+      "critical_cell_count": 0,
+      "high_cell_count": 366,
+      "avg_rainfall_24h_mm": 19.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.0702,
+        "lon": 91.3575
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Sungro",
+      "severity": "High",
+      "max_risk_score": 0.5639,
+      "avg_risk_score": 0.5249,
+      "alert_cell_count": 234,
+      "critical_cell_count": 0,
+      "high_cell_count": 234,
+      "avg_rainfall_24h_mm": 18.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.2799,
+        "lon": 94.3345
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Alongkima",
+      "severity": "High",
+      "max_risk_score": 0.5626,
+      "avg_risk_score": 0.5239,
+      "alert_cell_count": 2060,
+      "critical_cell_count": 0,
+      "high_cell_count": 2060,
+      "avg_rainfall_24h_mm": 19.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.594,
+        "lon": 94.5617
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Longchem",
+      "severity": "High",
+      "max_risk_score": 0.5626,
+      "avg_risk_score": 0.5208,
+      "alert_cell_count": 1180,
+      "critical_cell_count": 0,
+      "high_cell_count": 1180,
+      "avg_rainfall_24h_mm": 19.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.6577,
+        "lon": 94.4915
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Dima Hasao",
+      "severity": "High",
+      "max_risk_score": 0.5626,
+      "avg_risk_score": 0.5187,
+      "alert_cell_count": 970,
+      "critical_cell_count": 0,
+      "high_cell_count": 970,
+      "avg_rainfall_24h_mm": 19.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.052,
+        "lon": 93.0729
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Kubolong",
+      "severity": "High",
+      "max_risk_score": 0.5626,
+      "avg_risk_score": 0.5291,
+      "alert_cell_count": 644,
+      "critical_cell_count": 0,
+      "high_cell_count": 644,
+      "avg_rainfall_24h_mm": 19.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.452,
+        "lon": 94.5207
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Mokokchung",
+      "severity": "High",
+      "max_risk_score": 0.5626,
+      "avg_risk_score": 0.5256,
+      "alert_cell_count": 260,
+      "critical_cell_count": 0,
+      "high_cell_count": 260,
+      "avg_rainfall_24h_mm": 19.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.3415,
+        "lon": 94.5203
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Ralan",
+      "severity": "High",
+      "max_risk_score": 0.5626,
+      "avg_risk_score": 0.5251,
+      "alert_cell_count": 229,
+      "critical_cell_count": 0,
+      "high_cell_count": 229,
+      "avg_rainfall_24h_mm": 18.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.037,
+        "lon": 93.9794
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Sarupathar",
+      "severity": "High",
+      "max_risk_score": 0.5626,
+      "avg_risk_score": 0.5219,
+      "alert_cell_count": 203,
+      "critical_cell_count": 0,
+      "high_cell_count": 203,
+      "avg_rainfall_24h_mm": 19.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.1121,
+        "lon": 93.9702
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Kamrup",
+      "severity": "High",
+      "max_risk_score": 0.5626,
+      "avg_risk_score": 0.5237,
+      "alert_cell_count": 157,
+      "critical_cell_count": 0,
+      "high_cell_count": 157,
+      "avg_rainfall_24h_mm": 19.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.2927,
+        "lon": 91.6582
+      }
+    },
+    {
+      "state": "Manipur",
+      "district": "Tamenglong",
+      "severity": "High",
+      "max_risk_score": 0.5626,
+      "avg_risk_score": 0.5322,
+      "alert_cell_count": 124,
+      "critical_cell_count": 0,
+      "high_cell_count": 124,
+      "avg_rainfall_24h_mm": 19.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.9877,
+        "lon": 93.4812
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Mariani",
+      "severity": "High",
+      "max_risk_score": 0.5612,
+      "avg_risk_score": 0.5255,
+      "alert_cell_count": 211,
+      "critical_cell_count": 0,
+      "high_cell_count": 211,
+      "avg_rainfall_24h_mm": 18.6,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.5972,
+        "lon": 94.4435
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Longleng",
+      "severity": "High",
+      "max_risk_score": 0.56,
+      "avg_risk_score": 0.5322,
+      "alert_cell_count": 168,
+      "critical_cell_count": 0,
+      "high_cell_count": 168,
+      "avg_rainfall_24h_mm": 18.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.5192,
+        "lon": 94.7952
+      }
+    },
+    {
+      "state": "Manipur",
+      "district": "Longmei Subdivision",
+      "severity": "High",
+      "max_risk_score": 0.56,
+      "avg_risk_score": 0.5329,
+      "alert_cell_count": 25,
+      "critical_cell_count": 0,
+      "high_cell_count": 25,
+      "avg_rainfall_24h_mm": 18.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.7665,
+        "lon": 93.5731
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Changpang",
+      "severity": "High",
+      "max_risk_score": 0.5591,
+      "avg_risk_score": 0.5203,
+      "alert_cell_count": 131,
+      "critical_cell_count": 0,
+      "high_cell_count": 131,
+      "avg_rainfall_24h_mm": 18.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.4105,
+        "lon": 94.2573
+      }
+    },
+    {
+      "state": "Manipur",
+      "district": "Haochong Subdivision",
+      "severity": "High",
+      "max_risk_score": 0.5589,
+      "avg_risk_score": 0.5257,
+      "alert_cell_count": 102,
+      "critical_cell_count": 0,
+      "high_cell_count": 102,
+      "avg_rainfall_24h_mm": 19.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.9132,
+        "lon": 93.5654
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Lotsu",
+      "severity": "High",
+      "max_risk_score": 0.5577,
+      "avg_risk_score": 0.5305,
+      "alert_cell_count": 26,
+      "critical_cell_count": 0,
+      "high_cell_count": 26,
+      "avg_rainfall_24h_mm": 18.7,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.1301,
+        "lon": 94.0166
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Baghty",
+      "severity": "High",
+      "max_risk_score": 0.5572,
+      "avg_risk_score": 0.5287,
+      "alert_cell_count": 278,
+      "critical_cell_count": 0,
+      "high_cell_count": 278,
+      "avg_rainfall_24h_mm": 18.2,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.2896,
+        "lon": 94.217
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Bhandari",
+      "severity": "High",
+      "max_risk_score": 0.5572,
+      "avg_risk_score": 0.5288,
+      "alert_cell_count": 228,
+      "critical_cell_count": 0,
+      "high_cell_count": 228,
+      "avg_rainfall_24h_mm": 18.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.2118,
+        "lon": 94.0324
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Chen",
+      "severity": "High",
+      "max_risk_score": 0.5572,
+      "avg_risk_score": 0.5282,
+      "alert_cell_count": 164,
+      "critical_cell_count": 0,
+      "high_cell_count": 164,
+      "avg_rainfall_24h_mm": 18.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.608,
+        "lon": 95.0594
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Kamrup Metropolitan",
+      "severity": "High",
+      "max_risk_score": 0.5572,
+      "avg_risk_score": 0.5259,
+      "alert_cell_count": 137,
+      "critical_cell_count": 0,
+      "high_cell_count": 137,
+      "avg_rainfall_24h_mm": 18.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.1309,
+        "lon": 91.7279
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Angjangyang",
+      "severity": "High",
+      "max_risk_score": 0.5572,
+      "avg_risk_score": 0.5322,
+      "alert_cell_count": 47,
+      "critical_cell_count": 0,
+      "high_cell_count": 47,
+      "avg_rainfall_24h_mm": 18.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.5447,
+        "lon": 94.8839
+      }
+    },
+    {
+      "state": "Manipur",
+      "district": "Vangai Range",
+      "severity": "High",
+      "max_risk_score": 0.5537,
+      "avg_risk_score": 0.5229,
+      "alert_cell_count": 41,
+      "critical_cell_count": 0,
+      "high_cell_count": 41,
+      "avg_rainfall_24h_mm": 18.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.6342,
+        "lon": 93.0857
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "West Jaintia Hills",
+      "severity": "High",
+      "max_risk_score": 0.5521,
+      "avg_risk_score": 0.5181,
+      "alert_cell_count": 8,
+      "critical_cell_count": 0,
+      "high_cell_count": 8,
+      "avg_rainfall_24h_mm": 18.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.382,
+        "lon": 92.1282
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Kharkutta",
+      "severity": "High",
+      "max_risk_score": 0.5465,
+      "avg_risk_score": 0.509,
+      "alert_cell_count": 15,
+      "critical_cell_count": 0,
+      "high_cell_count": 15,
+      "avg_rainfall_24h_mm": 18.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.7537,
+        "lon": 91.0274
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Sipajhar",
+      "severity": "High",
+      "max_risk_score": 0.5436,
+      "avg_risk_score": 0.5276,
+      "alert_cell_count": 43,
+      "critical_cell_count": 0,
+      "high_cell_count": 43,
+      "avg_rainfall_24h_mm": 18.4,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.3749,
+        "lon": 91.8178
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Dimapur",
+      "severity": "High",
+      "max_risk_score": 0.5273,
+      "avg_risk_score": 0.5066,
+      "alert_cell_count": 61,
+      "critical_cell_count": 0,
+      "high_cell_count": 61,
+      "avg_rainfall_24h_mm": 19.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.0159,
+        "lon": 93.6014
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Sivasagar",
+      "severity": "High",
+      "max_risk_score": 0.5259,
+      "avg_risk_score": 0.5259,
+      "alert_cell_count": 1,
+      "critical_cell_count": 0,
+      "high_cell_count": 1,
+      "avg_rainfall_24h_mm": 22.3,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.9328,
+        "lon": 94.6326
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Hojai",
+      "severity": "High",
+      "max_risk_score": 0.5233,
+      "avg_risk_score": 0.5067,
+      "alert_cell_count": 46,
+      "critical_cell_count": 0,
+      "high_cell_count": 46,
+      "avg_rainfall_24h_mm": 18.8,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.872,
+        "lon": 92.8311
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Bagribari (Pt)",
+      "severity": "High",
+      "max_risk_score": 0.5196,
+      "avg_risk_score": 0.5138,
+      "alert_cell_count": 2,
+      "critical_cell_count": 0,
+      "high_cell_count": 2,
+      "avg_rainfall_24h_mm": 23.0,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.2292,
+        "lon": 90.0457
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Silonijan",
+      "severity": "High",
+      "max_risk_score": 0.5188,
+      "avg_risk_score": 0.5188,
+      "alert_cell_count": 1,
+      "critical_cell_count": 0,
+      "high_cell_count": 1,
+      "avg_rainfall_24h_mm": 18.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.1487,
+        "lon": 93.6146
+      }
+    },
+    {
+      "state": "Nagaland",
+      "district": "Niuland",
+      "severity": "High",
+      "max_risk_score": 0.5065,
+      "avg_risk_score": 0.5038,
+      "alert_cell_count": 10,
+      "critical_cell_count": 0,
+      "high_cell_count": 10,
+      "avg_rainfall_24h_mm": 18.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.9704,
+        "lon": 93.9251
+      }
+    },
+    {
+      "state": "Tripura",
+      "district": "Dharmanagar",
+      "severity": "High",
+      "max_risk_score": 0.5052,
+      "avg_risk_score": 0.5052,
+      "alert_cell_count": 1,
+      "critical_cell_count": 0,
+      "high_cell_count": 1,
+      "avg_rainfall_24h_mm": 18.9,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 24.5056,
+        "lon": 92.2399
+      }
+    },
+    {
+      "state": "Assam",
+      "district": "Chamaria",
+      "severity": "High",
+      "max_risk_score": 0.5014,
+      "avg_risk_score": 0.5014,
+      "alert_cell_count": 1,
+      "critical_cell_count": 0,
+      "high_cell_count": 1,
+      "avg_rainfall_24h_mm": 18.1,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 26.1295,
+        "lon": 91.0877
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "district": "Gasuapara",
+      "severity": "High",
+      "max_risk_score": 0.5014,
+      "avg_risk_score": 0.5014,
+      "alert_cell_count": 1,
+      "critical_cell_count": 0,
+      "high_cell_count": 1,
+      "avg_rainfall_24h_mm": 18.5,
+      "avg_soil_moisture_cm3_per_cm3": 0.3879,
+      "approx_centroid": {
+        "lat": 25.2648,
+        "lon": 90.4569
+      }
+    }
+  ],
+  "hotspots": [
+    {
+      "latitude": 23.3783,
+      "longitude": 91.8354,
+      "risk_score": 0.9649,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 37.0,
+      "soil_moisture": 0.3228,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3783,
+      "longitude": 91.822,
+      "risk_score": 0.9645,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 35.9,
+      "soil_moisture": 0.3228,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3783,
+      "longitude": 91.8258,
+      "risk_score": 0.9633,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 36.2,
+      "soil_moisture": 0.3228,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3783,
+      "longitude": 91.8335,
+      "risk_score": 0.9629,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 36.8,
+      "soil_moisture": 0.3228,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4301,
+      "longitude": 91.8143,
+      "risk_score": 0.9624,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 33.4,
+      "soil_moisture": 0.3227,
+      "nearest_district": "Gonda Twisa",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3783,
+      "longitude": 91.8239,
+      "risk_score": 0.962,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 36.1,
+      "soil_moisture": 0.3228,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3841,
+      "longitude": 91.8373,
+      "risk_score": 0.9614,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 36.9,
+      "soil_moisture": 0.3212,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3822,
+      "longitude": 91.8239,
+      "risk_score": 0.9606,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 35.9,
+      "soil_moisture": 0.3218,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3802,
+      "longitude": 91.8239,
+      "risk_score": 0.9606,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 36.0,
+      "soil_moisture": 0.3223,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3898,
+      "longitude": 91.8181,
+      "risk_score": 0.9606,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 35.2,
+      "soil_moisture": 0.3208,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4186,
+      "longitude": 91.8162,
+      "risk_score": 0.9606,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 33.9,
+      "soil_moisture": 0.3196,
+      "nearest_district": "Gonda Twisa",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 26.4439,
+      "longitude": 91.7894,
+      "risk_score": 0.9605,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 19.2,
+      "soil_moisture": 0.3707,
+      "nearest_district": "Goreswar",
+      "state": "Assam"
+    },
+    {
+      "latitude": 23.3783,
+      "longitude": 91.8201,
+      "risk_score": 0.9604,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 35.8,
+      "soil_moisture": 0.3228,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4397,
+      "longitude": 91.8162,
+      "risk_score": 0.9604,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 33.1,
+      "soil_moisture": 0.3212,
+      "nearest_district": "Gonda Twisa",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 26.4439,
+      "longitude": 91.7913,
+      "risk_score": 0.9602,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 19.2,
+      "soil_moisture": 0.3711,
+      "nearest_district": "Goreswar",
+      "state": "Assam"
+    },
+    {
+      "latitude": 23.3917,
+      "longitude": 91.8162,
+      "risk_score": 0.9601,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 35.0,
+      "soil_moisture": 0.3219,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4032,
+      "longitude": 91.8143,
+      "risk_score": 0.9601,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 34.4,
+      "soil_moisture": 0.3206,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4032,
+      "longitude": 91.8162,
+      "risk_score": 0.9601,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 34.5,
+      "soil_moisture": 0.3189,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4032,
+      "longitude": 91.8124,
+      "risk_score": 0.9601,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 34.2,
+      "soil_moisture": 0.3222,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3994,
+      "longitude": 91.8162,
+      "risk_score": 0.9601,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 34.7,
+      "soil_moisture": 0.3197,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3841,
+      "longitude": 91.8181,
+      "risk_score": 0.9601,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 35.4,
+      "soil_moisture": 0.3224,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3802,
+      "longitude": 91.8258,
+      "risk_score": 0.9601,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 36.1,
+      "soil_moisture": 0.3223,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4052,
+      "longitude": 91.8143,
+      "risk_score": 0.9601,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 34.3,
+      "soil_moisture": 0.3207,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.386,
+      "longitude": 91.8181,
+      "risk_score": 0.9601,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 35.3,
+      "soil_moisture": 0.3219,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3917,
+      "longitude": 91.8316,
+      "risk_score": 0.9601,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 36.1,
+      "soil_moisture": 0.319,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3975,
+      "longitude": 91.8162,
+      "risk_score": 0.9601,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 34.7,
+      "soil_moisture": 0.3202,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3917,
+      "longitude": 91.8296,
+      "risk_score": 0.9601,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 36.0,
+      "soil_moisture": 0.319,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3898,
+      "longitude": 91.8201,
+      "risk_score": 0.9601,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 35.3,
+      "soil_moisture": 0.3196,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.386,
+      "longitude": 91.8373,
+      "risk_score": 0.96,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 36.8,
+      "soil_moisture": 0.3207,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3994,
+      "longitude": 91.8143,
+      "risk_score": 0.9598,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 34.5,
+      "soil_moisture": 0.3213,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.432,
+      "longitude": 91.8162,
+      "risk_score": 0.9597,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 33.4,
+      "soil_moisture": 0.3205,
+      "nearest_district": "Gonda Twisa",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4358,
+      "longitude": 91.8162,
+      "risk_score": 0.9597,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 33.3,
+      "soil_moisture": 0.3208,
+      "nearest_district": "Gonda Twisa",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3975,
+      "longitude": 91.8373,
+      "risk_score": 0.9596,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 36.3,
+      "soil_moisture": 0.3174,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3975,
+      "longitude": 91.8239,
+      "risk_score": 0.9596,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 35.3,
+      "soil_moisture": 0.3174,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4282,
+      "longitude": 91.8201,
+      "risk_score": 0.9595,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 33.8,
+      "soil_moisture": 0.3161,
+      "nearest_district": "Gonda Twisa",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4378,
+      "longitude": 91.8258,
+      "risk_score": 0.9595,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 33.9,
+      "soil_moisture": 0.3161,
+      "nearest_district": "Gonda Twisa",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4339,
+      "longitude": 91.8258,
+      "risk_score": 0.9595,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 34.0,
+      "soil_moisture": 0.3161,
+      "nearest_district": "Gonda Twisa",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4339,
+      "longitude": 91.8239,
+      "risk_score": 0.9595,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 33.9,
+      "soil_moisture": 0.3161,
+      "nearest_district": "Gonda Twisa",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4358,
+      "longitude": 91.8258,
+      "risk_score": 0.9595,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 33.9,
+      "soil_moisture": 0.3161,
+      "nearest_district": "Gonda Twisa",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4282,
+      "longitude": 91.822,
+      "risk_score": 0.9595,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 34.0,
+      "soil_moisture": 0.3161,
+      "nearest_district": "Gonda Twisa",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4358,
+      "longitude": 91.8239,
+      "risk_score": 0.9595,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 33.8,
+      "soil_moisture": 0.3161,
+      "nearest_district": "Gonda Twisa",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.432,
+      "longitude": 91.8239,
+      "risk_score": 0.9595,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 34.0,
+      "soil_moisture": 0.3161,
+      "nearest_district": "Gonda Twisa",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4301,
+      "longitude": 91.822,
+      "risk_score": 0.9595,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 33.9,
+      "soil_moisture": 0.3161,
+      "nearest_district": "Gonda Twisa",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.432,
+      "longitude": 91.8258,
+      "risk_score": 0.9595,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 34.1,
+      "soil_moisture": 0.3161,
+      "nearest_district": "Gonda Twisa",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3898,
+      "longitude": 91.822,
+      "risk_score": 0.9594,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 35.5,
+      "soil_moisture": 0.3196,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3917,
+      "longitude": 91.8277,
+      "risk_score": 0.9594,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 35.8,
+      "soil_moisture": 0.319,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3841,
+      "longitude": 91.822,
+      "risk_score": 0.9594,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 35.7,
+      "soil_moisture": 0.3212,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3879,
+      "longitude": 91.8181,
+      "risk_score": 0.9594,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 35.3,
+      "soil_moisture": 0.3213,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.4147,
+      "longitude": 91.8143,
+      "risk_score": 0.9594,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 33.9,
+      "soil_moisture": 0.3213,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    },
+    {
+      "latitude": 23.3917,
+      "longitude": 91.8354,
+      "risk_score": 0.9594,
+      "risk_level": "Critical",
+      "rainfall_24h_mm": 36.4,
+      "soil_moisture": 0.319,
+      "nearest_district": "Karbook",
+      "state": "Tripura"
+    }
+  ]
+}
