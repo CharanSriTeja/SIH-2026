@@ -4,6 +4,8 @@ import * as pmtiles from 'pmtiles';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './MapComponent.css';
 import axios from 'axios';
+
+const API_BASE = import.meta.env.VITE_API_URL || '';
 import { 
   ShieldAlert, 
   CloudRain, 
@@ -177,7 +179,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
 
   // Fetch daily alerts summary on mount
   useEffect(() => {
-    axios.get('/api/risk/alerts-today')
+    axios.get(`${API_BASE}/api/risk/alerts-today`)
       .then((res) => {
         if (res.data && res.data.total_alert_cells > 0) {
           setRiskAlertsSummary(res.data);
@@ -211,7 +213,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
       const headers: Record<string, string> = {};
       if (token) headers['Authorization'] = `Bearer ${token}`;
 
-      const res = await axios.get<RiskDetailData>(`/risk/my-location?lat=${lat}&lon=${lon}`, { headers });
+      const res = await axios.get<RiskDetailData>(`${API_BASE}/risk/my-location?lat=${lat}&lon=${lon}`, { headers });
       setRiskData(res.data);
       setIsPanelOpen(true);
     } catch (err) {
@@ -413,7 +415,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
       // -----------------------------------------------------------------------
       map.addSource('susceptibility-raster', {
         type: 'raster',
-        tiles: ['/tiles/susceptibility/{z}/{x}/{y}.png'],
+        tiles: [`${API_BASE}/tiles/susceptibility/{z}/{x}/{y}.png`],
         tileSize: 256,
         minzoom: 4,
         maxzoom: 13,
@@ -438,7 +440,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
       // -----------------------------------------------------------------------
       map.addSource('risk-raster', {
         type: 'raster',
-        tiles: ['/tiles/risk/{z}/{x}/{y}.png'],
+        tiles: [`${API_BASE}/tiles/risk/{z}/{x}/{y}.png`],
         tileSize: 256,
         minzoom: 4,
         maxzoom: 13,
@@ -463,7 +465,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
       // -----------------------------------------------------------------------
       map.addSource('rainfall-raster', {
         type: 'raster',
-        tiles: ['/tiles/rainfall/{z}/{x}/{y}.png'],
+        tiles: [`${API_BASE}/tiles/rainfall/{z}/{x}/{y}.png`],
         tileSize: 256,
         minzoom: 4,
         maxzoom: 13,
@@ -488,7 +490,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
       // -----------------------------------------------------------------------
       map.addSource('soil-moisture-raster', {
         type: 'raster',
-        tiles: ['/tiles/soil-moisture/{z}/{x}/{y}.png'],
+        tiles: [`${API_BASE}/tiles/soil-moisture/{z}/{x}/{y}.png`],
         tileSize: 256,
         minzoom: 4,
         maxzoom: 13,
@@ -580,7 +582,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
       // -----------------------------------------------------------------------
       map.addSource('roads-vector-source', {
         type: 'vector',
-        tiles: ['/tiles/roads/{z}/{x}/{y}.pbf'],
+        tiles: [`${API_BASE}/tiles/roads/{z}/{x}/{y}.pbf`],
         minzoom: 5,
         maxzoom: 14,
       });

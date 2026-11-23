@@ -73,7 +73,7 @@ export const LocationPromptModal: React.FC<LocationPromptModalProps> = ({
       const token = localStorage.getItem('access_token');
       if (token) {
         await axios.post(
-          '/profile/location',
+          `${API_BASE}/profile/location`,
           { latitude: lat, longitude: lon },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -117,9 +117,11 @@ export const LocationPromptModal: React.FC<LocationPromptModalProps> = ({
         }
       },
       (err) => {
-        console.warn('Geolocation error:', err.message);
-        setStatus('DENIED');
-        setErrorMessage(err.message || 'Location permission denied by browser.');
+        console.warn('Geolocation error (using NER default):', err.message);
+        const sample = getRandomNerLocation();
+        setAssignedSample(sample);
+        setStatus('OUTSIDE_NER');
+        setCountdown(3);
       },
       {
         enableHighAccuracy: true,

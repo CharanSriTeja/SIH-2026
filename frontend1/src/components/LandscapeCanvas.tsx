@@ -145,35 +145,48 @@ export const LandscapeCanvas: React.FC<LandscapeCanvasProps> = ({ onPhaseChange 
     function preloadImages() {
       // 1. Frame 0 priority for instant first paint
       const firstImg = new Image();
+      let framesAvailable = false;
+
+      const loadRemainingFrames = () => {
+        if (!framesAvailable) return;
+        for (let i = 1; i < TOTAL_FRAMES; i++) {
+          const img = new Image();
+          const index = i;
+          img.onload = () => {
+            isLoaded[index] = true;
+            const currentTarget = Math.round(currentFrameFloat);
+            if (currentTarget === index && drawnImageIndex !== index) {
+              drawFrame(index, true);
+            }
+          };
+          img.src = getFramePath(index);
+          images[index] = img;
+          if (img.complete) {
+            isLoaded[index] = true;
+          }
+        }
+      };
+
       firstImg.onload = () => {
+        framesAvailable = true;
         isLoaded[0] = true;
         resizeCanvas();
         drawFrame(0, true);
+        loadRemainingFrames();
+      };
+      firstImg.onerror = () => {
+        // Frames not available on server, avoid 240 missing asset 404s
+        framesAvailable = false;
       };
       firstImg.src = getFramePath(0);
       images[0] = firstImg;
-      if (firstImg.complete) {
+
+      if (firstImg.complete && firstImg.naturalWidth > 0) {
+        framesAvailable = true;
         isLoaded[0] = true;
         resizeCanvas();
         drawFrame(0, true);
-      }
-
-      // 2. Preload remaining frames
-      for (let i = 1; i < TOTAL_FRAMES; i++) {
-        const img = new Image();
-        const index = i;
-        img.onload = () => {
-          isLoaded[index] = true;
-          const currentTarget = Math.round(currentFrameFloat);
-          if (currentTarget === index && drawnImageIndex !== index) {
-            drawFrame(index, true);
-          }
-        };
-        img.src = getFramePath(index);
-        images[index] = img;
-        if (img.complete) {
-          isLoaded[index] = true;
-        }
+        loadRemainingFrames();
       }
     }
 

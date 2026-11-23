@@ -39,6 +39,8 @@ import {
   MessageSquare
 } from 'lucide-react';
 import axios from 'axios';
+
+const API_BASE = import.meta.env.VITE_API_URL || '';
 import { UserRole, CitizenLocationState, GeoTaggedPhoto, GeoTaggedVideo } from '../types';
 import { CitizenCameraModal } from './CitizenCameraModal';
 import { OfficerOperationalService } from '../services/officerOperationalService';
@@ -256,7 +258,7 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
       const token = localStorage.getItem('access_token');
       const headers: Record<string, string> = {};
       if (token) headers['Authorization'] = `Bearer ${token}`;
-      const resp = await axios.get<RiskAssessmentData>(`/risk/my-location?lat=${lat}&lon=${lon}`, { headers });
+      const resp = await axios.get<RiskAssessmentData>(`${API_BASE}/risk/my-location?lat=${lat}&lon=${lon}`, { headers });
       setRiskAssessment(resp.data);
     } catch (e) {
       console.warn('Could not fetch real-time risk assessment:', e);
@@ -290,7 +292,7 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
         const token = localStorage.getItem('access_token');
         if (token) {
           axios.post(
-            '/profile/location',
+            `${API_BASE}/profile/location`,
             { latitude: loc.latitude, longitude: loc.longitude },
             { headers: { Authorization: `Bearer ${token}` } }
           ).catch(() => {});
@@ -345,7 +347,7 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
             const token = localStorage.getItem('access_token');
             if (token) {
               axios.post(
-                '/profile/location',
+                `${API_BASE}/profile/location`,
                 { latitude: loc.latitude, longitude: loc.longitude },
                 { headers: { Authorization: `Bearer ${token}` } }
               ).catch(() => {});
@@ -356,15 +358,34 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
           resolve(loc);
         },
         (err) => {
-          console.warn('Geolocation error:', err);
-          setLocationPermissionStatus('DENIED');
-          if (err.code === err.PERMISSION_DENIED) {
-            setLocationErrorMsg('Location access was denied. Please allow location permissions in your browser settings.');
-          } else {
-            setLocationErrorMsg('Unable to obtain device location. Please check device GPS and try again.');
-          }
+          console.warn('Geolocation error or timeout, defaulting to NER sample location:', err);
+          const fallbackSample = getRandomNerLocation();
+          const fallbackLoc: CitizenLocationState = {
+            latitude: fallbackSample.latitude,
+            longitude: fallbackSample.longitude,
+            altitude: null,
+            accuracy: 50,
+            timestamp: Date.now(),
+            areaName: `${fallbackSample.name}, ${fallbackSample.state} (NER Sample)`,
+            isPermissionGranted: true,
+            isDemo: true,
+          };
+          setLocationState(fallbackLoc);
+          setLocationPermissionStatus('GRANTED');
           setIsLocating(false);
-          resolve(null);
+          try {
+            sessionStorage.setItem('bhuraksha_citizen_location', JSON.stringify(fallbackLoc));
+            const token = localStorage.getItem('access_token');
+            if (token) {
+              axios.post(
+                `${API_BASE}/profile/location`,
+                { latitude: fallbackLoc.latitude, longitude: fallbackLoc.longitude },
+                { headers: { Authorization: `Bearer ${token}` } }
+              ).catch(() => {});
+            }
+          } catch {}
+          fetchRiskAssessment(fallbackLoc.latitude, fallbackLoc.longitude);
+          resolve(fallbackLoc);
         },
         {
           enableHighAccuracy: true,
