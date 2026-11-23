@@ -53,6 +53,7 @@ allowed_origins = [
     "http://127.0.0.1:3000",
     "http://localhost:8000",
     "http://127.0.0.1:8000",
+    "https://sih-2026-2qe4.onrender.com"
 ]
 if cors_origins_env:
     for origin in cors_origins_env.split(","):
