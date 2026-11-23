@@ -28,6 +28,7 @@ pyarrow>=14.0.2
 pyproj>=3.6.1
 pmtiles>=0.3.0
 shapely>=2.0.0
+Pillow>=10.0.0
 
 # NASA Earthdata / Soil Moisture
 earthaccess>=0.14.0

@@ -185,17 +185,23 @@ def _value_to_rgba(value: float) -> tuple:
     return (0xd7, 0x19, 0x1c, 200)  # fallback: Very High
 
 
+_BLANK_PNG = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x06\x00\x00\x00\x1f\x15c4\x00\x00\x00\nIDATx\x9cc\x00\x01\x00\x00\x05\x00\x01\r\n-\xb4\x00\x00\x00\x00IEND\xaeB`\x82'
 _TRANSPARENT_TILE = None
 
 def _make_transparent_tile() -> bytes:
     """Return a 256×256 fully transparent PNG (cached)."""
     global _TRANSPARENT_TILE
-    if _TRANSPARENT_TILE is None:
+    if _TRANSPARENT_TILE is not None and len(_TRANSPARENT_TILE) > 100:
+        return _TRANSPARENT_TILE
+    try:
+        from PIL import Image
         img = Image.new("RGBA", (256, 256), (0, 0, 0, 0))
         buf = io.BytesIO()
         img.save(buf, format="PNG")
         _TRANSPARENT_TILE = buf.getvalue()
-    return _TRANSPARENT_TILE
+        return _TRANSPARENT_TILE
+    except Exception:
+        return _BLANK_PNG
 
 # ============================================================================
 # 1. VECTOR TILE SERVING ENDPOINTS (MBTILES / MVT / PBF)

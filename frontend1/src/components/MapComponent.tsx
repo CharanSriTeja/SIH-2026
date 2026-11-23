@@ -40,10 +40,10 @@ try {
 }
 
 const getPmtilesUrl = (relativePath: string): string => {
-  const origin = typeof window !== 'undefined' && window.location.origin
-    ? window.location.origin
-    : 'http://localhost:5173';
-  return `pmtiles://${origin}${relativePath}`;
+  const apiBase = import.meta.env.VITE_API_URL || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:8000');
+  const cleanBase = apiBase.replace(/\/+$/, '');
+  const cleanPath = relativePath.startsWith('/') ? relativePath : `/${relativePath}`;
+  return `pmtiles://${cleanBase}${cleanPath}`;
 };
 
 const LANDSLIDES_SOURCE_LAYER = 'landslides';
