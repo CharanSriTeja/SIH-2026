@@ -3,7 +3,11 @@ import {
   StatesDistrictsResponse,
   DistrictAdminUser,
   DistrictAdminCreatePayload,
-  CitizenReportItem
+  CitizenReportItem,
+  DistrictOverviewResponse,
+  DistrictVillageItem,
+  DistrictVillagesResponse,
+  Shelter
 } from '../types';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
@@ -13,34 +17,16 @@ const getAuthHeaders = () => {
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
-/**
- * Ensures an active Super-Admin JWT is available.
- * If token is missing, expired, or non-admin, authenticates automatically using the database Super-Admin.
- */
 export async function obtainAdminToken(): Promise<string> {
-  try {
-    const res = await axios.post(`${API_BASE}/auth/login`, {
-      phone_number: '+919999999999',
-      password: 'AdminPass123!'
-    });
-    if (res.data?.access_token) {
-      const token = res.data.access_token;
-      localStorage.setItem('access_token', token);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      return token;
-    }
-  } catch (err) {
-    console.error('Failed to obtain admin token from backend:', err);
-  }
-  return '';
+  return localStorage.getItem("access_token") || "";
 }
 
 export async function getAdminAuthHeaders(): Promise<{ Authorization: string }> {
-  let token = localStorage.getItem('access_token');
+  const token = localStorage.getItem("access_token");
   if (!token) {
-    token = await obtainAdminToken();
+    throw new Error("Sign in as an administrator to continue.");
   }
-  return { Authorization: `Bearer ${token}` };
+  return { Authorization: "Bearer " + token };
 }
 
 /**
@@ -222,19 +208,94 @@ export async function fetchAuthorizedPhotoBlobUrl(photoPath: string): Promise<st
 }
 
 /**
- * Fetch all citizen hazard reports across all districts (Super-Admin only)
+ * Fetch District Admin command center overview statistics
  */
-export async function fetchAllAdminReports(): Promise<CitizenReportItem[]> {
+export async function fetchDistrictOverview(): Promise<DistrictOverviewResponse> {
+  const res = await axios.get<DistrictOverviewResponse>(`${API_BASE}/district-admin/overview`, {
+    headers: getAuthHeaders()
+  });
+  return res.data;
+}
+export const fetchNearestFacilities = async (lat?: number, lon?: number): Promise<any> => {
+  try {
+    const url = (lat && lon) 
+      ? `${API_BASE}/citizen/nearest-facilities?lat=${lat}&lon=${lon}` 
+      : `${API_BASE}/citizen/nearest-facilities`;
+    const response = await axios.get(url, { headers: getAuthHeaders() });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching nearest facilities:', error);
+    throw error;
+  }
+};
+
+/**
+ * Fetch District Admin active risk areas (stubbed or live pipeline)
+ */
+export async function fetchDistrictActiveRiskAreas(): Promise<{
+  district_id: string;
+  district_name?: string;
+  total_alert_areas: number;
+  areas: DistrictVillageItem[];
+  message: string;
+}> {
+  const res = await axios.get(`${API_BASE}/district-admin/active-risk-areas`, {
+    headers: getAuthHeaders()
+  });
+  return res.data;
+}
+
+/**
+ * Fetch settlements/villages within this District Admin jurisdiction
+ * with real Model B risk scores, risk levels, and daily alert status.
+ */
+export async function fetchDistrictVillages(filters?: {
+  risk_filter?: string;
+  search?: string;
+}): Promise<DistrictVillagesResponse> {
+  const params: Record<string, string> = {};
+  if (filters?.risk_filter) params.risk_filter = filters.risk_filter;
+  if (filters?.search) params.search = filters.search;
+
+  const res = await axios.get<DistrictVillagesResponse>(`${API_BASE}/district-admin/villages`, {
+    headers: getAuthHeaders(),
+    params
+  });
+  return res.data;
+}
+
+/**
+ * Fetch all citizen hazard reports across all districts (Super-Admin only)
+ * Supports filtering by state, district, status, and date range.
+ */
+export async function fetchAllAdminReports(filters?: {
+  state?: string;
+  district?: string;
+  status?: string;
+  date_from?: string;
+  date_to?: string;
+}): Promise<CitizenReportItem[]> {
+  const params: Record<string, string> = {};
+  if (filters?.state && filters.state !== 'all') params.state = filters.state;
+  if (filters?.district && filters.district !== 'all') params.district = filters.district;
+  if (filters?.status && filters.status !== 'all') params.status = filters.status;
+  if (filters?.date_from) params.date_from = filters.date_from;
+  if (filters?.date_to) params.date_to = filters.date_to;
+
   try {
     const headers = await getAdminAuthHeaders();
-    const res = await axios.get<CitizenReportItem[]>(`${API_BASE}/admin/reports`, { headers });
+    const res = await axios.get<CitizenReportItem[]>(`${API_BASE}/admin/reports`, {
+      headers,
+      params
+    });
     return res.data;
   } catch (err: any) {
     if (err.response?.status === 401 || err.response?.status === 403) {
       const token = await obtainAdminToken();
       if (token) {
         const res = await axios.get<CitizenReportItem[]>(`${API_BASE}/admin/reports`, {
-          headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${token}` },
+          params
         });
         return res.data;
       }
@@ -274,4 +335,127 @@ export async function updateAdminReportStatus(
   }
 }
 
+/**
+ * Manually trigger the data fetching pipeline from the admin dashboard
+ */
+export async function triggerDataPipeline(): Promise<{ success: boolean; message: string }> {
+  try {
+    const headers = await getAdminAuthHeaders();
+    const res = await axios.post(
+      `${API_BASE}/admin/run-pipeline`,
+      {},
+      { headers }
+    );
+    return res.data;
+  } catch (err: any) {
+    if (err.response?.status === 401 || err.response?.status === 403) {
+      const token = await obtainAdminToken();
+      if (token) {
+        const res = await axios.post(
+          `${API_BASE}/admin/run-pipeline`,
+          {},
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        return res.data;
+      }
+    }
+    throw err;
+  }
+}
 
+/**
+ * Fetch available data dates for data management
+ */
+export async function fetchDataDates(): Promise<string[]> {
+  try {
+    const headers = await getAdminAuthHeaders();
+    const res = await axios.get(`${API_BASE}/admin/data-dates`, { headers });
+    return res.data;
+  } catch (err: any) {
+    if (err.response?.status === 401 || err.response?.status === 403) {
+      const token = await obtainAdminToken();
+      if (token) {
+        const res = await axios.get(`${API_BASE}/admin/data-dates`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        return res.data;
+      }
+    }
+    throw err;
+  }
+}
+
+/**
+ * Delete data for a specific date
+ */
+export async function deleteDataDate(dateStr: string): Promise<{ success: boolean; message: string; deleted_count: number }> {
+  try {
+    const headers = await getAdminAuthHeaders();
+    const res = await axios.delete(`${API_BASE}/admin/data-dates/${dateStr}`, { headers });
+    return res.data;
+  } catch (err: any) {
+    if (err.response?.status === 401 || err.response?.status === 403) {
+      const token = await obtainAdminToken();
+      if (token) {
+        const res = await axios.delete(`${API_BASE}/admin/data-dates/${dateStr}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        return res.data;
+      }
+    }
+    throw err;
+  }
+}
+
+/**
+ * Fetch latest pipeline logs for the terminal UI
+ */
+export async function fetchPipelineLogs(): Promise<string> {
+  try {
+    const headers = await getAdminAuthHeaders();
+    const res = await axios.get(`${API_BASE}/admin/pipeline-logs`, { headers });
+    return res.data.logs;
+  } catch (err: any) {
+    if (err.response?.status === 401 || err.response?.status === 403) {
+      const token = await obtainAdminToken();
+      if (token) {
+        const res = await axios.get(`${API_BASE}/admin/pipeline-logs`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        return res.data.logs;
+      }
+    }
+    throw err;
+  }
+}
+
+/**
+ * Manage Shelters
+ */
+export async function fetchShelters(): Promise<Shelter[]> {
+  const res = await axios.get<Shelter[]>(`${API_BASE}/district-admin/shelters`, {
+    headers: getAuthHeaders()
+  });
+  return res.data;
+}
+
+export async function createShelter(payload: Partial<Shelter>): Promise<Shelter> {
+  const res = await axios.post<Shelter>(`${API_BASE}/district-admin/shelters`, payload, {
+    headers: getAuthHeaders()
+  });
+  return res.data;
+}
+
+export async function updateShelter(id: string, payload: Partial<Shelter>): Promise<Shelter> {
+  const res = await axios.patch<Shelter>(`${API_BASE}/district-admin/shelters/${id}`, payload, {
+    headers: getAuthHeaders()
+  });
+  return res.data;
+}
+
+export async function deleteShelter(id: string): Promise<{ success: boolean }> {
+  const res = await axios.delete<{ success: boolean }>(`${API_BASE}/district-admin/shelters/${id}`, {
+    headers: getAuthHeaders()
+  });
+  return res.data;
+}

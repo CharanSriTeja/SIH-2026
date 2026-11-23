@@ -22,7 +22,6 @@ import {
 } from 'lucide-react';
 import { UserRole, OfficerAccessRequest, OfficerOperationalProfile } from '../types';
 import { AuthService } from '../services/authService';
-import { obtainAdminToken } from '../services/districtAdminService';
 import { OfficerMultiStepRegistration } from './field-officer/OfficerMultiStepRegistration';
 import { OfficerStatusResolution } from './field-officer/OfficerStatusResolution';
 import { OfficerProfileSelection } from './field-officer/OfficerProfileSelection';
@@ -151,66 +150,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   };
 
   // Clear demo fill and set pre-authorized personas
-  const handleQuickDemoFill = (
-    type:
-      | 'citizen'
-      | 'officer_approved'
-      | 'officer_monitoring'
-      | 'officer_investigator'
-      | 'officer_pending'
-      | 'officer_rejected'
-      | 'officer_info'
-      | 'admin'
-  ) => {
-    setErrorMessage(null);
-    setErrorTitle(null);
-    setErrorCode(null);
-    setSubmittedOfficerRequest(null);
-    setOfficerStatusState(null);
-    setOfficerRequestData(null);
-
-    if (type === 'citizen') {
-      setMode('signin');
-      setSelectedRole('citizen');
-      setIdentifier('+91 98620 44102');
-      setPassword('citizen@123');
-    } else if (type === 'officer_approved' || type === 'officer_monitoring') {
-      setMode('signin');
-      setSelectedRole('officer');
-      setOfficerSubMode('login');
-      setIdentifier('OFF-8821');
-      setPassword('officer@123');
-    } else if (type === 'officer_investigator') {
-      setMode('signin');
-      setSelectedRole('officer');
-      setOfficerSubMode('login');
-      setIdentifier('OFF-9042');
-      setPassword('officer@123');
-    } else if (type === 'officer_pending') {
-      setMode('signin');
-      setSelectedRole('officer');
-      setOfficerSubMode('login');
-      setIdentifier('OFF-PENDING');
-      setPassword('officer@123');
-    } else if (type === 'officer_rejected') {
-      setMode('signin');
-      setSelectedRole('officer');
-      setOfficerSubMode('login');
-      setIdentifier('OFF-REJECTED');
-      setPassword('officer@123');
-    } else if (type === 'officer_info') {
-      setMode('signin');
-      setSelectedRole('officer');
-      setOfficerSubMode('login');
-      setIdentifier('OFF-INFO');
-      setPassword('officer@123');
-    } else if (type === 'admin') {
-      setMode('signin');
-      setSelectedRole('admin');
-      setIdentifier('ADM-4091');
-      setPassword('admin@123');
-    }
-  };
+  
 
   // Handle Sign In submission
   const handleSignInSubmit = (e: React.FormEvent) => {
@@ -252,9 +192,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     }
 
     if (result.user && result.authorizedRole) {
-      if (result.authorizedRole === 'admin') {
-        obtainAdminToken().catch((e) => console.warn('Admin token background fetch:', e));
-      }
       setIsSuccess(true);
       setSuccessMessage(`Authorized: Entering ${result.authorizedRole.toUpperCase()} Dashboard...`);
       setTimeout(() => {
@@ -390,14 +327,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               ? 'RESTRICTED / SDMA ONLY'
               : selectedRole === 'district_admin'
               ? 'DISTRICT JURISDICTION'
-              : selectedRole === 'officer'
-              ? 'FIELD VERIFICATION'
               : 'OPEN PUBLIC ACCESS'}
           </span>
         </div>
 
-        {/* 4-Role Architecture Selector Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+        {/* 3-Role Architecture Selector Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-4">
           {/* Card 1: CITIZEN */}
           <button
             type="button"
@@ -478,47 +413,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             </div>
           </button>
 
-          {/* Card 3: FIELD OFFICER */}
-          <button
-            type="button"
-            onClick={() => handleSelectRole('officer')}
-            className={`p-3 rounded-2xl border-2 text-left transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between ${
-              selectedRole === 'officer'
-                ? 'bg-[#EDF5F0] border-[#246A44] text-[#113822] shadow-md ring-2 ring-[#246A44]/40'
-                : 'bg-[#F5F1E6] border-[#D5CCA8] text-[#4E5446] hover:bg-[#EAE3D2] hover:border-[#BCB29E] hover:text-[#141712]'
-            }`}
-          >
-            <div className="flex items-center justify-between mb-2">
-              <div
-                className={`w-7 h-7 rounded-lg flex items-center justify-center transition-colors ${
-                  selectedRole === 'officer'
-                    ? 'bg-[#246A44] text-white'
-                    : 'bg-[#E0D7C5] text-[#555A4D]'
-                }`}
-              >
-                <Radio className="w-3.5 h-3.5" />
-              </div>
-              <span
-                className={`px-1.5 py-0.5 rounded text-[8px] font-mono font-bold uppercase transition-colors ${
-                  selectedRole === 'officer'
-                    ? 'bg-[#246A44] text-white'
-                    : 'bg-[#DAD1BD] text-[#474C3F] border border-[#C5BBA4]'
-                }`}
-              >
-                FIELD
-              </span>
-            </div>
-            <div>
-              <span className="text-xs font-bold font-mono uppercase block text-[#141712]">
-                FIELD OFFICER
-              </span>
-              <span className="text-[10px] text-[#474C3F] block leading-tight mt-0.5 font-medium">
-                Field investigations
-              </span>
-            </div>
-          </button>
-
-          {/* Card 4: ADMIN / SDMA */}
+          {/* Card 3: ADMIN / SDMA */}
           <button
             type="button"
             onClick={() => handleSelectRole('admin')}
@@ -600,20 +495,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               </div>
             )}
 
-            {selectedRole === 'admin' && (
-              <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-[11px] text-amber-900 flex items-center justify-between">
-                <div>
-                  <span className="text-earth-600 block text-[10px] uppercase font-mono font-semibold">MAIN ADMIN CREDENTIALS:</span>
-                  <span>Mobile: <strong>9999999999</strong> &bull; Password: <strong>AdminPass123!</strong></span>
-                </div>
-              </div>
-            )}
-
             <LoginForm 
+              role={selectedRole}
               onSuccess={(role, name) => {
-                if (role === 'admin' || selectedRole === 'admin') {
-                  obtainAdminToken().catch(() => {});
-                }
                 onAuthenticated?.((role as UserRole) || selectedRole, name || 'Authorized User');
                 onClose();
               }}
@@ -794,88 +678,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             )}
           </div>
         )}
-
-        {/* ========================================================================= */}
-        {/* SEPARATE PROTOTYPE DEMO ACCESS (EXPLICITLY MARKED PROTOTYPE TEST HARNESS) */}
-        {/* ========================================================================= */}
-        <div className="mt-4 pt-3.5 border-t border-earth-200 text-left space-y-2">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] font-mono uppercase text-earth-600 flex items-center gap-1.5 font-bold">
-              <Sparkles className="w-3 h-3 text-accent-700" />
-              <span>PROTOTYPE DEMO ACCESS (PRE-AUTHORIZED TEST ACCOUNTS)</span>
-            </span>
-            <span className="text-[9px] font-mono text-accent-800 uppercase font-semibold">
-              PRE-CONFIGURED PERSONAS
-            </span>
-          </div>
-
-          <p className="text-[10px] font-sans text-earth-600 leading-tight">
-            Use these pre-authorized accounts to test role-based separation. Administrator and Officer privileges cannot be acquired through public registration.
-          </p>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-1.5 pt-0.5">
-            <button
-              type="button"
-              onClick={() => handleQuickDemoFill('citizen')}
-              className="px-2 py-1.5 rounded-lg bg-brand-50 hover:bg-brand-100 text-brand-900 border border-brand-200 cursor-pointer font-mono text-[9px] font-bold text-left flex flex-col transition-colors"
-            >
-              <span>DEMO CITIZEN</span>
-              <span className="text-[7.5px] text-earth-600 font-sans font-normal">Public Resident</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleQuickDemoFill('officer_approved')}
-              className="px-2 py-1.5 rounded-lg bg-earth-100 hover:bg-earth-200 text-earth-900 border border-earth-300 cursor-pointer font-mono text-[9px] font-bold text-left flex flex-col transition-colors"
-            >
-              <span>OFFICER (ACTIVE)</span>
-              <span className="text-[7.5px] text-earth-600 font-sans font-normal">Full Operational</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleQuickDemoFill('officer_pending')}
-              className="px-2 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 cursor-pointer font-mono text-[9px] font-bold text-left flex flex-col transition-colors"
-            >
-              <span>OFFICER (PENDING)</span>
-              <span className="text-[7.5px] text-earth-600 font-sans font-normal">Awaiting Review</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleQuickDemoFill('officer_rejected')}
-              className="px-2 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-900 border border-rose-200 cursor-pointer font-mono text-[9px] font-bold text-left flex flex-col transition-colors"
-            >
-              <span>OFFICER (REJECTED)</span>
-              <span className="text-[7.5px] text-earth-600 font-sans font-normal">Ineligible / Denied</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleQuickDemoFill('officer_info')}
-              className="px-2 py-1.5 rounded-lg bg-earth-100 hover:bg-earth-200 text-earth-900 border border-earth-300 cursor-pointer font-mono text-[9px] font-bold text-left flex flex-col transition-colors"
-            >
-              <span>OFFICER (INFO REQ)</span>
-              <span className="text-[7.5px] text-earth-600 font-sans font-normal">Needs Resubmit</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleQuickDemoFill('admin')}
-              className="px-2 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 cursor-pointer font-mono text-[9px] font-bold text-left flex flex-col transition-colors"
-            >
-              <span>DEMO ADMIN</span>
-              <span className="text-[7.5px] text-earth-600 font-sans font-normal">SDMA Command</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Security Architecture Summary Strip */}
-        <div className="mt-3 pt-2.5 border-t border-earth-200 flex flex-wrap items-center justify-between text-[8.5px] font-mono text-earth-500 uppercase tracking-widest gap-1">
-          <span className="text-brand-800">PUBLIC: CITIZEN &rarr; REGISTER &rarr; CITIZEN DASHBOARD</span>
-          <span className="text-earth-700">AUTHORIZED: OFFICER &rarr; REQUEST ACCESS &rarr; VERIFICATION</span>
-          <span className="text-amber-800">RESTRICTED: ADMIN / SDMA &rarr; LOGIN ONLY</span>
-        </div>
       </div>
     </div>
   );

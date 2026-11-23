@@ -13,18 +13,18 @@ export const Card: React.FC<CardProps> = ({
   ...props
 }) => {
   const elevationClasses = {
-    flat: 'bg-[#FFFFFF] border border-[#C9C0AD] shadow-xs',
-    raised: 'bg-[#FFFFFF] border border-[#C9C0AD] shadow-md',
-    floating: 'bg-[#FFFFFF] border border-[#BCB29E] shadow-xl',
+    flat: 'bg-[#FFFDF8] border border-[#DDD6C4] shadow-xs',
+    raised: 'bg-[#FFFDF8] border border-[#DDD6C4] shadow-md',
+    floating: 'bg-[#FFFDF8] border border-[#DDD6C4] shadow-xl',
   }[elevation];
 
   const interactiveClasses = interactive
-    ? 'hover:border-[#1E4B33] hover:shadow-lg transition-all duration-200 cursor-pointer'
+    ? 'hover:border-[#2E4A3D] hover:shadow-lg transition-all duration-200 cursor-pointer'
     : '';
 
   return (
     <div
-      className={`rounded-2xl p-5 ${elevationClasses} ${interactiveClasses} text-[#141712] ${className}`}
+      className={`rounded-2xl p-5 ${elevationClasses} ${interactiveClasses} text-[#23261F] ${className}`}
       {...props}
     >
       {children}

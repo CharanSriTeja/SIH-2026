@@ -27,6 +27,10 @@ from routes.alerts import router as alerts_router
 from routes.reference import router as reference_router
 from routes.admin_districts import router as admin_districts_router
 from routes.reports import router as reports_router
+from routes.rainfall import router as rainfall_router
+from routes.soil_moisture import router as soil_moisture_router
+from routes.shelters import router as shelters_router
+from routes.citizen import router as citizen_router
 from services.prediction_service import prediction_service
 
 @asynccontextmanager
@@ -40,18 +44,26 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="SIH 2026 Landslide GIS API - Northeast India", lifespan=lifespan)
 
-# Enable CORS for the React frontend
+# Enable CORS for the React frontend (supports local development and cloud deployments)
+cors_origins_env = os.getenv("CORS_ORIGINS", "")
+allowed_origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
+if cors_origins_env:
+    for origin in cors_origins_env.split(","):
+        trimmed = origin.strip()
+        if trimmed and trimmed not in allowed_origins:
+            allowed_origins.append(trimmed)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:8000",
-        "http://127.0.0.1:8000",
-    ],
-    allow_origin_regex=r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$",
+    allow_origins=allowed_origins,
+    allow_origin_regex=r"^(https?://(localhost|127\.0\.0\.1)(:\d+)?|https://.*\.vercel\.app|https://.*\.netlify\.app|https://.*\.onrender\.com)$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -60,12 +72,17 @@ app.add_middleware(
 # Include the routers
 app.include_router(auth_router)
 app.include_router(profile_router)
+app.include_router(risk_router, prefix="/api")
 app.include_router(risk_router)
 app.include_router(alerts_router, prefix="/api")
 app.include_router(alerts_router)
 app.include_router(reference_router)
 app.include_router(admin_districts_router)
 app.include_router(reports_router)
+app.include_router(rainfall_router)
+app.include_router(soil_moisture_router)
+app.include_router(shelters_router)
+app.include_router(citizen_router)
 
 BASE_DIR = os.path.dirname(__file__)
 NER_DIR = os.path.join(BASE_DIR, "data", "NER_Boundaries")
@@ -701,6 +718,191 @@ async def get_susceptibility_tile(z: int, x: int, y: int):
             headers=png_headers,
         )
 
+
+# ============================================================================
+# 4b. GENERIC RASTER TILE RENDERER & SPECIFIC GIS PRODUCT TILES
+# ============================================================================
+
+def _render_generic_raster_tile(tif_path: str, z: int, x: int, y: int, colormap_fn):
+    png_headers = {
+        "Content-Type": "image/png",
+        "Cache-Control": "public, max-age=1800",
+        "Access-Control-Allow-Origin": "*",
+    }
+    if not _RASTER_DEPS or not tif_path or not os.path.exists(tif_path):
+        return Response(content=_make_transparent_tile(), media_type="image/png", headers=png_headers)
+
+    TILE_SIZE = 256
+    try:
+        lon_min, lat_min, lon_max, lat_max = _tile_bounds_epsg4326(z, x, y)
+        with rasterio.open(tif_path) as ds:
+            rb = ds.bounds
+            if lon_max <= rb.left or lon_min >= rb.right or lat_max <= rb.bottom or lat_min >= rb.top:
+                return Response(content=_make_transparent_tile(), media_type="image/png", headers=png_headers)
+
+            clamp_left   = max(lon_min, rb.left)
+            clamp_right  = min(lon_max, rb.right)
+            clamp_bottom = max(lat_min, rb.bottom)
+            clamp_top    = min(lat_max, rb.top)
+
+            if clamp_right <= clamp_left or clamp_top <= clamp_bottom:
+                return Response(content=_make_transparent_tile(), media_type="image/png", headers=png_headers)
+
+            window = window_from_bounds(
+                clamp_left, clamp_bottom, clamp_right, clamp_top,
+                transform=ds.transform,
+            )
+            lon_frac = (clamp_right - clamp_left) / (lon_max - lon_min)
+            lat_frac = (clamp_top - clamp_bottom) / (lat_max - lat_min)
+            out_w = max(1, round(TILE_SIZE * lon_frac))
+            out_h = max(1, round(TILE_SIZE * lat_frac))
+
+            raw = ds.read(
+                1,
+                window=window,
+                out_shape=(out_h, out_w),
+                resampling=rasterio.enums.Resampling.bilinear,
+                masked=True,
+            )
+        mask_arr = np.ma.getmaskarray(raw)
+        data_arr = np.asarray(raw)
+        rgba = np.zeros((TILE_SIZE, TILE_SIZE, 4), dtype=np.uint8)
+
+        off_x = round((clamp_left - lon_min) / (lon_max - lon_min) * TILE_SIZE)
+        off_y = round((lat_max - clamp_top)  / (lat_max - lat_min)  * TILE_SIZE)
+
+        valid = (~mask_arr) & np.isfinite(data_arr)
+        if valid.any():
+            sub_rgba = colormap_fn(data_arr, valid)
+            end_y = min(off_y + out_h, TILE_SIZE)
+            end_x = min(off_x + out_w, TILE_SIZE)
+            src_h = end_y - off_y
+            src_w = end_x - off_x
+            if src_h > 0 and src_w > 0 and off_y >= 0 and off_x >= 0:
+                rgba[off_y:end_y, off_x:end_x] = sub_rgba[:src_h, :src_w]
+
+        img = Image.fromarray(rgba, mode="RGBA")
+        buf = io.BytesIO()
+        img.save(buf, format="PNG")
+        return Response(content=buf.getvalue(), media_type="image/png", headers=png_headers)
+    except Exception as exc:
+        return Response(content=_make_transparent_tile(), media_type="image/png", headers=png_headers)
+
+
+def _colormap_rainfall(v, valid):
+    """Blue intensity colormap for 24h precipitation (mm)."""
+    r = np.zeros(v.shape, dtype=np.uint8)
+    g = np.zeros(v.shape, dtype=np.uint8)
+    b = np.zeros(v.shape, dtype=np.uint8)
+    a = np.zeros(v.shape, dtype=np.uint8)
+
+    # 0.5 - 10 mm (Light sky blue)
+    m1 = valid & (v >= 0.5) & (v < 10.0)
+    r[m1], g[m1], b[m1], a[m1] = 0xa6, 0xc8, 0xe0, 180
+
+    # 10 - 30 mm (Moderate blue)
+    m2 = valid & (v >= 10.0) & (v < 30.0)
+    r[m2], g[m2], b[m2], a[m2] = 0x64, 0xb5, 0xf6, 200
+
+    # 30 - 70 mm (Deep blue)
+    m3 = valid & (v >= 30.0) & (v < 70.0)
+    r[m3], g[m3], b[m3], a[m3] = 0x1e, 0x88, 0xe5, 215
+
+    # 70 - 120 mm (Navy indigo)
+    m4 = valid & (v >= 70.0) & (v < 120.0)
+    r[m4], g[m4], b[m4], a[m4] = 0x15, 0x65, 0xc0, 230
+
+    # >= 120 mm (Extreme violet/purple)
+    m5 = valid & (v >= 120.0)
+    r[m5], g[m5], b[m5], a[m5] = 0x4a, 0x14, 0x8c, 240
+
+    return np.stack([r, g, b, a], axis=-1)
+
+
+def _colormap_soil_moisture(v, valid):
+    """Dry-to-saturated moisture colormap (cm3/cm3)."""
+    r = np.zeros(v.shape, dtype=np.uint8)
+    g = np.zeros(v.shape, dtype=np.uint8)
+    b = np.zeros(v.shape, dtype=np.uint8)
+    a = np.zeros(v.shape, dtype=np.uint8)
+
+    # < 0.20 (Dry tan / sandy brown)
+    m1 = valid & (v < 0.20)
+    r[m1], g[m1], b[m1], a[m1] = 0xd7, 0xc2, 0x9e, 185
+
+    # 0.20 - 0.30 (Olive / yellowish-green)
+    m2 = valid & (v >= 0.20) & (v < 0.30)
+    r[m2], g[m2], b[m2], a[m2] = 0xc4, 0xd6, 0x85, 195
+
+    # 0.30 - 0.40 (Teal / moist cyan-green)
+    m3 = valid & (v >= 0.30) & (v < 0.40)
+    r[m3], g[m3], b[m3], a[m3] = 0x56, 0xb4, 0xa1, 210
+
+    # 0.40 - 0.45 (Turquoise blue)
+    m4 = valid & (v >= 0.40) & (v < 0.45)
+    r[m4], g[m4], b[m4], a[m4] = 0x2b, 0x8c, 0xbe, 225
+
+    # >= 0.45 (Saturated deep navy)
+    m5 = valid & (v >= 0.45)
+    r[m5], g[m5], b[m5], a[m5] = 0x08, 0x51, 0x9c, 240
+
+    return np.stack([r, g, b, a], axis=-1)
+
+
+def _colormap_risk(v, valid):
+    """Standard 4-class landslide risk colormap (Low->Moderate->High->Critical)."""
+    r = np.zeros(v.shape, dtype=np.uint8)
+    g = np.zeros(v.shape, dtype=np.uint8)
+    b = np.zeros(v.shape, dtype=np.uint8)
+    a = np.zeros(v.shape, dtype=np.uint8)
+
+    # Low (< 0.25): subtle transparent green
+    m1 = valid & (v < 0.25)
+    r[m1], g[m1], b[m1], a[m1] = 0x2e, 0xcc, 0x71, 90
+
+    # Moderate (0.25 - 0.50): yellow / amber
+    m2 = valid & (v >= 0.25) & (v < 0.50)
+    r[m2], g[m2], b[m2], a[m2] = 0xf1, 0xc4, 0x0f, 190
+
+    # High (0.50 - 0.75): vibrant orange
+    m3 = valid & (v >= 0.50) & (v < 0.75)
+    r[m3], g[m3], b[m3], a[m3] = 0xe6, 0x7e, 0x22, 220
+
+    # Critical (>= 0.75): vivid crimson red
+    m4 = valid & (v >= 0.75)
+    r[m4], g[m4], b[m4], a[m4] = 0xe7, 0x4c, 0x3c, 240
+
+    return np.stack([r, g, b, a], axis=-1)
+
+
+@app.get("/tiles/rainfall/{z}/{x}/{y}.png")
+async def get_rainfall_tile(z: int, x: int, y: int):
+    """Serve a 256x256 RGBA PNG tile for the INSAT-3DR 24-hour rainfall raster."""
+    import glob
+    candidates = sorted(glob.glob(os.path.join(BASE_DIR, "data", "processed", "rainfall", "rainfall_24h_*.tif")))
+    latest_alias = os.path.join(BASE_DIR, "data", "processed", "rainfall", "rainfall_24h_latest.tif")
+    tif_path = latest_alias if os.path.exists(latest_alias) else (candidates[-1] if candidates else None)
+    return _render_generic_raster_tile(tif_path, z, x, y, _colormap_rainfall)
+
+
+@app.get("/tiles/soil-moisture/{z}/{x}/{y}.png")
+async def get_soil_moisture_tile(z: int, x: int, y: int):
+    """Serve a 256x256 RGBA PNG tile for the NASA SMAP SPL3SMP_E soil moisture raster."""
+    import glob
+    latest_alias = os.path.join(BASE_DIR, "data", "soil_moisture", "processed", "smap_soil_moisture_latest_ner.tif")
+    candidates = sorted(glob.glob(os.path.join(BASE_DIR, "data", "soil_moisture", "processed", "smap_soil_moisture_*_ner.tif")))
+    tif_path = latest_alias if os.path.exists(latest_alias) else (candidates[-1] if candidates else None)
+    return _render_generic_raster_tile(tif_path, z, x, y, _colormap_soil_moisture)
+
+
+@app.get("/tiles/risk/{z}/{x}/{y}.png")
+async def get_risk_tile(z: int, x: int, y: int):
+    """Serve a 256x256 RGBA PNG tile for the Model B daily regional landslide risk raster."""
+    import glob
+    latest_alias = os.path.join(BASE_DIR, "data", "processed", "risk", "landslide_risk_latest.tif")
+    candidates = sorted(glob.glob(os.path.join(BASE_DIR, "data", "processed", "risk", "landslide_risk_*.tif")))
+    tif_path = latest_alias if os.path.exists(latest_alias) else (candidates[-1] if candidates else None)
+    return _render_generic_raster_tile(tif_path, z, x, y, _colormap_risk)
 
 
 @app.get("/api/gis/susceptibility/info")

@@ -29,21 +29,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variantClasses = {
       primary:
-        'bg-[#1E4B33] text-white hover:bg-[#143524] shadow-sm focus-visible:ring-4 focus-visible:ring-[#1E4B33]/20 border border-[#143524] font-semibold',
+        'bg-[#2E4A3D] text-[#FFFDF8] hover:bg-[#23382E] shadow-sm focus-visible:ring-4 focus-visible:ring-[#2E4A3D]/20 border border-[#23382E] font-semibold',
       accent:
-        'bg-[#B5551F] text-white hover:bg-[#964214] shadow-sm focus-visible:ring-4 focus-visible:ring-[#B5551F]/20 border border-[#964214] font-semibold',
+        'bg-[#B5551F] text-[#FFFDF8] hover:bg-[#9A4617] shadow-sm focus-visible:ring-4 focus-visible:ring-[#B5551F]/20 border border-[#9A4617] font-semibold',
       secondary:
-        'bg-[#FFFFFF] text-[#141712] hover:bg-[#EDE7DC] border-2 border-[#BCB29E] shadow-2xs focus-visible:ring-4 focus-visible:ring-[#1E4B33]/20 font-semibold',
+        'bg-[#FFFDF8] text-[#23261F] hover:bg-[#EDE8DE] border border-[#DDD6C4] shadow-xs focus-visible:ring-4 focus-visible:ring-[#2E4A3D]/20 font-semibold',
       outline:
-        'bg-transparent text-[#1E4B33] hover:bg-[#EBF4EE] border-2 border-[#1E4B33] focus-visible:ring-4 focus-visible:ring-[#1E4B33]/20 font-semibold',
+        'bg-transparent text-[#2E4A3D] hover:bg-[#E8EFEA] border border-[#2E4A3D] focus-visible:ring-4 focus-visible:ring-[#2E4A3D]/20 font-semibold',
       danger:
-        'bg-[#8A2418] text-white hover:bg-[#6D1B12] shadow-sm focus-visible:ring-4 focus-visible:ring-[#8A2418]/20 border border-[#6D1B12] font-semibold',
+        'bg-[#8A2418] text-[#FFFDF8] hover:bg-[#6E1C13] shadow-sm focus-visible:ring-4 focus-visible:ring-[#8A2418]/20 border border-[#6E1C13] font-semibold',
       ghost:
-        'bg-transparent text-[#474C3F] hover:text-[#141712] hover:bg-[#EDE7DC] focus-visible:ring-4 focus-visible:ring-[#1E4B33]/20 font-semibold',
+        'bg-transparent text-[#55594C] hover:text-[#23261F] hover:bg-[#EDE8DE] focus-visible:ring-4 focus-visible:ring-[#2E4A3D]/20 font-semibold',
     }[variant];
 
     const sizeClasses = {
-      sm: 'min-h-[36px] px-3 py-1.5 text-xs gap-1.5',
+      sm: 'min-h-[44px] sm:min-h-[36px] px-3 py-1.5 text-xs gap-1.5',
       md: 'min-h-[44px] px-4 py-2 text-sm gap-2',
       lg: 'min-h-[48px] px-6 py-2.5 text-base gap-2.5 font-semibold',
     }[size];

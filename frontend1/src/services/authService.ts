@@ -98,18 +98,6 @@ const SEED_ACCOUNTS: AuthAccount[] = [
       'Please submit an updated departmental deployment order and valid emergency contact verification for Monsoon 2026 field operations.',
     createdAt: '2026-09-04T09:30:00Z',
   },
-  {
-    id: 'ADM-4091',
-    role: 'admin',
-    name: 'Dr. R. Lalrinzuala',
-    identifier: 'ADM-4091',
-    password: 'admin@123',
-    status: 'APPROVED',
-    designation: 'State Disaster Management Authority Chief',
-    department: 'Mizoram SDMA Command Center',
-    clearanceLevel: 'Level 3 - Full Incident Commander',
-    createdAt: '2026-06-01T08:00:00Z',
-  },
 ];
 
 // Initial Seed Officer Access Requests
@@ -180,8 +168,13 @@ export class AuthService {
     try {
       const stored = localStorage.getItem(STORAGE_ACCOUNTS_KEY);
       if (stored) {
-        const parsed: AuthAccount[] = JSON.parse(stored);
+        let parsed: AuthAccount[] = JSON.parse(stored);
         let updated = false;
+        const currentAccounts = parsed.filter((account) => account.id !== 'ADM-4091');
+        if (currentAccounts.length !== parsed.length) {
+          parsed = currentAccounts;
+          updated = true;
+        }
         SEED_ACCOUNTS.forEach((seed) => {
           const idx = parsed.findIndex((a) => a.id === seed.id || a.identifier === seed.identifier);
           if (idx === -1) {
@@ -586,7 +579,6 @@ export class AuthService {
       if (acc.id === 'OFF-PENDING' && (normInput.includes('pending') || normInput.includes('marak') || normInput.includes('5519'))) return true;
       if (acc.id === 'OFF-REJECTED' && (normInput.includes('rejected') || normInput.includes('jamatia') || normInput.includes('3042'))) return true;
       if (acc.id === 'OFF-INFO' && (normInput.includes('info') || normInput.includes('sailo') || normInput.includes('1108'))) return true;
-      if (acc.id === 'ADM-4091' && (normInput.includes('4091') || normInput.includes('lalrinzuala') || normInput.includes('sdma.gov') || normInput.includes('9999999999') || normInput.includes('admin'))) return true;
       return false;
     });
 
@@ -600,7 +592,7 @@ export class AuthService {
     }
 
     // Password verification (for prototype demo, allows standard matching or demo fallbacks)
-    if (account.password !== rawPass && rawPass !== 'citizen@123' && rawPass !== 'officer@123' && rawPass !== 'admin@123' && rawPass !== 'AdminPass123!') {
+    if (account.password !== rawPass) {
       return {
         success: false,
         errorTitle: 'Invalid Password',

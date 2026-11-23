@@ -1,10 +1,16 @@
 import re
 import uuid
+from pathlib import Path
+from datetime import datetime
 from typing import List, Dict, Any, Optional
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Query
 from pydantic import BaseModel, Field
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, delete
+from sqlalchemy import select, delete, and_
+from sqlalchemy.orm import aliased
+import glob
+import shutil
+import os
 
 from database import get_db
 from models.user import User
@@ -194,28 +200,64 @@ async def delete_district_admin(
 
 @router.get("/reports")
 async def get_all_admin_reports(
+    state: Optional[str] = Query(None),
+    district: Optional[str] = Query(None),
+    status: Optional[str] = Query(None),
+    date_from: Optional[str] = Query(None),
+    date_to: Optional[str] = Query(None),
     admin_user: User = Depends(require_admin),
     db: AsyncSession = Depends(get_db)
 ) -> List[Dict[str, Any]]:
     """
-    Returns all citizen hazard reports across all districts for regional SDMA command.
+    Returns all citizen hazard reports across all districts for SDMA top-level command oversight.
+    Supports filtering by state, district, review status, and date range.
     """
+    submitter_alias = aliased(User)
+    reviewer_alias = aliased(User)
+
+    query_conditions = []
+    if state and state.strip() and state.strip().lower() != 'all':
+        query_conditions.append(District.state_name.ilike(f"%{state.strip()}%"))
+    if district and district.strip() and district.strip().lower() != 'all':
+        query_conditions.append(District.district_name.ilike(f"%{district.strip()}%"))
+    if status and status.strip() and status.strip().lower() != 'all':
+        query_conditions.append(CitizenReport.status == status.strip().lower())
+    if date_from and date_from.strip():
+        try:
+            df = datetime.fromisoformat(date_from.replace("Z", "+00:00"))
+            query_conditions.append(CitizenReport.submitted_at >= df)
+        except Exception:
+            pass
+    if date_to and date_to.strip():
+        try:
+            dt = datetime.fromisoformat(date_to.replace("Z", "+00:00"))
+            query_conditions.append(CitizenReport.submitted_at <= dt)
+        except Exception:
+            pass
+
     stmt = (
-        select(CitizenReport, District, User)
+        select(CitizenReport, District, submitter_alias, reviewer_alias)
         .outerjoin(District, CitizenReport.district_id == District.id)
-        .outerjoin(User, CitizenReport.user_id == User.id)
-        .order_by(CitizenReport.submitted_at.desc())
+        .outerjoin(submitter_alias, CitizenReport.user_id == submitter_alias.id)
+        .outerjoin(reviewer_alias, CitizenReport.reviewed_by == reviewer_alias.id)
     )
+    if query_conditions:
+        stmt = stmt.where(and_(*query_conditions))
+    stmt = stmt.order_by(CitizenReport.submitted_at.desc())
+
     result = await db.execute(stmt)
     rows = result.all()
 
     report_list = []
-    for report_obj, district_obj, user_obj in rows:
+    for report_obj, district_obj, submitter, reviewer in rows:
+        photo_filename = Path(report_obj.photo_path).name if report_obj.photo_path else ""
+        photo_url = f"/uploads/citizen_reports/{report_obj.district_id}/{photo_filename}" if report_obj.photo_path else None
+
         report_list.append({
             "id": str(report_obj.id),
-            "user_id": str(report_obj.user_id),
-            "citizen_name": user_obj.name if user_obj else "Citizen",
-            "citizen_phone": user_obj.phone_number if user_obj else None,
+            "user_id": str(report_obj.user_id) if report_obj.user_id else None,
+            "citizen_name": submitter.name if submitter else "Citizen",
+            "citizen_phone": submitter.phone_number if submitter else None,
             "district_id": str(report_obj.district_id),
             "district_name": district_obj.district_name if district_obj else "Unknown",
             "state_name": district_obj.state_name if district_obj else "Unknown",
@@ -224,9 +266,12 @@ async def get_all_admin_reports(
             "hazard_type": report_obj.hazard_type,
             "description": report_obj.description,
             "photo_path": report_obj.photo_path,
+            "photo_url": photo_url,
             "status": report_obj.status,
             "submitted_at": report_obj.submitted_at.isoformat() if report_obj.submitted_at else None,
             "reviewed_at": report_obj.reviewed_at.isoformat() if report_obj.reviewed_at else None,
+            "reviewed_by": str(report_obj.reviewed_by) if report_obj.reviewed_by else None,
+            "reviewed_by_name": reviewer.name if reviewer else None,
         })
     return report_list
 
@@ -274,6 +319,129 @@ async def update_admin_report_status(
         "status": report.status,
         "report_id": str(report.id)
     }
+
+from fastapi import BackgroundTasks
+from services.unified_daily_pipeline import run_unified_daily_pipeline
+
+@router.post("/run-pipeline")
+async def trigger_pipeline(
+    background_tasks: BackgroundTasks,
+    admin_user: User = Depends(require_admin)
+) -> Dict[str, Any]:
+    """
+    Manually trigger the MOSDAC and NASA data fetching and processing pipeline.
+    Runs in the background.
+    """
+    # Using background task so we don't block the request for a long time
+    background_tasks.add_task(run_unified_daily_pipeline, force=True)
+    return {
+        "success": True,
+        "message": "Data fetching pipeline triggered in the background. Check backend logs for progress."
+    }
+
+@router.get("/data-dates")
+async def get_available_data_dates(admin_user: User = Depends(require_admin)) -> List[str]:
+    """
+    Scans the processed risk directory to find available historical data dates.
+    """
+    from config import BASE_DIR
+    risk_dir = os.path.join(BASE_DIR, "data", "processed", "risk")
+    if not os.path.exists(risk_dir):
+        return []
+    
+    files = glob.glob(os.path.join(risk_dir, "landslide_risk_*.tif"))
+    dates = []
+    for fp in files:
+        name = os.path.basename(fp)
+        match = re.search(r'landslide_risk_(\d{8})\.tif', name)
+        if match:
+            # Format to YYYY-MM-DD
+            d = match.group(1)
+            dates.append(f"{d[:4]}-{d[4:6]}-{d[6:]}")
+    
+    return sorted(list(set(dates)), reverse=True)
+
+@router.delete("/data-dates/{date_str}")
+async def delete_historical_data(date_str: str, admin_user: User = Depends(require_admin)) -> Dict[str, Any]:
+    """
+    Deletes raw and processed files for a specific date (YYYY-MM-DD) to free up space.
+    """
+    from config import BASE_DIR
+    compact_date = date_str.replace("-", "")
+    
+    if not re.match(r'^\d{8}$', compact_date):
+        raise HTTPException(status_code=400, detail="Invalid date format. Expected YYYY-MM-DD.")
+
+    deleted_files = []
+    
+    # 1. Risk files
+    risk_dir = os.path.join(BASE_DIR, "data", "processed", "risk")
+    for ext in ['.tif', '_qc.json']:
+        fp = os.path.join(risk_dir, f"landslide_risk_{compact_date}{ext}")
+        if os.path.exists(fp):
+            os.remove(fp)
+            deleted_files.append(fp)
+            
+    # 2. Rainfall processed
+    rain_dir = os.path.join(BASE_DIR, "data", "processed", "rainfall")
+    for ext in ['.tif', '_qc.json']:
+        fp = os.path.join(rain_dir, f"rainfall_24h_{compact_date}{ext}")
+        if os.path.exists(fp):
+            os.remove(fp)
+            deleted_files.append(fp)
+            
+    # 3. SMAP processed
+    smap_dir = os.path.join(BASE_DIR, "data", "soil_moisture", "processed")
+    fp = os.path.join(smap_dir, f"smap_soil_moisture_{compact_date}_ner.tif")
+    if os.path.exists(fp):
+        os.remove(fp)
+        deleted_files.append(fp)
+        
+    # 4. SMAP Raw
+    smap_raw_dir = os.path.join(BASE_DIR, "data", "soil_moisture", "raw")
+    smap_raw_files = glob.glob(os.path.join(smap_raw_dir, f"SMAP_L3_SM_P_E_{compact_date}_*.h5"))
+    for fp in smap_raw_files:
+        os.remove(fp)
+        deleted_files.append(fp)
+        
+    # 5. MOSDAC INSAT-3DR Raw (Entire daily folder)
+    try:
+        dt = datetime.strptime(date_str, "%Y-%m-%d")
+        day = dt.strftime("%d")
+        month = dt.strftime("%b").upper()
+        year = dt.strftime("%Y")
+        mosdac_folder = os.path.join(BASE_DIR, "data", "INSAT3DR_IMR", "3RIMG_L2G_IMR", year, f"{day}{month}")
+        if os.path.exists(mosdac_folder):
+            shutil.rmtree(mosdac_folder)
+            deleted_files.append(mosdac_folder)
+    except Exception as e:
+        pass
+        
+    return {
+        "success": True,
+        "message": f"Deleted {len(deleted_files)} files/folders for {date_str}.",
+        "deleted_count": len(deleted_files)
+    }
+
+@router.get("/pipeline-logs")
+async def get_pipeline_logs(admin_user: User = Depends(require_admin)) -> Dict[str, Any]:
+    """
+    Returns the last 200 lines of the pipeline log file for the admin terminal.
+    """
+    from config import BASE_DIR
+    log_file = os.path.join(BASE_DIR, "logs", "pipeline.log")
+    
+    if not os.path.exists(log_file):
+        return {"logs": "Pipeline has not run yet or log file is missing."}
+        
+    try:
+        with open(log_file, "r", encoding="utf-8") as f:
+            lines = f.readlines()
+            tail = lines[-200:]
+            return {"logs": "".join(tail)}
+    except Exception as e:
+        return {"logs": f"Error reading logs: {str(e)}"}
+
 
 
 

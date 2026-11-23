@@ -176,8 +176,7 @@ export const CitizenCameraModal: React.FC<CitizenCameraModalProps> = ({
 
     if (typeof onPhotoCaptured === 'function') {
       onPhotoCaptured(photoItem);
-    }
-    if (typeof onCapturePhoto === 'function') {
+    } else if (typeof onCapturePhoto === 'function') {
       onCapturePhoto(photoItem);
     }
     onClose();
@@ -286,8 +285,7 @@ export const CitizenCameraModal: React.FC<CitizenCameraModalProps> = ({
 
     if (typeof onVideoCaptured === 'function') {
       onVideoCaptured(videoItem);
-    }
-    if (typeof onCaptureVideo === 'function') {
+    } else if (typeof onCaptureVideo === 'function') {
       onCaptureVideo(videoItem);
     }
     onClose();

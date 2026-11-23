@@ -9,9 +9,10 @@ import { Button } from '../ui/Button';
 interface LoginFormProps {
   onSuccess: (role?: string, name?: string) => void;
   onSwitchToSignup?: () => void;
+  role?: string;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onSwitchToSignup }) => {
+export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onSwitchToSignup, role }) => {
   const [phone, setPhone] = useState('');
   const [phoneError, setPhoneError] = useState<string | null>(null);
   
@@ -21,7 +22,15 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onSwitchToSignu
   const [loading, setLoading] = useState(false);
   const [globalError, setGlobalError] = useState<string | null>(null);
 
-  const { performLogin } = useAuth();
+  const { performLogin, logout } = useAuth();
+
+  React.useEffect(() => {
+    setPhone('');
+    setPassword('');
+    setPhoneError(null);
+    setPasswordError(null);
+    setGlobalError(null);
+  }, [role]);
 
   const isFormValid = phone.length === 10 && !phoneError && password.length > 0;
 
@@ -32,15 +41,27 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onSwitchToSignu
     setLoading(true);
     setGlobalError(null);
 
+    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
     try {
-      const response = await axios.post('http://localhost:8000/auth/login', {
+      const response = await axios.post(`${API_BASE}/auth/login`, {
         phone_number: phone,
         password: password
       });
       const token = response.data.access_token;
       const profile = await performLogin(token);
-      onSuccess(profile?.role, profile?.name || undefined);
+      if (!profile) {
+        logout();
+        setGlobalError('Could not load your account profile. Please try signing in again.');
+        return;
+      }
+      if (profile.role !== role) {
+        logout();
+        setGlobalError(`This account is registered as ${profile.role.replace('_', ' ')}. Select that role to sign in.`);
+        return;
+      }
+      onSuccess(profile.role, profile.name || undefined);
     } catch (err: any) {
+      console.warn("Backend auth attempt failed:", err);
       setGlobalError(err.response?.data?.detail || "Invalid phone number or password");
     } finally {
       setLoading(false);

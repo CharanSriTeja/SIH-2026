@@ -426,5 +426,71 @@ export interface CitizenReportItem {
   submitted_at: string;
   reviewed_at?: string | null;
   reviewed_by?: string | null;
+  reviewed_by_name?: string | null;
 }
 
+export interface DistrictOverviewResponse {
+  district: {
+    id: string;
+    state_name: string;
+    district_name: string;
+    centroid_lat?: number | null;
+    centroid_lon?: number | null;
+  };
+  pending_count: number;
+  verified_count: number;
+  verified_this_week_count: number;
+  dismissed_count: number;
+  total_reports_count: number;
+  active_risk_count: number;
+  total_villages_count?: number;
+  risk_level_breakdown: Record<string, number>;
+  last_updated?: string | null;
+  district_alert_meta?: any;
+}
+
+export interface DistrictVillageItem {
+  osm_id?: number | null;
+  name: string;
+  place_type?: string;
+  latitude: number;
+  longitude: number;
+  risk_score: number;
+  risk_level: 'Critical' | 'High' | 'Moderate' | 'Low';
+  is_in_todays_alerts: boolean;
+  nearest_alert_distance_km?: number | null;
+  population?: number | null;
+}
+
+export interface DistrictVillagesResponse {
+  district: {
+    id: string;
+    state_name: string;
+    district_name: string;
+    centroid_lat?: number | null;
+    centroid_lon?: number | null;
+  };
+  total_villages: number;
+  filtered_count: number;
+  alert_villages_count: number;
+  breakdown: {
+    Critical: number;
+    High: number;
+    Moderate: number;
+    Low: number;
+  };
+  villages: DistrictVillageItem[];
+}
+
+export interface Shelter {
+  id: string;
+  district_id: string;
+  name: string;
+  address?: string | null;
+  latitude: number;
+  longitude: number;
+  capacity?: number | null;
+  contact_phone?: string | null;
+  is_active: boolean;
+  distance_km?: number;
+}

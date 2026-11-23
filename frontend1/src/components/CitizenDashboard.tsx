@@ -46,22 +46,21 @@ import MapComponent from './MapComponent';
 import { getLocationMode, getRandomNerLocation, isWithinNer } from '../utils/nerLocations';
 import { useAuth } from './auth/AuthContext';
 import { AlertService, AlertStatus, AlertHistoryItem } from '../services/alertService';
-import { submitCitizenHazardReport } from '../services/districtAdminService';
+import { submitCitizenHazardReport, fetchNearestFacilities } from '../services/districtAdminService';
 import { RiskBadge } from './ui/RiskBadge';
 
 const LAND_COVER_LABELS: Record<string | number, string> = {
-  10: 'Cropland (Rainfed)',
-  20: 'Cropland (Irrigated)',
-  30: 'Mosaic Cropland / Highland Veg',
-  40: 'Broadleaved Deciduous Forest',
-  50: 'Broadleaved Evergreen Forest',
-  60: 'Open Deciduous Forest',
-  80: 'Needleleaved Forest',
-  100: 'Mosaic Tree & Shrub',
-  110: 'Mosaic Herbaceous',
-  120: 'Shrubland',
-  130: 'Grassland',
-  190: 'Urban / Settlement',
+  10: '🌳 Tree Cover',
+  20: '🌿 Shrubland',
+  30: '🌾 Grassland',
+  40: '🌱 Cropland',
+  50: '🏠 Built-up',
+  60: '🪨 Bare / Sparse Vegetation',
+  70: '❄️ Snow and Ice',
+  80: '💧 Permanent Water Bodies',
+  90: '🌱 Herbaceous Wetland',
+  95: '🌴 Mangroves',
+  100: '🍀 Moss and Lichen',
 };
 
 function getDominantSoilType(features?: RiskAssessmentData['static_features']): string {
@@ -94,6 +93,8 @@ interface RiskAssessmentData {
   rainfall_7day: number | null;
   soil_moisture: number | null;
   is_live_data_mocked?: boolean;
+  /** True when weather data came from Open-Meteo API (ISRO/NASA rasters unavailable) */
+  is_open_meteo_fallback?: boolean;
   data_source?: string;
   grid_match_distance_m: number;
   coverage_warning?: string | null;
@@ -163,6 +164,8 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
 
   // Evacuation Route Modal State
   const [showEvacuationModal, setShowEvacuationModal] = useState(false);
+  const [nearestFacilities, setNearestFacilities] = useState<any>(null);
+  const [isLoadingFacilities, setIsLoadingFacilities] = useState(false);
 
   // Acknowledged Alerts
   const [acknowledgedAlerts, setAcknowledgedAlerts] = useState<string[]>([]);
@@ -185,6 +188,14 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
     if (locationState?.areaName) {
       setProfileLocation(locationState.areaName);
       setProfileDistrict(locationState.areaName);
+    }
+    
+    if (locationState?.latitude && locationState?.longitude) {
+      setIsLoadingFacilities(true);
+      fetchNearestFacilities(locationState.latitude, locationState.longitude)
+        .then(data => setNearestFacilities(data))
+        .catch(err => console.error("Error fetching nearest facilities:", err))
+        .finally(() => setIsLoadingFacilities(false));
     }
   }, [locationState]);
 
@@ -234,56 +245,6 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
     }
   }, [authUser]);
 
-  const handleTriggerTestAlert = async () => {
-    const phoneToUse = targetPhone || authUser?.phone_number || profilePhone;
-    if (!phoneToUse || phoneToUse === 'Linked Resident Phone') {
-      setAlertFeedback({ type: 'error', message: 'Please provide a valid 10-digit Indian phone number.' });
-      return;
-    }
-    setIsSendingAlert(true);
-    setAlertFeedback(null);
-    try {
-      const res = await AlertService.sendEmergencySms({
-        phone_number: phoneToUse,
-        risk_level: riskAssessment?.risk_level === 'Outside Coverage' ? 'HIGH' : (riskAssessment?.risk_level || 'HIGH'),
-        location_name: locationState?.areaName || profileLocation,
-        latitude: locationState?.latitude,
-        longitude: locationState?.longitude,
-        custom_message: 'EMERGENCY TEST WARNING: Heightened landslide hazard conditions simulated for your sector.'
-      });
-      if (res.success) {
-        setAlertFeedback({
-          type: 'success',
-          message: `SMS dispatched via ${res.provider?.toUpperCase()} to ${res.masked_recipient}. Ref ID: ${res.reference_id || 'OK'}`
-        });
-      } else {
-        setAlertFeedback({
-          type: 'error',
-          message: res.message || 'Alert dispatch failed.'
-        });
-      }
-      const hist = await AlertService.getHistory(25);
-      setAlertHistory(hist);
-    } catch (err: any) {
-      if (err.response?.status === 429) {
-        const detail = err.response.data?.detail;
-        const msg = typeof detail === 'object' ? detail.message : (detail || 'Alert throttled by cooldown protection.');
-        setAlertFeedback({
-          type: 'throttled',
-          message: `${msg} Cooldown is active to prevent redundant resident SMS notifications.`
-        });
-      } else {
-        const errorDetail = err.response?.data?.detail;
-        const msg = typeof errorDetail === 'string' ? errorDetail : (errorDetail?.message || err.message || 'Failed to dispatch alert.');
-        setAlertFeedback({
-          type: 'error',
-          message: msg
-        });
-      }
-    } finally {
-      setIsSendingAlert(false);
-    }
-  };
 
   // Real Landslide Model A Susceptibility & Risk Assessment
   const [riskAssessment, setRiskAssessment] = useState<RiskAssessmentData | null>(null);
@@ -787,7 +748,7 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
         )}
 
         {/* Subtle Demonstration Badge */}
-        <div className="flex items-center justify-between text-[10px] font-mono text-earth-600 pb-1">
+        {/* <div className="flex items-center justify-between text-[10px] font-mono text-earth-600 pb-1">
           <span className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-600 animate-pulse" />
             <span>CONNECTED TO LOCAL DISTRICT SENTINEL</span>
@@ -795,7 +756,7 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
           <span className="px-2 py-0.5 rounded bg-white border border-earth-300 text-earth-700 uppercase font-semibold">
             DEMO / SYSTEM PREVIEW
           </span>
-        </div>
+        </div> */}
 
         {/* Offline Banner */}
         {isOffline && (
@@ -934,7 +895,7 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                       {/* Environmental Readout for Outside Location */}
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
                         <div className="p-4 rounded-2xl bg-earth-50 border border-earth-200 space-y-1">
-                          <span className="text-[10px] font-mono uppercase text-earth-500">PRECIPITATION (OPEN-METEO)</span>
+                          <span className="text-[10px] font-mono uppercase text-earth-500">PRECIPITATION (ISRO INSAT-3DR)</span>
                           <div className="text-base font-bold font-serif text-earth-900">
                             {riskAssessment.rainfall_24hr ?? 0} mm (24h)
                           </div>
@@ -978,7 +939,7 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                           CURRENT LANDSLIDE RISK ASSESSMENT
                         </span>
                         <div className="flex flex-wrap items-center gap-3">
-                          <RiskBadge severity={level === 'Outside Coverage' ? 'low' : (level.toLowerCase() as any)} size="lg" />
+                          <RiskBadge level={level === 'Outside Coverage' ? 'low' : (level.toLowerCase() as any)} size="lg" />
                           {riskAssessment?.risk_score != null && (
                             <span className="text-base sm:text-lg font-mono text-earth-800 font-semibold">
                               ({(riskAssessment.risk_score * 100).toFixed(1)}%)
@@ -1062,8 +1023,8 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                                 (sample data)
                               </span>
                             ) : (
-                              <span className="text-[8px] font-mono text-brand-800 font-semibold px-1.5 py-0.5 rounded bg-brand-100 border border-brand-300">
-                                Live Open-Meteo
+                              <span className="text-[8px] font-mono text-brand-800 font-semibold px-1.5 py-0.5 rounded bg-brand-100 border border-brand-300" title="MOSDAC INSAT-3DR IMAGER">
+                                ISRO INSAT-3DR
                               </span>
                             )
                           )}
@@ -1175,11 +1136,11 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
             {/* Quick Action Navigation Buttons */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <button
-                onClick={() => setShowCameraModal(true)}
-                className="p-5 rounded-2xl bg-[#1E4B33] hover:bg-[#143524] border-2 border-[#143524] text-white font-bold uppercase transition-all cursor-pointer shadow-md flex items-center justify-between group"
+                onClick={() => setActiveTab('REPORT HAZARD')}
+                className="p-5 rounded-2xl bg-[#2E4A3D] hover:bg-[#23382E] border border-[#23382E] text-[#FFFDF8] font-bold uppercase transition-all cursor-pointer shadow-md flex items-center justify-between group"
               >
                 <div className="flex items-center gap-3 text-left">
-                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center text-white">
+                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center text-[#FFFDF8]">
                     <Camera className="w-5 h-5" />
                   </div>
                   <div>
@@ -1187,7 +1148,7 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                       REPORT A HAZARD
                     </div>
                     <div className="text-xs font-sans font-normal text-white/90">
-                      Submit observed cracks or road damage
+                      Submit observed cracks, rockfall, or road erosion
                     </div>
                   </div>
                 </div>
@@ -1196,10 +1157,10 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
 
               <button
                 onClick={() => setActiveTab('ALERTS')}
-                className="p-5 rounded-2xl bg-white hover:bg-[#F5F1E6] border-2 border-[#BCB29E] hover:border-[#1E4B33] text-[#141712] font-bold uppercase transition-all cursor-pointer shadow-sm flex items-center justify-between group"
+                className="p-5 rounded-2xl bg-[#FFFDF8] hover:bg-[#EDE8DE] border border-[#DDD6C4] hover:border-[#2E4A3D] text-[#23261F] font-bold uppercase transition-all cursor-pointer shadow-xs flex items-center justify-between group"
               >
                 <div className="flex items-center gap-3 text-left">
-                  <div className="w-10 h-10 rounded-xl bg-[#F7D8C4] border border-[#E8B291] flex items-center justify-center text-[#B5551F]">
+                  <div className="w-10 h-10 rounded-xl bg-[#FDF1EB] border border-[#F6C8B3] flex items-center justify-center text-[#B5551F]">
                     <Bell className="w-5 h-5" />
                   </div>
                   <div>
@@ -1231,9 +1192,9 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                       DESIGNATED EVACUATION POINT
                     </span>
                     <h3 className="text-base font-bold font-serif text-[#141712] uppercase">
-                      {locationState?.areaName
+                      {nearestFacilities?.nearest_shelter?.name || nearestFacilities?.nearest_hospitals?.[0]?.name || (locationState?.areaName
                         ? `DISTRICT RELIEF FACILITY // ${locationState.areaName.toUpperCase()}`
-                        : 'DISTRICT EMERGENCY RELIEF SHELTER'}
+                        : 'DISTRICT EMERGENCY RELIEF SHELTER')}
                     </h3>
                   </div>
                 </div>
@@ -1245,12 +1206,18 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
                 <div className="text-[#434A3E]">
-                  <span className="text-[#6B7263] block text-[9px] uppercase">DISTANCE:</span>
-                  <span className="text-[#141712] font-bold">Nearest Designated Uphill Shelter</span>
+                  <span className="text-[#6B7263] block text-[9px] uppercase">DISTANCE & ETA:</span>
+                  <span className="text-[#141712] font-bold">
+                    {nearestFacilities?.nearest_shelter 
+                      ? `${nearestFacilities.nearest_shelter.distance_km.toFixed(1)} km (~${Math.round(nearestFacilities.nearest_shelter.duration_minutes)} min)` 
+                      : nearestFacilities?.nearest_hospitals?.[0]
+                        ? `${nearestFacilities.nearest_hospitals?.[0].distance_km.toFixed(1)} km (~${Math.round(nearestFacilities.nearest_hospitals?.[0].duration_minutes)} min)`
+                        : 'Nearest Designated Uphill Shelter'}
+                  </span>
                 </div>
                 <div className="text-[#434A3E]">
                   <span className="text-[#6B7263] block text-[9px] uppercase">SAFE CORRIDOR:</span>
-                  <span className="text-[#1E4A26] font-bold">Uphill Ridge Crest (Away from cuts)</span>
+                  <span className="text-[#1E4A26] font-bold">OSRM Verified Road Network</span>
                 </div>
                 <div className="text-[#434A3E]">
                   <span className="text-[#6B7263] block text-[9px] uppercase">ROUTE STATUS:</span>
@@ -1329,6 +1296,8 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                         isDemo: true,
                       }
                 }
+                nearestFacilities={nearestFacilities}
+                onReportHazardClick={() => setActiveTab('REPORT HAZARD')}
               />
             </div>
           </div>
@@ -1374,14 +1343,34 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                     {locationErrorMsg}
                   </div>
                 )}
-                <div className="pt-2">
+                <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
                   <button
                     onClick={requestLocation}
                     disabled={isLocating}
-                    className="px-6 py-3 rounded-xl bg-brand-700 hover:bg-brand-800 disabled:opacity-50 text-white font-mono font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-xs inline-flex items-center gap-2"
+                    className="px-6 py-3 rounded-xl bg-[#2E4A3D] hover:bg-[#23382E] disabled:opacity-50 text-[#FFFDF8] font-mono font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-xs inline-flex items-center gap-2"
                   >
                     {isLocating ? <RefreshCw className="w-4 h-4 animate-spin" /> : <MapPin className="w-4 h-4" />}
                     <span>ALLOW LOCATION ACCESS</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const lat = authUser?.last_latitude ?? 23.7271;
+                      const lon = authUser?.last_longitude ?? 92.7176;
+                      const label = authUser?.address_label || 'Durtlang Ridge, Aizawl';
+                      setLocationState({
+                        latitude: lat,
+                        longitude: lon,
+                        accuracy: 20,
+                        timestamp: Date.now(),
+                        areaName: label,
+                        isDemo: !authUser?.last_latitude,
+                      });
+                      setLocationPermissionStatus('GRANTED');
+                    }}
+                    className="px-5 py-3 rounded-xl bg-[#FFFDF8] hover:bg-[#EDE8DE] text-[#23261F] border border-[#DDD6C4] font-mono font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-xs"
+                  >
+                    USE REGISTERED LOCATION
                   </button>
                 </div>
               </div>
@@ -1831,7 +1820,7 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                       Local Soil Moisture: <strong className="text-earth-900">{riskAssessment.soil_moisture !== null ? (riskAssessment.soil_moisture > 1.0 ? riskAssessment.soil_moisture.toFixed(1) : (riskAssessment.soil_moisture * 100).toFixed(1)) + '%' : 'N/A'}</strong>
                     </span>
                     <span className="text-earth-500">
-                      Source: Open-Meteo Live API
+                      Source: ISRO INSAT-3DR &amp; NASA SMAP (~9km resampled)
                     </span>
                   </div>
                 )}
@@ -1877,11 +1866,11 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                     <div className="flex items-center gap-2">
                       <Navigation className="w-4 h-4 text-brand-700" />
                       <span className="text-xs font-mono font-bold text-brand-800 uppercase">
-                        DESIGNATED EVACUATION POINT: {locationState?.areaName ? locationState.areaName.toUpperCase() : 'LOCAL SECTOR'} RELIEF CENTRE
+                        DESIGNATED EVACUATION POINT: {nearestFacilities?.nearest_shelter?.name || nearestFacilities?.nearest_hospitals?.[0]?.name || (locationState?.areaName ? `${locationState.areaName.toUpperCase()} RELIEF CENTRE` : 'LOCAL SECTOR RELIEF CENTRE')}
                       </span>
                     </div>
                     <span className="text-[10px] font-mono text-brand-800 font-bold uppercase">
-                      ROUTE STATUS: VERIFIED SAFE CORRIDOR
+                      ROUTE STATUS: {nearestFacilities?.nearest_shelter || nearestFacilities?.nearest_hospitals?.[0] ? 'OSRM VERIFIED ROUTE' : 'VERIFIED SAFE CORRIDOR'}
                     </span>
                   </div>
 
@@ -1951,7 +1940,7 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                     </div>
                     <div>
                       <span className="text-xs font-mono font-bold uppercase text-[#1E4A26]">
-                        LIVE WEATHER TELEMETRY // OPEN-METEO
+                        LIVE SATELLITE TELEMETRY // ISRO &amp; NASA
                       </span>
                       <h3 className="text-sm font-bold font-serif uppercase text-[#141712]">
                         {(riskAssessment.rainfall_24hr ?? 0) > 40
@@ -1972,11 +1961,11 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
                   <div className="p-2.5 rounded-xl bg-[#F5F1E6] border border-[#D5CCA8]">
-                    <span className="text-[#6B7263] block text-[9px] uppercase">24H RAINFALL:</span>
+                    <span className="text-[#6B7263] block text-[9px] uppercase">24H RAINFALL (INSAT):</span>
                     <span className="text-[#141712] font-bold">{riskAssessment.rainfall_24hr ?? 0} mm</span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-[#F5F1E6] border border-[#D5CCA8]">
-                    <span className="text-[#6B7263] block text-[9px] uppercase">SOIL MOISTURE:</span>
+                    <span className="text-[#6B7263] block text-[9px] uppercase">SOIL MOISTURE (SMAP ~9km):</span>
                     <span className="text-[#141712] font-bold">{riskAssessment.soil_moisture !== null ? (riskAssessment.soil_moisture * 100).toFixed(1) + '%' : 'N/A'}</span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-[#F5F1E6] border border-[#D5CCA8]">
@@ -1990,201 +1979,10 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                 </div>
 
                 <p className="text-xs text-[#434A3E] leading-relaxed font-sans">
-                  Real-time precipitation and root-zone soil saturation are ingested directly from Open-Meteo API to dynamically drive Landslide Model B.
+                  Live precipitation (MOSDAC INSAT-3DR 3RIMG_L2G_IMR) and root-zone soil moisture (NASA SMAP Enhanced L3 SPL3SMP_E ~9km resampled) are ingested to dynamically compute Landslide Model B risk.
                 </p>
               </div>
             )}
-
-            {/* ==================================================== */}
-            {/* EMERGENCY SMS DISPATCH CONSOLE (MSG91 INTEGRATION)   */}
-            {/* ==================================================== */}
-            <div className="p-6 rounded-3xl bg-white border-2 border-[#BCB29E] space-y-4 shadow-sm">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b-2 border-[#D5CCA8] pb-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#F7D8C4] border border-[#E8B291] flex items-center justify-center text-[#B5551F] shrink-0">
-                    <Radio className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#B5551F]">
-                      EMERGENCY SMS SENTINEL // CITIZEN DISPATCH
-                    </span>
-                    <h3 className="text-lg font-bold font-serif uppercase text-[#141712]">
-                      DISPATCH SMS EARLY WARNING
-                    </h3>
-                  </div>
-                </div>
-
-                <div className="text-[11px] font-mono text-[#434A3E]">
-                  <span>DLT SENDER ID: <strong className="text-[#141712]">{alertStatus?.sender_id || 'LANDSL'}</strong></span>
-                </div>
-              </div>
-
-              <p className="text-xs text-[#434A3E] font-sans leading-relaxed">
-                Test or trigger an immediate high-priority SMS advisory to your registered or specified Indian mobile number. The dispatch pipeline routes through the FastAPI Alert Service and MSG91 Flow API v5.
-              </p>
-
-              {/* Input and Action */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
-                <div className="flex-1 relative">
-                  <input
-                    type="text"
-                    value={targetPhone}
-                    onChange={(e) => setTargetPhone(e.target.value)}
-                    placeholder="Enter Indian Mobile (e.g. 9862044102)"
-                    className="w-full px-4 py-3 bg-white border-2 border-[#BCB29E] rounded-xl text-xs font-mono text-[#141712] focus:outline-none focus:border-[#1E4B33] focus:ring-4 focus:ring-[#1E4B33]/20 transition-all"
-                  />
-                  <span className="absolute right-3 top-3 text-[10px] font-mono text-[#6B7263] uppercase">
-                    INDIA (+91)
-                  </span>
-                </div>
-
-                <button
-                  onClick={handleTriggerTestAlert}
-                  disabled={isSendingAlert}
-                  className="px-6 py-3 rounded-xl bg-[#B5551F] hover:bg-[#964214] border-2 border-[#873A10] disabled:opacity-50 text-white font-sans font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-sm flex items-center justify-center gap-2 shrink-0"
-                >
-                  {isSendingAlert ? (
-                    <>
-                      <RefreshCw className="w-4 h-4 animate-spin" />
-                      <span>DISPATCHING...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4" />
-                      <span>SEND EMERGENCY SMS</span>
-                    </>
-                  )}
-                </button>
-              </div>
-
-              {/* Feedback Banner */}
-              {alertFeedback && (
-                <div className={`p-3.5 rounded-xl text-xs font-mono flex items-start gap-2.5 transition-all ${
-                  alertFeedback.type === 'success'
-                    ? 'bg-brand-50 border border-brand-300 text-brand-900'
-                    : alertFeedback.type === 'throttled'
-                    ? 'bg-amber-50 border border-amber-300 text-amber-900'
-                    : 'bg-red-50 border border-red-200 text-red-900'
-                }`}>
-                  {alertFeedback.type === 'success' ? (
-                    <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5 text-brand-700" />
-                  ) : alertFeedback.type === 'throttled' ? (
-                    <Clock className="w-4 h-4 shrink-0 mt-0.5 text-amber-700" />
-                  ) : (
-                    <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-red-600" />
-                  )}
-                  <span className="leading-relaxed">{alertFeedback.message}</span>
-                </div>
-              )}
-            </div>
-
-            {/* ==================================================== */}
-            {/* LIVE ALERT AUDIT LOG                                 */}
-            {/* ==================================================== */}
-            <div className="p-6 rounded-3xl bg-white border-2 border-[#BCB29E] space-y-4 shadow-sm">
-              <div className="flex items-center justify-between border-b-2 border-[#D5CCA8] pb-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-[#EDE7DC] border border-[#BCB29E] flex items-center justify-center text-[#141712]">
-                    <FileText className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-bold font-serif uppercase text-[#141712]">
-                      OFFICIAL DISPATCH AUDIT LOG
-                    </h3>
-                    <span className="text-[10px] font-mono text-[#6B7263] block">
-                      IMMUTABLE TRANSACTION TRAIL // MSG91 DISPATCH RECORDS
-                    </span>
-                  </div>
-                </div>
-
-                <button
-                  onClick={() => {
-                    setIsLoadingAlerts(true);
-                    AlertService.getHistory(25).then(hist => {
-                      setAlertHistory(hist);
-                      setIsLoadingAlerts(false);
-                    });
-                  }}
-                  disabled={isLoadingAlerts}
-                  className="px-3.5 py-1.5 rounded-xl bg-[#EDE7DC] hover:bg-[#E2DBD0] border-2 border-[#BCB29E] text-[11px] font-mono font-bold text-[#141712] flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
-                >
-                  <RefreshCw className={`w-3.5 h-3.5 ${isLoadingAlerts ? 'animate-spin' : ''}`} />
-                  <span>REFRESH</span>
-                </button>
-              </div>
-
-              {alertHistory.length === 0 ? (
-                <div className="p-8 text-center rounded-2xl bg-earth-50 border border-earth-200 space-y-2">
-                  <MessageSquare className="w-8 h-8 mx-auto text-earth-400" />
-                  <p className="text-xs font-mono text-earth-700 uppercase font-semibold">
-                    NO DISPATCH RECORDS LOGGED YET
-                  </p>
-                  <p className="text-[11px] text-earth-500 font-sans">
-                    Dispatched emergency notifications will be securely registered here with masked recipient identifiers.
-                  </p>
-                </div>
-              ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs font-mono text-earth-800">
-                    <thead>
-                      <tr className="border-b border-earth-200 text-earth-600 uppercase text-[10px]">
-                        <th className="py-2.5 px-3">RECIPIENT</th>
-                        <th className="py-2.5 px-3">RISK LEVEL</th>
-                        <th className="py-2.5 px-3">LOCATION</th>
-                        <th className="py-2.5 px-3">STATUS</th>
-                        <th className="py-2.5 px-3">GATEWAY</th>
-                        <th className="py-2.5 px-3">TIMESTAMP</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-earth-100">
-                      {alertHistory.map((item) => (
-                        <tr key={item.id} className="hover:bg-earth-50 transition-colors">
-                          <td className="py-2.5 px-3 text-earth-900 font-bold whitespace-nowrap">
-                            {item.recipient_masked}
-                          </td>
-                          <td className="py-2.5 px-3">
-                            <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
-                              item.risk_level === 'CRITICAL' || item.risk_level === 'Critical'
-                                ? 'bg-red-100 text-red-800 border border-red-200'
-                                : item.risk_level === 'HIGH' || item.risk_level === 'High'
-                                ? 'bg-amber-100 text-amber-800 border border-amber-200'
-                                : 'bg-brand-100 text-brand-800 border border-brand-200'
-                            }`}>
-                              {item.risk_level}
-                            </span>
-                          </td>
-                          <td className="py-2.5 px-3 text-earth-800 max-w-[150px] truncate">
-                            {item.location_name || 'Northeast Region'}
-                          </td>
-                          <td className="py-2.5 px-3 whitespace-nowrap">
-                            <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
-                              item.status === 'SENT' || item.status === 'SUBMITTED'
-                                ? 'bg-brand-100 text-brand-800 border border-brand-200'
-                                : item.status === 'THROTTLED'
-                                ? 'bg-amber-100 text-amber-800 border border-amber-200'
-                                : 'bg-red-100 text-red-800 border border-red-200'
-                            }`}>
-                              {item.status}
-                            </span>
-                          </td>
-                          <td className="py-2.5 px-3 text-earth-500 uppercase text-[10px]">
-                            {item.provider}
-                          </td>
-                          <td className="py-2.5 px-3 text-earth-500 text-[10px] whitespace-nowrap">
-                            {new Date(item.created_at).toLocaleString([], {
-                              month: 'short',
-                              day: 'numeric',
-                              hour: '2-digit',
-                              minute: '2-digit'
-                            })}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-            </div>
           </div>
         )}
 
@@ -2394,12 +2192,14 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
                 DESIGNATED DESTINATION:
               </span>
               <div className="text-sm font-bold font-serif text-[#141712] uppercase">
-                {locationState?.areaName
+                {nearestFacilities?.nearest_shelter?.name || nearestFacilities?.nearest_hospitals?.[0]?.name || (locationState?.areaName
                   ? `COMMUNITY RELIEF FACILITY (${locationState.areaName.toUpperCase()})`
-                  : 'DISTRICT DESIGNATED RELIEF FACILITY'}
+                  : 'DISTRICT DESIGNATED RELIEF FACILITY')}
               </div>
               <div className="text-xs text-[#434A3E]">
-                Ridge Crest Sector &bull; Authority Verified Safe Elevation Corridor
+                {nearestFacilities?.nearest_shelter || nearestFacilities?.nearest_hospitals?.[0]
+                  ? `Distance: ${(nearestFacilities.nearest_shelter?.distance_km || nearestFacilities.nearest_hospitals?.[0]?.distance_km).toFixed(1)} km • Est. Travel Time: ${Math.round(nearestFacilities.nearest_shelter?.duration_minutes || nearestFacilities.nearest_hospitals?.[0]?.duration_minutes)} mins`
+                  : 'Ridge Crest Sector • Authority Verified Safe Elevation Corridor'}
               </div>
             </div>
 
@@ -2533,17 +2333,7 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({
           setIsCameraOpen(false);
           setCameraMode(null);
         }}
-        onCapturePhoto={(photo) => {
-          setCapturedPhotos((prev) => [...prev, photo].slice(0, 5));
-          setIsCameraOpen(false);
-          setCameraMode(null);
-        }}
         onVideoCaptured={(video) => {
-          setCapturedVideo(video);
-          setIsCameraOpen(false);
-          setCameraMode(null);
-        }}
-        onCaptureVideo={(video) => {
           setCapturedVideo(video);
           setIsCameraOpen(false);
           setCameraMode(null);

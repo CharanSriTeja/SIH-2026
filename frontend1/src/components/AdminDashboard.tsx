@@ -1,52 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import {
   Shield,
-  Activity,
-  Layers,
-  AlertTriangle,
-  Send,
   Users,
-  Database,
-  Sliders,
-  Radio,
-  FileCheck,
-  MapPin,
-  Compass,
-  Sparkles,
+  FileText,
+  PlusCircle,
+  Trash2,
+  Search,
+  Filter,
   RefreshCw,
   LogOut,
-  Clock,
+  Camera,
   Eye,
   CheckCircle2,
+  Clock,
   XCircle,
-  Building,
-  HeartPulse,
-  Truck,
-  Server,
-  Zap,
-  ChevronRight,
-  Filter,
-  Search,
-  Lock,
+  AlertTriangle,
+  Building2,
+  Calendar,
+  X,
   PhoneCall,
-  Trash2,
-  PlusCircle,
-  EyeOff,
-  ShieldCheck,
-  Building2
+  Lock,
+  ChevronDown,
+  Terminal,
+  Database
 } from 'lucide-react';
-import { UserRole, DistrictAdminUser, StatesDistrictsResponse, CitizenReportItem } from '../types';
+import {
+  UserRole,
+  DistrictAdminUser,
+  StatesDistrictsResponse,
+  CitizenReportItem
+} from '../types';
 import {
   fetchStatesDistricts,
   fetchDistrictAdmins,
   createDistrictAdmin,
   deleteDistrictAdmin,
   fetchAllAdminReports,
-  updateAdminReportStatus,
-  fetchAuthorizedPhotoBlobUrl
+  fetchAuthorizedPhotoBlobUrl,
+  triggerDataPipeline,
+  fetchDataDates,
+  deleteDataDate,
+  fetchPipelineLogs
 } from '../services/districtAdminService';
-
-import MapComponent from './MapComponent';
 
 interface AdminDashboardProps {
   user: { role: UserRole; name: string };
@@ -59,1546 +54,1254 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   onLogout,
   onSwitchRole,
 }) => {
-  const [activeTab, setActiveTab] = useState<
-    | 'COMMAND CENTER'
-    | 'RISK MAP'
-    | 'RISK ANALYTICS'
-    | 'FIELD INTELLIGENCE'
-    | 'ALERTS'
-    | 'RESPONSE'
-    | 'INFRASTRUCTURE'
-    | 'USERS'
-    | 'DATA SOURCES'
-    | 'SYSTEM'
-  >('COMMAND CENTER');
+  // Exactly three operational tabs:
+  // 1. DISTRICT ADMINISTRATOR MANAGEMENT (default)
+  // 2. HAZARD REPORTS — STATE & DISTRICT-WISE OVERSIGHT
+  // 3. DATA MANAGEMENT - historical data and pipelines
+  const [activeTab, setActiveTab] = useState<'DISTRICT_ADMINS' | 'HAZARD_REPORTS' | 'DATA_MANAGEMENT'>('DISTRICT_ADMINS');
 
-  // GIS Map Layer Toggles
-  const [layers, setLayers] = useState({
-    riskHeatmap: true,
-    riskZones: true,
-    villages: true,
-    roads: true,
-    schools: false,
-    hospitals: true,
-    bridges: true,
-    shelters: true,
-    historicalLandslides: true,
-    fieldReports: true,
-  });
-
-  const toggleLayer = (key: keyof typeof layers) => {
-    setLayers((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
-
-  // Alert Composer State
-  const [alertZone, setAlertZone] = useState('Sector A (Durtlang Ridge)');
-  const [alertSeverity, setAlertSeverity] = useState<'HIGH' | 'CRITICAL' | 'MODERATE'>('HIGH');
-  const [alertChannels, setAlertChannels] = useState({ sms: true, app: true, web: true });
-  const [alertMessage, setAlertMessage] = useState(
-    'High landslide risk has been detected in Sector A due to intense rainfall and slope saturation. Residents are advised to move toward designated safe shelters.'
-  );
-  const [alertSentSuccess, setAlertSentSuccess] = useState(false);
-
-  // Live Citizen Reports Management State
-  const [adminReports, setAdminReports] = useState<CitizenReportItem[]>([]);
-  const [loadingReports, setLoadingReports] = useState(false);
-  const [updatingReportId, setUpdatingReportId] = useState<string | null>(null);
-  const [selectedPhotoUrl, setSelectedPhotoUrl] = useState<string | null>(null);
-  const [loadingPhoto, setLoadingPhoto] = useState(false);
-  const [reportStatusFilter, setReportStatusFilter] = useState<'all' | 'pending' | 'verified' | 'dismissed'>('all');
-  const [reportSearch, setReportSearch] = useState('');
-
-
-  const handleSendAlert = (e: React.FormEvent) => {
-    e.preventDefault();
-    setAlertSentSuccess(true);
-    setTimeout(() => {
-      setAlertSentSuccess(false);
-    }, 4000);
-  };
-
-  const handleUpdateStatus = async (id: string, newStatus: 'verified' | 'dismissed' | 'pending') => {
-    try {
-      setUpdatingReportId(id);
-      await updateAdminReportStatus(id, newStatus);
-      const refreshed = await fetchAllAdminReports();
-      setAdminReports(refreshed);
-    } catch (err: any) {
-      console.error('Failed to update report status:', err);
-    } finally {
-      setUpdatingReportId(null);
-    }
-  };
-
-  const handleViewReportPhoto = async (photoPath: string) => {
-    try {
-      setLoadingPhoto(true);
-      const blobUrl = await fetchAuthorizedPhotoBlobUrl(photoPath);
-      setSelectedPhotoUrl(blobUrl);
-    } catch (err: any) {
-      console.error('Failed to load report photo:', err);
-      alert('Unable to load photo: ' + (err.response?.data?.detail || err.message));
-    } finally {
-      setLoadingPhoto(false);
-    }
-  };
-
-  // District Administrators Provisioning & Jurisdiction
+  // =========================================================================
+  // TAB 1: DISTRICT ADMINISTRATORS MANAGEMENT STATE
+  // =========================================================================
   const [statesDistricts, setStatesDistricts] = useState<StatesDistrictsResponse | null>(null);
   const [districtAdmins, setDistrictAdmins] = useState<DistrictAdminUser[]>([]);
   const [loadingDistAdmins, setLoadingDistAdmins] = useState(false);
-  const [daName, setDaName] = useState('');
-  const [daPhone, setDaPhone] = useState('+91');
-  const [daPassword, setDaPassword] = useState('');
-  const [showDaPassword, setShowDaPassword] = useState(false);
-  const [selectedState, setSelectedState] = useState('');
-  const [selectedDistrict, setSelectedDistrict] = useState('');
-  const [daSubmitting, setDaSubmitting] = useState(false);
-  const [daError, setDaError] = useState<string | null>(null);
-  const [daSuccess, setDaSuccess] = useState<string | null>(null);
+  const [adminSearch, setAdminSearch] = useState('');
+  const [adminStateFilter, setAdminStateFilter] = useState('all');
 
-  const loadDistrictAdminsData = async () => {
+  // Form State for creating new District Admin
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [daName, setDaName] = useState('');
+  const [daPhone, setDaPhone] = useState('');
+  const [daPassword, setDaPassword] = useState('');
+  const [daState, setDaState] = useState('');
+  const [daDistrict, setDaDistrict] = useState('');
+  const [createSubmitting, setCreateSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+  const [formSuccess, setFormSuccess] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  // =========================================================================
+  // TAB 2: CITIZEN HAZARD REPORTS OVERSIGHT STATE
+  // =========================================================================
+  const [reports, setReports] = useState<CitizenReportItem[]>([]);
+  const [loadingReports, setLoadingReports] = useState(false);
+  const [reportStateFilter, setReportStateFilter] = useState('all');
+  const [reportDistrictFilter, setReportDistrictFilter] = useState('all');
+  const [reportStatusFilter, setReportStatusFilter] = useState<'all' | 'pending' | 'verified' | 'dismissed'>('all');
+  const [reportDateFrom, setReportDateFrom] = useState('');
+  const [reportDateTo, setReportDateTo] = useState('');
+  const [reportSearch, setReportSearch] = useState('');
+
+  // Photo viewer modal state
+  const [inspectReport, setInspectReport] = useState<CitizenReportItem | null>(null);
+  const [modalPhotoUrl, setModalPhotoUrl] = useState<string | null>(null);
+  const [loadingModalPhoto, setLoadingModalPhoto] = useState(false);
+  const [photoBlobUrls, setPhotoBlobUrls] = useState<Record<string, string>>({});
+
+  // =========================================================================
+  // TAB 3: DATA MANAGEMENT STATE
+  // =========================================================================
+  const [dataDates, setDataDates] = useState<string[]>([]);
+  const [loadingDates, setLoadingDates] = useState(false);
+  const [showTerminal, setShowTerminal] = useState(false);
+  const [pipelineLogs, setPipelineLogs] = useState<string>('');
+  
+  // Pipeline trigger state
+  const [triggeringPipeline, setTriggeringPipeline] = useState(false);
+
+  // -------------------------------------------------------------------------
+  // Data Loaders
+  // -------------------------------------------------------------------------
+  const loadReferenceData = async () => {
     try {
-      setLoadingDistAdmins(true);
-      setLoadingReports(true);
-      const [refData, adminList, reportsList] = await Promise.all([
-        fetchStatesDistricts().catch(() => null),
-        fetchDistrictAdmins().catch(() => []),
-        fetchAllAdminReports().catch(() => [])
-      ]);
-      if (refData) {
-        setStatesDistricts(refData);
-        if (!selectedState && refData.states.length > 0) {
-          setSelectedState(refData.states[0]);
-          const firstStateDists = refData.districts_by_state[refData.states[0]] || [];
-          if (firstStateDists.length > 0) {
-            setSelectedDistrict(firstStateDists[0]);
-          }
+      const data = await fetchStatesDistricts();
+      setStatesDistricts(data);
+      if (data.states && data.states.length > 0 && !daState) {
+        setDaState(data.states[0]);
+        const districts = data.districts_by_state[data.states[0]] || [];
+        if (districts.length > 0) {
+          setDaDistrict(districts[0]);
         }
       }
-      setDistrictAdmins(adminList || []);
-      setAdminReports(reportsList || []);
-    } catch (err: any) {
-      console.error('Failed to load district data:', err);
+    } catch (err) {
+      console.warn('Could not load states & districts reference:', err);
+    }
+  };
+
+  const loadDistrictAdmins = async () => {
+    try {
+      setLoadingDistAdmins(true);
+      const list = await fetchDistrictAdmins();
+      setDistrictAdmins(list);
+    } catch (err) {
+      console.error('Failed to load district administrators:', err);
     } finally {
       setLoadingDistAdmins(false);
+    }
+  };
+
+  const loadAllReports = async () => {
+    try {
+      setLoadingReports(true);
+      const fetched = await fetchAllAdminReports({
+        state: reportStateFilter === 'all' ? undefined : reportStateFilter,
+        district: reportDistrictFilter === 'all' ? undefined : reportDistrictFilter,
+        status: reportStatusFilter === 'all' ? undefined : reportStatusFilter,
+        date_from: reportDateFrom || undefined,
+        date_to: reportDateTo || undefined,
+      });
+      setReports(fetched);
+
+      // Fetch thumbnails
+      fetched.forEach(async (rep) => {
+        const photoKey = rep.photo_path || rep.photo_url;
+        if (photoKey && !photoBlobUrls[rep.id]) {
+          try {
+            const blobUrl = await fetchAuthorizedPhotoBlobUrl(photoKey);
+            setPhotoBlobUrls((prev) => ({ ...prev, [rep.id]: blobUrl }));
+          } catch (e) {
+            console.warn('Failed to load thumbnail for report', rep.id, e);
+          }
+        }
+      });
+    } catch (err) {
+      console.error('Failed to load admin hazard reports:', err);
+    } finally {
       setLoadingReports(false);
     }
   };
 
+  const loadDataDates = async () => {
+    try {
+      setLoadingDates(true);
+      const dates = await fetchDataDates();
+      setDataDates(dates);
+    } catch (err) {
+      console.error('Failed to load data dates:', err);
+    } finally {
+      setLoadingDates(false);
+    }
+  };
+
+  const handleDeleteDataDate = async (dateStr: string) => {
+    if (!window.confirm(`Are you sure you want to delete all raw and processed data for ${dateStr}? This action cannot be undone.`)) {
+      return;
+    }
+    try {
+      await deleteDataDate(dateStr);
+      await loadDataDates(); // refresh
+    } catch (err) {
+      console.error('Failed to delete data:', err);
+      alert('Failed to delete data. See console for details.');
+    }
+  };
 
   useEffect(() => {
-    loadDistrictAdminsData();
+    loadReferenceData();
+    loadDistrictAdmins();
   }, []);
 
-  const handleStateChange = (stateName: string) => {
-    setSelectedState(stateName);
-    if (statesDistricts && statesDistricts.districts_by_state[stateName]) {
-      const dists = statesDistricts.districts_by_state[stateName];
-      setSelectedDistrict(dists[0] || '');
+  useEffect(() => {
+    if (activeTab === 'HAZARD_REPORTS') {
+      loadAllReports();
+    } else if (activeTab === 'DATA_MANAGEMENT') {
+      loadDataDates();
+    }
+  }, [activeTab, reportStateFilter, reportDistrictFilter, reportStatusFilter, reportDateFrom, reportDateTo]);
+
+  // Polling for pipeline logs
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (showTerminal || triggeringPipeline) {
+      const fetchLogs = async () => {
+        try {
+          const logs = await fetchPipelineLogs();
+          setPipelineLogs(logs);
+        } catch (e) {
+          console.error("Failed to fetch pipeline logs", e);
+        }
+      };
+      fetchLogs(); // initial fetch
+      interval = setInterval(fetchLogs, 2000);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [showTerminal, triggeringPipeline]);
+
+  // Handle State selection change in Create Form
+  const handleStateChange = (newState: string) => {
+    setDaState(newState);
+    if (statesDistricts) {
+      const districts = statesDistricts.districts_by_state[newState] || [];
+      setDaDistrict(districts[0] || '');
     }
   };
 
-  const handleCreateDistrictAdminSubmit = async (e: React.FormEvent) => {
+  // Handle District Admin Creation
+  const handleCreateDistrictAdmin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setDaError(null);
-    setDaSuccess(null);
+    setFormError(null);
+    setFormSuccess(null);
 
-    if (!daName.trim()) {
-      setDaError('Full Name is required.');
-      return;
-    }
-    const cleanPhone = daPhone.trim();
-    if (!/^\+91[6-9]\d{9}$/.test(cleanPhone)) {
-      setDaError('Phone number must be +91 followed by a valid 10-digit mobile number starting with 6-9.');
-      return;
-    }
-    if (daPassword.length < 8) {
-      setDaError('Password must be at least 8 characters long and contain letters and numbers.');
-      return;
-    }
-    if (!selectedState || !selectedDistrict) {
-      setDaError('Please select both a State and an assigned District jurisdiction.');
+    if (!daName.trim() || !daPhone.trim() || !daPassword.trim() || !daState || !daDistrict) {
+      setFormError('Please fill out all required fields.');
       return;
     }
 
     try {
-      setDaSubmitting(true);
-      const created = await createDistrictAdmin({
+      setCreateSubmitting(true);
+      await createDistrictAdmin({
         name: daName.trim(),
-        phone_number: cleanPhone,
+        phone_number: daPhone.trim(),
         password: daPassword,
-        state_name: selectedState,
-        district_name: selectedDistrict
+        state_name: daState,
+        district_name: daDistrict
       });
 
-      setDaSuccess(`District Administrator account created for ${created.name} (${selectedDistrict}, ${selectedState}).`);
+      setFormSuccess(`District Administrator account for ${daName} created successfully.`);
       setDaName('');
-      setDaPhone('+91');
+      setDaPhone('');
       setDaPassword('');
-      // Reload admins
-      const updatedList = await fetchDistrictAdmins();
-      setDistrictAdmins(updatedList);
+      setShowCreateForm(false);
+      await loadDistrictAdmins();
     } catch (err: any) {
-      const msg = err.response?.data?.detail || err.message || 'Failed to create District Administrator.';
-      setDaError(msg);
+      const msg = err.response?.data?.detail || err.message || 'Failed to create district administrator.';
+      setFormError(msg);
     } finally {
-      setDaSubmitting(false);
+      setCreateSubmitting(false);
     }
   };
 
-  const handleDeleteDistrictAdminSubmit = async (adminId: string, adminName: string) => {
-    if (!window.confirm(`Are you sure you want to revoke and delete the District Administrator account for ${adminName}?`)) {
+  // Handle District Admin Removal
+  const handleDeleteDistrictAdmin = async (adminId: string, name: string) => {
+    if (!window.confirm(`Are you sure you want to deactivate and remove the District Administrator account for ${name}?`)) {
       return;
     }
+
     try {
+      setDeletingId(adminId);
       await deleteDistrictAdmin(adminId);
-      setDistrictAdmins((prev) => prev.filter((a) => a.id !== adminId));
+      setDistrictAdmins((prev) => prev.filter((da) => da.id !== adminId));
     } catch (err: any) {
-      const msg = err.response?.data?.detail || err.message || 'Failed to delete account.';
-      alert(msg);
+      alert(err.response?.data?.detail || 'Failed to delete district administrator.');
+    } finally {
+      setDeletingId(null);
     }
   };
 
+  // Photo Inspection Modal
+  const handleOpenPhotoModal = async (report: CitizenReportItem) => {
+    setInspectReport(report);
+    const photoKey = report.photo_path || report.photo_url;
+    if (photoBlobUrls[report.id]) {
+      setModalPhotoUrl(photoBlobUrls[report.id]);
+    } else if (photoKey) {
+      try {
+        setLoadingModalPhoto(true);
+        const url = await fetchAuthorizedPhotoBlobUrl(photoKey);
+        setModalPhotoUrl(url);
+        setPhotoBlobUrls((prev) => ({ ...prev, [report.id]: url }));
+      } catch (err) {
+        console.error('Failed to load full photo in inspect modal:', err);
+        setModalPhotoUrl(null);
+      } finally {
+        setLoadingModalPhoto(false);
+      }
+    } else {
+      setModalPhotoUrl(null);
+    }
+  };
+
+  const handleTriggerPipeline = async () => {
+    if (!window.confirm('Are you sure you want to trigger the data fetching pipeline? This will run in the background.')) return;
+    try {
+      setTriggeringPipeline(true);
+      setShowTerminal(true);
+      setActiveTab('DATA_MANAGEMENT');
+      const res = await triggerDataPipeline();
+      // Optional: alert(res.message || 'Pipeline triggered successfully.');
+    } catch (err: any) {
+      alert(err.response?.data?.detail || 'Failed to trigger pipeline.');
+    } finally {
+      setTimeout(() => setTriggeringPipeline(false), 5000); // keep triggering indicator for a bit
+    }
+  };
+
+  // Filtered District Admins Roster
+  const filteredAdmins = districtAdmins.filter((adm) => {
+    if (adminStateFilter !== 'all' && adm.state_name !== adminStateFilter) {
+      return false;
+    }
+    if (adminSearch.trim()) {
+      const q = adminSearch.toLowerCase();
+      return (
+        adm.name.toLowerCase().includes(q) ||
+        adm.phone_number.includes(q) ||
+        (adm.district_name && adm.district_name.toLowerCase().includes(q)) ||
+        (adm.state_name && adm.state_name.toLowerCase().includes(q))
+      );
+    }
+    return true;
+  });
+
+  // Filtered Citizen Reports (client search filtering on top of server filters)
+  const filteredReports = reports.filter((rep) => {
+    if (!reportSearch.trim()) return true;
+    const q = reportSearch.toLowerCase();
+    return (
+      (rep.hazard_type && rep.hazard_type.toLowerCase().includes(q)) ||
+      (rep.description && rep.description.toLowerCase().includes(q)) ||
+      (rep.citizen_name && rep.citizen_name.toLowerCase().includes(q)) ||
+      (rep.citizen_phone && rep.citizen_phone.includes(q)) ||
+      (rep.district_name && rep.district_name.toLowerCase().includes(q)) ||
+      (rep.state_name && rep.state_name.toLowerCase().includes(q)) ||
+      (rep.reviewed_by_name && rep.reviewed_by_name.toLowerCase().includes(q))
+    );
+  });
+
+  // List of districts available for currently selected filter state
+  const filterDistricts =
+    reportStateFilter !== 'all' && statesDistricts
+      ? statesDistricts.districts_by_state[reportStateFilter] || []
+      : [];
+
   return (
-    <div className="min-h-screen bg-earth-100 text-earth-900 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#F0ECE1] text-[#141712] flex flex-col font-sans">
       {/* ==================================================== */}
-      {/* TOP ADMIN COMMAND HEADER                             */}
+      {/* 1. TOP HEADER: REGIONAL SDMA COMMAND                */}
       {/* ==================================================== */}
-      <header className="sticky top-0 z-40 bg-[#FFFDF8]/95 border-b border-earth-300 backdrop-blur-md px-4 sm:px-6 lg:px-8">
+      <header className="sticky top-0 z-40 bg-[#FFFFFF]/95 border-b-2 border-[#BCB29E] backdrop-blur-md px-4 sm:px-6 lg:px-8 shadow-xs">
         <div className="max-w-7xl mx-auto h-16 sm:h-20 flex items-center justify-between gap-4">
-          {/* Brand + Admin Clearance Badge */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-brand-100 border border-brand-200 flex items-center justify-center text-brand-800 shadow-2xs">
+            <div className="w-10 h-10 rounded-xl bg-[#EBF4EE] border-2 border-[#1E4B33] flex items-center justify-center text-[#1E4B33] shadow-xs">
               <Shield className="w-5 h-5" />
             </div>
             <div className="text-left">
               <div className="flex items-center gap-2">
-                <span className="text-base sm:text-lg font-bold font-serif uppercase tracking-wider text-earth-900">
+                <span className="text-base sm:text-lg font-bold font-serif uppercase tracking-wider text-[#141712]">
                   BHURAKSHA
                 </span>
-                <span className="px-2 py-0.5 rounded-full text-[9px] font-mono font-bold bg-brand-100 text-brand-900 border border-brand-200">
-                  ADMIN COMMAND
+                <span className="px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold bg-[#EBF4EE] text-[#1E4B33] border border-[#1E4B33]">
+                  SUPER-ADMIN DESK
                 </span>
               </div>
-              <span className="text-[10px] font-mono text-earth-600 uppercase block">
-                STATE DISASTER MANAGEMENT COMMISSION &bull; REGIONAL HQ
+              <span className="text-[11px] font-mono text-[#474C3F] block font-bold">
+                STATE &amp; REGIONAL DISASTER MANAGEMENT COMMAND
               </span>
             </div>
           </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden xl:flex items-center gap-1">
-            {(
-              [
-                'COMMAND CENTER',
-                'RISK MAP',
-                'RISK ANALYTICS',
-                'FIELD INTELLIGENCE',
-                'ALERTS',
-                'RESPONSE',
-                'INFRASTRUCTURE',
-                'USERS',
-                'DATA SOURCES',
-                'SYSTEM',
-              ] as const
-            ).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-2.5 py-1.5 rounded-xl text-[11px] font-mono uppercase font-bold transition-all cursor-pointer ${
-                  activeTab === tab
-                    ? 'bg-brand-700 text-white shadow-xs'
-                    : 'text-earth-700 hover:text-earth-900 hover:bg-earth-200'
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </nav>
-
-          {/* Right: Demo Switcher, Admin Info & Logout */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3">
             {onSwitchRole && (
-              <div className="hidden sm:flex items-center gap-1.5 bg-[#EDE7DC] border-2 border-[#BCB29E] px-2 py-1 rounded-xl">
-                <span className="text-[9px] font-mono uppercase text-[#6B7263] font-bold">SWITCH:</span>
+              <div className="hidden md:flex items-center gap-1.5 bg-[#EDE7DC] border-2 border-[#C9C0AD] px-2 py-1 rounded-xl">
+                <span className="text-[9px] font-mono uppercase text-[#474C3F] font-bold">SWITCH:</span>
                 <button
                   onClick={() => onSwitchRole('citizen')}
-                  className="px-2 py-0.5 rounded text-[9px] font-mono font-bold bg-white text-[#141712] hover:bg-[#EAE4D7] border border-[#BCB29E] transition-colors cursor-pointer shadow-2xs"
+                  className="px-2.5 py-0.5 rounded-lg text-[9px] font-mono font-bold bg-white text-[#141712] hover:bg-[#F0ECE1] border border-[#C9C0AD] transition-all cursor-pointer"
                 >
                   Citizen
                 </button>
                 <button
-                  onClick={() => onSwitchRole('officer')}
-                  className="px-2 py-0.5 rounded text-[9px] font-mono font-bold bg-[#1E4B33] text-white hover:bg-[#143524] border border-[#143524] transition-colors cursor-pointer shadow-2xs"
+                  onClick={() => onSwitchRole('district_admin')}
+                  className="px-2.5 py-0.5 rounded-lg text-[9px] font-mono font-bold bg-[#1E4B33] text-white hover:bg-[#143524] border border-[#143524] transition-all cursor-pointer"
                 >
-                  Officer
+                  District Desk
                 </button>
               </div>
             )}
 
             <div className="hidden sm:flex flex-col text-right">
-              <span className="text-xs font-mono font-bold text-earth-900 uppercase">
-                {user.name}
+              <span className="text-xs font-mono font-bold text-[#141712] uppercase">
+                {user.name || 'System Administrator'}
               </span>
-              <span className="text-[10px] font-mono text-brand-700 font-semibold">
-                Level-3 Admin Authority
+              <span className="text-[10px] font-mono text-[#1E4B33] font-semibold">
+                Super-Admin Clearance
               </span>
             </div>
 
             <button
               onClick={onLogout}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl border-2 border-[#BCB29E] bg-[#EDE7DC] hover:bg-[#FDF2F0] hover:border-[#F2BCA0] hover:text-[#8A2418] text-[#141712] text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+              className="p-2.5 rounded-xl bg-[#FDF2F0] hover:bg-[#FCE3DF] text-[#8A2418] hover:text-[#6D1B12] border-2 border-[#F2BCA0] transition-all cursor-pointer shadow-xs"
+              title="Sign Out"
             >
-              <LogOut className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">LOG OUT</span>
+              <LogOut className="w-4 h-4" />
             </button>
           </div>
-        </div>
-
-        {/* Mobile / Compact Navigation Strip */}
-        <div className="flex xl:hidden items-center gap-1 overflow-x-auto py-2 border-t border-earth-200 bg-earth-50 no-scrollbar">
-          {(
-            [
-              'COMMAND CENTER',
-              'RISK MAP',
-              'RISK ANALYTICS',
-              'FIELD INTELLIGENCE',
-              'ALERTS',
-              'RESPONSE',
-              'INFRASTRUCTURE',
-              'USERS',
-              'DATA SOURCES',
-              'SYSTEM',
-            ] as const
-          ).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-2.5 py-1 rounded-lg text-[10px] font-mono whitespace-nowrap uppercase font-bold transition-all ${
-                activeTab === tab
-                  ? 'bg-brand-700 text-white'
-                  : 'text-earth-700 hover:text-earth-900'
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
         </div>
       </header>
 
       {/* ==================================================== */}
-      {/* MAIN ADMIN DASHBOARD CONTENT                         */}
+      {/* 2. TAB SELECTION BAR (EXACTLY TWO FUNCTIONS)         */}
       {/* ==================================================== */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6 text-left">
-        {/* TAB 1: OVERALL COMMAND CENTER */}
-        {activeTab === 'COMMAND CENTER' && (
-          <div className="space-y-6">
-            {/* Header Status Strip */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-earth-300 pb-5">
-              <div>
-                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-brand-700 font-bold block mb-1">
-                  STATE DISASTER MANAGEMENT COMMISSION
+      <div className="bg-[#FFFFFF] border-b-2 border-[#BCB29E] px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex items-center gap-3 py-2.5">
+          {/* TAB 1: DISTRICT ADMINISTRATOR MANAGEMENT (FIRST / DEFAULT) */}
+          <button
+            onClick={() => setActiveTab('DISTRICT_ADMINS')}
+            className={`px-5 py-2.5 rounded-xl text-xs font-mono font-bold uppercase transition-all flex items-center gap-2 cursor-pointer border-2 ${
+              activeTab === 'DISTRICT_ADMINS'
+                ? 'bg-[#1E4B33] text-white border-[#1E4B33] shadow-xs'
+                : 'bg-white text-[#474C3F] border-[#C9C0AD] hover:bg-[#F0ECE1]'
+            }`}
+          >
+            <Users className="w-4 h-4" />
+            <span>District Administrator Management</span>
+            <span
+              className={`px-2 py-0.5 rounded-full text-[10px] ${
+                activeTab === 'DISTRICT_ADMINS' ? 'bg-white/20 text-white' : 'bg-[#ECE7DC] text-[#141712]'
+              }`}
+            >
+              {districtAdmins.length}
+            </span>
+          </button>
+
+          {/* TAB 2: HAZARD REPORTS — STATE & DISTRICT-WISE OVERSIGHT */}
+          <button
+            onClick={() => setActiveTab('HAZARD_REPORTS')}
+            className={`px-5 py-2.5 rounded-xl text-xs font-mono font-bold uppercase transition-all flex items-center gap-2 cursor-pointer border-2 ${
+              activeTab === 'HAZARD_REPORTS'
+                ? 'bg-[#1E4B33] text-white border-[#1E4B33] shadow-xs'
+                : 'bg-white text-[#474C3F] border-[#C9C0AD] hover:bg-[#F0ECE1]'
+            }`}
+          >
+            <FileText className="w-4 h-4" />
+            <span>Hazard Reports Oversight</span>
+            <span
+              className={`px-2 py-0.5 rounded-full text-[10px] ${
+                activeTab === 'HAZARD_REPORTS' ? 'bg-white/20 text-white' : 'bg-[#ECE7DC] text-[#141712]'
+              }`}
+            >
+              {reports.length}
+            </span>
+          </button>
+        {/* TAB 3: DATA MANAGEMENT */}
+          <button
+            onClick={() => setActiveTab('DATA_MANAGEMENT')}
+            className={`px-5 py-2.5 rounded-xl text-xs font-mono font-bold uppercase transition-all flex items-center gap-2 cursor-pointer border-2 ${
+              activeTab === 'DATA_MANAGEMENT'
+                ? 'bg-[#1E4B33] text-white border-[#1E4B33] shadow-xs'
+                : 'bg-white text-[#474C3F] border-[#C9C0AD] hover:bg-[#F0ECE1]'
+            }`}
+          >
+            <Database className="w-4 h-4" />
+            <span>Data Management</span>
+          </button>
+        </div>
+        <div className="flex-1"></div>
+        <div className="flex items-center gap-3 py-2.5">
+          <button
+            onClick={handleTriggerPipeline}
+            disabled={triggeringPipeline}
+            className={`px-5 py-2.5 rounded-xl text-xs font-mono font-bold uppercase transition-all flex items-center gap-2 cursor-pointer border-2 bg-[#F0ECE1] text-[#141712] border-[#C9C0AD] hover:bg-[#E2DFD3] disabled:opacity-50 disabled:cursor-not-allowed`}
+          >
+            <RefreshCw className={`w-4 h-4 ${triggeringPipeline ? 'animate-spin' : ''}`} />
+            <span>{triggeringPipeline ? 'Triggering...' : 'Run Data Pipeline'}</span>
+          </button>
+        </div>
+      </div>
+
+      {/* ==================================================== */}
+      {/* 3. MAIN DASHBOARD CONTENT                            */}
+      {/* ==================================================== */}
+      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
+
+        {/* ================================================== */}
+        {/* TAB 1: DISTRICT ADMINISTRATOR MANAGEMENT           */}
+        {/* ================================================== */}
+        {activeTab === 'DISTRICT_ADMINS' && (
+          <div className="space-y-6 text-left">
+            {/* Header Banner */}
+            <div className="p-6 rounded-3xl bg-white border-2 border-[#BCB29E] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#1E4B33] font-bold">
+                  DECENTRALIZED JURISDICTION ACCESS CONTROL
                 </span>
-                <h1 className="text-2xl sm:text-3xl font-bold font-serif text-earth-900 uppercase">
-                  REGIONAL COMMAND CENTER &bull; NER CLUSTER
+                <h1 className="text-2xl sm:text-3xl font-bold font-serif uppercase tracking-tight text-[#141712]">
+                  District Administrator Management
                 </h1>
-                <p className="text-xs sm:text-sm text-earth-700 mt-1 font-sans">
-                  Synchronized Telemetry: IMD Radar + Sentinel-1 InSAR + In-situ Piezometers + Ground Reports
+                <p className="text-xs sm:text-sm text-[#474C3F] max-w-2xl font-sans">
+                  Provision and oversee District Administrators for each administrative district in Northeast India. District Admins possess sole authority to verify citizen hazard reports in their jurisdiction.
                 </p>
               </div>
 
-              <div className="flex items-center gap-3">
-                <span className="px-3.5 py-1.5 rounded-full bg-risk-critical/15 border border-risk-critical/30 text-risk-critical text-xs font-mono font-bold uppercase animate-pulse">
-                  REGIONAL RISK: HIGH (CODE RED)
-                </span>
+              <div className="flex items-center gap-3 shrink-0">
                 <button
-                  onClick={() => setActiveTab('ALERTS')}
-                  className="px-4 py-2 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-mono font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer shadow-xs"
+                  onClick={() => setShowCreateForm(!showCreateForm)}
+                  className="px-4 py-2.5 rounded-xl bg-[#1E4B33] hover:bg-[#143524] text-white font-mono font-bold text-xs uppercase flex items-center gap-2 transition-all cursor-pointer border-2 border-[#143524] shadow-xs"
                 >
-                  DISPATCH ALERT &rarr;
+                  <PlusCircle className="w-4 h-4" />
+                  <span>{showCreateForm ? 'Close Form' : 'Create District Admin'}</span>
+                </button>
+
+                <button
+                  onClick={loadDistrictAdmins}
+                  disabled={loadingDistAdmins}
+                  className="p-2.5 rounded-xl bg-white hover:bg-[#F0ECE1] text-[#141712] border-2 border-[#BCB29E] transition-all cursor-pointer shadow-xs"
+                  title="Refresh Roster"
+                >
+                  <RefreshCw className={`w-4 h-4 ${loadingDistAdmins ? 'animate-spin' : ''}`} />
                 </button>
               </div>
             </div>
 
-            {/* 7 Core Administrative Metrics */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3">
-              <div className="p-4 rounded-2xl bg-[#FFFDF8] border border-risk-critical/30 space-y-1 shadow-xs">
-                <span className="text-[10px] font-mono text-earth-600 uppercase block font-semibold">
-                  REGIONAL RISK
-                </span>
-                <div className="text-xl font-bold font-serif text-risk-critical">HIGH</div>
-                <span className="text-[10px] font-mono text-earth-500">Multi-Hazard Sync</span>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#FFFDF8] border border-earth-300 space-y-1 shadow-xs">
-                <span className="text-[10px] font-mono text-earth-600 uppercase block font-semibold">
-                  ACTIVE JURISDICTIONS
-                </span>
-                <div className="text-xl font-bold font-serif text-earth-900">
-                  {statesDistricts?.states?.length || 8} States
-                </div>
-                <span className="text-[10px] font-mono text-earth-500">
-                  {(statesDistricts?.all_districts || statesDistricts?.districts || []).length || 129} Districts
-                </span>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#FFFDF8] border border-earth-300 space-y-1 shadow-xs">
-                <span className="text-[10px] font-mono text-brand-800 uppercase font-bold block">
-                  DISTRICT ADMINS
-                </span>
-                <div className="text-xl font-bold font-serif text-brand-900">
-                  {districtAdmins.length}
-                </div>
-                <span className="text-[10px] font-mono text-earth-500">Provisioned Desks</span>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#FFFDF8] border border-earth-300 space-y-1 shadow-xs">
-                <span className="text-[10px] font-mono text-earth-700 uppercase font-bold block">
-                  CITIZEN REPORTS
-                </span>
-                <div className="text-xl font-bold font-serif text-earth-900">
-                  {adminReports.length}
-                </div>
-                <span className="text-[10px] font-mono text-earth-500">
-                  {adminReports.filter(r => r.status === 'pending').length} Pending Review
-                </span>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#FFFDF8] border border-amber-300 space-y-1 shadow-xs">
-                <span className="text-[10px] font-mono text-amber-800 uppercase font-bold block">
-                  VERIFIED HAZARDS
-                </span>
-                <div className="text-xl font-bold font-serif text-amber-900">
-                  {adminReports.filter(r => r.status === 'verified').length}
-                </div>
-                <span className="text-[10px] font-mono text-amber-700 font-semibold">Field Confirmed</span>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#FFFDF8] border border-earth-300 space-y-1 shadow-xs">
-                <span className="text-[10px] font-mono text-earth-600 uppercase block font-semibold">
-                  DISMISSED / VOID
-                </span>
-                <div className="text-xl font-bold font-serif text-earth-800">
-                  {adminReports.filter(r => r.status === 'dismissed').length}
-                </div>
-                <span className="text-[10px] font-mono text-earth-500">Filtered Records</span>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#FFFDF8] border border-emerald-300 space-y-1 shadow-xs">
-                <span className="text-[10px] font-mono text-emerald-800 uppercase font-bold block">
-                  TELEMETRY NODES
-                </span>
-                <div className="text-xl font-bold font-serif text-emerald-900">ONLINE</div>
-                <span className="text-[10px] font-mono text-emerald-700 font-semibold">IMD + DB Live</span>
-              </div>
-            </div>
-
-            {/* Risk Intelligence Inspector for Sector A */}
-            <div className="rounded-3xl border border-earth-300 bg-[#FFFDF8] p-6 space-y-4 shadow-xs">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-earth-200 pb-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-xl bg-accent-100 border border-accent-200 text-accent-700">
-                    <Sparkles className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h2 className="text-base sm:text-lg font-bold font-serif text-earth-900 uppercase">
-                      RISK INTELLIGENCE INSPECTOR &bull; SECTOR A (CRITICAL FOCUS)
-                    </h2>
-                    <span className="text-[10px] font-mono text-earth-600">
-                      MULTI-FACTOR DATA FUSION MODEL (ENVIRONMENTAL + AI PREDICTION + GIS + FIELD EVIDENCE)
-                    </span>
-                  </div>
-                </div>
-
-                <span className="px-3 py-1 rounded-full bg-risk-critical/15 text-risk-critical border border-risk-critical/30 text-xs font-mono font-bold uppercase self-start sm:self-auto">
-                  INTELLIGENCE SCORE: 82% (HIGH)
-                </span>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 text-xs font-mono">
-                <div className="p-3 rounded-xl bg-earth-50 border border-earth-200 space-y-1">
-                  <span className="text-earth-600 text-[10px] uppercase block font-semibold">RISK SCORE</span>
-                  <span className="text-base font-bold text-risk-critical">82%</span>
-                </div>
-                <div className="p-3 rounded-xl bg-earth-50 border border-earth-200 space-y-1">
-                  <span className="text-earth-600 text-[10px] uppercase block font-semibold">SEVERITY</span>
-                  <span className="text-base font-bold text-risk-critical">HIGH</span>
-                </div>
-                <div className="p-3 rounded-xl bg-earth-50 border border-earth-200 space-y-1">
-                  <span className="text-earth-600 text-[10px] uppercase block font-semibold">RAINFALL</span>
-                  <span className="text-base font-bold text-accent-700">HIGH (42mm)</span>
-                </div>
-                <div className="p-3 rounded-xl bg-earth-50 border border-earth-200 space-y-1">
-                  <span className="text-earth-600 text-[10px] uppercase block font-semibold">SOIL MOISTURE</span>
-                  <span className="text-base font-bold text-accent-700">HIGH (78%)</span>
-                </div>
-                <div className="p-3 rounded-xl bg-earth-50 border border-earth-200 space-y-1">
-                  <span className="text-earth-600 text-[10px] uppercase block font-semibold">SLOPE ANGLE</span>
-                  <span className="text-base font-bold text-earth-900">38°</span>
-                </div>
-                <div className="p-3 rounded-xl bg-earth-50 border border-earth-200 space-y-1">
-                  <span className="text-earth-600 text-[10px] uppercase block font-semibold">HISTORICAL</span>
-                  <span className="text-base font-bold text-earth-900">07 Events</span>
-                </div>
-                <div className="p-3 rounded-xl bg-earth-50 border border-earth-200 space-y-1">
-                  <span className="text-earth-600 text-[10px] uppercase block font-semibold">FIELD REPORTS</span>
-                  <span className="text-base font-bold text-brand-800">03 Logs</span>
-                </div>
-                <div className="p-3 rounded-xl bg-earth-50 border border-earth-200 space-y-1">
-                  <span className="text-earth-600 text-[10px] uppercase block font-semibold">FIELD EVIDENCE</span>
-                  <span className="text-base font-bold text-amber-800">PENDING</span>
-                </div>
-              </div>
-
-              <div className="p-3.5 rounded-xl bg-earth-50 border border-earth-200 text-xs font-mono text-earth-700 flex items-center justify-between">
-                <span>
-                  CROSS-FACTOR CONFIRMATION: InSAR deformation (-14mm/month) + Saturated soil + Verified roadside tension fissure.
-                </span>
-                <button
-                  onClick={() => setActiveTab('RISK MAP')}
-                  className="text-amber-400 hover:text-amber-300 font-bold uppercase flex items-center gap-1 cursor-pointer shrink-0 ml-4"
-                >
-                  <span>VIEW ON GIS MAP</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
+            {/* Notification Messages */}
+            {formSuccess && (
+              <div className="p-4 rounded-2xl bg-[#EAF4EC] border-2 border-[#A8D9B2] text-xs font-mono text-[#1E4A26] flex items-center justify-between">
+                <span>{formSuccess}</span>
+                <button onClick={() => setFormSuccess(null)} className="cursor-pointer">
+                  <X className="w-4 h-4" />
                 </button>
               </div>
-            </div>
-
-            {/* Field Intelligence Management Table */}
-            <div className="rounded-3xl border border-earth-300 bg-[#FFFDF8] p-6 space-y-4 shadow-xs">
-              <div className="flex items-center justify-between border-b border-earth-200 pb-3">
-                <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-xl bg-brand-100 border border-brand-200 text-brand-800">
-                    <FileCheck className="w-5 h-5" />
-                  </div>
-                  <h2 className="text-base sm:text-lg font-bold font-serif text-earth-900 uppercase">
-                    FIELD INTELLIGENCE REPORT MANAGEMENT
-                  </h2>
-                </div>
-                <button
-                  onClick={() => setActiveTab('FIELD INTELLIGENCE')}
-                  className="text-xs font-mono text-brand-800 hover:text-brand-900 font-bold uppercase cursor-pointer"
-                >
-                  FULL WORKFLOW &rarr;
+            )}
+            {formError && (
+              <div className="p-4 rounded-2xl bg-[#FCEEEB] border-2 border-[#EABEB7] text-xs font-mono text-[#8A2418] flex items-center justify-between">
+                <span>{formError}</span>
+                <button onClick={() => setFormError(null)} className="cursor-pointer">
+                  <X className="w-4 h-4" />
                 </button>
-              </div>
-
-              <div className="overflow-x-auto rounded-2xl border border-earth-300 bg-white shadow-2xs">
-                <table className="w-full text-left text-xs font-mono">
-                  <thead className="bg-earth-50 border-b border-earth-200 text-earth-600 uppercase text-[10px]">
-                    <tr>
-                      <th className="py-2.5 px-3 font-semibold">REPORT ID</th>
-                      <th className="py-2.5 px-3 font-semibold">JURISDICTION</th>
-                      <th className="py-2.5 px-3 font-semibold">HAZARD TYPE</th>
-                      <th className="py-2.5 px-3 font-semibold">DESCRIPTION</th>
-                      <th className="py-2.5 px-3 font-semibold">EVIDENCE</th>
-                      <th className="py-2.5 px-3 font-semibold">STATUS</th>
-                      <th className="py-2.5 px-3 font-semibold">SUBMITTED</th>
-                      <th className="py-2.5 px-3 text-right font-semibold">ACTIONS</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-earth-200">
-                    {adminReports.length === 0 ? (
-                      <tr>
-                        <td colSpan={8} className="py-12 text-center text-xs font-mono text-earth-500">
-                          <div className="flex flex-col items-center justify-center gap-2">
-                            <FileCheck className="w-8 h-8 text-earth-400" />
-                            <span className="text-earth-800 font-bold uppercase">No Citizen Hazard Reports In Database</span>
-                            <span className="text-earth-600 text-[11px]">When citizens submit geotagged camera reports from the field, they will synchronize here live.</span>
-                          </div>
-                        </td>
-                      </tr>
-                    ) : (
-                      adminReports.map((r) => (
-                        <tr key={r.id} className="hover:bg-earth-50 transition-colors">
-                          <td className="py-3 px-3 font-bold text-earth-900 font-mono">
-                            {r.id.slice(0, 8)}...
-                          </td>
-                          <td className="py-3 px-3 text-earth-800">
-                            <div className="font-bold text-earth-900">{r.district_name || 'Assigned District'}</div>
-                            <div className="text-[10px] text-earth-500">{r.state_name || 'NER'}</div>
-                          </td>
-                          <td className="py-3 px-3 text-accent-700 font-bold uppercase">{r.hazard_type}</td>
-                          <td className="py-3 px-3 text-earth-700 max-w-xs truncate font-sans" title={r.description}>
-                            {r.description || 'No description provided.'}
-                          </td>
-                          <td className="py-3 px-3">
-                            {r.photo_path ? (
-                              <button
-                                type="button"
-                                onClick={() => handleViewReportPhoto(r.photo_path!)}
-                                className="px-2 py-1 rounded-lg bg-brand-100 hover:bg-brand-200 text-brand-900 border border-brand-200 text-[10px] font-bold uppercase flex items-center gap-1 cursor-pointer shadow-2xs"
-                              >
-                                <Eye className="w-3 h-3" />
-                                <span>VIEW PHOTO</span>
-                              </button>
-                            ) : (
-                              <span className="text-earth-400 text-[10px]">No Photo</span>
-                            )}
-                          </td>
-                          <td className="py-3 px-3">
-                            <span
-                              className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase border ${
-                                r.status === 'verified'
-                                  ? 'bg-emerald-100 text-emerald-900 border-emerald-300'
-                                  : r.status === 'dismissed'
-                                  ? 'bg-red-100 text-red-900 border-red-300'
-                                  : 'bg-amber-100 text-amber-900 border-amber-300'
-                              }`}
-                            >
-                              {r.status}
-                            </span>
-                          </td>
-                          <td className="py-3 px-3 text-earth-500 text-[10px]">
-                            {r.submitted_at ? new Date(r.submitted_at).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' }) : 'Recent'}
-                          </td>
-                          <td className="py-3 px-3 text-right space-x-1.5">
-                            {r.status !== 'verified' && (
-                              <button
-                                disabled={updatingReportId === r.id}
-                                onClick={() => handleUpdateStatus(r.id, 'verified')}
-                                className="px-2.5 py-1 rounded-lg bg-[#1E4B33] hover:bg-[#143524] text-white border border-[#143524] text-[10px] font-bold uppercase transition-all cursor-pointer disabled:opacity-50 shadow-2xs"
-                              >
-                                Verify
-                              </button>
-                            )}
-                            {r.status !== 'dismissed' && (
-                              <button
-                                disabled={updatingReportId === r.id}
-                                onClick={() => handleUpdateStatus(r.id, 'dismissed')}
-                                className="px-2.5 py-1 rounded-lg bg-[#FDF2F0] hover:bg-[#FCE3DF] text-[#8A2418] border border-[#F2BCA0] text-[10px] font-bold uppercase transition-all cursor-pointer disabled:opacity-50 shadow-2xs"
-                              >
-                                Dismiss
-                              </button>
-                            )}
-                            {r.status !== 'pending' && (
-                              <button
-                                disabled={updatingReportId === r.id}
-                                onClick={() => handleUpdateStatus(r.id, 'pending')}
-                                className="px-2.5 py-1 rounded-lg bg-[#EDE7DC] hover:bg-[#E2DBD0] text-[#141712] border border-[#BCB29E] text-[10px] font-bold uppercase transition-all cursor-pointer disabled:opacity-50 shadow-2xs"
-                              >
-                                Reset
-                              </button>
-                            )}
-                          </td>
-                        </tr>
-                      ))
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* TAB 2: LARGE GIS MAP WITH TOGGLEABLE LAYERS */}
-        {activeTab === 'RISK MAP' && (
-          <div className="space-y-6">
-            <div className="border-b border-white/10 pb-4">
-              <span className="text-[10px] font-mono-code uppercase tracking-[0.2em] text-amber-400 font-bold block mb-1">
-                SPATIAL GIS INTELLIGENCE
-              </span>
-              <h1 className="text-2xl sm:text-3xl font-extrabold font-heading text-white uppercase">
-                STATE GIS RISK MAP &amp; INFRASTRUCTURE LAYERS
-              </h1>
-              <p className="text-xs sm:text-sm text-slate-300 mt-1">
-                Full-scale spatial mapping correlating landslide susceptibility, lifelines, shelters, and citizen reports.
-              </p>
-            </div>
-
-            {/* Toggleable Layer Pills */}
-            <div className="p-4 rounded-2xl bg-[#0C121E] border border-white/10 space-y-2">
-              <span className="text-[10px] font-mono-code uppercase text-white/50 block font-bold">
-                TOGGLE GIS LAYERS:
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  { key: 'riskHeatmap', label: 'RISK HEATMAP' },
-                  { key: 'riskZones', label: 'RISK ZONES' },
-                  { key: 'villages', label: 'VILLAGES' },
-                  { key: 'roads', label: 'ROADS' },
-                  { key: 'schools', label: 'SCHOOLS' },
-                  { key: 'hospitals', label: 'HOSPITALS' },
-                  { key: 'bridges', label: 'BRIDGES' },
-                  { key: 'shelters', label: 'SHELTERS' },
-                  { key: 'historicalLandslides', label: 'HISTORICAL LANDSLIDES' },
-                  { key: 'fieldReports', label: 'FIELD REPORTS' },
-                ].map((l) => {
-                  const k = l.key as keyof typeof layers;
-                  const active = layers[k];
-                  return (
-                    <button
-                      key={l.key}
-                      onClick={() => toggleLayer(k)}
-                      className={`px-3 py-1.5 rounded-xl border text-xs font-mono-code font-bold uppercase transition-all cursor-pointer ${
-                        active
-                          ? 'bg-amber-400 text-black border-amber-400 shadow-md'
-                          : 'bg-[#080C14] border-white/10 text-white/50 hover:text-white'
-                      }`}
-                    >
-                      {active ? '✓ ' : '+ '} {l.label}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Real Interactive MapComponent */}
-            <div className="relative rounded-3xl border border-white/15 bg-[#0C121E] h-[620px] overflow-hidden shadow-2xl">
-              <MapComponent
-                showNERBoundaries={true}
-                showSusceptibility={layers.riskHeatmap}
-                showRoads={layers.roads}
-                showVillages={layers.villages}
-                showHospitals={layers.hospitals}
-                showLandslides={layers.historicalLandslides}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* TAB 3: ALERT MANAGEMENT INTERFACE */}
-        {activeTab === 'ALERTS' && (
-          <div className="max-w-3xl mx-auto space-y-6">
-            <div className="border-b border-white/10 pb-4">
-              <span className="text-[10px] font-mono-code uppercase tracking-[0.2em] text-red-400 font-bold block mb-1">
-                EMERGENCY DISPATCH SYSTEM
-              </span>
-              <h1 className="text-2xl sm:text-3xl font-extrabold font-heading text-white uppercase">
-                CREATE &amp; BROADCAST WARNING
-              </h1>
-              <p className="text-xs sm:text-sm text-slate-300 mt-1">
-                Dispatch targeted alerts directly to location-associated citizens and on-duty field officers.
-              </p>
-            </div>
-
-            {alertSentSuccess && (
-              <div className="p-4 rounded-2xl bg-emerald-500/20 border border-emerald-500/50 flex items-center gap-3 text-emerald-300 text-xs font-mono-code font-bold uppercase">
-                <CheckCircle2 className="w-5 h-5" />
-                <span>ALERT BROADCAST DISPATCHED TO REGISTERED CITIZENS IN {alertZone.toUpperCase()} VIA SMS, APP &amp; WEB!</span>
               </div>
             )}
 
-            <form onSubmit={handleSendAlert} className="rounded-3xl border border-white/15 bg-[#0C121E] p-6 sm:p-8 space-y-5 shadow-2xl">
-              {/* Target Risk Zone */}
-              <div className="space-y-2">
-                <label className="text-xs font-mono-code uppercase text-white/70 block font-bold">
-                  TARGET JURISDICTION / RISK ZONE
-                </label>
-                <select
-                  value={alertZone}
-                  onChange={(e) => setAlertZone(e.target.value)}
-                  className="w-full h-11 bg-[#080C14] border border-white/15 rounded-xl px-3 text-xs font-mono-code text-white focus:outline-none focus:border-amber-400"
-                >
-                  <option value="All NER Corridors (Regional Broadcast)">All NER Corridors (Regional Broadcast)</option>
-                  {statesDistricts && statesDistricts.states ? (
-                    statesDistricts.states.flatMap((st) =>
-                      (statesDistricts.districts_by_state[st] || []).map((dist) => (
-                        <option key={`${st}-${dist}`} value={`${dist} (${st})`}>
-                          {dist} &bull; {st}
-                        </option>
-                      ))
-                    )
-                  ) : (
-                    <>
-                      <option value="Aizawl (Mizoram)">Aizawl &bull; Mizoram</option>
-                      <option value="East Khasi Hills (Meghalaya)">East Khasi Hills &bull; Meghalaya</option>
-                      <option value="Kohima (Nagaland)">Kohima &bull; Nagaland</option>
-                    </>
-                  )}
-                </select>
-              </div>
-
-              {/* Severity Level */}
-              <div className="space-y-2">
-                <label className="text-xs font-mono-code uppercase text-white/70 block font-bold">
-                  ALERT SEVERITY LEVEL
-                </label>
-                <div className="grid grid-cols-3 gap-2">
-                  {(['MODERATE', 'HIGH', 'CRITICAL'] as const).map((sev) => (
-                    <button
-                      type="button"
-                      key={sev}
-                      onClick={() => setAlertSeverity(sev)}
-                      className={`py-2.5 rounded-xl border text-xs font-mono-code font-bold uppercase transition-all cursor-pointer ${
-                        alertSeverity === sev
-                          ? sev === 'CRITICAL' || sev === 'HIGH'
-                            ? 'bg-red-500 text-white border-red-500'
-                            : 'bg-amber-400 text-black border-amber-400'
-                          : 'bg-[#080C14] border-white/10 text-white/50'
-                      }`}
-                    >
-                      {sev}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Recipients & Multi-Channel */}
-              <div className="p-4 rounded-2xl bg-[#080C14] border border-white/10 space-y-3">
-                <div className="flex justify-between text-xs font-mono-code">
-                  <span className="text-white/50 uppercase">TARGET RECIPIENTS:</span>
-                  <span className="text-amber-400 font-bold">ALL LOCATION-ASSOCIATED CITIZENS IN JURISDICTION</span>
-                </div>
-
-
-                <div className="space-y-1.5">
-                  <span className="text-[10px] font-mono-code uppercase text-white/50 block font-bold">
-                    DELIVERY CHANNELS:
-                  </span>
-                  <div className="flex gap-4 text-xs font-mono-code">
-                    <label className="flex items-center gap-1.5 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={alertChannels.sms}
-                        onChange={(e) => setAlertChannels({ ...alertChannels, sms: e.target.checked })}
-                      />
-                      <span>SMS Broadcast (NIC-SMS Gateway)</span>
-                    </label>
-                    <label className="flex items-center gap-1.5 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={alertChannels.app}
-                        onChange={(e) => setAlertChannels({ ...alertChannels, app: e.target.checked })}
-                      />
-                      <span>App Push Notification</span>
-                    </label>
-                    <label className="flex items-center gap-1.5 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={alertChannels.web}
-                        onChange={(e) => setAlertChannels({ ...alertChannels, web: e.target.checked })}
-                      />
-                      <span>Web Alert Banner</span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-
-              {/* Message Composer */}
-              <div className="space-y-2">
-                <label className="text-xs font-mono-code uppercase text-white/70 block font-bold">
-                  WARNING MESSAGE CONTENT
-                </label>
-                <textarea
-                  rows={4}
-                  value={alertMessage}
-                  onChange={(e) => setAlertMessage(e.target.value)}
-                  className="w-full p-3 bg-[#080C14] border border-white/15 rounded-xl text-xs font-mono-code text-white placeholder-white/30 focus:outline-none focus:border-amber-400"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full py-4 rounded-xl bg-red-500 hover:bg-red-400 text-white font-mono-code font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-lg shadow-red-500/20 flex items-center justify-center gap-2"
+            {/* "Create District Administrator" Provisioning Form */}
+            {showCreateForm && (
+              <form
+                onSubmit={handleCreateDistrictAdmin}
+                className="p-6 rounded-3xl bg-white border-2 border-[#1E4B33] shadow-md space-y-4 animate-fade-in"
               >
-                <Send className="w-4 h-4" />
-                <span>SEND EMERGENCY ALERT TO CITIZENS &rarr;</span>
-              </button>
-            </form>
-          </div>
-        )}
-
-        {/* TAB 4: ADMIN RESPONSE CENTER */}
-        {activeTab === 'RESPONSE' && (
-          <div className="space-y-6">
-            <div className="border-b border-white/10 pb-4">
-              <span className="text-[10px] font-mono-code uppercase tracking-[0.2em] text-amber-400 font-bold block mb-1">
-                INCIDENT MANAGEMENT
-              </span>
-              <h1 className="text-2xl sm:text-3xl font-extrabold font-heading text-white uppercase">
-                ADMIN RESPONSE &amp; EVACUATION COORDINATION
-              </h1>
-              <p className="text-xs sm:text-sm text-slate-300 mt-1">
-                Real-time status of priority zones, transportation lifelines, and emergency relief shelters.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* High Priority Areas */}
-              <div className="p-6 rounded-3xl bg-[#0C121E] border border-red-500/30 space-y-4 shadow-xl">
-                <h3 className="text-base font-bold font-heading text-white uppercase flex items-center gap-2">
-                  <AlertTriangle className="w-5 h-5 text-red-400" />
-                  <span>HIGH PRIORITY AREAS</span>
-                </h3>
-                <div className="space-y-3 text-xs font-mono-code">
-                  <div className="p-3 rounded-xl bg-[#080C14] border border-red-500/20">
-                    <span className="text-red-400 font-bold block">01 SECTOR A (HIGH RISK)</span>
-                    <span className="text-white/60">Durtlang Ridge Escarpment &bull; 1,420 Residents</span>
-                  </div>
-                  <div className="p-3 rounded-xl bg-[#080C14] border border-red-500/20">
-                    <span className="text-red-400 font-bold block">02 SECTOR C (HIGH RISK)</span>
-                    <span className="text-white/60">Zuangtui Highway Corridor &bull; Active Scarp</span>
-                  </div>
-                  <div className="p-3 rounded-xl bg-[#080C14] border border-amber-500/20">
-                    <span className="text-amber-400 font-bold block">03 SECTOR D (MODERATE &rarr; HIGH)</span>
-                    <span className="text-white/60">Bethlehem Veng Upper Ridge &bull; Creep Monitored</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Road Status */}
-              <div className="p-6 rounded-3xl bg-[#0C121E] border border-white/10 space-y-4 shadow-xl">
-                <h3 className="text-base font-bold font-heading text-white uppercase flex items-center gap-2">
-                  <Truck className="w-5 h-5 text-amber-400" />
-                  <span>LIFELINE ROAD STATUS</span>
-                </h3>
-                <div className="space-y-3 text-xs font-mono-code">
-                  <div className="p-3 rounded-xl bg-[#080C14] border border-amber-500/20">
-                    <span className="text-amber-400 font-bold block">NH-10 (AT RISK)</span>
-                    <span className="text-white/60">Restricted to light emergency traffic only.</span>
-                  </div>
-                  <div className="p-3 rounded-xl bg-[#080C14] border border-red-500/20">
-                    <span className="text-red-400 font-bold block">ROAD R-204 (BLOCKED)</span>
-                    <span className="text-white/60">Mud debris clearing team dispatched.</span>
-                  </div>
-                  <div className="p-3 rounded-xl bg-[#080C14] border border-emerald-500/20">
-                    <span className="text-emerald-400 font-bold block">VILLAGE ROAD V-18 (OPEN)</span>
-                    <span className="text-emerald-300">Designated primary evacuation corridor.</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Relief Shelter */}
-              <div className="p-6 rounded-3xl bg-emerald-500/[0.04] border border-emerald-500/30 space-y-4 shadow-xl flex flex-col justify-between">
-                <div>
-                  <h3 className="text-base font-bold font-heading text-white uppercase flex items-center gap-2">
-                    <Building className="w-5 h-5 text-emerald-400" />
-                    <span>RELIEF SHELTER LOGISTICS</span>
+                <div className="border-b border-[#DFD8CA] pb-3">
+                  <h3 className="text-base font-serif font-bold uppercase text-[#141712]">
+                    Provision New District Administrator
                   </h3>
-                  <div className="mt-3 space-y-2 text-xs font-mono-code">
-                    <div className="p-3 rounded-xl bg-[#080C14] border border-emerald-500/20 space-y-1">
-                      <span className="text-emerald-400 font-bold block">
-                        COMMUNITY RELIEF CENTRE A
-                      </span>
-                      <div className="flex justify-between text-white/70">
-                        <span>Capacity:</span>
-                        <span className="text-white font-bold">500 Persons</span>
-                      </div>
-                      <div className="flex justify-between text-white/70">
-                        <span>Current Occupancy:</span>
-                        <span className="text-amber-400 font-bold">183 Persons</span>
-                      </div>
-                      <div className="flex justify-between text-white/70">
-                        <span>Remaining Beds:</span>
-                        <span className="text-emerald-400 font-bold">317 Available</span>
-                      </div>
-                    </div>
-                  </div>
+                  <p className="text-xs text-[#474C3F]">
+                    Assign official credentials and bind the administrator directly to a specific district.
+                  </p>
                 </div>
 
-                <div className="p-3 rounded-xl bg-[#080C14] border border-white/10 text-[11px] font-mono-code text-white/60">
-                  Rations: 7 Days &bull; Potable Water: 12,000L &bull; Medical Staff: 2 Officers on site.
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* TAB 5: USERS & ROLE-BASED ACCESS CONTROL */}
-        {activeTab === 'USERS' && (
-          <div className="space-y-6">
-            <div className="border-b border-white/10 pb-4">
-              <span className="text-[10px] font-mono-code uppercase tracking-[0.2em] text-amber-400 font-bold block mb-1">
-                SECURITY &amp; ACCESS CONTROL DESK
-              </span>
-              <h1 className="text-2xl sm:text-3xl font-extrabold font-heading text-white uppercase">
-                PERSONNEL AUTHORIZATION &amp; ROLE MANAGEMENT
-              </h1>
-              <p className="text-xs sm:text-sm text-slate-300 mt-1">
-                Enforce role separation: Public Citizens, Departmentally Verified Field Officers, and Level-3 SDMA Administrators.
-              </p>
-            </div>
-
-            {/* 4 Security Tiers Overview Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="p-4 rounded-2xl bg-[#0C121E] border border-emerald-500/30 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono-code font-bold uppercase text-emerald-400">
-                    PUBLIC CITIZENS
-                  </span>
-                  <span className="text-[9px] font-mono-code px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 uppercase font-bold">
-                    CITIZEN ROLE
-                  </span>
-                </div>
-                <p className="text-xs text-white/70">
-                  Citizens submit geotagged hazard photos. Incident reports are spatially routed to the nearest district administration.
-                </p>
-                <div className="text-[10px] font-mono-code text-white/40 pt-1">
-                  Access: <span className="text-emerald-300 font-bold">Geotagged Camera Reports</span>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#0C121E] border border-blue-500/30 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono-code font-bold uppercase text-blue-400">
-                    FIELD OFFICERS
-                  </span>
-                  <span className="text-[9px] font-mono-code px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30 uppercase font-bold">
-                    FIELD ROLE
-                  </span>
-                </div>
-                <p className="text-xs text-white/70">
-                  Official credentials verified by SDMA administrators before field investigation and ground sensor deployment access.
-                </p>
-                <div className="text-[10px] font-mono-code text-white/40 pt-1">
-                  Access: <span className="text-blue-300 font-bold">Ground Investigation &amp; Sensor Ops</span>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#0C121E] border border-purple-500/30 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono-code font-bold uppercase text-purple-400">
-                    DISTRICT ADMINS
-                  </span>
-                  <span className="text-[9px] font-mono-code px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 uppercase font-bold">
-                    DISTRICT SCOPED
-                  </span>
-                </div>
-                <p className="text-xs text-white/70">
-                  Assigned strictly to a specific district. Exclusive authority to review, verify, or dismiss local hazard reports.
-                </p>
-                <div className="text-[10px] font-mono-code text-white/40 pt-1">
-                  Provisioned Admins:{' '}
-                  <span className="text-purple-300 font-bold">{districtAdmins.length} Active</span>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#0C121E] border border-amber-500/30 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono-code font-bold uppercase text-amber-400">
-                    SDMA SUPER-ADMINS
-                  </span>
-                  <span className="text-[9px] font-mono-code px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 uppercase font-bold">
-                    COMMAND CLEARANCE
-                  </span>
-                </div>
-                <p className="text-xs text-white/70">
-                  Accounts provisioned strictly by system authority. Full jurisdiction across all states, districts, and telemetry systems.
-                </p>
-                <div className="text-[10px] font-mono-code text-white/40 pt-1">
-                  Jurisdiction Scope:{' '}
-                  <span className="text-amber-300 font-bold">
-                    {statesDistricts && statesDistricts.states
-                      ? `${statesDistricts.states.length} States • ${(statesDistricts.all_districts || statesDistricts.districts || []).length} Districts`
-                      : '8 States • 129 Districts'}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* ========================================================= */}
-            {/* DISTRICT ADMINISTRATORS PROVISIONING & JURISDICTION ROSTER */}
-            {/* ========================================================= */}
-            <div className="rounded-3xl border border-earth-300 bg-[#FFFDF8] p-6 space-y-6 shadow-xs">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-earth-200 pb-4">
-                <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-xl bg-brand-100 border border-brand-200 text-brand-800">
-                    <Building2 className="w-5 h-5" />
-                  </div>
-                  <h3 className="text-base font-bold font-serif text-earth-900 uppercase">
-                    DISTRICT ADMINISTRATORS PROVISIONING &amp; JURISDICTION
-                  </h3>
-                </div>
-                <span className="text-xs font-mono text-earth-600">
-                  Create and manage district-scoped administrative authorities
-                </span>
-              </div>
-
-              {/* Create District Admin Form */}
-              <form onSubmit={handleCreateDistrictAdminSubmit} className="p-5 rounded-2xl bg-earth-50 border border-earth-200 space-y-4">
-                <div className="flex items-center gap-2 text-xs font-mono text-brand-800 font-bold uppercase">
-                  <PlusCircle className="w-4 h-4" />
-                  <span>Provision New District Administrator</span>
-                </div>
-
-                {daError && (
-                  <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-risk-critical text-xs font-mono">
-                    {daError}
-                  </div>
-                )}
-                {daSuccess && (
-                  <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono font-semibold">
-                    {daSuccess}
-                  </div>
-                )}
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs font-mono">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {/* Name */}
-                  <div className="space-y-1.5">
-                    <label className="text-earth-700 block uppercase font-bold text-[11px]">
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-mono font-bold uppercase text-[#474C3F] block">
                       Full Name *
                     </label>
                     <input
                       type="text"
-                      placeholder="e.g. Officer T. Jamir"
+                      required
                       value={daName}
                       onChange={(e) => setDaName(e.target.value)}
-                      className="w-full h-10 px-3 bg-white border border-earth-300 rounded-xl text-earth-900 placeholder-earth-400 focus:outline-none focus:border-brand-600 shadow-2xs"
-                      required
+                      placeholder="e.g. Tenzing Norbu"
+                      className="w-full px-3 py-2 rounded-xl bg-white border-2 border-[#BCB29E] text-xs font-mono focus:border-[#1E4B33] focus:outline-none"
                     />
                   </div>
 
-                  {/* Phone */}
-                  <div className="space-y-1.5">
-                    <label className="text-earth-700 block uppercase font-bold text-[11px]">
-                      Mobile Number (+91) *
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="+919876543210"
-                      value={daPhone}
-                      onChange={(e) => setDaPhone(e.target.value)}
-                      className="w-full h-10 px-3 bg-white border border-earth-300 rounded-xl text-earth-900 placeholder-earth-400 focus:outline-none focus:border-brand-600 shadow-2xs"
-                      required
-                    />
-                  </div>
-
-                  {/* Password with toggle */}
-                  <div className="space-y-1.5">
-                    <label className="text-earth-700 block uppercase font-bold text-[11px]">
-                      Temporary Password (8+ chars) *
+                  {/* Phone Number */}
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-mono font-bold uppercase text-[#474C3F] block">
+                      Mobile Number *
                     </label>
                     <div className="relative">
+                      <PhoneCall className="w-3.5 h-3.5 absolute left-3 top-3 text-[#6B7263]" />
                       <input
-                        type={showDaPassword ? 'text' : 'password'}
-                        placeholder="Min 8 chars, letters & digits"
-                        value={daPassword}
-                        onChange={(e) => setDaPassword(e.target.value)}
-                        className="w-full h-10 pl-3 pr-10 bg-white border border-earth-300 rounded-xl text-earth-900 placeholder-earth-400 focus:outline-none focus:border-brand-600 shadow-2xs"
+                        type="tel"
                         required
+                        value={daPhone}
+                        onChange={(e) => setDaPhone(e.target.value)}
+                        placeholder="+919876543210"
+                        className="w-full pl-9 pr-3 py-2 rounded-xl bg-white border-2 border-[#BCB29E] text-xs font-mono focus:border-[#1E4B33] focus:outline-none"
                       />
-                      <button
-                        type="button"
-                        onClick={() => setShowDaPassword(!showDaPassword)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-earth-500 hover:text-earth-800 cursor-pointer"
-                      >
-                        {showDaPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                      </button>
                     </div>
                   </div>
 
-                  {/* State Select */}
-                  <div className="space-y-1.5">
-                    <label className="text-earth-700 block uppercase font-bold text-[11px]">
+                  {/* Password */}
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-mono font-bold uppercase text-[#474C3F] block">
+                      Password (min 8 chars, letter+num) *
+                    </label>
+                    <div className="relative">
+                      <Lock className="w-3.5 h-3.5 absolute left-3 top-3 text-[#6B7263]" />
+                      <input
+                        type="password"
+                        required
+                        value={daPassword}
+                        onChange={(e) => setDaPassword(e.target.value)}
+                        placeholder="••••••••••••"
+                        className="w-full pl-9 pr-3 py-2 rounded-xl bg-white border-2 border-[#BCB29E] text-xs font-mono focus:border-[#1E4B33] focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  {/* State Dropdown */}
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-mono font-bold uppercase text-[#474C3F] block">
                       Assigned State *
                     </label>
                     <select
-                      value={selectedState}
+                      value={daState}
                       onChange={(e) => handleStateChange(e.target.value)}
-                      className="w-full h-10 px-3 bg-white border border-earth-300 rounded-xl text-earth-900 focus:outline-none focus:border-brand-600 shadow-2xs cursor-pointer"
-                      required
+                      className="w-full px-3 py-2 rounded-xl bg-white border-2 border-[#BCB29E] text-xs font-mono focus:border-[#1E4B33] focus:outline-none"
                     >
-                      {statesDistricts ? (
-                        statesDistricts.states.map((st) => (
-                          <option key={st} value={st} className="bg-white text-earth-900">
-                            {st}
-                          </option>
-                        ))
-                      ) : (
-                        <option value="">Loading states...</option>
-                      )}
+                      {statesDistricts?.states?.map((st) => (
+                        <option key={st} value={st}>
+                          {st}
+                        </option>
+                      ))}
                     </select>
                   </div>
 
-                  {/* District Select */}
-                  <div className="space-y-1.5">
-                    <label className="text-earth-700 block uppercase font-bold text-[11px]">
-                      Assigned District Jurisdiction *
+                  {/* District Dropdown (filtered by State) */}
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-mono font-bold uppercase text-[#474C3F] block">
+                      Assigned District *
                     </label>
                     <select
-                      value={selectedDistrict}
-                      onChange={(e) => setSelectedDistrict(e.target.value)}
-                      className="w-full h-10 px-3 bg-white border border-earth-300 rounded-xl text-earth-900 focus:outline-none focus:border-brand-600 shadow-2xs cursor-pointer"
-                      required
+                      value={daDistrict}
+                      onChange={(e) => setDaDistrict(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl bg-white border-2 border-[#BCB29E] text-xs font-mono focus:border-[#1E4B33] focus:outline-none"
                     >
-                      {statesDistricts && selectedState && statesDistricts.districts_by_state[selectedState] ? (
-                        statesDistricts.districts_by_state[selectedState].map((dist) => (
-                          <option key={dist} value={dist} className="bg-white text-earth-900">
-                            {dist}
-                          </option>
-                        ))
-                      ) : (
-                        <option value="">Select state first</option>
-                      )}
+                      {statesDistricts && daState && statesDistricts.districts_by_state[daState]?.map((dst) => (
+                        <option key={dst} value={dst}>
+                          {dst}
+                        </option>
+                      ))}
                     </select>
                   </div>
-
-                  {/* Submit Button */}
-                  <div className="flex items-end">
-                    <button
-                      type="submit"
-                      disabled={daSubmitting}
-                      className="w-full h-10 px-4 rounded-xl bg-brand-700 hover:bg-brand-800 disabled:opacity-50 text-white font-mono font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-xs flex items-center justify-center gap-2"
-                    >
-                      {daSubmitting ? (
-                        <span>PROVISIONING...</span>
-                      ) : (
-                        <>
-                          <ShieldCheck className="w-4 h-4" />
-                          <span>PROVISION DISTRICT ADMIN</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
                 </div>
-              </form>
 
-              {/* District Admins Roster Table */}
-              <div className="space-y-3">
-                <div className="flex items-center justify-between text-xs font-mono">
-                  <span className="text-earth-800 font-bold uppercase">
-                    ACTIVE DISTRICT ADMINISTRATORS ROSTER ({districtAdmins.length})
-                  </span>
+                <div className="flex items-center justify-end gap-3 pt-2">
                   <button
-                    onClick={loadDistrictAdminsData}
-                    disabled={loadingDistAdmins}
-                    className="text-brand-800 hover:text-brand-900 flex items-center gap-1 cursor-pointer font-bold"
+                    type="button"
+                    onClick={() => setShowCreateForm(false)}
+                    className="px-4 py-2 rounded-xl bg-white border-2 border-[#BCB29E] text-xs font-mono font-bold uppercase text-[#474C3F] hover:bg-[#F0ECE1] transition-colors cursor-pointer"
                   >
-                    <RefreshCw className={`w-3.5 h-3.5 ${loadingDistAdmins ? 'animate-spin' : ''}`} />
-                    <span>REFRESH</span>
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={createSubmitting}
+                    className="px-5 py-2 rounded-xl bg-[#1E4B33] hover:bg-[#143524] text-white border-2 border-[#143524] text-xs font-mono font-bold uppercase transition-colors cursor-pointer shadow-xs disabled:opacity-50"
+                  >
+                    {createSubmitting ? 'Creating Administrator...' : 'Create Account'}
                   </button>
                 </div>
+              </form>
+            )}
 
-                {districtAdmins.length === 0 ? (
-                  <div className="py-8 text-center text-xs font-mono text-earth-500 border border-earth-200 rounded-2xl bg-earth-50">
-                    No District Administrators provisioned yet. Use the form above to add an administrator.
+            {/* Administrators Roster Table / List */}
+            <div className="p-6 rounded-3xl bg-white border-2 border-[#BCB29E] shadow-sm space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#DFD8CA] pb-3">
+                <div>
+                  <h3 className="text-base font-serif font-bold uppercase text-[#141712]">
+                    Active District Administrators Roster
+                  </h3>
+                  <p className="text-xs text-[#474C3F]">
+                    List of all provisioned district administrators across Northeast India.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2.5">
+                  {/* Filter by State */}
+                  <select
+                    value={adminStateFilter}
+                    onChange={(e) => setAdminStateFilter(e.target.value)}
+                    className="px-3 py-1.5 rounded-xl bg-white border-2 border-[#BCB29E] text-xs font-mono focus:outline-none"
+                  >
+                    <option value="all">All States</option>
+                    {statesDistricts?.states?.map((st) => (
+                      <option key={st} value={st}>
+                        {st}
+                      </option>
+                    ))}
+                  </select>
+
+                  {/* Search bar */}
+                  <div className="relative">
+                    <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-[#6B7263]" />
+                    <input
+                      type="text"
+                      value={adminSearch}
+                      onChange={(e) => setAdminSearch(e.target.value)}
+                      placeholder="Search admin name..."
+                      className="pl-8 pr-3 py-1.5 rounded-xl bg-white border-2 border-[#BCB29E] text-xs font-mono focus:outline-none"
+                    />
                   </div>
-                ) : (
-                  <div className="overflow-x-auto rounded-2xl border border-earth-300 bg-white shadow-2xs">
-                    <table className="w-full text-left text-xs font-mono">
-                      <thead className="border-b border-earth-200 bg-earth-50 text-earth-600 uppercase text-[10px]">
-                        <tr>
-                          <th className="p-3 font-semibold">Administrator</th>
-                          <th className="p-3 font-semibold">Mobile Contact</th>
-                          <th className="p-3 font-semibold">State</th>
-                          <th className="p-3 font-semibold">Assigned District</th>
-                          <th className="p-3 font-semibold">Jurisdiction Status</th>
-                          <th className="p-3 font-semibold">Created</th>
-                          <th className="p-3 text-right font-semibold">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-earth-200">
-                        {districtAdmins.map((admin) => (
-                          <tr key={admin.id} className="hover:bg-earth-50 transition-colors">
-                            <td className="p-3">
-                              <span className="text-earth-900 font-bold block">{admin.name}</span>
-                              <span className="text-[10px] text-earth-500">{admin.id}</span>
-                            </td>
-                            <td className="p-3 text-earth-800">{admin.phone_number}</td>
-                            <td className="p-3 text-earth-800">{admin.state_name || '—'}</td>
-                            <td className="p-3">
-                              <span className="px-2.5 py-0.5 rounded-full bg-brand-100 text-brand-900 border border-brand-200 text-[10px] font-bold">
-                                {admin.district_name || 'Assigned District'}
-                              </span>
-                            </td>
-                            <td className="p-3">
-                              <span className="flex items-center gap-1.5 text-brand-800 font-bold text-[11px]">
-                                <CheckCircle2 className="w-3.5 h-3.5 text-brand-700" />
-                                <span>ACTIVE</span>
-                              </span>
-                            </td>
-                            <td className="p-3 text-earth-500 text-[10px]">
-                              {admin.created_at ? new Date(admin.created_at).toLocaleDateString() : 'Recent'}
-                            </td>
-                            <td className="p-3 text-right">
-                              <button
-                                type="button"
-                                onClick={() => handleDeleteDistrictAdminSubmit(admin.id, admin.name)}
-                                className="px-2.5 py-1.5 rounded-lg bg-[#FDF2F0] hover:bg-[#FCE3DF] text-[#8A2418] border-2 border-[#F2BCA0] text-[11px] font-bold transition-all cursor-pointer inline-flex items-center gap-1 shadow-2xs"
-                                title="Revoke & Delete Administrator"
-                              >
-                                <Trash2 className="w-3.5 h-3.5" />
-                                <span>REVOKE</span>
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
+                </div>
               </div>
+
+              {loadingDistAdmins ? (
+                <div className="p-12 text-center space-y-2">
+                  <div className="w-8 h-8 border-3 border-[#1E4B33] border-t-transparent rounded-full animate-spin mx-auto" />
+                  <span className="text-xs font-mono uppercase text-[#474C3F]">Loading roster...</span>
+                </div>
+              ) : filteredAdmins.length === 0 ? (
+                <div className="p-12 text-center rounded-2xl bg-[#EDE7DC]/40 border-2 border-dashed border-[#BCB29E] space-y-2">
+                  <Users className="w-8 h-8 text-[#6B7263] mx-auto opacity-60" />
+                  <span className="text-xs font-mono uppercase text-[#474C3F] block font-bold">
+                    No District Administrators Found
+                  </span>
+                  <p className="text-xs text-[#474C3F] font-sans">
+                    Use the "Create District Admin" button above to provision an administrator for a district.
+                  </p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="border-b-2 border-[#BCB29E] text-[10px] font-mono uppercase text-[#474C3F]">
+                        <th className="py-2.5 px-3">Administrator</th>
+                        <th className="py-2.5 px-3">Mobile Contact</th>
+                        <th className="py-2.5 px-3">Assigned Jurisdiction</th>
+                        <th className="py-2.5 px-3">Created Date</th>
+                        <th className="py-2.5 px-3">Status</th>
+                        <th className="py-2.5 px-3 text-right">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#DFD8CA] text-xs font-mono">
+                      {filteredAdmins.map((adm) => (
+                        <tr key={adm.id} className="hover:bg-[#F0ECE1]/50 transition-colors">
+                          <td className="py-3 px-3 font-bold text-[#141712]">
+                            {adm.name}
+                          </td>
+                          <td className="py-3 px-3 text-[#474C3F]">
+                            {adm.phone_number}
+                          </td>
+                          <td className="py-3 px-3">
+                            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#EBF4EE] text-[#1E4B33] border border-[#9EC4AF]">
+                              {adm.district_name || 'District'}, {adm.state_name || 'State'}
+                            </span>
+                          </td>
+                          <td className="py-3 px-3 text-[#6B7263]">
+                            {adm.created_at ? new Date(adm.created_at).toLocaleDateString() : 'N/A'}
+                          </td>
+                          <td className="py-3 px-3">
+                            <span className="px-2 py-0.5 rounded-md text-[9px] font-bold uppercase bg-[#EAF4EC] text-[#1E4A26] border border-[#A8D9B2]">
+                              Active
+                            </span>
+                          </td>
+                          <td className="py-3 px-3 text-right">
+                            <button
+                              onClick={() => handleDeleteDistrictAdmin(adm.id, adm.name)}
+                              disabled={deletingId === adm.id}
+                              className="px-2.5 py-1 rounded-lg bg-[#FCEEEB] hover:bg-[#F9D4CD] text-[#8A2418] border border-[#EABEB7] text-[10px] font-bold uppercase transition-colors cursor-pointer inline-flex items-center gap-1"
+                              title="Deactivate / Delete"
+                            >
+                              <Trash2 className="w-3 h-3" />
+                              <span>Deactivate</span>
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
           </div>
         )}
 
-        {/* TAB 6: DEDICATED FIELD INTELLIGENCE & CITIZEN REPORTS */}
-        {activeTab === 'FIELD INTELLIGENCE' && (
-          <div className="space-y-6">
-            <div className="border-b border-white/10 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div>
-                <span className="text-[10px] font-mono-code uppercase tracking-[0.2em] text-blue-400 font-bold block mb-1">
-                  SDMA REGIONAL AUDIT
+        {/* ================================================== */}
+        {/* TAB 2: HAZARD REPORTS — REGION-WIDE OVERSIGHT      */}
+        {/* ================================================== */}
+        {activeTab === 'HAZARD_REPORTS' && (
+          <div className="space-y-6 text-left">
+            {/* Header Banner */}
+            <div className="p-6 rounded-3xl bg-white border-2 border-[#BCB29E] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#1E4B33] font-bold">
+                  NATIONAL &amp; REGIONAL SDMA OVERSIGHT
                 </span>
-                <h1 className="text-2xl sm:text-3xl font-extrabold font-heading text-white uppercase">
-                  CITIZEN FIELD HAZARD INTELLIGENCE
+                <h1 className="text-2xl sm:text-3xl font-bold font-serif uppercase tracking-tight text-[#141712]">
+                  Citizen Hazard Reports Oversight
                 </h1>
-                <p className="text-xs sm:text-sm text-slate-300 mt-1">
-                  Live reports submitted by registered citizens across all districts with geotags and field evidence photos.
+                <p className="text-xs sm:text-sm text-[#474C3F] max-w-2xl font-sans">
+                  Comprehensive, state- and district-wise monitoring of all citizen hazard reports submitted across Northeast India. Read-only oversight with district verification accountability.
                 </p>
               </div>
 
               <button
-                onClick={loadDistrictAdminsData}
+                onClick={loadAllReports}
                 disabled={loadingReports}
-                className="px-4 py-2 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/30 text-xs font-mono-code font-bold uppercase transition-all flex items-center gap-2 self-start sm:self-auto cursor-pointer"
+                className="px-4 py-2.5 rounded-xl bg-[#1E4B33] hover:bg-[#143524] text-white font-mono font-bold text-xs uppercase flex items-center gap-2 transition-all cursor-pointer border-2 border-[#143524] shadow-xs self-start md:self-auto"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${loadingReports ? 'animate-spin' : ''}`} />
-                <span>SYNC LIVE DATA</span>
+                <span>Refresh Oversight Feed</span>
               </button>
             </div>
 
-            {/* Filter Pills */}
-            <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-2xl bg-[#0C121E] border border-white/10">
-              <div className="flex flex-wrap gap-2">
-                {[
-                  { key: 'all', label: 'ALL REPORTS', count: adminReports.length },
-                  { key: 'pending', label: 'PENDING TRIAGE', count: adminReports.filter(r => r.status === 'pending').length },
-                  { key: 'verified', label: 'VERIFIED', count: adminReports.filter(r => r.status === 'verified').length },
-                  { key: 'dismissed', label: 'DISMISSED', count: adminReports.filter(r => r.status === 'dismissed').length }
-                ].map((pill) => (
-                  <button
-                    key={pill.key}
-                    onClick={() => setReportStatusFilter(pill.key as any)}
-                    className={`px-3 py-1.5 rounded-xl border text-xs font-mono-code font-bold uppercase transition-all cursor-pointer ${
-                      reportStatusFilter === pill.key
-                        ? 'bg-blue-500 text-white border-blue-400 shadow-md'
-                        : 'bg-[#080C14] border-white/10 text-white/60 hover:text-white'
-                    }`}
-                  >
-                    {pill.label} ({pill.count})
-                  </button>
-                ))}
+            {/* Filter Bar: State, District, Status, Date Range */}
+            <div className="p-5 rounded-2xl bg-white border-2 border-[#BCB29E] shadow-xs space-y-3">
+              <div className="flex items-center justify-between border-b border-[#DFD8CA] pb-2">
+                <span className="text-xs font-mono font-bold uppercase text-[#141712] flex items-center gap-1.5">
+                  <Filter className="w-3.5 h-3.5 text-[#1E4B33]" />
+                  <span>Oversight Filters</span>
+                </span>
+                <span className="text-[10px] font-mono text-[#6B7263]">
+                  Showing {filteredReports.length} reports
+                </span>
               </div>
 
-              <div className="relative w-full sm:w-64">
-                <Search className="w-4 h-4 text-white/40 absolute left-3 top-2.5" />
-                <input
-                  type="text"
-                  placeholder="Filter district or hazard..."
-                  value={reportSearch}
-                  onChange={(e) => setReportSearch(e.target.value)}
-                  className="w-full h-9 pl-9 pr-3 bg-[#080C14] border border-white/15 rounded-xl text-xs font-mono-code text-white placeholder-white/30 focus:outline-none focus:border-blue-400"
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+                {/* State Dropdown */}
+                <div className="space-y-1">
+                  <label className="text-[10px] font-mono font-bold uppercase text-[#474C3F] block">
+                    State
+                  </label>
+                  <select
+                    value={reportStateFilter}
+                    onChange={(e) => {
+                      setReportStateFilter(e.target.value);
+                      setReportDistrictFilter('all');
+                    }}
+                    className="w-full px-2.5 py-1.5 rounded-xl bg-white border-2 border-[#BCB29E] text-xs font-mono focus:outline-none"
+                  >
+                    <option value="all">All States</option>
+                    {statesDistricts?.states?.map((st) => (
+                      <option key={st} value={st}>
+                        {st}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* District Dropdown (dynamically populated) */}
+                <div className="space-y-1">
+                  <label className="text-[10px] font-mono font-bold uppercase text-[#474C3F] block">
+                    District
+                  </label>
+                  <select
+                    value={reportDistrictFilter}
+                    onChange={(e) => setReportDistrictFilter(e.target.value)}
+                    disabled={reportStateFilter === 'all'}
+                    className="w-full px-2.5 py-1.5 rounded-xl bg-white border-2 border-[#BCB29E] text-xs font-mono focus:outline-none disabled:opacity-50"
+                  >
+                    <option value="all">All Districts</option>
+                    {filterDistricts.map((dst) => (
+                      <option key={dst} value={dst}>
+                        {dst}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Status Filter */}
+                <div className="space-y-1">
+                  <label className="text-[10px] font-mono font-bold uppercase text-[#474C3F] block">
+                    Review Status
+                  </label>
+                  <select
+                    value={reportStatusFilter}
+                    onChange={(e) => setReportStatusFilter(e.target.value as any)}
+                    className="w-full px-2.5 py-1.5 rounded-xl bg-white border-2 border-[#BCB29E] text-xs font-mono focus:outline-none"
+                  >
+                    <option value="all">All Statuses</option>
+                    <option value="pending">Pending</option>
+                    <option value="verified">Verified</option>
+                    <option value="dismissed">Dismissed</option>
+                  </select>
+                </div>
+
+                {/* Date From */}
+                <div className="space-y-1">
+                  <label className="text-[10px] font-mono font-bold uppercase text-[#474C3F] block">
+                    From Date
+                  </label>
+                  <input
+                    type="date"
+                    value={reportDateFrom}
+                    onChange={(e) => setReportDateFrom(e.target.value)}
+                    className="w-full px-2.5 py-1.5 rounded-xl bg-white border-2 border-[#BCB29E] text-xs font-mono focus:outline-none"
+                  />
+                </div>
+
+                {/* Date To */}
+                <div className="space-y-1">
+                  <label className="text-[10px] font-mono font-bold uppercase text-[#474C3F] block">
+                    To Date
+                  </label>
+                  <input
+                    type="date"
+                    value={reportDateTo}
+                    onChange={(e) => setReportDateTo(e.target.value)}
+                    className="w-full px-2.5 py-1.5 rounded-xl bg-white border-2 border-[#BCB29E] text-xs font-mono focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              {/* Search Bar + Reset */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
+                <div className="relative w-full sm:w-80">
+                  <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-[#6B7263]" />
+                  <input
+                    type="text"
+                    value={reportSearch}
+                    onChange={(e) => setReportSearch(e.target.value)}
+                    placeholder="Search submitter, hazard type, district..."
+                    className="w-full pl-8 pr-3 py-1.5 rounded-xl bg-white border-2 border-[#BCB29E] text-xs font-mono focus:outline-none"
+                  />
+                </div>
+
+                {(reportStateFilter !== 'all' || reportDistrictFilter !== 'all' || reportStatusFilter !== 'all' || reportDateFrom || reportDateTo || reportSearch) && (
+                  <button
+                    onClick={() => {
+                      setReportStateFilter('all');
+                      setReportDistrictFilter('all');
+                      setReportStatusFilter('all');
+                      setReportDateFrom('');
+                      setReportDateTo('');
+                      setReportSearch('');
+                    }}
+                    className="text-xs font-mono text-[#8A2418] hover:underline font-bold cursor-pointer self-end"
+                  >
+                    Reset All Filters
+                  </button>
+                )}
               </div>
             </div>
 
-            {/* Roster of live reports */}
-            <div className="rounded-3xl border border-white/15 bg-[#0C121E] p-6 space-y-4 shadow-2xl">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs font-mono-code">
-                  <thead>
-                    <tr className="border-b border-white/10 text-white/40 uppercase">
-                      <th className="py-3 px-3">REPORT ID</th>
-                      <th className="py-3 px-3">DISTRICT &amp; STATE</th>
-                      <th className="py-3 px-3">HAZARD TYPE</th>
-                      <th className="py-3 px-3">CITIZEN EVIDENCE &amp; DETAILS</th>
-                      <th className="py-3 px-3">COORDINATES</th>
-                      <th className="py-3 px-3">STATUS</th>
-                      <th className="py-3 px-3">TIMESTAMP</th>
-                      <th className="py-3 px-3 text-right">ACTIONS</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-white/5">
-                    {(() => {
-                      const filtered = adminReports.filter(r => {
-                        if (reportStatusFilter !== 'all' && r.status !== reportStatusFilter) return false;
-                        if (reportSearch.trim()) {
-                          const q = reportSearch.toLowerCase();
-                          const matchDist = (r.district_name || '').toLowerCase().includes(q);
-                          const matchState = (r.state_name || '').toLowerCase().includes(q);
-                          const matchHazard = (r.hazard_type || '').toLowerCase().includes(q);
-                          const matchDesc = (r.description || '').toLowerCase().includes(q);
-                          return matchDist || matchState || matchHazard || matchDesc;
-                        }
-                        return true;
-                      });
+            {/* Oversight Table / Report List */}
+            <div className="p-6 rounded-3xl bg-white border-2 border-[#BCB29E] shadow-sm space-y-4">
+              {loadingReports ? (
+                <div className="p-12 text-center space-y-2">
+                  <div className="w-8 h-8 border-3 border-[#1E4B33] border-t-transparent rounded-full animate-spin mx-auto" />
+                  <span className="text-xs font-mono uppercase text-[#474C3F]">Loading regional reports...</span>
+                </div>
+              ) : filteredReports.length === 0 ? (
+                <div className="p-12 text-center rounded-2xl bg-[#EDE7DC]/40 border-2 border-dashed border-[#BCB29E] space-y-2">
+                  <FileText className="w-8 h-8 text-[#6B7263] mx-auto opacity-60" />
+                  <span className="text-xs font-mono uppercase text-[#474C3F] block font-bold">
+                    No Hazard Reports Found
+                  </span>
+                  <p className="text-xs text-[#474C3F] font-sans">
+                    No citizen hazard reports match the selected state, district, or status filter.
+                  </p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse">
+                    <thead>
+                      <tr className="border-b-2 border-[#BCB29E] text-[10px] font-mono uppercase text-[#474C3F]">
+                        <th className="py-2.5 px-3">Photo</th>
+                        <th className="py-2.5 px-3">Submitter</th>
+                        <th className="py-2.5 px-3">State &amp; District</th>
+                        <th className="py-2.5 px-3">Hazard Type</th>
+                        <th className="py-2.5 px-3">Submitted Time</th>
+                        <th className="py-2.5 px-3">Status</th>
+                        <th className="py-2.5 px-3">Reviewed By (District Admin)</th>
+                        <th className="py-2.5 px-3 text-right">Inspect</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#DFD8CA] text-xs font-mono">
+                      {filteredReports.map((rep) => {
+                        const isPending = rep.status.toLowerCase() === 'pending';
+                        const isVerified = rep.status.toLowerCase() === 'verified';
+                        const isDismissed = rep.status.toLowerCase() === 'dismissed';
 
-                      if (filtered.length === 0) {
                         return (
-                          <tr>
-                            <td colSpan={8} className="py-12 text-center text-xs font-mono-code text-white/40">
-                              <div className="flex flex-col items-center justify-center gap-2">
-                                <FileCheck className="w-8 h-8 text-white/20" />
-                                <span className="text-white/60 font-bold uppercase">No matching reports found</span>
-                                <span className="text-white/40 text-[11px]">
-                                  {adminReports.length === 0 ? 'No hazard reports submitted in the database yet.' : 'Try adjusting your status or search filters.'}
-                                </span>
+                          <tr key={rep.id} className="hover:bg-[#F0ECE1]/50 transition-colors">
+                            {/* Thumbnail */}
+                            <td className="py-2.5 px-3">
+                              <div
+                                onClick={() => handleOpenPhotoModal(rep)}
+                                className="w-12 h-12 rounded-lg bg-[#ECE7DC] border border-[#BCB29E] overflow-hidden cursor-pointer relative group flex items-center justify-center shrink-0"
+                              >
+                                {photoBlobUrls[rep.id] ? (
+                                  <img
+                                    src={photoBlobUrls[rep.id]}
+                                    alt="Hazard"
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                                  />
+                                ) : (
+                                  <Camera className="w-4 h-4 text-[#6B7263]" />
+                                )}
                               </div>
+                            </td>
+
+                            {/* Submitter */}
+                            <td className="py-2.5 px-3">
+                              <div className="font-bold text-[#141712]">{rep.citizen_name || 'Citizen'}</div>
+                              <div className="text-[10px] text-[#6B7263]">{rep.citizen_phone || 'N/A'}</div>
+                            </td>
+
+                            {/* Jurisdiction */}
+                            <td className="py-2.5 px-3">
+                              <div className="font-bold text-[#141712]">{rep.district_name || 'Unknown District'}</div>
+                              <div className="text-[10px] text-[#1E4B33] font-semibold">{rep.state_name || 'NER'}</div>
+                            </td>
+
+                            {/* Hazard Type */}
+                            <td className="py-2.5 px-3">
+                              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-[#ECE7DC] text-[#141712] border border-[#BCB29E]">
+                                {rep.hazard_type || 'Hazard'}
+                              </span>
+                            </td>
+
+                            {/* Submitted Date */}
+                            <td className="py-2.5 px-3 text-[#474C3F]">
+                              {rep.submitted_at
+                                ? new Date(rep.submitted_at).toLocaleString([], {
+                                    dateStyle: 'short',
+                                    timeStyle: 'short'
+                                  })
+                                : 'N/A'}
+                            </td>
+
+                            {/* Status */}
+                            <td className="py-2.5 px-3">
+                              <span
+                                className={`px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase border ${
+                                  isVerified
+                                    ? 'bg-[#EAF4EC] text-[#1E4A26] border-[#A8D9B2]'
+                                    : isDismissed
+                                    ? 'bg-[#FCEEEB] text-[#5C170F] border-[#EABEB7]'
+                                    : 'bg-[#FDF4E6] text-[#694008] border-[#F0CE91]'
+                                }`}
+                              >
+                                {rep.status}
+                              </span>
+                            </td>
+
+                            {/* Reviewing District Admin */}
+                            <td className="py-2.5 px-3">
+                              {rep.reviewed_by_name ? (
+                                <div className="text-[#1E4B33] font-bold flex items-center gap-1">
+                                  <CheckCircle2 className="w-3 h-3 text-[#1E4B33]" />
+                                  <span>{rep.reviewed_by_name}</span>
+                                </div>
+                              ) : isPending ? (
+                                <span className="text-[10px] text-[#B87217] font-semibold">
+                                  Awaiting District Review
+                                </span>
+                              ) : (
+                                <span className="text-[10px] text-[#6B7263]">Reviewed</span>
+                              )}
+                            </td>
+
+                            {/* Inspect */}
+                            <td className="py-2.5 px-3 text-right">
+                              <button
+                                onClick={() => handleOpenPhotoModal(rep)}
+                                className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#F0ECE1] text-[#141712] border border-[#BCB29E] text-[10px] font-bold uppercase transition-colors cursor-pointer inline-flex items-center gap-1"
+                              >
+                                <Eye className="w-3 h-3" />
+                                <span>Inspect</span>
+                              </button>
                             </td>
                           </tr>
                         );
-                      }
-
-                      return filtered.map((r) => (
-                        <tr key={r.id} className="hover:bg-white/[0.02]">
-                          <td className="py-3 px-3 font-bold text-white font-mono-code">
-                            {r.id.slice(0, 8)}
-                          </td>
-                          <td className="py-3 px-3">
-                            <span className="text-white font-bold block">{r.district_name || 'District'}</span>
-                            <span className="text-[10px] text-white/50">{r.state_name || 'State'}</span>
-                          </td>
-                          <td className="py-3 px-3">
-                            <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[10px] font-bold uppercase">
-                              {r.hazard_type}
-                            </span>
-                          </td>
-                          <td className="py-3 px-3 max-w-sm">
-                            <div className="text-white/80">{r.description || 'No description.'}</div>
-                            <div className="flex items-center gap-2 mt-1">
-                              {r.photo_path ? (
-                                <button
-                                  type="button"
-                                  onClick={() => handleViewReportPhoto(r.photo_path!)}
-                                  className="text-[10px] text-blue-400 hover:text-blue-300 font-bold flex items-center gap-1 cursor-pointer"
-                                >
-                                  <Eye className="w-3 h-3" />
-                                  <span>VIEW PHOTO EVIDENCE</span>
-                                </button>
-                              ) : (
-                                <span className="text-[10px] text-white/30">No photo attached</span>
-                              )}
-                              {r.citizen_name && (
-                                <span className="text-[10px] text-white/40">
-                                  &bull; By {r.citizen_name}
-                                </span>
-                              )}
-                            </div>
-                          </td>
-                          <td className="py-3 px-3 text-white/60 text-[10px] font-mono-code">
-                            {r.latitude.toFixed(4)}, {r.longitude.toFixed(4)}
-                          </td>
-                          <td className="py-3 px-3">
-                            <span
-                              className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase border ${
-                                r.status === 'verified'
-                                  ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
-                                  : r.status === 'dismissed'
-                                  ? 'bg-red-500/20 text-red-300 border-red-500/40'
-                                  : 'bg-amber-500/20 text-amber-300 border-amber-500/40'
-                              }`}
-                            >
-                              {r.status}
-                            </span>
-                          </td>
-                          <td className="py-3 px-3 text-white/50 text-[10px]">
-                            {r.submitted_at ? new Date(r.submitted_at).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' }) : 'Recent'}
-                          </td>
-                          <td className="py-3 px-3 text-right space-x-1.5">
-                            {r.status !== 'verified' && (
-                              <button
-                                disabled={updatingReportId === r.id}
-                                onClick={() => handleUpdateStatus(r.id, 'verified')}
-                                className="px-2 py-1 rounded bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 text-[10px] font-bold uppercase transition-colors cursor-pointer disabled:opacity-50"
-                              >
-                                Verify
-                              </button>
-                            )}
-                            {r.status !== 'dismissed' && (
-                              <button
-                                disabled={updatingReportId === r.id}
-                                onClick={() => handleUpdateStatus(r.id, 'dismissed')}
-                                className="px-2 py-1 rounded bg-red-500/20 hover:bg-red-500/30 text-red-300 text-[10px] font-bold uppercase transition-colors cursor-pointer disabled:opacity-50"
-                              >
-                                Dismiss
-                              </button>
-                            )}
-                            {r.status !== 'pending' && (
-                              <button
-                                disabled={updatingReportId === r.id}
-                                onClick={() => handleUpdateStatus(r.id, 'pending')}
-                                className="px-2 py-1 rounded bg-white/10 hover:bg-white/20 text-white/70 text-[10px] font-bold uppercase transition-colors cursor-pointer disabled:opacity-50"
-                              >
-                                Reset
-                              </button>
-                            )}
-                          </td>
-                        </tr>
-                      ));
-                    })()}
-                  </tbody>
-                </table>
-              </div>
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
           </div>
         )}
 
-        {/* OTHER ADMIN TABS: RISK ANALYTICS, INFRASTRUCTURE, DATA SOURCES, SYSTEM */}
-        {(activeTab === 'RISK ANALYTICS' ||
-          activeTab === 'INFRASTRUCTURE' ||
-          activeTab === 'DATA SOURCES' ||
-          activeTab === 'SYSTEM') && (
-          <div className="space-y-6">
-            <div className="border-b border-white/10 pb-4">
-              <span className="text-[10px] font-mono-code uppercase tracking-[0.2em] text-amber-400 font-bold block mb-1">
-                ENTERPRISE SYSTEM MODULE
-              </span>
-              <h1 className="text-2xl sm:text-3xl font-extrabold font-heading text-white uppercase">
-                {activeTab} &bull; ADMINISTRATION
-              </h1>
-              <p className="text-xs sm:text-sm text-slate-300 mt-1">
-                Authorized State Disaster Authority configuration and diagnostic telemetry.
-              </p>
-            </div>
-
-            <div className="rounded-3xl border border-white/15 bg-[#0C121E] p-6 space-y-4 text-xs font-mono-code shadow-xl">
-              <div className="flex items-center gap-2 text-amber-400 font-bold uppercase text-sm">
-                <Server className="w-4 h-4" />
-                <span>SYSTEM HEALTH: OPTIMAL (100% NODES ACTIVE)</span>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
-                <div className="p-3 rounded-xl bg-[#080C14] border border-white/10">
-                  <span className="text-white/40 block text-[9px] uppercase">POSTGRESQL DB</span>
-                  <span className="text-white font-bold">Connected (3ms)</span>
+        {/* ==================================================== */}
+        {/* 3. TAB 3: DATA MANAGEMENT & TERMINAL                 */}
+        {/* ==================================================== */}
+        {activeTab === 'DATA_MANAGEMENT' && (
+          <div className="max-w-7xl mx-auto space-y-6">
+            <div className="flex flex-col md:flex-row gap-6">
+              
+              {/* Left Column: Data Dates */}
+              <div className="w-full md:w-1/3 space-y-4">
+                <div className="bg-white border-2 border-[#BCB29E] rounded-3xl p-5 sm:p-6 shadow-xs h-full">
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-[#141712] flex items-center gap-2">
+                      <Database className="w-4 h-4 text-[#1E4B33]" />
+                      Historical Archives
+                    </h2>
+                    <button
+                      onClick={loadDataDates}
+                      className="p-1.5 rounded-lg bg-[#F0ECE1] hover:bg-[#E2DECA] text-[#141712] transition-colors"
+                      title="Refresh Dates"
+                    >
+                      <RefreshCw className={`w-3.5 h-3.5 ${loadingDates ? 'animate-spin' : ''}`} />
+                    </button>
+                  </div>
+                  
+                  {loadingDates ? (
+                    <div className="flex flex-col items-center justify-center py-8 text-[#6B7263]">
+                      <RefreshCw className="w-6 h-6 animate-spin mb-2" />
+                      <span className="text-xs font-mono">Scanning archives...</span>
+                    </div>
+                  ) : dataDates.length === 0 ? (
+                    <div className="bg-[#F0ECE1] rounded-2xl p-6 text-center text-[#6B7263]">
+                      <p className="text-xs font-mono font-bold">No historical data archives found.</p>
+                    </div>
+                  ) : (
+                    <div className="space-y-2 max-h-[60vh] overflow-y-auto pr-1 custom-scrollbar">
+                      {dataDates.map(date => (
+                        <div key={date} className="flex items-center justify-between bg-[#F0ECE1] p-3 rounded-xl border border-[#C9C0AD]">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4 text-[#1E4B33]" />
+                            <span className="text-xs font-mono font-bold text-[#141712]">{date}</span>
+                          </div>
+                          <button
+                            onClick={() => handleDeleteDataDate(date)}
+                            className="p-1.5 bg-[#FDF2F0] hover:bg-[#FCE3DF] border border-[#F2BCA0] text-[#8A2418] hover:text-[#6D1B12] rounded-lg transition-colors"
+                            title="Delete Archive"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
-                <div className="p-3 rounded-xl bg-[#080C14] border border-white/10">
-                  <span className="text-white/40 block text-[9px] uppercase">IMD API FEED</span>
-                  <span className="text-emerald-400 font-bold">Live Doppler Sync</span>
-                </div>
-                <div className="p-3 rounded-xl bg-[#080C14] border border-white/10">
-                  <span className="text-white/40 block text-[9px] uppercase">AI INFERENCE</span>
-                  <span className="text-blue-400 font-bold">Antigravity Core V2</span>
-                </div>
-                <div className="p-3 rounded-xl bg-[#080C14] border border-white/10">
-                  <span className="text-white/40 block text-[9px] uppercase">SMS GATEWAY</span>
-                  <span className="text-emerald-400 font-bold">99.8% Delivered</span>
+              </div>
+              
+              {/* Right Column: Pipeline Terminal */}
+              <div className="w-full md:w-2/3 space-y-4">
+                <div className="bg-[#141712] border-2 border-[#474C3F] rounded-3xl p-5 sm:p-6 shadow-xs h-full flex flex-col min-h-[400px]">
+                  <div className="flex items-center justify-between mb-4 border-b border-[#2C3026] pb-3">
+                    <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-[#EBF4EE] flex items-center gap-2">
+                      <Terminal className="w-4 h-4 text-[#A8D9B2]" />
+                      Live Pipeline Terminal
+                    </h2>
+                    <div className="flex items-center gap-2">
+                      {triggeringPipeline && (
+                        <span className="flex items-center gap-1.5 text-[9px] font-mono uppercase bg-[#1E4B33] text-[#A8D9B2] px-2 py-0.5 rounded-full">
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+                          Running
+                        </span>
+                      )}
+                      <button
+                        onClick={() => setShowTerminal(!showTerminal)}
+                        className={`px-3 py-1 rounded-lg text-[10px] font-mono font-bold uppercase transition-colors border ${
+                          showTerminal 
+                            ? 'bg-[#1E4B33] border-[#1E4B33] text-white' 
+                            : 'bg-transparent border-[#474C3F] text-[#BCB29E] hover:bg-[#2C3026]'
+                        }`}
+                      >
+                        {showTerminal ? 'Disconnect' : 'Connect'}
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div className="flex-1 bg-black rounded-xl p-4 overflow-x-auto overflow-y-auto max-h-[60vh] custom-scrollbar border border-[#2C3026]">
+                    <pre className="text-[10px] sm:text-xs font-mono leading-relaxed text-[#A8D9B2] whitespace-pre-wrap break-all">
+                      {!showTerminal && !triggeringPipeline ? (
+                        <span className="text-[#6B7263]">Terminal disconnected. Click Connect to stream logs or trigger pipeline.</span>
+                      ) : pipelineLogs ? (
+                        pipelineLogs
+                      ) : (
+                        <span className="text-[#6B7263]">Waiting for logs...</span>
+                      )}
+                    </pre>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
-
-        {/* Modal for viewing citizen uploaded photo evidence */}
-        {selectedPhotoUrl && (
-          <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
-            <div className="bg-[#0C121E] border border-white/20 rounded-3xl p-6 max-w-2xl w-full space-y-4 shadow-2xl">
-              <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                <h3 className="text-sm font-bold font-heading text-white uppercase flex items-center gap-2">
-                  <Eye className="w-4 h-4 text-amber-400" />
-                  <span>CITIZEN FIELD PHOTO EVIDENCE</span>
-                </h3>
-                <button
-                  type="button"
-                  onClick={() => {
-                    URL.revokeObjectURL(selectedPhotoUrl);
-                    setSelectedPhotoUrl(null);
-                  }}
-                  className="text-white/60 hover:text-white text-xs font-mono-code uppercase px-2 py-1 rounded bg-white/10 hover:bg-white/20 transition-colors cursor-pointer"
-                >
-                  CLOSE [✕]
-                </button>
-              </div>
-              <div className="rounded-2xl overflow-hidden border border-white/10 bg-black max-h-[70vh] flex items-center justify-center">
-                <img src={selectedPhotoUrl} alt="Hazard Evidence" className="max-h-[70vh] w-auto object-contain" />
-              </div>
+              
             </div>
           </div>
         )}
       </main>
+
+      {/* ==================================================== */}
+      {/* 4. PHOTO INSPECTION MODAL (READ-ONLY OVERSIGHT)      */}
+      {/* ==================================================== */}
+      {inspectReport && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="w-full max-w-xl bg-white rounded-3xl border-2 border-[#BCB29E] overflow-hidden shadow-2xl space-y-4 text-left flex flex-col max-h-[90vh]">
+            <div className="p-4 sm:p-5 border-b-2 border-[#BCB29E] flex items-center justify-between">
+              <div>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#1E4B33] font-bold block">
+                  SDMA INCIDENT OVERSIGHT INSPECTOR
+                </span>
+                <h3 className="text-lg font-serif font-bold text-[#141712] uppercase">
+                  {inspectReport.hazard_type || 'Citizen Observation'}
+                </h3>
+              </div>
+              <button
+                onClick={() => setInspectReport(null)}
+                className="p-1.5 rounded-xl hover:bg-[#F0ECE1] text-[#6B7263] hover:text-[#141712] transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="px-5 overflow-y-auto space-y-4 flex-1">
+              <div className="w-full h-64 sm:h-72 rounded-2xl bg-[#ECE7DC] border-2 border-[#BCB29E] overflow-hidden flex items-center justify-center relative">
+                {loadingModalPhoto ? (
+                  <div className="flex flex-col items-center gap-2 text-[#474C3F]">
+                    <div className="w-6 h-6 border-2 border-[#1E4B33] border-t-transparent rounded-full animate-spin" />
+                    <span className="text-xs font-mono">Loading high-resolution photo...</span>
+                  </div>
+                ) : modalPhotoUrl ? (
+                  <img
+                    src={modalPhotoUrl}
+                    alt="Inspected hazard"
+                    className="w-full h-full object-contain bg-black/5"
+                  />
+                ) : (
+                  <div className="text-center p-4 text-[#6B7263] space-y-1">
+                    <Camera className="w-8 h-8 mx-auto opacity-50" />
+                    <span className="text-xs font-mono block">Photo not available on disk</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="space-y-2 text-xs font-mono bg-[#ECE7DC] p-3.5 rounded-xl border border-[#C9C0AD]">
+                <div className="flex justify-between">
+                  <span className="text-[#6B7263]">Jurisdiction:</span>
+                  <span className="font-bold text-[#141712]">
+                    {inspectReport.district_name || 'District'}, {inspectReport.state_name || 'State'}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#6B7263]">Submitter:</span>
+                  <span className="font-bold text-[#141712]">{inspectReport.citizen_name || 'Citizen'}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#6B7263]">Phone:</span>
+                  <span className="font-bold text-[#141712]">{inspectReport.citizen_phone || 'N/A'}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#6B7263]">GPS Coordinates:</span>
+                  <span className="font-bold text-[#1E4B33]">
+                    {inspectReport.latitude.toFixed(5)}&deg;N, {inspectReport.longitude.toFixed(5)}&deg;E
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#6B7263]">Submitted:</span>
+                  <span className="font-bold text-[#141712]">
+                    {new Date(inspectReport.submitted_at).toLocaleString()}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#6B7263]">Review Status:</span>
+                  <span className="font-bold uppercase text-[#141712]">{inspectReport.status}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-[#6B7263]">Reviewing Admin:</span>
+                  <span className="font-bold text-[#1E4B33]">{inspectReport.reviewed_by_name || 'Awaiting District Admin'}</span>
+                </div>
+                {inspectReport.description && (
+                  <div className="pt-2 border-t border-[#BCB29E]">
+                    <span className="text-[#6B7263] block mb-0.5">Description:</span>
+                    <p className="font-sans text-xs text-[#141712] leading-relaxed">
+                      {inspectReport.description}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="p-4 sm:p-5 border-t-2 border-[#BCB29E] flex items-center justify-end">
+              <button
+                onClick={() => setInspectReport(null)}
+                className="px-5 py-2 rounded-xl bg-[#1E4B33] hover:bg-[#143524] text-white border-2 border-[#143524] text-xs font-mono font-bold uppercase transition-colors cursor-pointer shadow-xs"
+              >
+                Close Inspector
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
+export default AdminDashboard;

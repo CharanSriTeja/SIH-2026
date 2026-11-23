@@ -4,13 +4,11 @@ import MapComponent from './MapComponent';
 
 export const GisRiskMapSection: React.FC = () => {
   const [activeLayers, setActiveLayers] = useState({
-    heatmap: true,
     zones: true,
     villages: true,
     roads: true,
     infrastructure: true,
     shelters: true,
-    history: true,
   });
 
   const [selectedSector, setSelectedSector] = useState<'sector-a' | 'sector-b' | 'sector-c'>('sector-a');
@@ -95,12 +93,11 @@ export const GisRiskMapSection: React.FC = () => {
                   LAYERS:
                 </span>
                 {[
-                  { key: 'heatmap', label: 'AI HEATMAP' },
-                  { key: 'zones', label: 'LANDSLIDE ZONES' },
+                  { key: 'zones', label: 'RISK ZONES' },
                   { key: 'villages', label: 'VILLAGES' },
                   { key: 'roads', label: 'ROADS' },
                   { key: 'infrastructure', label: 'HOSPITALS' },
-                  { key: 'history', label: 'HISTORICAL' },
+                  { key: 'shelters', label: 'SHELTERS' },
                 ].map((l) => {
                   const isActive = activeLayers[l.key as keyof typeof activeLayers];
                   return (
@@ -122,10 +119,10 @@ export const GisRiskMapSection: React.FC = () => {
               {/* Vector GIS Map Representation */}
               <div className="relative w-full h-[320px] sm:h-[360px] lg:h-[390px] rounded-2xl border border-earth-300 bg-white overflow-hidden my-auto shadow-inner">
                 <MapComponent
+                  role="citizen"
                   showNERBoundaries={true}
-                  showSusceptibility={activeLayers.heatmap}
                   showRoads={activeLayers.roads}
-                  showLandslides={activeLayers.history}
+                  showVillages={activeLayers.villages}
                   showHospitals={activeLayers.infrastructure}
                 />
 

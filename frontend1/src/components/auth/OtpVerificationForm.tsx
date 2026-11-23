@@ -63,8 +63,9 @@ export const OtpVerificationForm: React.FC<OtpVerificationFormProps> = ({ phoneN
     if (timeLeft > 0) return;
     setLoading(true);
     setGlobalError(null);
+    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
     try {
-      const resp = await axios.post('http://localhost:8000/auth/resend-otp', {
+      const resp = await axios.post(`${API_BASE}/auth/resend-otp`, {
         phone_number: phoneNumber,
         purpose: "signup"
       });
@@ -93,8 +94,9 @@ export const OtpVerificationForm: React.FC<OtpVerificationFormProps> = ({ phoneN
     setLoading(true);
     setGlobalError(null);
 
+    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
     try {
-      const response = await axios.post('http://localhost:8000/auth/verify-otp', {
+      const response = await axios.post(`${API_BASE}/auth/verify-otp`, {
         phone_number: phoneNumber,
         otp_code: otpCode,
         purpose: "signup"

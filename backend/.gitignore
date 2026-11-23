@@ -16,7 +16,8 @@ __pycache__/
 backend/data/
 data/
 datasets/
-
+config.json
+*.env
 # GIS / Remote sensing
 *.tif
 *.tiff

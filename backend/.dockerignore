@@ -1,0 +1,16 @@
+.venv
+venv
+ENV
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+.ipynb_checkpoints
+.pytest_cache
+.vscode
+.git
+.gitignore
+tests/__pycache__
+*.log
+backend.log

@@ -42,8 +42,9 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSuccess, onSwitchToLog
     setLoading(true);
     setGlobalError(null);
 
+    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
     try {
-      const resp = await axios.post('http://localhost:8000/auth/signup', {
+      const resp = await axios.post(`${API_BASE}/auth/signup`, {
         phone_number: phone,
         password: password,
         name: name || undefined

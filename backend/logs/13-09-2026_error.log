@@ -1,0 +1,13 @@
+13-09-2026 06:31:28 - ERROR - [ERROR] Invalid Token Error encountered. Please Login Successfully and Try Again.
+Error Details: 
+Traceback (most recent call last):
+  File "D:\charan coding\SIH 2026\SIH1\backend\data\mdapi.py", line 711, in refresh_access_token
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\charan coding\SIH 2026\SIH1\backend\.venv\Lib\site-packages\requests\models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 429 Client Error: TOO MANY REQUESTS for url: https://mosdac.gov.in/download_api/refresh-token
+13-09-2026 06:31:28 - ERROR - Token could not be Refreshed due to Invalid Refresh Token.
+13-09-2026 06:31:39 - ERROR - There was an Error encountered regarding the Validation of 'username' in Logout.
+Error Details: No Active Session found for this user.
+Solution: Please make sure you use the Correct Username associated with your MOSDAC account.

@@ -31,8 +31,14 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({ value, onChange, error, 
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Only allow digits
-    const val = e.target.value.replace(/\D/g, '').slice(0, 10);
+    let raw = e.target.value.replace(/\D/g, '');
+    // If user entered or pasted 11-12 digits starting with 91 (e.g. +91), strip it
+    if (raw.length > 10 && raw.startsWith('91')) {
+      raw = raw.slice(2);
+    } else if (raw.length === 11 && raw.startsWith('0')) {
+      raw = raw.slice(1);
+    }
+    const val = raw.slice(0, 10);
     onChange(val);
     if (touched) {
       validate(val);

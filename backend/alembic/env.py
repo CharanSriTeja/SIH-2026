@@ -25,6 +25,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 load_dotenv()
 
 from models.user import Base
+import models.district
+import models.report
+import models.shelter
 target_metadata = Base.metadata
 
 db_url = os.environ.get("DATABASE_URL")

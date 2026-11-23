@@ -52,7 +52,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     try {
       // Fetch comprehensive profile including location fields
-      const response = await axios.get('http://localhost:8000/profile/me');
+      const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const response = await axios.get(`${API_BASE}/profile/me`);
       setUser(response.data);
       return response.data;
     } catch (error: any) {

@@ -1,0 +1,1024 @@
+2026-09-13 06:44:31,203 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-09-13 06:44:31,203 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-09-13 06:44:32,407 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-09-13 06:44:32,423 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-09-13 06:44:32,431 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-09-13 06:44:33,077 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-09-13 06:44:40,384 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 7.31s.
+2026-09-13 06:44:41,104 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 9.90s!
+2026-09-13 06:46:58,320 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 06:47:00,011 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.27, 91.73) succeeded: 24h=23.3mm, 7d=47.3mm, SM=46.9% (raw=0.469 m3/m3)
+2026-09-13 06:47:00,092 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 06:47:00,093 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 06:47:05,972 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 06:47:05,980 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 06:47:05,985 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 06:47:19,892 - landslide_sms.alert_service - INFO - Alerts history database initialized at D:\charan coding\SIH 2026\SIH1\backend\data\alerts_history.db
+2026-09-13 06:47:42,626 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 06:47:42,640 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 06:47:42,642 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 06:47:42,844 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 06:47:42,848 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 06:47:42,849 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 06:50:19,499 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 06:50:19,503 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 06:50:19,503 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 06:50:19,597 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 06:50:19,602 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 06:50:19,602 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 06:51:00,157 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-09-13 06:51:00,158 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-09-13 06:51:00,830 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-09-13 06:51:00,844 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-09-13 06:51:00,847 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-09-13 06:51:01,299 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-09-13 06:51:09,587 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 8.29s.
+2026-09-13 06:51:10,353 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 10.19s!
+2026-09-13 06:51:12,763 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-09-13 06:51:12,768 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-09-13 06:51:13,679 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-09-13 06:51:13,698 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-09-13 06:51:13,716 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-09-13 06:51:14,141 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-09-13 06:51:21,796 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 7.65s.
+2026-09-13 06:51:22,534 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 9.77s!
+2026-09-13 06:56:11,936 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 06:56:13,695 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.27, 91.73) succeeded: 24h=23.3mm, 7d=47.3mm, SM=46.9% (raw=0.469 m3/m3)
+2026-09-13 06:56:13,708 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 06:56:13,709 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 06:56:13,897 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 06:56:13,904 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 06:56:13,904 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 06:56:46,138 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 06:56:47,890 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (26.092287597440546, 94.42532719618941) succeeded: 24h=4.9mm, 7d=41.7mm, SM=48.3% (raw=0.483 m3/m3)
+2026-09-13 06:56:47,903 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.0923, 94.4253) = 0.0679
+2026-09-13 06:56:47,928 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0679 (matches tile color)
+2026-09-13 06:57:24,585 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 06:57:24,591 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 06:57:24,591 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 06:57:24,714 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 06:57:24,720 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 06:57:24,721 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 06:57:52,913 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 06:57:54,347 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (28.682678916397236, 91.96247641250653) succeeded: 24h=18.0mm, 7d=32.5mm, SM=35.7% (raw=0.357 m3/m3)
+2026-09-13 08:48:45,532 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-09-13 08:48:45,534 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-09-13 08:48:48,649 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-09-13 08:48:48,710 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-09-13 08:48:48,730 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-09-13 08:48:49,690 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-09-13 08:49:11,645 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-09-13 08:49:11,646 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-09-13 08:49:12,055 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-09-13 08:49:12,122 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-09-13 08:49:12,129 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-09-13 08:49:13,074 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-09-13 08:49:13,761 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 24.07s.
+2026-09-13 08:49:16,151 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 30.62s!
+2026-09-13 08:49:37,772 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 24.70s.
+2026-09-13 08:49:39,896 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 28.25s!
+2026-09-13 08:49:40,205 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:49:42,209 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (27.0844, 93.6053) succeeded: 24h=17.6mm, 7d=54.800000000000004mm, SM=40.2% (raw=0.402 m3/m3)
+2026-09-13 08:49:42,392 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.1156
+2026-09-13 08:49:42,394 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1156 (matches tile color)
+2026-09-13 08:49:48,321 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:49:48,335 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.1156
+2026-09-13 08:49:48,335 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1156 (matches tile color)
+2026-09-13 08:49:48,517 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:49:48,529 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.1156
+2026-09-13 08:49:48,530 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1156 (matches tile color)
+2026-09-13 08:50:37,710 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:50:37,728 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.1156
+2026-09-13 08:50:37,729 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1156 (matches tile color)
+2026-09-13 08:50:37,925 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:50:37,937 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.1156
+2026-09-13 08:50:37,939 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1156 (matches tile color)
+2026-09-13 08:50:58,246 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:50:58,256 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0843, 93.6055) = 0.1156
+2026-09-13 08:50:58,257 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1156 (matches tile color)
+2026-09-13 08:51:22,523 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:51:24,654 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (27.069945748226942, 93.6425318190789) succeeded: 24h=23.4mm, 7d=82.5mm, SM=43.1% (raw=0.431 m3/m3)
+2026-09-13 08:51:24,668 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0699, 93.6425) = 0.2056
+2026-09-13 08:51:24,669 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.2056 (matches tile color)
+2026-09-13 08:51:34,432 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:51:36,108 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (27.085891161022175, 93.60919769949936) succeeded: 24h=17.6mm, 7d=54.800000000000004mm, SM=40.2% (raw=0.402 m3/m3)
+2026-09-13 08:51:36,122 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0859, 93.6092) = 0.1260
+2026-09-13 08:51:36,123 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1260 (matches tile color)
+2026-09-13 08:51:46,841 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:51:48,904 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (27.081617644126908, 93.60343002210374) succeeded: 24h=17.6mm, 7d=54.800000000000004mm, SM=40.2% (raw=0.402 m3/m3)
+2026-09-13 08:51:48,920 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0816, 93.6034) = 0.1675
+2026-09-13 08:51:48,920 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1675 (matches tile color)
+2026-09-13 08:52:03,432 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:52:03,442 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.1156
+2026-09-13 08:52:03,443 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1156 (matches tile color)
+2026-09-13 08:52:54,318 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:52:56,182 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (26.442297522686175, 90.8093174794335) succeeded: 24h=20.5mm, 7d=61.3mm, SM=41.7% (raw=0.417 m3/m3)
+2026-09-13 08:52:56,196 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.4423, 90.8093) = 0.9548
+2026-09-13 08:52:56,197 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.9548 (matches tile color)
+2026-09-13 08:53:04,378 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:53:05,991 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (26.270062387322085, 90.7105458810147) succeeded: 24h=22.0mm, 7d=52.4mm, SM=40.8% (raw=0.408 m3/m3)
+2026-09-13 08:53:06,006 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.2701, 90.7105) = 0.4065
+2026-09-13 08:53:06,007 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.4065 (matches tile color)
+2026-09-13 08:53:08,935 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:53:10,828 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (26.021566207667775, 90.44215490603864) succeeded: 24h=15.7mm, 7d=39.6mm, SM=41.7% (raw=0.417 m3/m3)
+2026-09-13 08:53:10,841 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.0216, 90.4422) = 0.8121
+2026-09-13 08:53:10,842 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8121 (matches tile color)
+2026-09-13 08:53:14,178 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:53:16,255 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.63825894125401, 91.75428856147664) succeeded: 24h=6.7mm, 7d=60.5mm, SM=45.6% (raw=0.456 m3/m3)
+2026-09-13 08:53:16,271 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.6383, 91.7543) = 0.8233
+2026-09-13 08:53:16,272 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8233 (matches tile color)
+2026-09-13 08:57:44,574 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:57:46,792 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (23.7271, 92.7176) succeeded: 24h=10.6mm, 7d=84.7mm, SM=37.6% (raw=0.376 m3/m3)
+2026-09-13 08:57:46,805 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.7271, 92.7176) = 0.0273
+2026-09-13 08:57:46,807 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0273 (matches tile color)
+2026-09-13 08:57:50,446 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:57:52,630 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.27, 91.73) succeeded: 24h=23.3mm, 7d=47.3mm, SM=46.9% (raw=0.469 m3/m3)
+2026-09-13 08:57:52,645 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 08:57:52,645 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 08:57:53,766 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:57:53,778 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.1156
+2026-09-13 08:57:53,779 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1156 (matches tile color)
+2026-09-13 08:57:53,782 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:57:53,796 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.7271, 92.7176) = 0.0273
+2026-09-13 08:57:53,797 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0273 (matches tile color)
+2026-09-13 08:57:53,974 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:57:53,983 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.7271, 92.7176) = 0.0273
+2026-09-13 08:57:53,984 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0273 (matches tile color)
+2026-09-13 08:58:31,112 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:58:31,123 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.1156
+2026-09-13 08:58:31,123 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1156 (matches tile color)
+2026-09-13 08:58:31,296 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 08:58:31,306 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.1156
+2026-09-13 08:58:31,307 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1156 (matches tile color)
+2026-09-13 08:59:24,094 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-09-13 08:59:24,097 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-09-13 08:59:26,261 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-09-13 08:59:26,316 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-09-13 08:59:26,338 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-09-13 08:59:27,029 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-09-13 09:00:02,503 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-09-13 09:00:02,507 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-09-13 09:00:04,313 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-09-13 09:00:04,364 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-09-13 09:00:04,373 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-09-13 09:00:04,866 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-09-13 09:00:19,068 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 14.20s.
+2026-09-13 09:00:20,341 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 17.83s!
+2026-09-13 10:53:52,227 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 10:53:54,943 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (26.1445, 91.7362) succeeded: 24h=19.0mm, 7d=41.6mm, SM=48.1% (raw=0.481 m3/m3)
+2026-09-13 10:53:55,017 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1445, 91.7362) = 0.1671
+2026-09-13 10:53:55,019 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1671 (matches tile color)
+2026-09-13 10:53:55,229 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 10:53:55,245 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1445, 91.7362) = 0.1671
+2026-09-13 10:53:55,246 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1671 (matches tile color)
+2026-09-13 10:54:20,626 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 10:54:20,635 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1445, 91.7362) = 0.1671
+2026-09-13 10:54:20,637 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1671 (matches tile color)
+2026-09-13 10:54:20,829 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 10:54:20,840 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1445, 91.7362) = 0.1671
+2026-09-13 10:54:20,841 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1671 (matches tile color)
+2026-09-13 10:54:42,325 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 10:54:44,679 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (26.123416585564996, 94.39348997742684) succeeded: 24h=6.3mm, 7d=54.1mm, SM=48.3% (raw=0.483 m3/m3)
+2026-09-13 10:54:44,692 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1234, 94.3935) = 0.1297
+2026-09-13 10:54:44,692 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1297 (matches tile color)
+2026-09-13 10:55:27,895 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 10:55:29,943 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (26.134264429543933, 91.74911539366389) succeeded: 24h=19.0mm, 7d=41.6mm, SM=48.1% (raw=0.481 m3/m3)
+2026-09-13 10:55:29,956 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1343, 91.7491) = 0.2807
+2026-09-13 10:55:29,958 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.2807 (matches tile color)
+2026-09-13 10:55:32,421 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 10:55:34,554 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (26.12168810719392, 91.80714725556322) succeeded: 24h=19.0mm, 7d=41.6mm, SM=48.1% (raw=0.481 m3/m3)
+2026-09-13 10:55:34,570 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1217, 91.8071) = 0.4726
+2026-09-13 10:55:34,573 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.4726 (matches tile color)
+2026-09-13 10:55:35,498 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 10:55:37,110 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (26.124383147393914, 91.83282802203502) succeeded: 24h=18.7mm, 7d=43.4mm, SM=51.1% (raw=0.511 m3/m3)
+2026-09-13 10:55:37,125 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1244, 91.8328) = 0.5092
+2026-09-13 10:55:37,126 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5092 (matches tile color)
+2026-09-13 10:55:39,755 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 10:55:41,720 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (26.07077012057819, 91.91887526554001) succeeded: 24h=18.7mm, 7d=43.4mm, SM=51.1% (raw=0.511 m3/m3)
+2026-09-13 10:55:41,732 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.0708, 91.9189) = 0.8179
+2026-09-13 10:55:41,733 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8179 (matches tile color)
+2026-09-13 10:55:47,388 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 10:55:49,718 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.624578964646048, 92.53855766231538) succeeded: 24h=9.4mm, 7d=47.9mm, SM=49.2% (raw=0.492 m3/m3)
+2026-09-13 10:55:49,731 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.6246, 92.5386) = 0.7444
+2026-09-13 10:55:49,733 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7444 (matches tile color)
+2026-09-13 10:59:50,496 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 10:59:52,290 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.27, 91.73) succeeded: 24h=23.3mm, 7d=47.3mm, SM=46.9% (raw=0.469 m3/m3)
+2026-09-13 10:59:52,302 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 10:59:52,303 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 10:59:59,768 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 10:59:59,778 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 10:59:59,778 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 11:00:14,716 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:00:14,727 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 11:00:14,728 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 11:00:14,916 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:00:14,926 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 11:00:14,927 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 11:00:15,791 - landslide_sms.alert_service - INFO - Alerts history database initialized at D:\charan coding\SIH 2026\SIH1\backend\data\alerts_history.db
+2026-09-13 11:00:21,427 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:00:21,436 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 11:00:21,438 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 11:00:21,613 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:00:21,622 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 11:00:21,623 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 11:01:22,583 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:01:24,142 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.5788, 91.8933) succeeded: 24h=10.7mm, 7d=36.9mm, SM=48.7% (raw=0.487 m3/m3)
+2026-09-13 11:01:24,157 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 11:01:24,157 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 11:01:46,722 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:01:46,730 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 11:01:46,731 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 11:01:46,899 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:01:46,908 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 11:01:46,909 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 11:02:23,779 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:02:24,796 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:02:26,091 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.567732780000526, 91.88054908518859) succeeded: 24h=7.0mm, 7d=34.3mm, SM=48.6% (raw=0.486 m3/m3)
+2026-09-13 11:02:26,105 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5677, 91.8805) = 0.8460
+2026-09-13 11:02:26,106 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8460 (matches tile color)
+2026-09-13 11:02:26,339 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:02:26,348 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5679, 91.8807) = 0.6981
+2026-09-13 11:02:26,349 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.6981 (matches tile color)
+2026-09-13 11:02:26,403 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.567921297499268, 91.88078128674005) succeeded: 24h=7.0mm, 7d=34.3mm, SM=48.6% (raw=0.486 m3/m3)
+2026-09-13 11:02:26,418 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5679, 91.8808) = 0.6981
+2026-09-13 11:02:26,419 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.6981 (matches tile color)
+2026-09-13 11:02:46,174 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:02:47,930 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.57215335154035, 91.88674619081434) succeeded: 24h=10.7mm, 7d=36.9mm, SM=48.7% (raw=0.487 m3/m3)
+2026-09-13 11:02:47,946 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5722, 91.8867) = 0.8311
+2026-09-13 11:02:47,950 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8311 (matches tile color)
+2026-09-13 11:02:59,789 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:03:02,245 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.52089650279926, 91.8696864056484) succeeded: 24h=2.4mm, 7d=29.2mm, SM=46.6% (raw=0.466 m3/m3)
+2026-09-13 11:03:02,258 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5209, 91.8697) = 0.2249
+2026-09-13 11:03:02,260 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.2249 (matches tile color)
+2026-09-13 11:17:03,876 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:17:06,123 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.5788, 91.8933) succeeded: 24h=10.7mm, 7d=36.9mm, SM=48.7% (raw=0.487 m3/m3)
+2026-09-13 11:17:06,137 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 11:17:06,137 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 11:17:12,841 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:17:12,851 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 11:17:12,852 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 11:17:13,045 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:17:13,054 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 11:17:13,055 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 11:17:13,218 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:17:13,228 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 11:17:13,228 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 11:17:16,259 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:17:16,267 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 11:17:16,268 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 11:17:16,451 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:17:16,461 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 11:17:16,462 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 11:17:16,911 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:17:16,920 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 11:17:16,921 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 11:17:17,088 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:17:17,098 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 11:17:17,101 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 11:17:18,084 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:17:18,096 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 11:17:18,097 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 11:17:18,286 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 11:17:18,296 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 11:17:18,297 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 14:29:03,040 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 14:29:05,702 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (23.8315, 91.2868) succeeded: 24h=3.5mm, 7d=52.4mm, SM=49.6% (raw=0.496 m3/m3)
+2026-09-13 14:29:05,778 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.8315, 91.2868) = 0.1131
+2026-09-13 14:29:05,780 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1131 (matches tile color)
+2026-09-13 14:29:05,915 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 14:29:05,920 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.8315, 91.2868) = 0.1131
+2026-09-13 14:29:05,920 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1131 (matches tile color)
+2026-09-13 14:47:21,110 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 14:47:22,660 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.27, 91.73) succeeded: 24h=18.0mm, 7d=42.0mm, SM=46.4% (raw=0.464 m3/m3)
+2026-09-13 14:47:22,689 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 14:47:22,690 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 14:47:22,819 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 14:47:22,825 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 14:47:22,826 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 15:00:31,193 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:00:32,920 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.5788, 91.8933) succeeded: 24h=11.2mm, 7d=37.4mm, SM=48.7% (raw=0.487 m3/m3)
+2026-09-13 15:00:32,931 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 15:00:32,932 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 15:00:33,091 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:00:33,100 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 15:00:33,101 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 15:03:50,409 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:03:50,419 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 15:03:50,421 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 15:03:50,616 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:03:50,625 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 15:03:50,627 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 15:04:13,910 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:04:13,920 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 15:04:13,920 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 15:04:14,121 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:04:14,132 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 15:04:14,135 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 15:04:15,600 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:04:17,891 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.71127519553025, 92.04248131216428) succeeded: 24h=9.4mm, 7d=47.6mm, SM=47.7% (raw=0.477 m3/m3)
+2026-09-13 15:04:17,904 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.7113, 92.0425) = 0.5890
+2026-09-13 15:04:17,905 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5890 (matches tile color)
+2026-09-13 15:04:52,411 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:04:52,420 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 15:04:52,422 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 15:04:52,611 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:04:52,620 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 15:04:52,621 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 15:06:34,458 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:06:36,382 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (27.0844, 93.6053) succeeded: 24h=6.2mm, 7d=43.4mm, SM=39.7% (raw=0.397 m3/m3)
+2026-09-13 15:06:36,394 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.1156
+2026-09-13 15:06:36,395 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1156 (matches tile color)
+2026-09-13 15:06:41,985 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:06:42,013 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.1156
+2026-09-13 15:06:42,013 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1156 (matches tile color)
+2026-09-13 15:07:16,012 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:07:16,022 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 15:07:16,023 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 15:07:17,294 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:07:19,098 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (27.3389, 88.6065) succeeded: 24h=13.9mm, 7d=47.1mm, SM=40.5% (raw=0.405 m3/m3)
+2026-09-13 15:07:19,112 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3389, 88.6065) = 0.1857
+2026-09-13 15:07:19,114 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1857 (matches tile color)
+2026-09-13 15:07:24,141 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:07:25,889 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:07:27,302 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (23.7271, 92.7176) succeeded: 24h=7.8mm, 7d=81.9mm, SM=37.6% (raw=0.376 m3/m3)
+2026-09-13 15:07:27,315 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.7271, 92.7176) = 0.0273
+2026-09-13 15:07:27,316 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0273 (matches tile color)
+2026-09-13 15:07:27,423 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (23.8315, 91.2868) succeeded: 24h=3.5mm, 7d=52.4mm, SM=49.6% (raw=0.496 m3/m3)
+2026-09-13 15:07:27,437 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.8315, 91.2868) = 0.1131
+2026-09-13 15:07:27,438 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1131 (matches tile color)
+2026-09-13 15:07:42,656 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:07:42,693 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 15:07:42,694 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 15:07:43,655 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:07:44,324 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:07:44,335 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.7271, 92.7176) = 0.0273
+2026-09-13 15:07:44,336 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0273 (matches tile color)
+2026-09-13 15:07:45,864 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (26.1445, 91.7362) succeeded: 24h=24.7mm, 7d=47.3mm, SM=48.1% (raw=0.481 m3/m3)
+2026-09-13 15:07:45,883 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1445, 91.7362) = 0.1671
+2026-09-13 15:07:45,885 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1671 (matches tile color)
+2026-09-13 15:08:09,701 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:08:09,756 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.7271, 92.7176) = 0.0273
+2026-09-13 15:08:09,758 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0273 (matches tile color)
+2026-09-13 15:08:09,760 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:08:09,763 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:08:09,776 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 15:08:09,779 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 15:08:09,786 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.7271, 92.7176) = 0.0273
+2026-09-13 15:08:09,791 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0273 (matches tile color)
+2026-09-13 15:08:09,989 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:08:09,999 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1445, 91.7362) = 0.1671
+2026-09-13 15:08:09,999 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1671 (matches tile color)
+2026-09-13 15:08:15,057 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:08:16,693 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.6751, 94.1086) succeeded: 24h=7.2mm, 7d=88.4mm, SM=47.2% (raw=0.472 m3/m3)
+2026-09-13 15:08:16,707 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.6751, 94.1086) = 0.1243
+2026-09-13 15:08:16,708 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1243 (matches tile color)
+2026-09-13 15:08:38,806 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:08:38,814 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.7271, 92.7176) = 0.0273
+2026-09-13 15:08:38,815 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0273 (matches tile color)
+2026-09-13 15:08:44,320 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:08:44,329 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-13 15:08:44,330 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-13 15:09:03,736 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:09:05,844 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (24.817, 93.9368) succeeded: 24h=0.7mm, 7d=24.8mm, SM=46.5% (raw=0.465 m3/m3)
+2026-09-13 15:09:05,859 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (24.8170, 93.9368) = 0.0297
+2026-09-13 15:09:05,860 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0297 (matches tile color)
+2026-09-13 15:09:10,312 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:09:10,320 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3389, 88.6065) = 0.1857
+2026-09-13 15:09:10,321 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1857 (matches tile color)
+2026-09-13 15:09:10,486 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:09:12,191 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.27, 91.73) succeeded: 24h=18.0mm, 7d=42.0mm, SM=46.4% (raw=0.464 m3/m3)
+2026-09-13 15:09:12,204 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5483
+2026-09-13 15:09:12,205 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5483 (matches tile color)
+2026-09-13 15:09:15,777 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:09:15,788 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.7271, 92.7176) = 0.0273
+2026-09-13 15:09:15,788 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0273 (matches tile color)
+2026-09-13 15:09:15,959 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:09:15,968 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.7271, 92.7176) = 0.0273
+2026-09-13 15:09:15,969 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0273 (matches tile color)
+2026-09-13 15:09:16,171 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:09:16,180 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.7271, 92.7176) = 0.0273
+2026-09-13 15:09:16,181 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0273 (matches tile color)
+2026-09-13 15:09:56,039 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:09:56,049 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.7271, 92.7176) = 0.0273
+2026-09-13 15:09:56,049 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0273 (matches tile color)
+2026-09-13 15:09:56,225 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:09:56,234 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.7271, 92.7176) = 0.0273
+2026-09-13 15:09:56,235 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0273 (matches tile color)
+2026-09-13 15:10:03,302 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:10:03,320 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.7271, 92.7176) = 0.0273
+2026-09-13 15:10:03,321 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0273 (matches tile color)
+2026-09-13 15:10:03,722 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 15:10:03,737 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.7271, 92.7176) = 0.0273
+2026-09-13 15:10:03,738 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0273 (matches tile color)
+2026-09-13 15:21:59,176 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-09-13 15:21:59,179 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-09-13 15:22:01,364 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-09-13 15:22:01,413 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-09-13 15:22:01,427 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-09-13 15:22:02,155 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-09-13 15:22:18,534 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 16.38s.
+2026-09-13 15:22:20,328 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 21.15s!
+2026-09-13 20:49:28,034 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-09-13 20:49:28,038 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-09-13 20:49:31,084 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-09-13 20:49:31,126 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-09-13 20:49:31,166 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-09-13 20:49:32,375 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-09-13 20:49:48,786 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 16.41s.
+2026-09-13 20:49:50,180 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 22.14s!
+2026-09-13 20:50:26,024 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 20:50:29,080 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (27.0844, 93.6053) succeeded: 24h=7.9mm, 7d=45.1mm, SM=39.7% (raw=0.397 m3/m3)
+2026-09-13 20:50:29,138 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.1156
+2026-09-13 20:50:29,139 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1156 (matches tile color)
+2026-09-13 20:50:29,350 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 20:50:29,365 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.1156
+2026-09-13 20:50:29,366 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1156 (matches tile color)
+2026-09-13 20:51:00,978 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 20:51:00,988 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.1156
+2026-09-13 20:51:00,990 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1156 (matches tile color)
+2026-09-13 20:51:01,197 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 20:51:01,206 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.1156
+2026-09-13 20:51:01,207 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1156 (matches tile color)
+2026-09-13 20:51:36,840 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-13 20:51:38,668 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (26.2349425070729, 94.77864467403845) succeeded: 24h=11.5mm, 7d=65.8mm, SM=47.6% (raw=0.476 m3/m3)
+2026-09-13 20:51:38,680 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.2349, 94.7786) = 0.0970
+2026-09-13 20:51:38,682 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0970 (matches tile color)
+2026-09-16 05:06:20,292 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-09-16 05:06:20,293 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-09-16 05:06:23,574 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-09-16 05:06:23,628 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-09-16 05:06:23,663 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-09-16 05:06:24,890 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-09-16 05:06:39,598 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 14.71s.
+2026-09-16 05:06:41,198 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 20.91s!
+2026-09-16 05:43:48,704 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-09-16 05:43:48,708 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-09-16 05:43:52,325 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-09-16 05:43:52,370 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-09-16 05:43:52,404 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-09-16 05:43:53,838 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-09-16 05:44:13,003 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-09-16 05:44:13,006 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-09-16 05:44:13,440 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-09-16 05:44:13,509 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-09-16 05:44:13,518 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-09-16 05:44:14,662 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-09-16 05:44:18,990 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 25.15s.
+2026-09-16 05:44:21,365 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 32.66s!
+2026-09-16 05:44:33,304 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 05:44:34,611 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (27.3389, 88.6065) succeeded: 24h=57.0mm, 7d=138.2mm, SM=43.9% (raw=0.439 m3/m3)
+2026-09-16 05:44:34,688 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3389, 88.6065) = 0.1857
+2026-09-16 05:44:34,689 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1857 (matches tile color)
+2026-09-16 05:44:39,766 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 25.10s.
+2026-09-16 05:44:41,769 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 28.76s!
+2026-09-16 05:44:42,004 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 05:44:42,016 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3389, 88.6065) = 0.1857
+2026-09-16 05:44:42,017 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1857 (matches tile color)
+2026-09-16 05:44:59,842 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 05:44:59,849 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3389, 88.6065) = 0.1857
+2026-09-16 05:44:59,849 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1857 (matches tile color)
+2026-09-16 05:45:00,021 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 05:45:00,031 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3389, 88.6065) = 0.1857
+2026-09-16 05:45:00,032 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1857 (matches tile color)
+2026-09-16 05:45:08,827 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 05:45:08,835 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3389, 88.6065) = 0.1857
+2026-09-16 05:45:08,835 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1857 (matches tile color)
+2026-09-16 05:45:09,780 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 05:45:09,788 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3389, 88.6065) = 0.1857
+2026-09-16 05:45:09,788 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1857 (matches tile color)
+2026-09-16 05:45:13,065 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 05:45:13,073 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3389, 88.6065) = 0.1857
+2026-09-16 05:45:13,073 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1857 (matches tile color)
+2026-09-16 05:45:16,286 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 05:45:16,758 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 05:45:17,516 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (27.336236963542177, 88.60993110354201) succeeded: 24h=54.0mm, 7d=142.6mm, SM=43.4% (raw=0.434 m3/m3)
+2026-09-16 05:45:17,528 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3362, 88.6099) = 0.1809
+2026-09-16 05:45:17,529 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1809 (matches tile color)
+2026-09-16 05:45:17,690 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 05:45:17,698 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3362, 88.6099) = 0.1809
+2026-09-16 05:45:17,699 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1809 (matches tile color)
+2026-09-16 05:45:17,929 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (27.33623696354067, 88.60993110354224) succeeded: 24h=54.0mm, 7d=142.6mm, SM=43.4% (raw=0.434 m3/m3)
+2026-09-16 05:45:17,942 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3362, 88.6099) = 0.1809
+2026-09-16 05:45:17,943 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1809 (matches tile color)
+2026-09-16 05:45:18,132 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 05:45:18,144 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3362, 88.6099) = 0.1809
+2026-09-16 05:45:18,145 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1809 (matches tile color)
+2026-09-16 05:45:18,293 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 05:45:18,301 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3362, 88.6099) = 0.1809
+2026-09-16 05:45:18,302 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1809 (matches tile color)
+2026-09-16 05:45:18,461 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 05:45:18,468 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3362, 88.6099) = 0.1809
+2026-09-16 05:45:18,469 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1809 (matches tile color)
+2026-09-16 05:45:18,620 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 05:45:18,627 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3362, 88.6099) = 0.1809
+2026-09-16 05:45:18,628 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1809 (matches tile color)
+2026-09-16 05:45:18,781 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 05:45:18,790 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3362, 88.6099) = 0.1809
+2026-09-16 05:45:18,792 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1809 (matches tile color)
+2026-09-16 06:23:40,202 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 06:23:41,295 - prediction_service - INFO - [PredictionPipeline] Live Open-Meteo query for (25.6751, 94.1086) succeeded: 24h=22.4mm, 7d=90.0mm, SM=48.1% (raw=0.481 m3/m3)
+2026-09-16 06:23:41,307 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.6751, 94.1086) = 0.1243
+2026-09-16 06:23:41,307 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1243 (matches tile color)
+2026-09-16 06:23:41,443 - prediction_service - INFO - [PredictionPipeline] Rainfall raster not found at D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_latest.tif; skipping raster sampling.
+2026-09-16 06:23:41,450 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.6751, 94.1086) = 0.1243
+2026-09-16 06:23:41,451 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1243 (matches tile color)
+2026-09-16 06:33:47,808 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-09-16 06:33:47,810 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-09-16 06:33:50,297 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-09-16 06:33:50,359 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-09-16 06:33:50,386 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-09-16 06:33:51,265 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-09-16 06:34:07,870 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 16.60s.
+2026-09-16 06:34:09,743 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 21.93s!
+2026-09-16 06:34:34,408 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-16 06:34:34,448 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.6751, 94.1086): rain24h=0.7mm, rain7d=1.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-16 06:34:34,459 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.6751, 94.1086) = 0.1243
+2026-09-16 06:34:34,460 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1243 (matches tile color)
+2026-09-16 06:39:36,745 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-16 06:39:36,772 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.6751, 94.1086): rain24h=0.7mm, rain7d=1.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-16 06:39:36,782 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.6751, 94.1086) = 0.1243
+2026-09-16 06:39:36,785 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1243 (matches tile color)
+2026-09-16 07:11:22,484 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-09-16 07:11:22,486 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-09-16 07:11:24,273 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-09-16 07:11:24,311 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-09-16 07:11:24,318 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-09-16 07:11:24,936 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-09-16 07:11:42,657 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 17.72s.
+2026-09-16 07:11:44,403 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 21.92s!
+2026-09-17 05:47:55,423 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-09-17 05:47:55,426 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-09-17 05:47:58,990 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-09-17 05:47:59,048 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-09-17 05:47:59,095 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-09-17 05:48:00,270 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-09-17 05:48:18,762 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 18.49s.
+2026-09-17 05:48:19,861 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 24.44s!
+2026-09-17 05:48:38,340 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:48:38,393 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5788, 91.8933): rain24h=35.7mm, rain7d=71.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:48:38,405 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-17 05:48:38,406 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-17 05:48:38,584 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:48:38,612 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5788, 91.8933): rain24h=35.7mm, rain7d=71.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:48:38,621 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-17 05:48:38,622 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-17 05:49:10,763 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:10,783 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5788, 91.8933): rain24h=35.7mm, rain7d=71.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:10,792 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-17 05:49:10,792 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-17 05:49:10,964 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:10,984 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5788, 91.8933): rain24h=35.7mm, rain7d=71.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:10,994 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-17 05:49:10,994 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-17 05:49:45,742 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:45,764 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5422, 91.9022): rain24h=35.0mm, rain7d=70.1mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:45,775 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5422, 91.9022) = 0.8784
+2026-09-17 05:49:45,776 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8784 (matches tile color)
+2026-09-17 05:49:45,951 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:45,983 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5422, 91.9022): rain24h=35.0mm, rain7d=70.1mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:46,014 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5422, 91.9022) = 0.8784
+2026-09-17 05:49:46,023 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8784 (matches tile color)
+2026-09-17 05:49:46,119 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:46,137 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5422, 91.9022): rain24h=35.0mm, rain7d=70.1mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:46,146 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5422, 91.9022) = 0.8784
+2026-09-17 05:49:46,147 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8784 (matches tile color)
+2026-09-17 05:49:46,304 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:46,323 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5422, 91.9022): rain24h=35.0mm, rain7d=70.1mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:46,332 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5422, 91.9022) = 0.8784
+2026-09-17 05:49:46,333 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8784 (matches tile color)
+2026-09-17 05:49:46,500 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:46,522 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5422, 91.9022): rain24h=35.0mm, rain7d=70.1mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:46,530 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5422, 91.9022) = 0.8784
+2026-09-17 05:49:46,531 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8784 (matches tile color)
+2026-09-17 05:49:46,701 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:46,720 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5422, 91.9022): rain24h=35.0mm, rain7d=70.1mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:46,731 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5422, 91.9022) = 0.8784
+2026-09-17 05:49:46,731 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8784 (matches tile color)
+2026-09-17 05:49:46,909 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:46,926 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5422, 91.9022): rain24h=35.0mm, rain7d=70.1mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:46,935 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5422, 91.9022) = 0.8784
+2026-09-17 05:49:46,936 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8784 (matches tile color)
+2026-09-17 05:49:47,103 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:47,124 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5422, 91.9022): rain24h=35.0mm, rain7d=70.1mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:47,136 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5422, 91.9022) = 0.8784
+2026-09-17 05:49:47,137 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8784 (matches tile color)
+2026-09-17 05:49:47,307 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:47,329 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5422, 91.9022): rain24h=35.0mm, rain7d=70.1mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:47,338 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5422, 91.9022) = 0.8784
+2026-09-17 05:49:47,339 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8784 (matches tile color)
+2026-09-17 05:49:50,643 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:50,662 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5788, 91.8933): rain24h=35.7mm, rain7d=71.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:50,673 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-17 05:49:50,673 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-17 05:49:52,189 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:52,216 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5692, 91.9113): rain24h=36.2mm, rain7d=72.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:52,226 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5692, 91.9113) = 0.8517
+2026-09-17 05:49:52,226 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8517 (matches tile color)
+2026-09-17 05:49:52,417 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:52,440 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5692, 91.9113): rain24h=36.2mm, rain7d=72.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:52,460 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5692, 91.9113) = 0.8517
+2026-09-17 05:49:52,471 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8517 (matches tile color)
+2026-09-17 05:49:52,597 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:52,618 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5692, 91.9113): rain24h=36.2mm, rain7d=72.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:52,626 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5692, 91.9113) = 0.8517
+2026-09-17 05:49:52,627 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8517 (matches tile color)
+2026-09-17 05:49:52,795 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:52,818 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5692, 91.9113): rain24h=36.2mm, rain7d=72.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:52,828 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5692, 91.9113) = 0.8517
+2026-09-17 05:49:52,829 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8517 (matches tile color)
+2026-09-17 05:49:53,424 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:53,447 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5788, 91.8933): rain24h=35.7mm, rain7d=71.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:53,457 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-17 05:49:53,458 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-17 05:49:53,644 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:53,667 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5788, 91.8933): rain24h=35.7mm, rain7d=71.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:53,676 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-17 05:49:53,677 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-17 05:49:53,860 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:53,879 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5788, 91.8933): rain24h=35.7mm, rain7d=71.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:53,889 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-17 05:49:53,889 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-17 05:49:54,056 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:54,077 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5788, 91.8933): rain24h=35.7mm, rain7d=71.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:54,086 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-17 05:49:54,088 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-17 05:49:54,290 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:54,314 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5788, 91.8933): rain24h=35.7mm, rain7d=71.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:54,324 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-17 05:49:54,326 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-17 05:49:54,482 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:54,503 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5788, 91.8933): rain24h=35.7mm, rain7d=71.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:54,513 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-17 05:49:54,514 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-17 05:49:54,673 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:54,691 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5788, 91.8933): rain24h=35.7mm, rain7d=71.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:54,700 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-17 05:49:54,701 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-17 05:49:54,851 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:54,871 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5788, 91.8933): rain24h=35.7mm, rain7d=71.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:54,879 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-17 05:49:54,879 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-17 05:49:55,045 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:49:55,064 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5788, 91.8933): rain24h=35.7mm, rain7d=71.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:49:55,074 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.7585
+2026-09-17 05:49:55,074 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.7585 (matches tile color)
+2026-09-17 05:50:05,549 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:50:05,568 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5768, 91.8916): rain24h=35.6mm, rain7d=71.1mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:50:05,577 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5768, 91.8916) = 0.8311
+2026-09-17 05:50:05,577 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8311 (matches tile color)
+2026-09-17 05:50:08,894 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:50:08,914 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5763, 91.8892): rain24h=35.5mm, rain7d=71.0mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:50:08,923 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5763, 91.8892) = 0.8311
+2026-09-17 05:50:08,923 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8311 (matches tile color)
+2026-09-17 05:50:11,383 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:50:11,404 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5764, 91.8863): rain24h=35.3mm, rain7d=70.6mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:50:11,413 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5764, 91.8863) = 0.8526
+2026-09-17 05:50:11,413 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8526 (matches tile color)
+2026-09-17 05:50:13,218 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:50:13,238 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5754, 91.8857): rain24h=35.3mm, rain7d=70.5mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:50:13,246 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5754, 91.8857) = 0.8517
+2026-09-17 05:50:13,247 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8517 (matches tile color)
+2026-09-17 05:50:15,355 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:50:15,375 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5807, 91.8847): rain24h=35.3mm, rain7d=70.6mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:50:15,384 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5807, 91.8847) = 0.8326
+2026-09-17 05:50:15,385 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8326 (matches tile color)
+2026-09-17 05:50:17,158 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:50:17,177 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5834, 91.8783): rain24h=35.1mm, rain7d=70.3mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:50:17,187 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5834, 91.8783) = 0.8502
+2026-09-17 05:50:17,187 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8502 (matches tile color)
+2026-09-17 05:50:19,632 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:50:19,652 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5617, 91.8904): rain24h=35.1mm, rain7d=70.3mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:50:19,661 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5617, 91.8904) = 0.8485
+2026-09-17 05:50:19,662 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8485 (matches tile color)
+2026-09-17 05:50:22,066 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:50:22,086 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5602, 91.8842): rain24h=34.9mm, rain7d=69.8mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:50:22,095 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5602, 91.8842) = 0.4578
+2026-09-17 05:50:22,096 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.4578 (matches tile color)
+2026-09-17 05:50:23,408 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:50:23,426 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5522, 91.8890): rain24h=34.8mm, rain7d=69.7mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:50:23,435 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5522, 91.8890) = 0.8468
+2026-09-17 05:50:23,436 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8468 (matches tile color)
+2026-09-17 05:50:24,873 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:50:24,893 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5520, 91.8834): rain24h=34.7mm, rain7d=69.4mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:50:24,903 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5520, 91.8834) = 0.8025
+2026-09-17 05:50:24,903 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8025 (matches tile color)
+2026-09-17 05:50:25,954 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260912.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:50:25,973 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5557, 91.8986): rain24h=35.3mm, rain7d=70.6mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:50:25,983 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5557, 91.8986) = 0.8161
+2026-09-17 05:50:25,984 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.8161 (matches tile color)
+2026-09-17 05:51:04,596 - unified_daily_pipeline - INFO - ================================================================================
+2026-09-17 05:51:04,597 - unified_daily_pipeline - INFO - STARTING UNIFIED DAILY LANDSLIDE RISK PIPELINE (NER REGIONAL BATCH)
+2026-09-17 05:51:04,597 - unified_daily_pipeline - INFO - ================================================================================
+2026-09-17 05:51:04,598 - unified_daily_pipeline - INFO - 
+[PIPELINE 1/4] Running 24h Rainfall Pipeline...
+2026-09-17 05:51:04,599 - unified_daily_pipeline - INFO - [PIPELINE 1/4] Force download enabled. Fetching latest from MOSDAC...
+2026-09-17 05:52:11,786 - rainfall_service - INFO - [RainfallPipeline] Starting 24h rainfall pipeline for date: 2026-09-16
+2026-09-17 05:52:15,006 - rainfall_service - INFO - [RainfallPipeline] Saved 24h rainfall GeoTIFF to: D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif
+2026-09-17 05:52:15,011 - rainfall_service - INFO - [RainfallPipeline] Completed with status: COMPLETE (40/48 files, Rainfall: min=0.0mm, mean=11.11mm, max=83.6mm)
+2026-09-17 05:52:15,017 - unified_daily_pipeline - INFO - [PIPELINE 1/4] Using rainfall raster: D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif
+2026-09-17 05:52:15,017 - unified_daily_pipeline - INFO - 
+[PIPELINE 2/4] Running NASA SMAP Soil Moisture Pipeline...
+2026-09-17 05:52:15,018 - smap_service - INFO - ======================================================================
+2026-09-17 05:52:15,018 - smap_service - INFO - STARTING NASA SMAP DAILY SOIL MOISTURE PIPELINE
+2026-09-17 05:52:15,019 - smap_service - INFO - ======================================================================
+2026-09-17 05:52:19,741 - earthaccess.auth - INFO - You're now authenticated with NASA Earthdata Login
+2026-09-17 05:52:19,742 - earthaccess.auth - INFO - Using token with expiration date 11/02/2026
+2026-09-17 05:52:23,836 - smap_service - INFO - [NASA AUTH] Successfully authenticated with NASA Earthdata via earthaccess
+2026-09-17 05:52:23,836 - smap_service - INFO - [NASA SEARCH] Searching SPL3SMP_E v006 between 2026-09-16 and 2026-09-17 for NER...
+2026-09-17 05:52:25,235 - earthaccess.api - INFO - Granules found: 0
+2026-09-17 05:52:26,012 - smap_service - WARNING - [NASA SEARCH] No online granules returned for requested temporal window.
+2026-09-17 05:52:26,013 - smap_service - INFO - [NASA LOCAL] Using most recent local SMAP granule: D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\raw\SMAP_L3_SM_P_E_20260908_R19240_001.h5
+2026-09-17 05:52:26,026 - smap_service - INFO - [SMAP PROCESS] Reading HDF5 file: D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\raw\SMAP_L3_SM_P_E_20260901_R19240_001.h5
+2026-09-17 05:52:26,827 - smap_service - INFO - [SMAP PROCESS] Reading HDF5 file: D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\raw\SMAP_L3_SM_P_E_20260908_R19240_001.h5
+2026-09-17 05:52:27,545 - smap_service - INFO - [SMAP QUALITY] Composite valid pixels across 2 granules: 846638
+2026-09-17 05:52:27,562 - smap_service - INFO - [SMAP GEO] Reprojecting from EPSG:6933 to EPSG:4326 (3921x4904)...
+2026-09-17 05:52:28,143 - smap_service - INFO - [SMAP GEO] Reprojected valid pixels in NER bounding box: 2006535
+2026-09-17 05:52:28,230 - smap_service - INFO - [SMAP GEO] Applied official NER polygon boundary mask.
+2026-09-17 05:52:28,372 - smap_service - INFO - [SMAP GEO] Final NER 200m grid: Direct=421,300 (6.6%), Regional Fill=5,990,631, Total Active=6,411,931, Median=0.388 cm3/cm3
+2026-09-17 05:52:29,036 - smap_service - INFO - [SMAP SAVE] Saved GeoTIFF: D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_20260908_ner.tif
+2026-09-17 05:52:29,683 - smap_service - INFO - [SMAP SAVE] Saved GeoTIFF: D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:52:29,686 - smap_service - INFO - [SMAP SAVE] Saved QC report: D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_qc.json
+2026-09-17 05:52:29,686 - smap_service - INFO - ======================================================================
+2026-09-17 05:52:29,686 - smap_service - INFO - NASA SMAP PIPELINE COMPLETED: Status=COMPLETE, Valid Cells=6411931
+2026-09-17 05:52:29,686 - smap_service - INFO - ======================================================================
+2026-09-17 05:52:29,699 - unified_daily_pipeline - INFO - [PIPELINE 2/4] Using soil moisture raster: D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:52:29,700 - unified_daily_pipeline - INFO - 
+[PIPELINE 3/4] Aligning Rasters and Assembling Master Analysis Grid...
+2026-09-17 05:52:30,598 - unified_daily_pipeline - INFO - [PIPELINE 3/4] All 3 rasters perfectly aligned: (3921, 4904), CRS=EPSG:4326
+2026-09-17 05:52:30,599 - unified_daily_pipeline - INFO - 
+[PIPELINE 4/4] Executing Model B Batch Inference...
+2026-09-17 05:52:30,707 - unified_daily_pipeline - INFO - [MODEL B] Total active analysis cells inside NER: 6,354,037
+2026-09-17 05:52:31,066 - unified_daily_pipeline - INFO - [MODEL B] Feature Summary across 6,354,037 cells:
+  rain_mm: min=0.0, max=83.5, mean=11.1
+  soil_moisture: min=0.297, max=0.499, mean=0.389
+  susceptibility: min=0.000, max=0.996, mean=0.465
+2026-09-17 05:52:31,114 - unified_daily_pipeline - INFO - [MODEL B] Successfully loaded trained Model B from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-09-17 05:53:04,652 - unified_daily_pipeline - INFO - [MODEL B] Inferred 6,354,037 cells via Random Forest in 33.46s
+2026-09-17 05:53:06,042 - unified_daily_pipeline - INFO - [RISK SAVE] Saved GeoTIFF: D:\charan coding\SIH 2026\SIH1\backend\data\processed\risk\landslide_risk_20260916.tif
+2026-09-17 05:53:07,188 - unified_daily_pipeline - INFO - [RISK SAVE] Saved GeoTIFF: D:\charan coding\SIH 2026\SIH1\backend\data\processed\risk\landslide_risk_latest.tif
+2026-09-17 05:53:07,189 - unified_daily_pipeline - INFO - [RISK ALERTS] Aggregating High and Critical risk cells (score >= 0.50)...
+2026-09-17 05:53:07,320 - unified_daily_pipeline - INFO - [RISK ALERTS] Found 550,281 cells meeting alert threshold (>= 0.5)
+2026-09-17 05:53:08,676 - unified_daily_pipeline - INFO - [RISK ALERTS] Saved alerts summary to: D:\charan coding\SIH 2026\SIH1\backend\data\processed\risk\risk_alerts_today.json
+2026-09-17 05:53:08,822 - unified_daily_pipeline - INFO - ================================================================================
+2026-09-17 05:53:08,822 - unified_daily_pipeline - INFO - UNIFIED DAILY PIPELINE COMPLETED IN 124.22s
+  Total Valid Cells: 6,354,037
+  Low (< 0.25): 5,109,708 (80.4%)
+  Moderate (0.25-0.50): 694,048 (10.9%)
+  High (0.50-0.75): 390,758 (6.1%)
+  Critical (>= 0.75): 159,523 (2.5%)
+  Districts at Risk: 230
+2026-09-17 05:53:08,823 - unified_daily_pipeline - INFO - ================================================================================
+2026-09-17 05:53:55,445 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:53:55,464 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (26.1445, 91.7362): rain24h=18.1mm, rain7d=36.2mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:53:55,474 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1445, 91.7362) = 0.4995
+2026-09-17 05:53:55,475 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.4995 (matches tile color)
+2026-09-17 05:53:55,646 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:53:55,667 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (26.1445, 91.7362): rain24h=18.1mm, rain7d=36.2mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:53:55,675 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1445, 91.7362) = 0.4995
+2026-09-17 05:53:55,676 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.4995 (matches tile color)
+2026-09-17 05:54:00,350 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:54:00,376 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (26.1445, 91.7362): rain24h=18.1mm, rain7d=36.2mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:54:00,384 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1445, 91.7362) = 0.4995
+2026-09-17 05:54:00,385 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.4995 (matches tile color)
+2026-09-17 05:54:00,570 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:54:00,590 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (26.1445, 91.7362): rain24h=18.1mm, rain7d=36.2mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:54:00,600 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1445, 91.7362) = 0.4995
+2026-09-17 05:54:00,601 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.4995 (matches tile color)
+2026-09-17 05:57:49,782 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:57:49,806 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.0725, 92.6983): rain24h=23.6mm, rain7d=47.2mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:57:49,819 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.0725, 92.6983) = 0.6301
+2026-09-17 05:57:49,820 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.6301 (matches tile color)
+2026-09-17 05:58:07,580 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:58:07,601 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.2700, 91.7300): rain24h=50.5mm, rain7d=101.0mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:58:07,610 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5454
+2026-09-17 05:58:07,611 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5454 (matches tile color)
+2026-09-17 05:58:08,350 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:58:08,371 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (27.3389, 88.6065): rain24h=0.1mm, rain7d=0.2mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:58:08,384 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3389, 88.6065) = 0.1857
+2026-09-17 05:58:08,385 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1857 (matches tile color)
+2026-09-17 05:58:11,351 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:58:11,372 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (23.8315, 91.2868): rain24h=48.2mm, rain7d=96.5mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:58:11,382 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.8315, 91.2868) = 0.5515
+2026-09-17 05:58:11,383 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5515 (matches tile color)
+2026-09-17 05:58:19,982 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:58:20,005 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.5788, 91.8933): rain24h=10.8mm, rain7d=21.6mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:58:20,022 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.5788, 91.8933) = 0.1394
+2026-09-17 05:58:20,028 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1394 (matches tile color)
+2026-09-17 05:58:20,868 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:58:20,889 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (26.1445, 91.7362): rain24h=18.1mm, rain7d=36.2mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:58:20,900 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1445, 91.7362) = 0.4995
+2026-09-17 05:58:20,901 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.4995 (matches tile color)
+2026-09-17 05:58:23,248 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:58:23,262 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (23.7271, 92.7176): rain24h=25.1mm, rain7d=50.3mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:58:23,267 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (23.7271, 92.7176) = 0.1585
+2026-09-17 05:58:23,268 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1585 (matches tile color)
+2026-09-17 05:58:37,985 - landslide_sms.alert_service - INFO - Alerts history database initialized at D:\charan coding\SIH 2026\SIH1\backend\data\alerts_history.db
+2026-09-17 05:58:50,164 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:58:50,179 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (27.0844, 93.6053): rain24h=12.9mm, rain7d=25.8mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:58:50,181 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:58:50,185 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.0990
+2026-09-17 05:58:50,186 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0990 (matches tile color)
+2026-09-17 05:58:50,197 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (27.3389, 88.6065): rain24h=0.1mm, rain7d=0.2mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:58:50,207 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.3389, 88.6065) = 0.1857
+2026-09-17 05:58:50,208 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1857 (matches tile color)
+2026-09-17 05:58:50,348 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:58:50,362 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.6751, 94.1086): rain24h=3.5mm, rain7d=7.1mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:58:50,368 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.6751, 94.1086) = 0.1167
+2026-09-17 05:58:50,368 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1167 (matches tile color)
+2026-09-17 05:59:01,069 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:59:01,088 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (24.8170, 93.9368): rain24h=4.1mm, rain7d=8.2mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:59:01,096 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (24.8170, 93.9368) = 0.0301
+2026-09-17 05:59:01,097 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0301 (matches tile color)
+2026-09-17 05:59:40,465 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-09-17 05:59:40,479 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.2700, 91.7300): rain24h=50.5mm, rain7d=101.0mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-09-17 05:59:40,486 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2700, 91.7300) = 0.5454
+2026-09-17 05:59:40,486 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.5454 (matches tile color)
+2026-11-02 20:06:26,466 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-11-02 20:06:26,469 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-11-02 20:06:31,995 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-11-02 20:06:32,046 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-11-02 20:06:32,072 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-11-02 20:06:33,602 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-11-02 20:06:49,545 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 15.94s.
+2026-11-02 20:06:51,632 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 25.17s!
+2026-11-02 20:16:17,830 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-11-02 20:16:17,832 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-11-02 20:16:20,701 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-11-02 20:16:20,764 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-11-02 20:16:20,788 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-11-02 20:16:21,896 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-11-02 20:16:44,367 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 22.47s.
+2026-11-02 20:16:46,435 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 28.60s!
+2026-11-02 20:19:03,925 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-02 20:19:04,022 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (27.0844, 93.6053): rain24h=12.9mm, rain7d=25.8mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-11-02 20:19:04,035 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.0990
+2026-11-02 20:19:04,036 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0990 (matches tile color)
+2026-11-02 20:19:04,222 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-02 20:19:04,251 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (27.0844, 93.6053): rain24h=12.9mm, rain7d=25.8mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-11-02 20:19:04,261 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.0990
+2026-11-02 20:19:04,262 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0990 (matches tile color)
+2026-11-02 20:19:13,800 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-02 20:19:13,821 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (27.0844, 93.6053): rain24h=12.9mm, rain7d=25.8mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-11-02 20:19:13,830 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.0990
+2026-11-02 20:19:13,830 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0990 (matches tile color)
+2026-11-02 20:19:14,034 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-02 20:19:14,055 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (27.0844, 93.6053): rain24h=12.9mm, rain7d=25.8mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-11-02 20:19:14,065 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (27.0844, 93.6053) = 0.0990
+2026-11-02 20:19:14,066 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0990 (matches tile color)
+2026-11-02 20:25:30,961 - unified_daily_pipeline - INFO - ================================================================================
+2026-11-02 20:25:30,962 - unified_daily_pipeline - INFO - STARTING UNIFIED DAILY LANDSLIDE RISK PIPELINE (NER REGIONAL BATCH)
+2026-11-02 20:25:30,962 - unified_daily_pipeline - INFO - ================================================================================
+2026-11-02 20:25:30,962 - unified_daily_pipeline - INFO - 
+[PIPELINE 1/4] Running 24h Rainfall Pipeline...
+2026-11-02 20:25:30,991 - rainfall_service - INFO - [RainfallPipeline] Starting 24h rainfall pipeline for date: 2026-09-16
+2026-11-02 20:25:35,825 - rainfall_service - INFO - [RainfallPipeline] Saved 24h rainfall GeoTIFF to: D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif
+2026-11-02 20:25:35,831 - rainfall_service - INFO - [RainfallPipeline] Completed with status: COMPLETE (40/48 files, Rainfall: min=0.0mm, mean=11.11mm, max=83.6mm)
+2026-11-02 20:25:35,842 - unified_daily_pipeline - INFO - [PIPELINE 1/4] Using rainfall raster: D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20260916.tif
+2026-11-02 20:25:35,842 - unified_daily_pipeline - INFO - 
+[PIPELINE 2/4] Running NASA SMAP Soil Moisture Pipeline...
+2026-11-02 20:25:35,842 - smap_service - INFO - ======================================================================
+2026-11-02 20:25:35,842 - smap_service - INFO - STARTING NASA SMAP DAILY SOIL MOISTURE PIPELINE
+2026-11-02 20:25:35,842 - smap_service - INFO - ======================================================================
+2026-11-02 20:25:40,931 - earthaccess.auth - INFO - You're now authenticated with NASA Earthdata Login
+2026-11-02 20:25:40,931 - earthaccess.auth - INFO - Using token with expiration date 01/01/2027
+2026-11-02 20:25:45,222 - smap_service - INFO - [NASA AUTH] Successfully authenticated with NASA Earthdata via earthaccess
+2026-11-02 20:25:45,223 - smap_service - INFO - [NASA SEARCH] Searching SPL3SMP_E v006 between 2026-10-28 and 2026-11-02 for NER...
+2026-11-02 20:25:47,279 - earthaccess.api - INFO - Granules found: 4
+2026-11-02 20:25:48,430 - smap_service - INFO - [NASA SEARCH] Found 4 granules. Latest: Collection: {'Version': '006', 'ShortName': 'SPL3SMP_E'}
+Spatial coverage: {'HorizontalSpatialDomain': {'Geometry': {'BoundingRectangles': [{'WestBoundingCoordinate': -180, 'SouthBoundingCoordinate': -85.04450225830078, 'EastBoundingCoordinate': 180, 'NorthBoundingCoordinate': 85.04450225830078}]}}}
+Temporal coverage: {'RangeDateTime': {'EndingDateTime': '2026-10-31T23:59:59.999Z', 'BeginningDateTime': '2026-10-31T00:00:00.000Z'}}
+Size(MB): 68.98778915405273
+Data: ['https://data.nsidc.earthdatacloud.nasa.gov/nsidc-cumulus-prod-protected/SMAP/SPL3SMP_E/006/2026/10/31/SMAP_L3_SM_P_E_20261031_R19240_001.h5']
+2026-11-02 20:25:48,430 - smap_service - INFO - [NASA DOWNLOAD] Downloading granule to D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\raw...
+2026-11-02 20:25:48,766 - earthaccess.store - INFO - Getting 1 granules, approx download size: 0.07 GB
+2026-11-23 16:43:50,122 - prediction_service - INFO - [PredictionPipeline] Initializing models and master spatial grid...
+2026-11-23 16:43:50,125 - prediction_service - INFO - [PredictionPipeline] Loading Model A from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_a_random_forest.pkl
+2026-11-23 16:43:55,174 - prediction_service - INFO - [PredictionPipeline] Model A loaded with features: ['elevation', 'slope', 'aspect', 'curvature', 'tpi', 'tri', 'roughness', 'soil_clayey', 'soil_clayskeletal', 'soil_loamy', 'soil_sandy', 'land_cover_class']
+2026-11-23 16:43:55,238 - prediction_service - INFO - [PredictionPipeline] Model B loaded successfully from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-11-23 16:43:55,269 - prediction_service - INFO - [PredictionPipeline] Reading master grid coordinates from: D:\charan coding\SIH 2026\SIH1\backend\data\Model 1 Datasets\static_features_master_cleaned_v2.parquet
+2026-11-23 16:43:58,845 - prediction_service - INFO - [PredictionPipeline] Loaded 15520151 grid rows. Constructing spatial cKDTree...
+2026-11-23 16:44:17,521 - prediction_service - INFO - [PredictionPipeline] cKDTree built in 18.68s.
+2026-11-23 16:44:19,350 - prediction_service - INFO - [PredictionPipeline] Pipeline fully initialized in 29.23s!
+2026-11-23 16:46:44,651 - unified_daily_pipeline - INFO - ================================================================================
+2026-11-23 16:46:44,652 - unified_daily_pipeline - INFO - STARTING UNIFIED DAILY LANDSLIDE RISK PIPELINE (NER REGIONAL BATCH)
+2026-11-23 16:46:44,653 - unified_daily_pipeline - INFO - ================================================================================
+2026-11-23 16:46:44,653 - unified_daily_pipeline - INFO - 
+[PIPELINE 1/4] Running 24h Rainfall Pipeline...
+2026-11-23 16:46:44,654 - unified_daily_pipeline - INFO - [PIPELINE 1/4] Force download enabled. Fetching latest from MOSDAC...
+2026-11-23 16:48:20,355 - rainfall_service - INFO - [RainfallPipeline] Starting 24h rainfall pipeline for date: 2026-11-22
+2026-11-23 16:48:24,112 - rainfall_service - INFO - [RainfallPipeline] Saved 24h rainfall GeoTIFF to: D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif
+2026-11-23 16:48:24,115 - rainfall_service - INFO - [RainfallPipeline] Completed with status: COMPLETE (47/48 files, Rainfall: min=0.0mm, mean=0.01mm, max=0.77mm)
+2026-11-23 16:48:24,121 - unified_daily_pipeline - INFO - [PIPELINE 1/4] Using rainfall raster: D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif
+2026-11-23 16:48:24,121 - unified_daily_pipeline - INFO - 
+[PIPELINE 2/4] Running NASA SMAP Soil Moisture Pipeline...
+2026-11-23 16:48:24,122 - smap_service - INFO - ======================================================================
+2026-11-23 16:48:24,122 - smap_service - INFO - STARTING NASA SMAP DAILY SOIL MOISTURE PIPELINE
+2026-11-23 16:48:24,123 - smap_service - INFO - ======================================================================
+2026-11-23 16:48:28,755 - earthaccess.auth - INFO - You're now authenticated with NASA Earthdata Login
+2026-11-23 16:48:28,756 - earthaccess.auth - INFO - Using token with expiration date 01/01/2027
+2026-11-23 16:48:32,336 - smap_service - INFO - [NASA AUTH] Successfully authenticated with NASA Earthdata via earthaccess
+2026-11-23 16:48:32,337 - smap_service - INFO - [NASA SEARCH] Searching SPL3SMP_E v006 between 2026-11-22 and 2026-11-23 for NER...
+2026-11-23 16:48:33,562 - earthaccess.api - INFO - Granules found: 0
+2026-11-23 16:48:34,394 - smap_service - WARNING - [NASA SEARCH] No online granules returned for requested temporal window.
+2026-11-23 16:48:34,394 - smap_service - INFO - [NASA LOCAL] Using most recent local SMAP granule: D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\raw\SMAP_L3_SM_P_E_20260908_R19240_001.h5
+2026-11-23 16:48:34,414 - smap_service - INFO - [SMAP PROCESS] Reading HDF5 file: D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\raw\SMAP_L3_SM_P_E_20260901_R19240_001.h5
+2026-11-23 16:48:35,453 - smap_service - INFO - [SMAP PROCESS] Reading HDF5 file: D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\raw\SMAP_L3_SM_P_E_20260908_R19240_001.h5
+2026-11-23 16:48:36,416 - smap_service - INFO - [SMAP QUALITY] Composite valid pixels across 2 granules: 846638
+2026-11-23 16:48:36,447 - smap_service - INFO - [SMAP GEO] Reprojecting from EPSG:6933 to EPSG:4326 (3921x4904)...
+2026-11-23 16:48:37,217 - smap_service - INFO - [SMAP GEO] Reprojected valid pixels in NER bounding box: 2006535
+2026-11-23 16:48:37,321 - smap_service - INFO - [SMAP GEO] Applied official NER polygon boundary mask.
+2026-11-23 16:48:37,460 - smap_service - INFO - [SMAP GEO] Final NER 200m grid: Direct=421,300 (6.6%), Regional Fill=5,990,631, Total Active=6,411,931, Median=0.388 cm3/cm3
+2026-11-23 16:48:38,269 - smap_service - INFO - [SMAP SAVE] Saved GeoTIFF: D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_20260908_ner.tif
+2026-11-23 16:48:38,849 - smap_service - INFO - [SMAP SAVE] Saved GeoTIFF: D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 16:48:38,870 - smap_service - INFO - [SMAP SAVE] Saved QC report: D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_qc.json
+2026-11-23 16:48:38,871 - smap_service - INFO - ======================================================================
+2026-11-23 16:48:38,873 - smap_service - INFO - NASA SMAP PIPELINE COMPLETED: Status=COMPLETE, Valid Cells=6411931
+2026-11-23 16:48:38,873 - smap_service - INFO - ======================================================================
+2026-11-23 16:48:38,887 - unified_daily_pipeline - INFO - [PIPELINE 2/4] Using soil moisture raster: D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 16:48:38,888 - unified_daily_pipeline - INFO - 
+[PIPELINE 3/4] Aligning Rasters and Assembling Master Analysis Grid...
+2026-11-23 16:48:39,930 - unified_daily_pipeline - INFO - [PIPELINE 3/4] All 3 rasters perfectly aligned: (3921, 4904), CRS=EPSG:4326
+2026-11-23 16:48:39,930 - unified_daily_pipeline - INFO - 
+[PIPELINE 4/4] Executing Model B Batch Inference...
+2026-11-23 16:48:40,059 - unified_daily_pipeline - INFO - [MODEL B] Total active analysis cells inside NER: 6,354,037
+2026-11-23 16:48:40,446 - unified_daily_pipeline - INFO - [MODEL B] Feature Summary across 6,354,037 cells:
+  rain_mm: min=0.0, max=0.8, mean=0.0
+  soil_moisture: min=0.297, max=0.499, mean=0.389
+  susceptibility: min=0.000, max=0.996, mean=0.465
+2026-11-23 16:48:40,533 - unified_daily_pipeline - INFO - [MODEL B] Successfully loaded trained Model B from: D:\charan coding\SIH 2026\SIH1\backend\data\Models\model_b_dynamic.pkl
+2026-11-23 16:49:16,385 - unified_daily_pipeline - INFO - [MODEL B] Inferred 6,354,037 cells via Random Forest in 35.77s
+2026-11-23 16:49:17,623 - unified_daily_pipeline - INFO - [RISK SAVE] Saved GeoTIFF: D:\charan coding\SIH 2026\SIH1\backend\data\processed\risk\landslide_risk_20261122.tif
+2026-11-23 16:49:18,874 - unified_daily_pipeline - INFO - [RISK SAVE] Saved GeoTIFF: D:\charan coding\SIH 2026\SIH1\backend\data\processed\risk\landslide_risk_latest.tif
+2026-11-23 16:49:18,876 - unified_daily_pipeline - INFO - [RISK ALERTS] Aggregating High and Critical risk cells (score >= 0.50)...
+2026-11-23 16:49:19,081 - unified_daily_pipeline - INFO - [RISK ALERTS] Found 0 cells meeting alert threshold (>= 0.5)
+2026-11-23 16:49:19,242 - unified_daily_pipeline - INFO - ================================================================================
+2026-11-23 16:49:19,243 - unified_daily_pipeline - INFO - UNIFIED DAILY PIPELINE COMPLETED IN 154.59s
+  Total Valid Cells: 6,354,037
+  Low (< 0.25): 6,353,003 (100.0%)
+  Moderate (0.25-0.50): 1,034 (0.0%)
+  High (0.50-0.75): 0 (0.0%)
+  Critical (>= 0.75): 0 (0.0%)
+  Districts at Risk: 0
+2026-11-23 16:49:19,243 - unified_daily_pipeline - INFO - ================================================================================
+2026-11-23 16:58:37,700 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 16:58:37,749 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (26.1445, 91.7362): rain24h=0.0mm, rain7d=0.0mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-11-23 16:58:37,760 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1445, 91.7362) = 0.1231
+2026-11-23 16:58:37,762 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1231 (matches tile color)
+2026-11-23 16:58:37,958 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 16:58:37,984 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (26.1445, 91.7362): rain24h=0.0mm, rain7d=0.0mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-11-23 16:58:37,993 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1445, 91.7362) = 0.1231
+2026-11-23 16:58:37,994 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1231 (matches tile color)
+2026-11-23 16:59:23,140 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 16:59:23,163 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (26.1445, 91.7362): rain24h=0.0mm, rain7d=0.0mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-11-23 16:59:23,174 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1445, 91.7362) = 0.1231
+2026-11-23 16:59:23,179 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1231 (matches tile color)
+2026-11-23 16:59:23,394 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 16:59:23,419 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (26.1445, 91.7362): rain24h=0.0mm, rain7d=0.0mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-11-23 16:59:23,429 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1445, 91.7362) = 0.1231
+2026-11-23 16:59:23,430 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1231 (matches tile color)
+2026-11-23 17:01:00,380 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 17:01:00,396 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (29.8450, 96.0716): rain24h=0.0mm, rain7d=0.0mm, SM=nan% (raw=nan m3/m3)
+2026-11-23 17:01:06,688 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 17:01:06,709 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (29.8079, 86.3573): rain24h=0.0mm, rain7d=0.0mm, SM=nan% (raw=nan m3/m3)
+2026-11-23 17:01:06,710 - prediction_service - INFO - [PredictionPipeline] Coordinates (29.80788035921225, 86.35726282402953) are outside Northeast India coverage (distance=182313.2m). Halting prediction.
+2026-11-23 17:03:08,561 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 17:03:08,585 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (26.1445, 91.7362): rain24h=0.0mm, rain7d=0.0mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-11-23 17:03:08,594 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1445, 91.7362) = 0.1231
+2026-11-23 17:03:08,595 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1231 (matches tile color)
+2026-11-23 17:03:19,141 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 17:03:19,156 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (26.1476, 91.7072): rain24h=0.0mm, rain7d=0.0mm, SM=38.8% (raw=0.3879 m3/m3)
+2026-11-23 17:03:19,164 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.1476, 91.7072) = 0.1315
+2026-11-23 17:03:19,166 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1315 (matches tile color)
+2026-11-23 17:03:36,838 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 17:03:36,856 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (26.0911, 92.0248): rain24h=0.0mm, rain7d=0.0mm, SM=47.6% (raw=0.4755 m3/m3)
+2026-11-23 17:03:36,865 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.0911, 92.0248) = 0.1564
+2026-11-23 17:03:36,867 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1564 (matches tile color)
+2026-11-23 17:03:38,855 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 17:03:38,874 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (26.2879, 92.4867): rain24h=0.0mm, rain7d=0.0mm, SM=48.3% (raw=0.4826 m3/m3)
+2026-11-23 17:03:38,882 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (26.2879, 92.4867) = 0.0525
+2026-11-23 17:03:38,883 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0525 (matches tile color)
+2026-11-23 17:03:42,168 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 17:03:42,183 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.9692, 91.0867): rain24h=0.0mm, rain7d=0.0mm, SM=48.4% (raw=0.4839 m3/m3)
+2026-11-23 17:03:42,192 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.9692, 91.0867) = 0.0804
+2026-11-23 17:03:42,193 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0804 (matches tile color)
+2026-11-23 17:03:44,991 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 17:03:45,010 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.9670, 90.4194): rain24h=0.0mm, rain7d=0.0mm, SM=48.1% (raw=0.4809 m3/m3)
+2026-11-23 17:03:45,020 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.9670, 90.4194) = 0.2195
+2026-11-23 17:03:45,021 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.2195 (matches tile color)
+2026-11-23 17:03:46,769 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 17:03:46,784 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.7949, 90.4871): rain24h=0.0mm, rain7d=0.0mm, SM=47.2% (raw=0.4721 m3/m3)
+2026-11-23 17:03:46,793 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.7949, 90.4871) = 0.1549
+2026-11-23 17:03:46,794 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1549 (matches tile color)
+2026-11-23 17:03:48,390 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 17:03:48,407 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.8894, 90.3191): rain24h=0.0mm, rain7d=0.0mm, SM=46.1% (raw=0.4610 m3/m3)
+2026-11-23 17:03:48,416 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.8894, 90.3191) = 0.1432
+2026-11-23 17:03:48,418 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.1432 (matches tile color)
+2026-11-23 17:03:49,927 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 17:03:49,945 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.7949, 90.2048): rain24h=0.0mm, rain7d=0.0mm, SM=46.7% (raw=0.4665 m3/m3)
+2026-11-23 17:03:49,954 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.7949, 90.2048) = 0.0861
+2026-11-23 17:03:49,954 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0861 (matches tile color)
+2026-11-23 17:03:53,804 - prediction_service - INFO - [PredictionPipeline] Raster inputs: rainfall=D:\charan coding\SIH 2026\SIH1\backend\data\processed\rainfall\rainfall_24h_20261122.tif, smap=D:\charan coding\SIH 2026\SIH1\backend\data\soil_moisture\processed\smap_soil_moisture_latest_ner.tif
+2026-11-23 17:03:53,821 - prediction_service - INFO - [PredictionPipeline] Raster point-sample for (25.2957, 90.0728): rain24h=0.0mm, rain7d=0.0mm, SM=47.3% (raw=0.4727 m3/m3)
+2026-11-23 17:03:53,829 - prediction_service - INFO - [PredictionPipeline] Risk raster sample at (25.2957, 90.0728) = 0.0814
+2026-11-23 17:03:53,830 - prediction_service - INFO - [PredictionPipeline] Using batch raster risk score: 0.0814 (matches tile color)
+2026-11-23 17:06:00,583 - landslide_sms.alert_service - INFO - Alerts history database initialized at D:\charan coding\SIH 2026\SIH1\backend\data\alerts_history.db

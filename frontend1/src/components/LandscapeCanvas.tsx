@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 interface LandscapeCanvasProps {
   scrollProgress?: number; // 0 to 1
+  onPhaseChange?: (phase: string) => void;
 }
 
 const TOTAL_FRAMES = 240;
@@ -11,7 +12,7 @@ const getFramePath = (index: number) => {
   return `/frames/ezgif-frame-${frameNum}.jpg`;
 };
 
-export const LandscapeCanvas: React.FC<LandscapeCanvasProps> = () => {
+export const LandscapeCanvas: React.FC<LandscapeCanvasProps> = ({ onPhaseChange }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [hudPhase, setHudPhase] = useState('01 // PEACEFUL TERRAIN');
 
@@ -88,10 +89,10 @@ export const LandscapeCanvas: React.FC<LandscapeCanvasProps> = () => {
       const scale = Math.max(cw / iw, ch / ih);
       const nw = iw * scale;
       const nh = ih * scale;
-      const dx = (cw - nw) * 0.5;
-      const dy = (ch - nh) * 0.5;
+      const nx = (cw - nw) / 2;
+      const ny = (ch - nh) / 2;
 
-      ctx.drawImage(img, 0, 0, iw, ih, dx, dy, nw, nh);
+      ctx.drawImage(img, 0, 0, iw, ih, nx, ny, nw, nh);
       drawnImageIndex = best.index;
     }
 
@@ -118,6 +119,9 @@ export const LandscapeCanvas: React.FC<LandscapeCanvasProps> = () => {
         }
       }
       setHudPhase(currentStage);
+      if (onPhaseChange) {
+        onPhaseChange(currentStage);
+      }
     }
 
     function loop() {
@@ -191,7 +195,7 @@ export const LandscapeCanvas: React.FC<LandscapeCanvasProps> = () => {
       window.removeEventListener('scroll', updateScrollTarget);
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, []);
+  }, [onPhaseChange]);
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -201,14 +205,6 @@ export const LandscapeCanvas: React.FC<LandscapeCanvasProps> = () => {
       {/* Warm paper contrast veil: keeps terrain subtle and body text 100% legible */}
       <div className="absolute inset-0 bg-[#F6F3EC]/80 pointer-events-none backdrop-blur-[1px]" />
       <div className="absolute inset-0 bg-gradient-to-b from-[#F6F3EC]/90 via-transparent to-[#F6F3EC]/95 pointer-events-none" />
-
-      {/* Floating Spatial Telemetry HUD Indicator */}
-      <div className="absolute top-24 left-6 hidden lg:flex items-center gap-3 text-[11px] font-mono text-[#55594C] pointer-events-auto bg-[#FFFDF8]/95 border border-[#DDD6C4] px-3.5 py-1.5 rounded-lg shadow-sm">
-        <div className="w-2 h-2 rounded-full bg-[#4F8F5B] animate-pulse" />
-        <span className="font-semibold text-[#2E4A3D]">TERRAIN &amp; PRECIPITATION OBSERVATION</span>
-        <span className="text-[#DDD6C4]">|</span>
-        <span className="text-[#B5551F] font-semibold">{hudPhase}</span>
-      </div>
     </div>
   );
 };

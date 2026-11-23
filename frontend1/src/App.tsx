@@ -28,6 +28,7 @@ export default function App() {
 
   const { user: authUser, logout, updateUserLocation } = useAuth();
   const [sessionLocationGranted, setSessionLocationGranted] = useState(false);
+  const [telemetryPhase, setTelemetryPhase] = useState('01 // PEACEFUL TERRAIN');
 
   const handleOpenAuth = (mode: 'signin' | 'register') => {
     setAuthInitialMode(mode);
@@ -80,9 +81,9 @@ export default function App() {
   // ROLE-BASED APPLICATION INTERFACE ROUTING (AFTER LOGIN)
   // ==========================================================
   if (activeUser) {
-    // 1. Mandatory Location Gate check
+    // 1. Mandatory Location Gate check (for citizens whose local risk score depends on device GPS)
     const locationIsFresh = isLocationFresh();
-    if (!locationIsFresh) {
+    if (activeUser.role === 'citizen' && !locationIsFresh) {
       return (
         <LocationPromptModal
           isOpen={true}
@@ -147,16 +148,17 @@ export default function App() {
   // PUBLIC PRE-LOGIN INTERFACE (EXACTLY 5 CONTENT SECTIONS)
   // ==========================================================
   return (
-    <div className="min-h-screen bg-transparent text-white selection:bg-amber-500/30 selection:text-white font-sans relative">
+    <div className="min-h-screen bg-transparent text-[#23261F] selection:bg-[#B5551F]/20 selection:text-[#23261F] font-sans relative">
       {/* 240-Frame Scroll-Controlled Landslide Animation Background Engine */}
-      <LandscapeCanvas />
+      <LandscapeCanvas onPhaseChange={setTelemetryPhase} />
 
-      {/* Clean Public Navigation Bar: Brand, OVERVIEW, SIGN IN, REGISTER */}
+      {/* Clean Public Navigation Bar: Brand, SIGN IN, REGISTER & Sub-Navbar Telemetry */}
       <Navbar
         onOpenAuth={handleOpenAuth}
         onNavigateSection={handleNavigateSection}
         authenticatedUser={authenticatedUser}
         onSignOut={handleSignOut}
+        telemetryPhase={telemetryPhase}
       />
 
       {/* Main Container: Exactly 5 Content Sections Overlaid on Scroll Animation */}
@@ -183,40 +185,40 @@ export default function App() {
       </main>
 
       {/* Clean Public Footer */}
-      <footer className="relative z-10 border-t border-earth-300 bg-earth-100/95 backdrop-blur-xl py-8 px-4 sm:px-6 lg:px-8 text-earth-800">
+      <footer className="relative z-10 border-t border-[#DDD6C4] bg-[#FFFDF8]/95 backdrop-blur-xl py-8 px-4 sm:px-6 lg:px-8 text-[#23261F]">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-left">
-            <div className="w-8 h-8 rounded-lg border border-brand-700/30 bg-brand-700/10 flex items-center justify-center text-brand-700">
+            <div className="w-9 h-9 rounded-xl border border-[#CAD7CE] bg-[#E8EFEA] flex items-center justify-center text-[#2E4A3D]">
               <Shield className="w-4 h-4" />
             </div>
             <div>
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-earth-900 font-serif block">
+              <span className="text-xs font-bold uppercase tracking-[0.15em] text-[#23261F] font-serif block">
                 BHURAKSHA 2.0
               </span>
-              <span className="text-[9px] font-mono text-earth-600 tracking-widest uppercase">
-                AI-POWERED LANDSLIDE RISK MONITORING &amp; EARLY WARNING // NORTH EAST INDIA
+              <span className="text-[10px] font-mono text-[#55594C] tracking-wider uppercase block mt-0.5">
+                Landslide Early Warning &amp; Targeted Risk Intelligence &bull; Northeast India
               </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 text-[10px] font-mono text-earth-500 uppercase">
+          <div className="flex items-center gap-2 text-[11px] font-mono text-[#55594C] uppercase tracking-wider">
             <span>SENSE</span>
-            <span>&bull;</span>
+            <span className="text-[#DDD6C4]">&bull;</span>
             <span>FUSE</span>
-            <span>&bull;</span>
+            <span className="text-[#DDD6C4]">&bull;</span>
             <span>PREDICT</span>
-            <span>&bull;</span>
+            <span className="text-[#DDD6C4]">&bull;</span>
             <span>MAP</span>
-            <span>&bull;</span>
+            <span className="text-[#DDD6C4]">&bull;</span>
             <span>PROTECT</span>
           </div>
 
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-earth-700 hover:text-earth-900 transition-colors cursor-pointer px-3 py-2 rounded-xl border border-earth-300 bg-[#FFFDF8] hover:bg-earth-200 shadow-sm"
+            className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#55594C] hover:text-[#23261F] transition-colors cursor-pointer px-3.5 py-2 rounded-xl border border-[#DDD6C4] bg-[#FFFDF8] hover:bg-[#EDE8DE] shadow-xs focus-visible:ring-2 focus-visible:ring-[#2E4A3D]/30"
           >
             <span>BACK TO TOP</span>
-            <ChevronUp className="w-3.5 h-3.5" />
+            <ChevronUp className="w-3.5 h-3.5 text-[#55594C]" />
           </button>
         </div>
       </footer>

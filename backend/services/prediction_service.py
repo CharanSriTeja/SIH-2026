@@ -1,4 +1,5 @@
 import os
+import glob
 import pickle
 import time
 import logging
@@ -268,18 +269,234 @@ class PredictionPipeline:
         fallback = self.get_live_conditions_mock(lat, lon)
         return fallback
 
+    def get_live_conditions_from_rasters(self, lat: float, lon: float) -> Optional[Dict[str, Any]]:
+        """
+        Point-samples the stored ISRO INSAT-3DR rainfall and NASA SMAP soil moisture
+        rasters at the given lat/lon coordinates.
+
+        These are the EXACT same rasters fed into the unified daily batch pipeline
+        (unified_daily_pipeline.py), so the returned values will produce a Model B score
+        consistent with the color of the risk tile the user clicked on.
+
+        Returns None if the rasters are unavailable (pipeline hasn't run yet),
+        allowing the caller to fall back to Open-Meteo.
+        """
+        try:
+            import rasterio
+            from rasterio.crs import CRS
+            from pyproj import Transformer
+        except ImportError:
+            logger.warning("[PredictionPipeline] rasterio not installed; cannot sample rasters.")
+            return None
+
+        # Resolve raster paths (same directories as rainfall_service and smap_service)
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        rainfall_dir = os.path.join(base_dir, "data", "processed", "rainfall")
+        rainfall_alias = os.path.join(rainfall_dir, "rainfall_24h_latest.tif")
+        rainfall_candidates = sorted(
+            path for path in glob.glob(os.path.join(rainfall_dir, "rainfall_24h_*.tif"))
+            if os.path.basename(path) != "rainfall_24h_latest.tif"
+        )
+        rainfall_path = rainfall_alias if os.path.exists(rainfall_alias) else (
+            rainfall_candidates[-1] if rainfall_candidates else rainfall_alias
+        )
+
+        smap_dir = os.path.join(base_dir, "data", "soil_moisture", "processed")
+        smap_alias = os.path.join(smap_dir, "smap_soil_moisture_latest_ner.tif")
+        smap_candidates = sorted(
+            path for path in glob.glob(os.path.join(smap_dir, "smap_soil_moisture_*_ner.tif"))
+            if os.path.basename(path) != "smap_soil_moisture_latest_ner.tif"
+        )
+        smap_path = smap_alias if os.path.exists(smap_alias) else (
+            smap_candidates[-1] if smap_candidates else smap_alias
+        )
+
+        logger.info(
+            f"[PredictionPipeline] Raster inputs: rainfall={rainfall_path}, smap={smap_path}"
+        )
+
+        # Check both rasters exist
+        if not os.path.exists(rainfall_path):
+            logger.info(f"[PredictionPipeline] Rainfall raster not found at {rainfall_path}; skipping raster sampling.")
+            return None
+        if not os.path.exists(smap_path):
+            logger.info(f"[PredictionPipeline] SMAP raster not found at {smap_path}; skipping raster sampling.")
+            return None
+
+        try:
+            # ── Sample 24h rainfall raster ──────────────────────────────────────────
+            with rasterio.open(rainfall_path) as ds:
+                # Transform lat/lon (EPSG:4326) to the raster's native CRS if needed
+                rf_crs = ds.crs
+                if rf_crs and not rf_crs.to_epsg() == 4326:
+                    t = Transformer.from_crs("EPSG:4326", rf_crs, always_xy=True)
+                    rx, ry = t.transform(lon, lat)
+                else:
+                    rx, ry = lon, lat
+
+                row_rf, col_rf = ds.index(rx, ry)
+                row_rf = int(np.clip(row_rf, 0, ds.height - 1))
+                col_rf = int(np.clip(col_rf, 0, ds.width - 1))
+                # Read the single pixel window
+                window = rasterio.windows.Window(col_rf, row_rf, 1, 1)
+                rf_data = ds.read(1, window=window)
+                rf_nodata = ds.nodata
+
+            rf_val = float(rf_data[0, 0]) if rf_data.size > 0 else 0.0
+            if rf_nodata is not None and abs(rf_val - rf_nodata) < 1.0:
+                rf_val = 0.0
+            rf_val = max(0.0, rf_val)  # rainfall can't be negative
+
+            # ── Sample SMAP soil moisture raster ────────────────────────────────────
+            with rasterio.open(smap_path) as ds:
+                sm_crs = ds.crs
+                if sm_crs and not sm_crs.to_epsg() == 4326:
+                    t = Transformer.from_crs("EPSG:4326", sm_crs, always_xy=True)
+                    sx, sy = t.transform(lon, lat)
+                else:
+                    sx, sy = lon, lat
+
+                row_sm, col_sm = ds.index(sx, sy)
+                row_sm = int(np.clip(row_sm, 0, ds.height - 1))
+                col_sm = int(np.clip(col_sm, 0, ds.width - 1))
+                window = rasterio.windows.Window(col_sm, row_sm, 1, 1)
+                sm_data = ds.read(1, window=window)
+                sm_nodata = ds.nodata
+
+            sm_raw = float(sm_data[0, 0]) if sm_data.size > 0 else 0.35
+            if sm_nodata is not None and abs(sm_raw - sm_nodata) < 0.001:
+                sm_raw = 0.35  # default mid-range if pixel is no-data
+            sm_raw = float(np.clip(sm_raw, 0.02, 0.55))  # physical range for soil moisture
+
+            # ── Estimate 7-day rainfall (sum last 7 dated rasters if available) ─────
+            rainfall_dir = os.path.join(base_dir, "data", "processed", "rainfall")
+            dated_tifs = sorted(glob.glob(os.path.join(rainfall_dir, "rainfall_24h_????????.tif")))
+            r7d = rf_val  # at minimum the latest 24h
+            if dated_tifs:
+                # Use up to the last 6 additional daily rasters (+ current = 7 days)
+                past_tifs = dated_tifs[-6:]
+                for ptif in past_tifs:
+                    try:
+                        with rasterio.open(ptif) as pds:
+                            p_row, p_col = pds.index(lon, lat)
+                            p_row = int(np.clip(p_row, 0, pds.height - 1))
+                            p_col = int(np.clip(p_col, 0, pds.width - 1))
+                            pw = rasterio.windows.Window(p_col, p_row, 1, 1)
+                            pd_data = pds.read(1, window=pw)
+                            p_nodata = pds.nodata
+                            pval = float(pd_data[0, 0]) if pd_data.size > 0 else 0.0
+                            if p_nodata is not None and abs(pval - p_nodata) < 1.0:
+                                pval = 0.0
+                            r7d += max(0.0, pval)
+                    except Exception:
+                        pass  # skip unreadable files silently
+
+            sm_pct = round(sm_raw * 100.0, 1)
+
+            result = {
+                "rainfall_24hr": round(rf_val, 1),
+                "rainfall_7day": round(r7d, 1),
+                "soil_moisture": sm_pct,
+                "soil_moisture_raw": round(sm_raw, 4),
+                "is_live_data_mocked": False,
+                "is_open_meteo_fallback": False,
+                "data_source": "ISRO INSAT-3DR + NASA SMAP (Batch)",
+            }
+            logger.info(
+                f"[PredictionPipeline] Raster point-sample for ({lat:.4f}, {lon:.4f}): "
+                f"rain24h={rf_val:.1f}mm, rain7d={r7d:.1f}mm, SM={sm_pct:.1f}% (raw={sm_raw:.4f} m3/m3)"
+            )
+            return result
+
+        except Exception as e:
+            logger.warning(f"[PredictionPipeline] Raster point-sampling failed ({e}); falling back to Open-Meteo.")
+            return None
+
     def get_live_conditions(self, lat: float, lon: float) -> Dict[str, Any]:
-        """Routes to live Open-Meteo API query with automatic caching and fallback."""
-        return self.get_live_conditions_open_meteo(lat, lon)
+        """
+        Primary: point-samples stored ISRO INSAT-3DR rainfall and NASA SMAP
+        soil moisture rasters — the same data used by the batch risk pipeline.
+        This ensures the risk score shown in the click panel matches the
+        color of the risk tile the user clicked.
+
+        Fallback (rasters missing / pipeline not yet run): Open-Meteo live API.
+        Second fallback: mock simulation.
+        """
+        # Attempt 1: Read from batch rasters (ISRO + NASA data)
+        raster_result = self.get_live_conditions_from_rasters(lat, lon)
+        if raster_result is not None:
+            return raster_result
+
+        # Attempt 2: Open-Meteo live API (marks data as open_meteo_fallback)
+        open_meteo_result = self.get_live_conditions_open_meteo(lat, lon)
+        open_meteo_result["is_open_meteo_fallback"] = True
+        return open_meteo_result
+
+    def get_risk_score_from_raster(self, lat: float, lon: float) -> Optional[float]:
+        """
+        Reads the pre-computed Model B risk score directly from the daily batch
+        raster (landslide_risk_latest.tif).
+
+        This is the EXACT pixel value that was used to render the risk tile on the map,
+        so the click-panel score will be 100% consistent with the tile color.
+
+        Returns a float in [0.0, 1.0] or None if the raster is unavailable.
+        """
+        try:
+            import rasterio
+            from pyproj import Transformer
+        except ImportError:
+            return None
+
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        risk_path = os.path.join(base_dir, "data", "processed", "risk", "landslide_risk_latest.tif")
+
+        if not os.path.exists(risk_path):
+            logger.info(f"[PredictionPipeline] Risk raster not found at {risk_path}; will re-compute via Model B.")
+            return None
+
+        try:
+            with rasterio.open(risk_path) as ds:
+                crs = ds.crs
+                if crs and crs.to_epsg() != 4326:
+                    t = Transformer.from_crs("EPSG:4326", crs, always_xy=True)
+                    rx, ry = t.transform(lon, lat)
+                else:
+                    rx, ry = lon, lat
+
+                row, col = ds.index(rx, ry)
+                row = int(np.clip(row, 0, ds.height - 1))
+                col = int(np.clip(col, 0, ds.width - 1))
+                window = rasterio.windows.Window(col, row, 1, 1)
+                data = ds.read(1, window=window)
+                nodata = ds.nodata
+
+            val = float(data[0, 0]) if data.size > 0 else None
+            if val is None:
+                return None
+            if nodata is not None and abs(val - nodata) < 0.001:
+                return None  # no-data pixel (outside NER / ocean)
+            if np.isnan(val):
+                return None
+
+            # Risk raster is stored in [0.0, 1.0]; guard against any rescaling
+            val = float(np.clip(val, 0.0, 1.0))
+            logger.info(f"[PredictionPipeline] Risk raster sample at ({lat:.4f}, {lon:.4f}) = {val:.4f}")
+            return val
+
+        except Exception as e:
+            logger.warning(f"[PredictionPipeline] Risk raster sampling failed ({e}); will re-compute via Model B.")
+            return None
 
     def get_full_risk_assessment(self, lat: float, lon: float) -> Dict[str, Any]:
         """
         Executes the end-to-end landslide risk assessment pipeline:
         1. STEP 1 — Static feature lookup via EPSG:6933 cKDTree.
         2. STEP 2 — Model A susceptibility score via predict_proba.
-        3. STEP 3 — Live weather & soil saturation via Open-Meteo API.
-        4. STEP 4 — Model B live risk fusion (susceptibility + weather + saturation).
-        5. Returns complete combined response with is_live_data_mocked indicator.
+        3. STEP 3 — Live weather & soil conditions (rasters first, Open-Meteo fallback).
+        4. STEP 4 — Risk score: reads directly from landslide_risk_latest.tif raster
+                    (same pixel that colors the tile) OR re-runs Model B if raster missing.
+        5. Returns complete combined response with source indicators.
         """
         static_features = self.get_static_features(lat, lon)
         susceptibility_score = self.get_susceptibility(static_features)
@@ -290,6 +507,7 @@ class PredictionPipeline:
         soil_moisture = live_conditions["soil_moisture"]
         soil_moisture_raw = live_conditions.get("soil_moisture_raw", soil_moisture / 100.0)
         is_live_data_mocked = live_conditions.get("is_live_data_mocked", False)
+        is_open_meteo_fallback = live_conditions.get("is_open_meteo_fallback", False)
         data_source = live_conditions.get("data_source", "Open-Meteo Realtime API")
 
         distance_m = static_features.get("grid_match_distance_m", 0.0)
@@ -314,6 +532,7 @@ class PredictionPipeline:
                 "soil_moisture": soil_moisture,
                 "soil_moisture_raw": soil_moisture_raw,
                 "is_live_data_mocked": is_live_data_mocked,
+                "is_open_meteo_fallback": is_open_meteo_fallback,
                 "data_source": data_source,
                 "grid_match_distance_m": round(distance_m, 1),
                 "coverage_warning": f"Selected location ({round(lat, 4)}°N, {round(lon, 4)}°E) is outside the North East Region (NER) landslide monitoring zone. Risk prediction is only available within Northeast India.",
@@ -323,11 +542,21 @@ class PredictionPipeline:
 
         risk_score = None
         live_risk_available = False
+        risk_from_raster = False
 
-        # STEP 4: Model B (live risk inference)
+        # STEP 4a: Read risk score directly from the pre-computed batch raster.
+        # This gives the EXACT same value used to paint the risk tile pixel the user clicked.
+        raster_risk = self.get_risk_score_from_raster(lat, lon)
+        if raster_risk is not None:
+            risk_score = raster_risk
+            live_risk_available = True
+            risk_from_raster = True
+            logger.info(f"[PredictionPipeline] Using batch raster risk score: {risk_score:.4f} (matches tile color)")
+
+        # STEP 4b: Model B (live risk inference) — only runs if raster is unavailable
         # Model B is decoupled from static terrain factors (condensed by Model A) and strictly
         # processes dynamic triggers: Model A susceptibility score, rainfall, and soil moisture saturation.
-        if self.model_b is not None:
+        if risk_score is None and self.model_b is not None:
             try:
                 b_feature_names = getattr(self.model_b, "feature_names_in_", None)
                 if b_feature_names is not None:
@@ -430,6 +659,7 @@ class PredictionPipeline:
             "soil_moisture": soil_moisture,
             "soil_moisture_raw": soil_moisture_raw,
             "is_live_data_mocked": is_live_data_mocked,
+            "is_open_meteo_fallback": is_open_meteo_fallback,
             "data_source": data_source,
             "grid_match_distance_m": round(distance_m, 1),
             "coverage_warning": coverage_warning,
