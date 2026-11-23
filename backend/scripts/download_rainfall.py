@@ -12,7 +12,14 @@ from datetime import datetime, timedelta
 # Ensure backend root is on sys.path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from data.mdapi import download_rainfall_data
+try:
+    from data.mdapi import download_rainfall_data
+except Exception:
+    try:
+        from mdapi import download_rainfall_data
+    except Exception:
+        def download_rainfall_data(*args, **kwargs):
+            return {"status": "FAILED", "message": "mdapi not available"}
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Download INSAT-3DR rainfall data from MOSDAC")

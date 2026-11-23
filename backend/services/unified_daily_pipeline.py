@@ -41,7 +41,14 @@ from services.smap_service import (
     run_smap_daily_pipeline as run_smap_pipeline,
     PROCESSED_DIR as SMAP_DIR,
 )
-from data.mdapi import download_rainfall_data
+try:
+    from data.mdapi import download_rainfall_data
+except Exception:
+    try:
+        from mdapi import download_rainfall_data
+    except Exception:
+        def download_rainfall_data(*args, **kwargs):
+            return {"status": "FAILED", "message": "mdapi not available"}
 
 logger = logging.getLogger("unified_daily_pipeline")
 

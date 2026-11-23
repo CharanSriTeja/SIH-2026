@@ -20,7 +20,14 @@ from services.rainfall_service import (
     RAW_DATA_DIR,
     PROCESSED_DIR
 )
-from data.mdapi import download_rainfall_data
+try:
+    from data.mdapi import download_rainfall_data
+except Exception:
+    try:
+        from mdapi import download_rainfall_data
+    except Exception:
+        def download_rainfall_data(*args, **kwargs):
+            return {"status": "FAILED", "message": "mdapi not available"}
 
 def parse_args():
     parser = argparse.ArgumentParser(description="End-to-end 24-hour rainfall pipeline for NER")

@@ -35,6 +35,8 @@ data/**
 
 # Whitelist root files & folders
 !data/
+!data/__init__.py
+!data/mdapi.py
 !data/config.json
 !data/states_districts.json
 !data/states_districts_detailed.json
