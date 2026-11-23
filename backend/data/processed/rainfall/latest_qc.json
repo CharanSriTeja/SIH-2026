@@ -1,6 +1,6 @@
 {
   "date": "2026-11-22",
-  "generated_at": "2026-11-23T11:18:23.566784+00:00",
+  "generated_at": "2026-11-23T12:39:28.347470+00:00",
   "status": "COMPLETE",
   "completeness_pct": 97.92,
   "available_observations": 47,
@@ -26,6 +26,6 @@
     "max_valid_obs_per_pixel": 47,
     "mean_valid_obs_per_pixel": 47.0
   },
-  "geotiff_path": "D:\\charan coding\\SIH 2026\\SIH1\\backend\\data\\processed\\rainfall\\rainfall_24h_20261122.tif",
-  "qc_report_path": "D:\\charan coding\\SIH 2026\\SIH1\\backend\\data\\processed\\rainfall\\rainfall_24h_20261122_qc.json"
+  "geotiff_path": "/home/runner/work/SIH-2026/SIH-2026/backend/data/processed/rainfall/rainfall_24h_20261122.tif",
+  "qc_report_path": "/home/runner/work/SIH-2026/SIH-2026/backend/data/processed/rainfall/rainfall_24h_20261122_qc.json"
 }
