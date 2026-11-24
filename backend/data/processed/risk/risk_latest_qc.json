@@ -1,10 +1,10 @@
 {
   "status": "COMPLETE",
-  "date": "20261122",
-  "completed_at": "2026-11-23T12:39:35.273491+00:00",
-  "runtime_seconds": 274.94,
+  "date": "20261123",
+  "completed_at": "2026-11-24T10:54:16.538109+00:00",
+  "runtime_seconds": 254.69,
   "input_products": {
-    "rainfall": "rainfall_24h_20261122.tif",
+    "rainfall": "rainfall_24h_20261123.tif",
     "soil_moisture": "smap_soil_moisture_latest_ner.tif",
     "susceptibility": "modelA_NER_only_susceptibility_cog.tif"
   },
@@ -15,13 +15,13 @@
   },
   "risk_distribution": {
     "total_cells": 6354037,
-    "low_cells": 6353003,
-    "moderate_cells": 1034,
+    "low_cells": 6353183,
+    "moderate_cells": 854,
     "high_cells": 0,
     "critical_cells": 0,
     "min_score": 0.0002,
     "max_score": 0.2544,
-    "mean_score": 0.0972
+    "mean_score": 0.097
   },
   "alerts_today": {
     "total_alert_cells": 0,
@@ -29,7 +29,7 @@
   },
   "artifacts": {
     "latest_risk_tif": "/home/runner/work/SIH-2026/SIH-2026/backend/data/processed/risk/landslide_risk_latest.tif",
-    "dated_risk_tif": "/home/runner/work/SIH-2026/SIH-2026/backend/data/processed/risk/landslide_risk_20261122.tif",
+    "dated_risk_tif": "/home/runner/work/SIH-2026/SIH-2026/backend/data/processed/risk/landslide_risk_20261123.tif",
     "alerts_json": "/home/runner/work/SIH-2026/SIH-2026/backend/data/processed/risk/risk_alerts_today.json"
   }
 }
