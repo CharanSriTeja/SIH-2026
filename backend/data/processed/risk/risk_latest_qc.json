@@ -1,10 +1,10 @@
 {
   "status": "COMPLETE",
-  "date": "20261124",
-  "completed_at": "2026-11-25T09:47:51.896318+00:00",
-  "runtime_seconds": 161.41,
+  "date": "20261125",
+  "completed_at": "2026-11-26T09:32:43.636927+00:00",
+  "runtime_seconds": 282.76,
   "input_products": {
-    "rainfall": "rainfall_24h_20261124.tif",
+    "rainfall": "rainfall_24h_20261125.tif",
     "soil_moisture": "smap_soil_moisture_latest_ner.tif",
     "susceptibility": "modelA_NER_only_susceptibility_cog.tif"
   },
@@ -21,7 +21,7 @@
     "critical_cells": 0,
     "min_score": 0.0002,
     "max_score": 0.2544,
-    "mean_score": 0.0971
+    "mean_score": 0.0973
   },
   "alerts_today": {
     "total_alert_cells": 0,
@@ -29,7 +29,7 @@
   },
   "artifacts": {
     "latest_risk_tif": "/home/runner/work/SIH-2026/SIH-2026/backend/data/processed/risk/landslide_risk_latest.tif",
-    "dated_risk_tif": "/home/runner/work/SIH-2026/SIH-2026/backend/data/processed/risk/landslide_risk_20261124.tif",
+    "dated_risk_tif": "/home/runner/work/SIH-2026/SIH-2026/backend/data/processed/risk/landslide_risk_20261125.tif",
     "alerts_json": "/home/runner/work/SIH-2026/SIH-2026/backend/data/processed/risk/risk_alerts_today.json"
   }
 }
