@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-26",
+  "generated_at": "2026-11-27T09:40:10.265265+00:00",
+  "status": "COMPLETE",
+  "completeness_pct": 100.0,
+  "available_observations": 48,
+  "expected_observations": 48,
+  "missing_observations_count": 0,
+  "missing_slots": [],
+  "has_inf": false,
+  "grid_dimensions": [
+    3921,
+    4904
+  ],
+  "total_cells": 19228584,
+  "valid_cells": 6411931,
+  "nodata_pct": 66.65,
+  "rainfall_min_mm": 0.0,
+  "rainfall_max_mm": 0.0,
+  "rainfall_mean_mm": 0.0,
+  "accumulation_stats": {
+    "processed_file_count": 48,
+    "min_valid_obs_per_pixel": 48,
+    "max_valid_obs_per_pixel": 48,
+    "mean_valid_obs_per_pixel": 48.0
+  },
+  "geotiff_path": "/home/runner/work/SIH-2026/SIH-2026/backend/data/processed/rainfall/rainfall_24h_20261126.tif",
+  "qc_report_path": "/home/runner/work/SIH-2026/SIH-2026/backend/data/processed/rainfall/rainfall_24h_20261126_qc.json"
+}
