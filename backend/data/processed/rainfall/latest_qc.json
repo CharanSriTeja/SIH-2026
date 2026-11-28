@@ -1,6 +1,6 @@
 {
-  "date": "2026-11-26",
-  "generated_at": "2026-11-27T09:40:10.265265+00:00",
+  "date": "2026-11-27",
+  "generated_at": "2026-11-28T08:52:27.570094+00:00",
   "status": "COMPLETE",
   "completeness_pct": 100.0,
   "available_observations": 48,
@@ -24,6 +24,6 @@
     "max_valid_obs_per_pixel": 48,
     "mean_valid_obs_per_pixel": 48.0
   },
-  "geotiff_path": "/home/runner/work/SIH-2026/SIH-2026/backend/data/processed/rainfall/rainfall_24h_20261126.tif",
-  "qc_report_path": "/home/runner/work/SIH-2026/SIH-2026/backend/data/processed/rainfall/rainfall_24h_20261126_qc.json"
+  "geotiff_path": "/home/runner/work/SIH-2026/SIH-2026/backend/data/processed/rainfall/rainfall_24h_20261127.tif",
+  "qc_report_path": "/home/runner/work/SIH-2026/SIH-2026/backend/data/processed/rainfall/rainfall_24h_20261127_qc.json"
 }
